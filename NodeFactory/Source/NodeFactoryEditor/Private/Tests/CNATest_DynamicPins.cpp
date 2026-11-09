@@ -1,6 +1,7 @@
 // Copyright (c) NodeFactory. Dynamic pins and Make Array: check A7 of spec 12.2.
 
 #include "CNATestUtils.h"
+#include "CNAValidator.h"
 #include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS

@@ -1,6 +1,7 @@
 // Copyright (c) NodeFactory. Update of all node instances after a change of the asset (spec 9.1).
 
 #include "CNAUpdateService.h"
+#include "CNACurveUtils.h"
 #include "CNAEditorSettings.h"
 #include "CNAGraphUtils.h"
 #include "CNAMessages.h"
@@ -40,6 +41,7 @@
 #include "UObject/UObjectGlobals.h"
 #include "UObject/UObjectIterator.h"
 #include "Widgets/Notifications/SNotificationList.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -910,7 +912,9 @@ int32 FCNAUpdateService::UpdateBlueprint(UBlueprint* Blueprint, const TArray<UCu
 		// Each loss was reported as CNA016 by the node; the summary lists them again (spec 9.1, item 6).
 		for (const FName& PinName : Node->GetLastLostWirePins())
 		{
-			InOutReport.LostWires.Add(FString::Printf(TEXT("%s: %s.%s"), *Blueprint->GetName(), *FCNAGraphUtils::GetNodeName(Node), *PinName.ToString()));
+			// Curve pins are listed by their label, not by their internal name.
+			InOutReport.LostWires.Add(FString::Printf(TEXT("%s: %s.%s"), *Blueprint->GetName(), *FCNAGraphUtils::GetNodeName(Node),
+				*FCNACurveUtils::DescribePinName(Node->GetCustomNodeAsset(), PinName).ToString()));
 		}
 	}
 

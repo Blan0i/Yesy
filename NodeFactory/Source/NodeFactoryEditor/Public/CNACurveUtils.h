@@ -57,9 +57,6 @@ struct NODEFACTORYEDITOR_API FCNACurveUtils
 	/** First curve in Playback mode of an impure asset; nullptr for a pure asset or when there is none. */
 	static const FCNABodyWidget* FindPlaybackCurve(const UCustomNodeAsset* Asset);
 
-	/** Number of curves in Playback mode (validation: at most one). */
-	static int32 CountPlaybackCurves(const UCustomNodeAsset* Asset);
-
 	/** First exec pin of the signature in a direction: the exec flow a Playback curve drives. NAME_None without one. */
 	static FName GetPrimaryExecPinName(const TArray<FCNASignaturePin>& Signature, EEdGraphPinDirection Direction);
 

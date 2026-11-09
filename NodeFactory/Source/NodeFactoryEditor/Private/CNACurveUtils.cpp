@@ -10,6 +10,7 @@
 #include "Curves/CurveFloat.h"
 #include "Curves/CurveLinearColor.h"
 #include "Curves/CurveVector.h"
+#include "EdGraph/EdGraph.h"
 #include "EdGraphSchema_K2.h"
 #include "Internationalization/Text.h"
 #include "UObject/Class.h"
@@ -202,19 +203,6 @@ const FCNABodyWidget* FCNACurveUtils::FindPlaybackCurve(const UCustomNodeAsset* 
 	return nullptr;
 }
 
-int32 FCNACurveUtils::CountPlaybackCurves(const UCustomNodeAsset* Asset)
-{
-	int32 Count = 0;
-	if (Asset)
-	{
-		for (const FCNABodyWidget& Widget : Asset->BodyWidgets)
-		{
-			Count += (Widget.IsCurve() && Widget.Curve.Mode == ECNACurveMode::Playback) ? 1 : 0;
-		}
-	}
-	return Count;
-}
-
 FName FCNACurveUtils::GetPrimaryExecPinName(const TArray<FCNASignaturePin>& Signature, EEdGraphPinDirection Direction)
 {
 	for (const FCNASignaturePin& Pin : Signature)
@@ -289,6 +277,10 @@ void FCNACurveUtils::SyncCurveValueNodes(UCustomNodeAsset* Asset)
 		{
 			Node->Modify();
 			Node->ReconstructNode();
+			if (UEdGraph* Graph = Node->GetGraph())
+			{
+				Graph->NotifyGraphChanged();
+			}
 		}
 	}
 }

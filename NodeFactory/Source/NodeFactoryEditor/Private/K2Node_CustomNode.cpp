@@ -332,8 +332,20 @@ UEdGraphPin* UK2Node_CustomNode::FindCurvePin(const FGuid& WidgetGuid, ECNACurve
 FName UK2Node_CustomNode::GetCurveTakeoverPinName(FName OldName, EEdGraphPinDirection Direction) const
 {
 	const UCustomNodeAsset* Asset = GetCustomNodeAsset();
+	if (!Asset)
+	{
+		return NAME_None;
+	}
+	FGuid WidgetGuid;
+	ECNACurvePinRole Role = ECNACurvePinRole::Time;
+	const bool bOldCurvePin = CNATypes::ParseCurvePinName(OldName, WidgetGuid, Role);
+	// Assets without curves (and pins that are no curve pins of them) never take anything over.
+	if (!bOldCurvePin && !Asset->BodyWidgets.ContainsByPredicate([](const FCNABodyWidget& Widget) { return Widget.IsCurve(); }))
+	{
+		return NAME_None;
+	}
 	TArray<FCNASignaturePin> Signature;
-	if (!Asset || !FCNAGraphUtils::GetSignature(Asset, Signature))
+	if (!FCNAGraphUtils::GetSignature(Asset, Signature))
 	{
 		return NAME_None;
 	}
@@ -350,14 +362,8 @@ FName UK2Node_CustomNode::GetCurveTakeoverPinName(FName OldName, EEdGraphPinDire
 		return OldName == PrimaryExec ? CNATypes::MakeCurvePinName(Playback->WidgetGuid, TakeoverRole) : NAME_None;
 	}
 
-	// Playback switched off: Play and Update give their wires back to the exec flow of the macro.
-	FGuid WidgetGuid;
-	ECNACurvePinRole Role = ECNACurvePinRole::Time;
-	if (CNATypes::ParseCurvePinName(OldName, WidgetGuid, Role) && Role == TakeoverRole)
-	{
-		return PrimaryExec;
-	}
-	return NAME_None;
+	// Playback switched off (or the curve removed): Play and Update give their wires back to the exec flow.
+	return bOldCurvePin && Role == TakeoverRole ? PrimaryExec : NAME_None;
 }
 
 void UK2Node_CustomNode::ApplyPinOverrides(const UCustomNodeAsset& Asset, UEdGraphPin* Pin, const FCNAPinOverride* Override, int32 DynamicIndex)
