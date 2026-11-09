@@ -205,8 +205,13 @@ public:
 	/** Label color of the pin: LabelColor of its override or PinLabelColor of the asset. */
 	FLinearColor GetPinLabelColor(const UEdGraphPin* Pin) const;
 
-	/** Body widget that replaces the value field of the pin, if any. */
+	/** Body widget that replaces the value field of the pin, if any. Curve widgets belong to no pin. */
 	const FCNABodyWidget* FindBodyWidget(FName PinName) const;
+
+	// Curves
+
+	/** Pin of a curve widget (CNATypes::MakeCurvePinName), nullptr when the mode of the curve has no such role. */
+	UEdGraphPin* FindCurvePin(const FGuid& WidgetGuid, ECNACurvePinRole Role) const;
 
 	/** Title without the second line. */
 	FText GetMainTitle() const;
@@ -296,6 +301,18 @@ public:
 private:
 	/** Creates the pins of one signature entry; dynamic groups create their element pins. */
 	void CreatePinsForSignaturePin(const UCustomNodeAsset& Asset, const FCNASignaturePin& SignaturePin);
+
+	/**
+	 * Pins of the curve widgets of one direction, exec or data. Names are stable (Guid + role), the label of the
+	 * role is only the display name.
+	 */
+	void CreateCurvePins(const UCustomNodeAsset& Asset, EEdGraphPinDirection Direction, bool bExecPins);
+
+	/**
+	 * Pin that takes over the wires of an old pin when a Playback curve is switched on or off: the first exec input
+	 * of the macro <-> Play, its first exec output <-> Update. NAME_None when nothing takes over.
+	 */
+	FName GetCurveTakeoverPinName(FName OldName, EEdGraphPinDirection Direction) const;
 
 	/** Display name, tooltip, Advanced and hidden state from the asset override and the instance override. */
 	void ApplyPinOverrides(const UCustomNodeAsset& Asset, UEdGraphPin* Pin, const FCNAPinOverride* Override, int32 DynamicIndex);

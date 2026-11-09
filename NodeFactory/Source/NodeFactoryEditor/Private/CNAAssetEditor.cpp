@@ -23,6 +23,8 @@
 #include "Modules/ModuleManager.h"
 #include "Framework/Commands/UICommandList.h"
 #include "Framework/Docking/TabManager.h"
+#include "CoreGlobals.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -34,6 +36,65 @@ void FCNAAssetEditor::InitCNAEditor(const EToolkitMode::Type Mode, const TShared
 	TArray<UBlueprint*> Blueprints;
 	Blueprints.Add(Asset);
 	InitBlueprintEditor(Mode, InitToolkitHost, Blueprints, /*bShouldOpenInDefaultsMode*/ false);
+
+	// Pins can also be renamed in the Details of Tunnel Input / Tunnel Output; their references follow (V11).
+	WatchedAsset = Asset;
+	FCNAPinManagerOps::CaptureSignature(Asset, SignatureSnapshot);
+	if (Asset)
+	{
+		BlueprintChangedHandle = Asset->OnChanged().AddSP(this, &FCNAAssetEditor::HandleAssetBlueprintChanged);
+	}
+	LanguageChangedHandle = FCNALocalization::OnModeChanged().AddSP(this, &FCNAAssetEditor::HandleLanguageChanged);
+}
+
+FCNAAssetEditor::~FCNAAssetEditor()
+{
+	if (UCustomNodeAsset* Asset = WatchedAsset.Get())
+	{
+		Asset->OnChanged().Remove(BlueprintChangedHandle);
+	}
+	FCNALocalization::OnModeChanged().Remove(LanguageChangedHandle);
+}
+
+void FCNAAssetEditor::PostUndo(bool bSuccess)
+{
+	// Undo restores names and references together; a name change seen now is not a rename to follow.
+	bInUndoRedo = true;
+	FBlueprintEditor::PostUndo(bSuccess);
+	bInUndoRedo = false;
+	FCNAPinManagerOps::CaptureSignature(GetCustomNodeAsset(), SignatureSnapshot);
+}
+
+void FCNAAssetEditor::PostRedo(bool bSuccess)
+{
+	bInUndoRedo = true;
+	FBlueprintEditor::PostRedo(bSuccess);
+	bInUndoRedo = false;
+	FCNAPinManagerOps::CaptureSignature(GetCustomNodeAsset(), SignatureSnapshot);
+}
+
+void FCNAAssetEditor::HandleAssetBlueprintChanged(UBlueprint* Blueprint)
+{
+	UCustomNodeAsset* Asset = GetCustomNodeAsset();
+	if (!Asset || Blueprint != Asset)
+	{
+		return;
+	}
+	if (bInUndoRedo || GIsTransacting)
+	{
+		FCNAPinManagerOps::CaptureSignature(Asset, SignatureSnapshot);
+		return;
+	}
+	FCNAPinManagerOps::FollowExternalRenames(Asset, SignatureSnapshot);
+}
+
+void FCNAAssetEditor::HandleLanguageChanged()
+{
+	// The Details rebuild their rows with the new language; other panels pick it up when reopened.
+	if (NodeSettingsView.IsValid())
+	{
+		NodeSettingsView->ForceRefresh();
+	}
 }
 
 UCustomNodeAsset* FCNAAssetEditor::GetCustomNodeAsset() const

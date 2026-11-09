@@ -7,9 +7,13 @@
 #include "CNAPinUtils.h"
 #include "CNAValidator.h"
 #include "CNAMessages.h"
+#include "CNABehaviorBase.h"
+#include "NodeFactoryModule.h"
 
 #include "K2Node_Tunnel.h"
 #include "K2Node_EditablePinBase.h"
+#include "K2Node_CallFunction.h"
+#include "K2Node_SwitchName.h"
 #include "EdGraphSchema_K2.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "ScopedTransaction.h"
@@ -39,6 +43,7 @@
 #include "Widgets/Views/SHeaderRow.h"
 #include "Widgets/Views/STableRow.h"
 #include "Input/DragAndDrop.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -283,6 +288,7 @@ bool FCNAPinManagerOps::RenamePin(UCustomNodeAsset* Asset, EEdGraphPinDirection 
 	// Instances keep their wires through the redirect (V11); overrides and references follow the new name.
 	AddRedirect(*Asset, OldName, NewName);
 	RenameReferences(*Asset, OldName, NewName);
+	RenameBehaviorReferences(*Asset, OldName, NewName, /*bApply*/ true);
 	FinishStructuralChange(Asset, Tunnel);
 	Asset->NotifyAssetChanged(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinRedirects));
 	return true;
@@ -345,7 +351,7 @@ bool FCNAPinManagerOps::RemovePin(UCustomNodeAsset* Asset, EEdGraphPinDirection 
 			Override.PassThroughOf = NAME_None;
 		}
 	}
-	Asset->BodyWidgets.RemoveAll([PinName](const FCNABodyWidget& Widget) { return Widget.PinName == PinName; });
+	Asset->BodyWidgets.RemoveAll([PinName](const FCNABodyWidget& Widget) { return !Widget.IsCurve() && Widget.PinName == PinName; });
 	FinishStructuralChange(Asset, Tunnel);
 	Asset->NotifyAssetChanged(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinOverrides));
 	return true;
@@ -542,11 +548,475 @@ void FCNAPinManagerOps::RenameReferences(UCustomNodeAsset& Asset, FName OldName,
 	}
 	for (FCNABodyWidget& Widget : Asset.BodyWidgets)
 	{
-		if (Widget.PinName == OldName)
+		// The PinName of a Curve widget is the name of the curve, not a pin of the macro.
+		if (!Widget.IsCurve() && Widget.PinName == OldName)
 		{
 			Widget.PinName = NewName;
 		}
 	}
+}
+
+int32 FCNAPinManagerOps::RenameBehaviorReferences(UCustomNodeAsset& Asset, FName OldName, FName NewName, bool bApply)
+{
+	if (OldName.IsNone() || NewName.IsNone() || OldName == NewName)
+	{
+		return 0;
+	}
+	// "Old" -> "New" and the element pins of a dynamic group "Old__2" -> "New__2".
+	auto MapName = [OldName, NewName](FName Value, FName& OutValue) -> bool
+	{
+		if (Value == OldName)
+		{
+			OutValue = NewName;
+			return true;
+		}
+		FName Base;
+		int32 Index = 0;
+		if (CNATypes::ParseDynamicPinName(Value, Base, Index) && Base == OldName)
+		{
+			OutValue = CNATypes::MakeDynamicPinName(NewName, Index);
+			return true;
+		}
+		return false;
+	};
+
+	static const FName EqualName(TEXT("EqualEqual_NameName"));
+	static const FName NotEqualName(TEXT("NotEqual_NameName"));
+
+	// Every graph of the Behavior Blueprint; the macro Execute is game logic and has no pin name literals.
+	TArray<UEdGraph*> Graphs;
+	TArray<UEdGraph*> Roots;
+	Roots.Append(Asset.UbergraphPages);
+	Roots.Append(Asset.FunctionGraphs);
+	for (UEdGraph* Root : Roots)
+	{
+		if (Root)
+		{
+			FCNAGraphUtils::CollectGraphs(Root, Graphs);
+		}
+	}
+
+	int32 Count = 0;
+	for (UEdGraph* Graph : Graphs)
+	{
+		if (!Graph)
+		{
+			continue;
+		}
+		// A copy: ReconstructNode of a switch must not disturb the iteration.
+		const TArray<UEdGraphNode*> Nodes = Graph->Nodes;
+		for (UEdGraphNode* Node : Nodes)
+		{
+			if (UK2Node_SwitchName* Switch = Cast<UK2Node_SwitchName>(Node))
+			{
+				for (int32 Index = 0; Index < Switch->PinNames.Num(); ++Index)
+				{
+					FName Mapped;
+					if (!MapName(Switch->PinNames[Index], Mapped) || Switch->PinNames.Contains(Mapped))
+					{
+						continue;
+					}
+					++Count;
+					if (bApply)
+					{
+						Switch->Modify();
+						// The case pin is renamed first, so ReconstructNode finds it under the new name with its wires.
+						if (UEdGraphPin* CasePin = Switch->FindPin(Switch->PinNames[Index]))
+						{
+							CasePin->Modify();
+							CasePin->PinName = Mapped;
+						}
+						Switch->PinNames[Index] = Mapped;
+						Switch->ReconstructNode();
+					}
+				}
+				continue;
+			}
+
+			UK2Node_CallFunction* Call = Cast<UK2Node_CallFunction>(Node);
+			const UFunction* Function = Call ? Call->GetTargetFunction() : nullptr;
+			if (!Function)
+			{
+				continue;
+			}
+			const UClass* Owner = Function->GetOwnerClass();
+			const bool bBehaviorAction = Owner && Owner->IsChildOf(UCNABehaviorBase::StaticClass());
+			const bool bCompare = Function->GetFName() == EqualName || Function->GetFName() == NotEqualName;
+			if (!bBehaviorAction && !bCompare)
+			{
+				continue;
+			}
+			// A comparison only counts when its other operand comes from a wire (the PinName of an event).
+			bool bHasLinkedNameInput = false;
+			for (const UEdGraphPin* Pin : Call->Pins)
+			{
+				if (Pin && Pin->Direction == EGPD_Input && Pin->PinType.PinCategory == UEdGraphSchema_K2::PC_Name && Pin->LinkedTo.Num() > 0)
+				{
+					bHasLinkedNameInput = true;
+				}
+			}
+			if (bCompare && !bHasLinkedNameInput)
+			{
+				continue;
+			}
+			for (UEdGraphPin* Pin : Call->Pins)
+			{
+				if (!Pin || Pin->Direction != EGPD_Input || Pin->PinType.PinCategory != UEdGraphSchema_K2::PC_Name
+					|| Pin->LinkedTo.Num() > 0 || Pin->PinType.IsContainer())
+				{
+					continue;
+				}
+				FName Mapped;
+				if (!MapName(FName(*Pin->DefaultValue), Mapped))
+				{
+					continue;
+				}
+				++Count;
+				if (bApply)
+				{
+					Call->Modify();
+					Pin->Modify();
+					Pin->DefaultValue = Mapped.ToString();
+				}
+			}
+		}
+	}
+	return Count;
+}
+
+bool FCNAPinManagerOps::NeedsReferenceUpdate(const UCustomNodeAsset& Asset, FName OldName, FName NewName)
+{
+	if (Asset.ResolvePinRedirect(OldName) != NewName)
+	{
+		return true;
+	}
+	for (const FCNAPinOverride& Override : Asset.PinOverrides)
+	{
+		if (Override.PinName == OldName || Override.PassThroughOf == OldName)
+		{
+			return true;
+		}
+	}
+	for (const FCNABodyWidget& Widget : Asset.BodyWidgets)
+	{
+		if (!Widget.IsCurve() && Widget.PinName == OldName)
+		{
+			return true;
+		}
+	}
+	return RenameBehaviorReferences(const_cast<UCustomNodeAsset&>(Asset), OldName, NewName, /*bApply*/ false) > 0;
+}
+
+void FCNAPinManagerOps::CaptureSignature(const UCustomNodeAsset* Asset, FCNASignatureSnapshot& OutSnapshot)
+{
+	OutSnapshot = FCNASignatureSnapshot();
+	const UK2Node_Tunnel* Entry = GetTunnel(Asset, EGPD_Input);
+	const UK2Node_Tunnel* Exit = GetTunnel(Asset, EGPD_Output);
+	if (!Entry || !Exit)
+	{
+		return;
+	}
+	auto Capture = [](const UK2Node_Tunnel* Tunnel, TArray<FName>& OutNames, TArray<FString>& OutTypes)
+	{
+		for (const TSharedPtr<FUserPinInfo>& Info : Tunnel->UserDefinedPins)
+		{
+			if (Info.IsValid())
+			{
+				OutNames.Add(Info->PinName);
+				OutTypes.Add(FCNAPinUtils::GetTypeSignatureString(Info->PinType));
+			}
+		}
+	};
+	Capture(Entry, OutSnapshot.InputNames, OutSnapshot.InputTypes);
+	Capture(Exit, OutSnapshot.OutputNames, OutSnapshot.OutputTypes);
+	OutSnapshot.bValid = true;
+}
+
+int32 FCNAPinManagerOps::FollowExternalRenames(UCustomNodeAsset* Asset, FCNASignatureSnapshot& InOutSnapshot)
+{
+	FCNASignatureSnapshot Current;
+	CaptureSignature(Asset, Current);
+	const FCNASignatureSnapshot Previous = InOutSnapshot;
+	InOutSnapshot = Current;
+	// Undo and Redo restore every object of the transaction themselves.
+	if (!Asset || !Previous.bValid || !Current.bValid || GIsTransacting)
+	{
+		return 0;
+	}
+
+	// One side, same count and order, exactly one position with another name and the same type: a rename.
+	TArray<TPair<FName, FName>> Renames;
+	auto Compare = [&Renames](const TArray<FName>& OldNames, const TArray<FString>& OldTypes, const TArray<FName>& NewNames, const TArray<FString>& NewTypes)
+	{
+		if (OldNames.Num() != NewNames.Num())
+		{
+			return;
+		}
+		int32 Changed = INDEX_NONE;
+		for (int32 Index = 0; Index < OldNames.Num(); ++Index)
+		{
+			if (OldNames[Index] != NewNames[Index])
+			{
+				if (Changed != INDEX_NONE)
+				{
+					return;
+				}
+				Changed = Index;
+			}
+		}
+		if (Changed != INDEX_NONE && OldTypes[Changed] == NewTypes[Changed] && !NewNames.Contains(OldNames[Changed]))
+		{
+			Renames.Add(TPair<FName, FName>(OldNames[Changed], NewNames[Changed]));
+		}
+	};
+	Compare(Previous.InputNames, Previous.InputTypes, Current.InputNames, Current.InputTypes);
+	Compare(Previous.OutputNames, Previous.OutputTypes, Current.OutputNames, Current.OutputTypes);
+
+	int32 Followed = 0;
+	for (const TPair<FName, FName>& Rename : Renames)
+	{
+		// The Pin Manager already moved everything for its own renames; then there is nothing to record.
+		if (!NeedsReferenceUpdate(*Asset, Rename.Key, Rename.Value))
+		{
+			continue;
+		}
+		// Inside the transaction of the rename when it is still open, else an Undo step of its own.
+		const FScopedTransaction Transaction(LOCTEXT("PinManager.FollowRenameTransaction", "Update References of Renamed Pin"));
+		Asset->Modify();
+		AddRedirect(*Asset, Rename.Key, Rename.Value);
+		RenameReferences(*Asset, Rename.Key, Rename.Value);
+		RenameBehaviorReferences(*Asset, Rename.Key, Rename.Value, /*bApply*/ true);
+		++Followed;
+		UE_LOG(LogNodeFactory, Log, TEXT("%s: pin %s was renamed to %s; overrides, body widgets, redirects and Behavior literals follow."),
+			*Asset->GetName(), *Rename.Key.ToString(), *Rename.Value.ToString());
+	}
+	if (Followed > 0)
+	{
+		FBlueprintEditorUtils::MarkBlueprintAsModified(Asset);
+		Asset->NotifyAssetChanged(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinRedirects));
+	}
+	return Followed;
+}
+
+// Stale references
+
+FText FCNAStaleReference::Describe() const
+{
+	const FText NameText = FText::FromName(Name);
+	switch (Kind)
+	{
+	case ECNAStaleReferenceKind::PassThrough:
+		return FText::Format(LOCTEXT("Stale.PassThrough", "Pass Through Of {0} (override #{1})"), NameText, FText::AsNumber(Index));
+	case ECNAStaleReferenceKind::BodyWidget:
+		return FText::Format(LOCTEXT("Stale.BodyWidget", "Body widget of pin {0} (#{1})"), NameText, FText::AsNumber(Index));
+	case ECNAStaleReferenceKind::Redirect:
+		return FText::Format(LOCTEXT("Stale.Redirect", "Pin redirect to {0} (#{1})"), NameText, FText::AsNumber(Index));
+	case ECNAStaleReferenceKind::PinOverride:
+	default:
+		return FText::Format(LOCTEXT("Stale.PinOverride", "Pin override {0} (#{1})"), NameText, FText::AsNumber(Index));
+	}
+}
+
+void FCNAPinManagerOps::FindStaleReferences(const UCustomNodeAsset* Asset, TArray<FCNAStaleReference>& OutReferences)
+{
+	OutReferences.Reset();
+	TArray<FCNASignaturePin> Signature;
+	// Without the macro Execute every name would look stale; CNA005 is reported instead.
+	if (!Asset || !FCNAGraphUtils::GetSignature(Asset, Signature))
+	{
+		return;
+	}
+	auto Add = [&OutReferences](ECNAStaleReferenceKind Kind, int32 Index, FName Name)
+	{
+		FCNAStaleReference& Reference = OutReferences[OutReferences.AddDefaulted()];
+		Reference.Kind = Kind;
+		Reference.Index = Index;
+		Reference.Name = Name;
+	};
+	for (int32 Index = 0; Index < Asset->PinOverrides.Num(); ++Index)
+	{
+		const FCNAPinOverride& Override = Asset->PinOverrides[Index];
+		if (!FCNAGraphUtils::FindSignaturePin(Signature, Override.PinName))
+		{
+			Add(ECNAStaleReferenceKind::PinOverride, Index, Override.PinName);
+		}
+		if (!Override.PassThroughOf.IsNone() && !FCNAGraphUtils::FindSignaturePin(Signature, Override.PassThroughOf, EGPD_Input))
+		{
+			Add(ECNAStaleReferenceKind::PassThrough, Index, Override.PassThroughOf);
+		}
+	}
+	for (int32 Index = 0; Index < Asset->BodyWidgets.Num(); ++Index)
+	{
+		const FCNABodyWidget& Widget = Asset->BodyWidgets[Index];
+		if (!Widget.IsCurve() && !FCNAGraphUtils::FindSignaturePin(Signature, Widget.PinName, EGPD_Input))
+		{
+			Add(ECNAStaleReferenceKind::BodyWidget, Index, Widget.PinName);
+		}
+	}
+	for (int32 Index = 0; Index < Asset->PinRedirects.Num(); ++Index)
+	{
+		const FCNAPinRedirect& Redirect = Asset->PinRedirects[Index];
+		const FName Target = Asset->ResolvePinRedirect(Redirect.OldName);
+		if (!Redirect.NewName.IsNone() && !FCNAGraphUtils::FindSignaturePin(Signature, Target))
+		{
+			Add(ECNAStaleReferenceKind::Redirect, Index, Redirect.NewName);
+		}
+	}
+}
+
+bool FCNAPinManagerOps::IsStaleReferenceCurrent(const UCustomNodeAsset* Asset, const FCNAStaleReference& Reference)
+{
+	// The menu may be older than the arrays (Undo, another edit): only act on the element it was built for.
+	TArray<FCNAStaleReference> Current;
+	FindStaleReferences(Asset, Current);
+	return Current.ContainsByPredicate([&Reference](const FCNAStaleReference& Item)
+	{
+		return Item.Kind == Reference.Kind && Item.Index == Reference.Index && Item.Name == Reference.Name;
+	});
+}
+
+void FCNAPinManagerOps::GetRemapCandidates(const UCustomNodeAsset* Asset, const FCNAStaleReference& Reference, TArray<FName>& OutPins)
+{
+	OutPins.Reset();
+	TArray<FCNASignaturePin> Signature;
+	if (!Asset || !FCNAGraphUtils::GetSignature(Asset, Signature))
+	{
+		return;
+	}
+	const bool bInputsOnly = Reference.Kind == ECNAStaleReferenceKind::BodyWidget || Reference.Kind == ECNAStaleReferenceKind::PassThrough;
+	for (const FCNASignaturePin& Pin : Signature)
+	{
+		if (bInputsOnly && !Pin.IsInput())
+		{
+			continue;
+		}
+		// A second override of the same pin would be ignored (CNA014).
+		if (Reference.Kind == ECNAStaleReferenceKind::PinOverride && Asset->FindPinOverride(Pin.Name))
+		{
+			continue;
+		}
+		OutPins.AddUnique(Pin.Name);
+	}
+}
+
+FName FCNAPinManagerOps::SuggestRemap(const UCustomNodeAsset* Asset, const FCNAStaleReference& Reference)
+{
+	TArray<FName> Candidates;
+	GetRemapCandidates(Asset, Reference, Candidates);
+	const FString Stale = Reference.Name.ToString().ToLower();
+	if (Stale.IsEmpty() || Reference.Name.IsNone())
+	{
+		return NAME_None;
+	}
+	auto Distance = [](const FString& A, const FString& B)
+	{
+		TArray<int32> Row;
+		Row.SetNum(B.Len() + 1);
+		for (int32 Column = 0; Column <= B.Len(); ++Column)
+		{
+			Row[Column] = Column;
+		}
+		for (int32 I = 1; I <= A.Len(); ++I)
+		{
+			int32 Diagonal = Row[0];
+			Row[0] = I;
+			for (int32 J = 1; J <= B.Len(); ++J)
+			{
+				const int32 Above = Row[J];
+				Row[J] = FMath::Min3(Row[J] + 1, Row[J - 1] + 1, Diagonal + (A[I - 1] == B[J - 1] ? 0 : 1));
+				Diagonal = Above;
+			}
+		}
+		return Row[B.Len()];
+	};
+	FName Best = NAME_None;
+	int32 BestScore = MAX_int32;
+	for (const FName Candidate : Candidates)
+	{
+		const FString Name = Candidate.ToString().ToLower();
+		// A truncated or extended name ("Durati" / "Duration") is the usual leftover of an interrupted edit.
+		const int32 Score = (Name.StartsWith(Stale) || Stale.StartsWith(Name)) ? 0 : Distance(Stale, Name);
+		if (Score < BestScore)
+		{
+			BestScore = Score;
+			Best = Candidate;
+		}
+	}
+	const int32 Limit = FMath::Max(2, Stale.Len() / 3);
+	return BestScore <= Limit ? Best : NAME_None;
+}
+
+bool FCNAPinManagerOps::RemapStaleReference(UCustomNodeAsset* Asset, const FCNAStaleReference& Reference, FName NewPin, FText& OutError)
+{
+	if (!Asset || NewPin.IsNone() || !IsStaleReferenceCurrent(Asset, Reference))
+	{
+		OutError = LOCTEXT("Stale.Outdated", "The settings changed since the list was built. Open the list again.");
+		return false;
+	}
+	TArray<FName> Candidates;
+	GetRemapCandidates(Asset, Reference, Candidates);
+	if (!Candidates.Contains(NewPin))
+	{
+		OutError = FText::Format(LOCTEXT("Stale.NotCandidate", "{0} cannot be used here: it does not exist, has the wrong direction or already has an override."),
+			FText::FromName(NewPin));
+		return false;
+	}
+
+	const FScopedTransaction Transaction(LOCTEXT("Stale.RemapTransaction", "Fix Pin Reference"));
+	Asset->Modify();
+	FName ChangedProperty = GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinOverrides);
+	switch (Reference.Kind)
+	{
+	case ECNAStaleReferenceKind::PinOverride:
+		Asset->PinOverrides[Reference.Index].PinName = NewPin;
+		break;
+	case ECNAStaleReferenceKind::PassThrough:
+		Asset->PinOverrides[Reference.Index].PassThroughOf = NewPin;
+		break;
+	case ECNAStaleReferenceKind::BodyWidget:
+		Asset->BodyWidgets[Reference.Index].PinName = NewPin;
+		ChangedProperty = GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, BodyWidgets);
+		break;
+	case ECNAStaleReferenceKind::Redirect:
+		Asset->PinRedirects[Reference.Index].NewName = NewPin;
+		ChangedProperty = GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinRedirects);
+		break;
+	}
+	FBlueprintEditorUtils::MarkBlueprintAsModified(Asset);
+	Asset->NotifyAssetChanged(ChangedProperty);
+	return true;
+}
+
+bool FCNAPinManagerOps::RemoveStaleReference(UCustomNodeAsset* Asset, const FCNAStaleReference& Reference, FText& OutError)
+{
+	if (!Asset || !IsStaleReferenceCurrent(Asset, Reference))
+	{
+		OutError = LOCTEXT("Stale.Outdated", "The settings changed since the list was built. Open the list again.");
+		return false;
+	}
+	const FScopedTransaction Transaction(LOCTEXT("Stale.RemoveTransaction", "Remove Pin Reference"));
+	Asset->Modify();
+	FName ChangedProperty = GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinOverrides);
+	switch (Reference.Kind)
+	{
+	case ECNAStaleReferenceKind::PinOverride:
+		Asset->PinOverrides.RemoveAt(Reference.Index);
+		break;
+	case ECNAStaleReferenceKind::PassThrough:
+		Asset->PinOverrides[Reference.Index].PassThroughOf = NAME_None;
+		break;
+	case ECNAStaleReferenceKind::BodyWidget:
+		Asset->BodyWidgets.RemoveAt(Reference.Index);
+		ChangedProperty = GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, BodyWidgets);
+		break;
+	case ECNAStaleReferenceKind::Redirect:
+		Asset->PinRedirects.RemoveAt(Reference.Index);
+		ChangedProperty = GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinRedirects);
+		break;
+	}
+	FBlueprintEditorUtils::MarkBlueprintAsModified(Asset);
+	Asset->NotifyAssetChanged(ChangedProperty);
+	return true;
 }
 void FCNAPinManagerOps::FinishStructuralChange(UCustomNodeAsset* Asset, UK2Node_Tunnel* Tunnel)
 {
