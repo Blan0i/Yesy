@@ -1,10 +1,12 @@
 // Copyright (c) NodeFactory. Checks of custom nodes at compile time (spec 5.1, item 1) and of assets (spec 10.2).
 
 #include "CNAValidator.h"
+#include "CNACurveUtils.h"
 #include "CNAEditorSettings.h"
 #include "CNAGraphUtils.h"
 #include "CNAPinUtils.h"
 #include "CustomNodeAsset.h"
+#include "K2Node_CNACurveValue.h"
 #include "K2Node_CustomNode.h"
 #include "K2Node_GetLocal.h"
 #include "NodeFactoryModule.h"
@@ -12,6 +14,7 @@
 
 #include "AssetData.h"
 #include "AssetRegistryModule.h"
+#include "Curves/CurveBase.h"
 #include "EdGraphSchema_K2.h"
 #include "Engine/Blueprint.h"
 #include "Engine/Texture2D.h"
@@ -19,6 +22,7 @@
 #include "Misc/ScopedSlowTask.h"
 #include "Modules/ModuleManager.h"
 #include "Toolkits/AssetEditorManager.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -237,6 +241,21 @@ void FCNAValidator::ValidateNodeForCompilation(const UK2Node_CustomNode* Node, F
 
 	// CNA017: only wired Get Local and Set Local nodes take part in the expansion.
 	CheckLocalVariableNodes(Asset, true, Node, Out);
+
+	// CNA020-CNA022: the curves the expansion evaluates; Playback ticks with a latent loop (Event Graphs only).
+	CheckCurves(Asset, Node, false, Out);
+	if (const FCNABodyWidget* Playback = FCNACurveUtils::FindPlaybackCurve(Asset))
+	{
+		if (!FCNAGraphUtils::IsLatentAllowedIn(Node->GetGraph()))
+		{
+			FFormatNamedArguments Arguments = AssetArguments;
+			Arguments.Add(TEXT("Curve"), FCNACurveUtils::GetCurveDisplayName(*Playback));
+			Out.Add(ECNAMessage::CNA020, Arguments, Node);
+		}
+	}
+
+	// CNA023: only wired Curve Value nodes take part in the expansion.
+	CheckCurveValueNodes(Asset, true, Node, Out);
 }
 
 void FCNAValidator::CheckRequiredPins(const UK2Node_CustomNode* Node, const UCustomNodeAsset* Asset, FCNADiagnosticList& Out)
@@ -515,6 +534,151 @@ void FCNAValidator::CheckDynamicRanges(const UCustomNodeAsset* Asset, FCNADiagno
 	}
 }
 
+void FCNAValidator::CheckCurves(const UCustomNodeAsset* Asset, const UObject* Context, bool bIncludeWarnings, FCNADiagnosticList& Out)
+{
+	if (!Asset)
+	{
+		return;
+	}
+	TArray<FString> PlaybackNames;
+	TSet<FName> Names;
+	for (const FCNABodyWidget& Widget : Asset->BodyWidgets)
+	{
+		if (!Widget.IsCurve())
+		{
+			continue;
+		}
+		const FCNACurveSettings& Curve = Widget.Curve;
+		FFormatNamedArguments Arguments = FCNAMessages::AssetArgs(Asset);
+		Arguments.Add(TEXT("Curve"), FCNACurveUtils::GetCurveDisplayName(Widget));
+
+		auto AddProblem = [&Out, &Arguments, Context](const FText& Details, bool bWarning)
+		{
+			FFormatNamedArguments ProblemArguments = Arguments;
+			ProblemArguments.Add(TEXT("Details"), Details);
+			if (bWarning)
+			{
+				Out.AddText(ECNAMessage::CNA022, FText::Format(FCNAMessages::GetTemplate(ECNAMessage::CNA022), ProblemArguments), Context, true);
+			}
+			else
+			{
+				Out.Add(ECNAMessage::CNA022, ProblemArguments, Context);
+			}
+		};
+
+		// CNA022: where the values come from.
+		const UClass* NeededClass = FCNACurveUtils::GetCurveAssetClass(Curve.ValueType);
+		FFormatNamedArguments DetailArguments;
+		DetailArguments.Add(TEXT("Class"), NeededClass->GetDisplayNameText());
+		DetailArguments.Add(TEXT("Type"), FCNAPinUtils::GetTypeText(FCNACurveUtils::GetValuePinType(Curve.ValueType)));
+		DetailArguments.Add(TEXT("Path"), FText::FromString(Curve.CurveAsset.ToString()));
+		if (Curve.bUseCurveAsset)
+		{
+			const UCurveBase* Loaded = Curve.CurveAsset.IsNull() ? nullptr : Curve.CurveAsset.LoadSynchronous();
+			if (Curve.CurveAsset.IsNull())
+			{
+				AddProblem(FText::Format(LOCTEXT("Validator.CurveAssetNone", "no Curve asset is set; choose a {Class} or use the own curve."), DetailArguments), false);
+			}
+			else if (!Loaded)
+			{
+				AddProblem(FText::Format(LOCTEXT("Validator.CurveAssetMissing", "the Curve asset {Path} was not found."), DetailArguments), false);
+			}
+			else if (!FCNACurveUtils::IsCurveAssetCompatible(Loaded, Curve.ValueType))
+			{
+				DetailArguments.Add(TEXT("Actual"), Loaded->GetClass()->GetDisplayNameText());
+				AddProblem(FText::Format(LOCTEXT("Validator.CurveAssetClass", "the Curve asset {Path} is a {Actual}, but the value type {Type} needs a {Class}."), DetailArguments), false);
+			}
+		}
+		else if (bIncludeWarnings && FCNACurveUtils::IsOwnCurveEmpty(Curve))
+		{
+			AddProblem(LOCTEXT("Validator.CurveEmpty", "the curve has no keys; its value is 0."), true);
+		}
+
+		if (Curve.Mode == ECNACurveMode::Playback)
+		{
+			PlaybackNames.Add(FCNACurveUtils::GetCurveDisplayName(Widget).ToString());
+			// CNA020: a pure node has no exec pins to start and stop the playback.
+			if (Asset->bPure)
+			{
+				Out.Add(ECNAMessage::CNA020, Arguments, Context);
+			}
+			else if (bIncludeWarnings)
+			{
+				// Intermediate latent nodes of one instance share its latent action id (V-check:
+				// FCompilerResultsLog::CalculateStableIdentifierForLatentActionManager), so a latent node of the
+				// subgraph is ignored while the playback loop waits for the next frame.
+				TArray<FString> LatentNames;
+				if (FCNAGraphUtils::FindLatentNodes(Asset, &LatentNames))
+				{
+					FFormatNamedArguments LatentArguments = Arguments;
+					LatentArguments.Add(TEXT("Nodes"), FText::FromString(FCNAGraphUtils::JoinNames(LatentNames)));
+					Out.AddText(ECNAMessage::CNA020, FText::Format(LOCTEXT("Validator.PlaybackLatent",
+						"Curve {Curve} of {Asset} uses Playback, but the subgraph contains latent nodes ({Nodes}); they do not run while the curve plays."),
+						LatentArguments), Context, true);
+				}
+			}
+		}
+
+		if (bIncludeWarnings)
+		{
+			if (Widget.PinName.IsNone())
+			{
+				AddProblem(LOCTEXT("Validator.CurveNoName", "the curve has no name; give it one so Curve Value nodes can be told apart."), true);
+			}
+			else if (Names.Contains(Widget.PinName))
+			{
+				AddProblem(LOCTEXT("Validator.CurveNameTwice", "another curve has the same name; Curve Value nodes pasted from other assets use the first one."), true);
+			}
+			Names.Add(Widget.PinName);
+		}
+	}
+
+	// CNA021: the node has one Play ... Finished set and drives its exec flow from one loop.
+	if (PlaybackNames.Num() > 1)
+	{
+		FFormatNamedArguments Arguments = FCNAMessages::AssetArgs(Asset);
+		Arguments.Add(TEXT("Curves"), FText::FromString(FString::Join(PlaybackNames, TEXT(", "))));
+		Out.Add(ECNAMessage::CNA021, Arguments, Context);
+	}
+}
+
+void FCNAValidator::CheckCurveValueNodes(const UCustomNodeAsset* Asset, bool bOnlyWired, const UObject* Context, FCNADiagnosticList& Out)
+{
+	if (!Asset)
+	{
+		return;
+	}
+	TArray<UK2Node_CNACurveValue*> Nodes;
+	FCNAGraphUtils::GetExecuteNodesOfClass<UK2Node_CNACurveValue>(Asset, Nodes);
+	for (const UK2Node_CNACurveValue* CurveNode : Nodes)
+	{
+		if (!CurveNode || (bOnlyWired && !CNAValidatorLocal::HasAnyLink(CurveNode)))
+		{
+			continue;
+		}
+		FFormatNamedArguments Arguments = FCNAMessages::AssetArgs(Asset);
+		Arguments.Add(TEXT("Node"), FText::FromString(FCNAGraphUtils::GetNodeName(CurveNode)));
+		Arguments.Add(TEXT("Curve"), CurveNode->GetCurveDisplayName());
+		// Without a context the message points to the Curve Value node itself.
+		const UObject* Target = Context ? Context : CurveNode;
+
+		const FCNABodyWidget* Widget = CurveNode->FindCurveIn(Asset);
+		if (!Widget)
+		{
+			Out.Add(ECNAMessage::CNA023, Arguments, Target);
+			continue;
+		}
+		const UEdGraphPin* ValuePin = CurveNode->GetValuePin();
+		const FEdGraphPinType Expected = FCNACurveUtils::GetValuePinType(Widget->Curve.ValueType);
+		if (ValuePin && !FCNAPinUtils::AreTypesIdentical(ValuePin->PinType, Expected))
+		{
+			Arguments.Add(TEXT("Type"), FCNAPinUtils::GetTypeText(Expected));
+			Out.AddText(ECNAMessage::CNA023, FText::Format(LOCTEXT("Validator.CurveValueOutdated",
+				"{Node} is outdated: the curve {Curve} of {Asset} now gives {Type}. Use Refresh Node on it."), Arguments), Target);
+		}
+	}
+}
+
 void FCNAValidator::CheckSignatureTypes(const UCustomNodeAsset* Asset, const TArray<FCNASignaturePin>& Signature, const UObject* Context, FCNADiagnosticList& Out)
 {
 	for (const FCNASignaturePin& Pin : Signature)
@@ -604,6 +768,8 @@ bool FCNAValidator::ValidateAsset(const UCustomNodeAsset* Asset, FCNADiagnosticL
 	ValidateLocalVariables(Asset, Out);
 	ValidateAppearance(Asset, Out);
 	ValidateContextClass(Asset, Out);
+	CheckCurves(Asset, Asset, true, Out);
+	CheckCurveValueNodes(Asset, false, nullptr, Out);
 	return Out.NumErrors() == ErrorsBefore;
 }
 
@@ -623,13 +789,13 @@ void FCNAValidator::ValidatePinOverride(const UCustomNodeAsset* Asset, const TAr
 	Arguments.Add(TEXT("Type"), FCNAPinUtils::GetTypeText(Pin->Type));
 	Arguments.Add(TEXT("Direction"), CNAValidatorLocal::GetDirectionText(Pin->Direction));
 
-	// Dynamic group: an input array whose elements become pins (spec 4.4).
+	// Dynamic group: an input or output array whose elements become pins (spec 4.4).
 	if (Override.bDynamicGroup)
 	{
-		if (!Pin->IsInput() || !Pin->Type.IsArray())
+		if (!Pin->Type.IsArray())
 		{
 			Out.AddText(ECNAMessage::CNA013, FText::Format(LOCTEXT("Validator.DynamicNotArray",
-				"Pin {Pin} of {Asset} is a dynamic group, but only an input array can be one (it is an {Direction} of type {Type})."),
+				"Pin {Pin} of {Asset} is a dynamic group, but only an array can be one (it is an {Direction} of type {Type})."),
 				Arguments), Asset);
 		}
 		const bool bRangeValid = Override.DynamicMin >= 0 && Override.DynamicMax >= 1
@@ -794,6 +960,11 @@ void FCNAValidator::ValidateAppearance(const UCustomNodeAsset* Asset, FCNADiagno
 	TSet<FName> WidgetPins;
 	for (const FCNABodyWidget& Widget : Asset->BodyWidgets)
 	{
+		// A Curve widget belongs to no pin; CheckCurves validates it.
+		if (Widget.IsCurve())
+		{
+			continue;
+		}
 		FFormatNamedArguments Arguments = CNAValidatorLocal::PinArgs(Asset, Widget.PinName);
 		Arguments.Add(TEXT("Widget"), CNAValidatorLocal::GetBodyWidgetTypeText(Widget.Type));
 		const FCNASignaturePin* Pin = FCNAGraphUtils::FindSignaturePin(Signature, Widget.PinName, EGPD_Input);

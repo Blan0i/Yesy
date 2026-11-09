@@ -1,4 +1,4 @@
-// Copyright (c) NodeFactory. Message codes CNA001-CNA019, their texts and the Message Log "NodeFactory" (spec 10.1).
+// Copyright (c) NodeFactory. Message codes CNA001-CNA023, their texts and the Message Log "NodeFactory" (spec 10.1).
 
 #pragma once
 
@@ -32,6 +32,10 @@ enum class ECNAMessage : uint8
 	CNA017,		// Error: Get Local or Set Local references a missing variable
 	CNA018,		// Error: local variables in a pure node
 	CNA019,		// Warning: icon texture missing, default icon used
+	CNA020,		// Error: curve Playback on a pure node or outside an Event Graph
+	CNA021,		// Error: more than one curve in Playback mode
+	CNA022,		// Error: curve settings invalid (Curve asset missing or of the wrong class; empty curve, names: warnings)
+	CNA023,		// Error: Curve Value references a missing curve or is outdated
 	Count
 };
 

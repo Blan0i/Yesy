@@ -10,7 +10,10 @@ class FKismetCompilerContext;
 class UCustomNodeAsset;
 class UEdGraph;
 class UEdGraphNode;
+class UClass;
 class UK2Node;
+class UK2Node_CallFunction;
+class UK2Node_CNACurveValue;
 class UK2Node_CustomNode;
 class UK2Node_GetCaller;
 class UK2Node_GetLocal;
@@ -28,7 +31,9 @@ enum class ECNAMessage : uint8;
  * Steps (spec 5.1):
  *  1. ValidateNodeDuringCompilation checks, unless the compiler already ran them on this copy.
  *  2. The macro Execute is cloned; every instance gets its own clone.
- *  3. Dynamic element pins are gathered by Make Array.
+ *  3. Dynamic element pins of an input are gathered by Make Array; those of an output read Array Get.
+ *     Curves: Curve Value nodes become engine nodes that evaluate the curve (baked samples of an own curve, the
+ *     getter of a Curve asset) at the Time pin of the instance or at the position of the playback loop.
  *  4. Split struct pins are expanded the standard way (UK2Node::ExpandSplitPin, V21).
  *  5. Local variables become UK2Node_TemporaryVariable nodes; each exec entry resets them first (spec 4.8, V28).
  *  6. Get Caller becomes Self (spec 4.9, V29).
@@ -65,6 +70,12 @@ public:
 		int32 NestedInstances = 0;
 		int32 PassThroughWires = 0;
 		int32 MaxDepth = 0;
+		int32 ArrayGetNodes = 0;
+		int32 CurveValueNodes = 0;
+		int32 CurveEvaluations = 0;
+		int32 BakedChannels = 0;
+		int32 CurveAssetCalls = 0;
+		int32 PlaybackLoops = 0;
 	};
 	static const FStats& GetStats();
 	static void ResetStats();
@@ -158,6 +169,9 @@ private:
 		/** Output name -> input name of PassThroughOf. */
 		TMap<FName, FName> PassThrough;
 
+		/** Consumers of Exit pins that have no output of the same name: dynamic output groups, Update of a Playback curve. */
+		TMap<FName, TArray<UEdGraphPin*>> OutputOverrides;
+
 		/** Insert the reset of the local variables after every exec input. */
 		bool bResetLocalVariables = false;
 
@@ -167,6 +181,9 @@ private:
 
 	/** Builds the Make Array nodes of the dynamic groups and returns their outputs by group name (step 3). */
 	void BuildDynamicArrays(TMap<FName, FInputSource>& OutOverrides);
+
+	/** Element pins of dynamic output groups read the array output of the subgraph through Array Get (step 8). */
+	void BuildDynamicOutputs(TMap<FName, TArray<UEdGraphPin*>>& OutConsumers);
 
 	/** Self for Default To Self pins without wire (step 9). */
 	void BuildDefaultToSelf(TMap<FName, FInputSource>& OutOverrides);
@@ -182,6 +199,82 @@ private:
 
 	/** Connects a consumer to the source of an input, or copies the value when there is no wire. */
 	static void ConnectSource(const FInputSource* Source, UEdGraphPin* Consumer);
+
+	// Curves
+
+	/** A wire, or the literal text of a pin value, that feeds a pin. */
+	struct FPinSource
+	{
+		UEdGraphPin* Pin = nullptr;
+		FString Literal;
+
+		static FPinSource FromPin(UEdGraphPin* InPin);
+		static FPinSource FromLiteral(const FString& InLiteral);
+		static FPinSource FromFloat(float Value);
+		static FPinSource FromInt(int32 Value);
+	};
+
+	/** Named input of a spawned engine call. */
+	struct FCallArgument
+	{
+		FName Name;
+		FPinSource Source;
+	};
+
+	/** Value and time of one curve for this instance, built once and shared by its Curve Value nodes. */
+	struct FCurveEvaluation
+	{
+		FPinSource Value;
+		FPinSource Time;
+	};
+
+	/** Links the wire to the consumer or writes the literal into its value. */
+	static void ConnectPinSource(const FPinSource& Source, UEdGraphPin* Consumer);
+
+	/**
+	 * Time sources of the curves: the Time pin of the instance (EvaluateAtTime) or the position of the playback loop.
+	 * Runs before the boundary, which takes the wires of the node.
+	 */
+	void BuildCurveDrivers(FBoundaryOptions& Options);
+
+	/**
+	 * Timeline-like playback with engine nodes only: persistent position, playing and direction variables, the
+	 * commands Play, Play from Start, Stop, Reverse, and a Delay(0) loop that advances the position once per frame,
+	 * runs the exec flow of the subgraph (-> Update) and fires Finished at the end.
+	 */
+	bool BuildPlayback(const FCNABodyWidget& Widget, FBoundaryOptions& Options);
+
+	/** Replaces every Curve Value node by the evaluation of its curve (CNA023 for a missing curve). */
+	void ReplaceCurveValueNodes();
+
+	/** Evaluation of a curve at its time source, built on first use. nullptr when it cannot be built. */
+	const FCurveEvaluation* GetCurveEvaluation(const FCNABodyWidget& Widget);
+
+	/** Getter of the Curve asset, called on the asset as an object literal (a hard reference that is cooked). */
+	bool BuildAssetEvaluation(const FCNACurveSettings& Curve, const FPinSource& Time, FPinSource& OutValue);
+
+	/** Own curve: samples baked into Make Array literals, read back with Array Get and Lerp. */
+	bool BuildBakedEvaluation(const FCNACurveSettings& Curve, const FPinSource& Time, FPinSource& OutValue);
+
+	// Engine nodes spawned by the expansion
+
+	/** Call of a native function, nullptr and an error when the function does not exist (V-check). */
+	UK2Node_CallFunction* SpawnCall(UClass* Class, FName FunctionName);
+
+	/** Pure call with its inputs connected; returns the return value pin. */
+	UEdGraphPin* SpawnPureCall(UClass* Class, FName FunctionName, const TArray<FCallArgument>& Arguments);
+
+	/** UKismetArrayLibrary::Array_Get typed for ElementType; returns the Item pin. */
+	UEdGraphPin* SpawnArrayGet(const FEdGraphPinType& ElementType, UEdGraphPin*& OutArrayPin, UEdGraphPin*& OutIndexPin);
+
+	/** Make Array of float literals; returns the array pin. */
+	UEdGraphPin* SpawnFloatArray(const TArray<float>& Values);
+
+	/** Persistent temporary variable of the ubergraph (a member of the frame that survives between frames). */
+	UEdGraphPin* SpawnPersistentVariable(FName Category);
+
+	/** Assignment of a value to a variable pin. */
+	FAssignmentPins SpawnAssignmentOf(UEdGraphPin* VariablePin, const FPinSource& Value);
 
 	// Nested nodes and cleanup (steps 10 and 11)
 
@@ -217,7 +310,12 @@ private:
 	TArray<UK2Node_GetLocal*> GetLocalNodes;
 	TArray<UK2Node_SetLocal*> SetLocalNodes;
 	TArray<UK2Node_GetCaller*> CallerNodes;
+	TArray<UK2Node_CNACurveValue*> CurveValueNodes;
 	TArray<UK2Node_CustomNode*> NestedNodes;
+
+	/** Time of each curve (by WidgetGuid) and its evaluation, built on first use. */
+	TMap<FGuid, FPinSource> CurveTimeSources;
+	TMap<FGuid, FCurveEvaluation> CurveEvaluations;
 
 	/** Nodes that were bypassed and must not be compiled. */
 	TArray<UEdGraphNode*> ReplacedNodes;

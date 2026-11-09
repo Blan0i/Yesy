@@ -1,29 +1,40 @@
 // Copyright (c) NodeFactory. Expansion of a custom node into ordinary nodes when a Blueprint compiles (spec 5).
 
 #include "CNAExpander.h"
+#include "CNACurveUtils.h"
 #include "CNAEditorSettings.h"
 #include "CNAGraphUtils.h"
 #include "CNAMessages.h"
 #include "CNAPinUtils.h"
 #include "CNAValidator.h"
 #include "CustomNodeAsset.h"
+#include "K2Node_CNACurveValue.h"
 #include "K2Node_CustomNode.h"
 #include "K2Node_GetCaller.h"
 #include "K2Node_GetLocal.h"
 #include "K2Node_SetLocal.h"
 #include "NodeFactoryModule.h"
 
+#include "Curves/CurveBase.h"
 #include "EdGraph/EdGraph.h"
 #include "EdGraphSchema_K2.h"
 #include "EdGraphUtilities.h"
 #include "K2Node_AssignmentStatement.h"
+#include "K2Node_CallArrayFunction.h"
+#include "K2Node_CallFunction.h"
 #include "K2Node_Composite.h"
+#include "K2Node_ExecutionSequence.h"
+#include "K2Node_IfThenElse.h"
 #include "K2Node_Knot.h"
 #include "K2Node_MacroInstance.h"
 #include "K2Node_MakeArray.h"
 #include "K2Node_Self.h"
 #include "K2Node_TemporaryVariable.h"
 #include "K2Node_Tunnel.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetArrayLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Kismet2/CompilerResultsLog.h"
 #include "KismetCompiler.h"
 #include "Misc/Guid.h"
@@ -31,6 +42,7 @@
 #include "UObject/Package.h"
 #include "UObject/SoftObjectPath.h"
 #include "UObject/UnrealType.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -191,9 +203,12 @@ bool FCNAExpander::Run()
 	ReplaceSetLocalNodes();
 	ReplaceCallerNodes();
 
-	// Steps 3, 7, 8 and 9.
+	// Steps 3, 7, 8 and 9. The curves read the curve pins of the node before the boundary takes its wires.
 	FBoundaryOptions Options;
+	BuildCurveDrivers(Options);
+	ReplaceCurveValueNodes();
 	BuildDynamicArrays(Options.InputOverrides);
+	BuildDynamicOutputs(Options.OutputOverrides);
 	BuildDefaultToSelf(Options.InputOverrides);
 	BuildPassThrough(Options.PassThrough);
 	Options.bResetLocalVariables = UsedVariables.Num() > 0;
@@ -359,6 +374,11 @@ void FCNAExpander::TakeNodesOfGraph(UEdGraph* Graph, int32 MacroDepth, UK2Node_T
 		else if (UK2Node_GetCaller* CallerNode = Cast<UK2Node_GetCaller>(K2Node))
 		{
 			CallerNodes.Add(CallerNode);
+			ReplacedNodes.Add(K2Node);
+		}
+		else if (UK2Node_CNACurveValue* CurveNode = Cast<UK2Node_CNACurveValue>(K2Node))
+		{
+			CurveValueNodes.Add(CurveNode);
 			ReplacedNodes.Add(K2Node);
 		}
 		else if (UK2Node_CustomNode* NestedNode = Cast<UK2Node_CustomNode>(K2Node))
@@ -890,6 +910,50 @@ void FCNAExpander::BuildDynamicArrays(TMap<FName, FInputSource>& OutOverrides)
 	}
 }
 
+void FCNAExpander::BuildDynamicOutputs(TMap<FName, TArray<UEdGraphPin*>>& OutConsumers)
+{
+	TArray<FCNASignaturePin> Signature;
+	if (!FCNAGraphUtils::GetSignature(Asset, Signature))
+	{
+		return;
+	}
+
+	for (const FCNASignaturePin& SignaturePin : Signature)
+	{
+		const FCNAPinOverride* Override = Asset->FindPinOverride(SignaturePin.Name);
+		if (SignaturePin.IsInput() || !Override || !Override->bDynamicGroup || !SignaturePin.Type.IsArray())
+		{
+			continue;
+		}
+
+		TArray<UEdGraphPin*> Elements;
+		Node->GetPinsOfSignaturePin(SignaturePin.Name, Elements);
+		for (UEdGraphPin* Element : Elements)
+		{
+			const int32 Index = FCNAPinUtils::GetDynamicIndex(Element->PinName);
+			if (Element->Direction != EGPD_Output || Index == INDEX_NONE || Element->LinkedTo.Num() == 0)
+			{
+				continue;
+			}
+			FEdGraphPinType ElementType = CNAExpanderLocal::MakeValueType(Element->PinType);
+			ElementType.ContainerType = EPinContainerType::None;
+
+			// Element I of the array output of the subgraph: Array Get with the literal index I.
+			UEdGraphPin* ArrayPin = nullptr;
+			UEdGraphPin* IndexPin = nullptr;
+			UEdGraphPin* ItemPin = SpawnArrayGet(ElementType, ArrayPin, IndexPin);
+			if (!ItemPin)
+			{
+				continue;
+			}
+			IndexPin->DefaultValue = FString::FromInt(Index);
+			// Wires of the element pin; also records the pin for Watch (spec 5.3).
+			Context.MovePinLinksToIntermediate(*Element, *ItemPin);
+			OutConsumers.FindOrAdd(SignaturePin.Name).Add(ArrayPin);
+		}
+	}
+}
+
 void FCNAExpander::BuildDefaultToSelf(TMap<FName, FInputSource>& OutOverrides)
 {
 	for (UEdGraphPin* Pin : Node->Pins)
@@ -962,6 +1026,10 @@ void FCNAExpander::CollapseBoundary(UEdGraphNode* Instance, UK2Node_Tunnel* Inne
 		for (const TPair<FName, FInputSource>& Override : Options->InputOverrides)
 		{
 			InputSources.Add(Override.Key, Override.Value);
+		}
+		for (const TPair<FName, TArray<UEdGraphPin*>>& Extra : Options->OutputOverrides)
+		{
+			OutputConsumers.FindOrAdd(Extra.Key).Append(Extra.Value);
 		}
 	}
 
@@ -1135,6 +1203,668 @@ void FCNAExpander::ConnectSource(const FInputSource* Source, UEdGraphPin* Consum
 		// No wire: the value typed into the pin of the node is used (spec 5.1 item 7).
 		FCNAPinUtils::CopyDefaultValue(Source->DefaultFrom, Consumer);
 	}
+}
+
+// Curves
+
+FCNAExpander::FPinSource FCNAExpander::FPinSource::FromPin(UEdGraphPin* InPin)
+{
+	FPinSource Source;
+	Source.Pin = InPin;
+	return Source;
+}
+
+FCNAExpander::FPinSource FCNAExpander::FPinSource::FromLiteral(const FString& InLiteral)
+{
+	FPinSource Source;
+	Source.Literal = InLiteral;
+	return Source;
+}
+
+FCNAExpander::FPinSource FCNAExpander::FPinSource::FromFloat(float Value)
+{
+	return FromLiteral(FString::SanitizeFloat(Value));
+}
+
+FCNAExpander::FPinSource FCNAExpander::FPinSource::FromInt(int32 Value)
+{
+	return FromLiteral(FString::FromInt(Value));
+}
+
+void FCNAExpander::ConnectPinSource(const FPinSource& Source, UEdGraphPin* Consumer)
+{
+	if (!Consumer)
+	{
+		return;
+	}
+	if (Source.Pin)
+	{
+		Source.Pin->MakeLinkTo(Consumer);
+	}
+	else
+	{
+		Consumer->DefaultObject = nullptr;
+		Consumer->DefaultValue = Source.Literal;
+	}
+}
+
+void FCNAExpander::BuildCurveDrivers(FBoundaryOptions& Options)
+{
+	const FCNABodyWidget* Playback = FCNACurveUtils::FindPlaybackCurve(Asset);
+	for (const FCNABodyWidget& Widget : Asset->BodyWidgets)
+	{
+		if (!Widget.IsCurve() || !Widget.WidgetGuid.IsValid() || &Widget == Playback)
+		{
+			continue;
+		}
+		// EvaluateAtTime: the wire of the Time pin of the instance, or its value.
+		FPinSource Time = FPinSource::FromFloat(0.0f);
+		if (const UEdGraphPin* TimePin = Node->FindCurvePin(Widget.WidgetGuid, ECNACurvePinRole::Time))
+		{
+			if (TimePin->LinkedTo.Num() > 0)
+			{
+				Time = FPinSource::FromPin(TimePin->LinkedTo[0]);
+			}
+			else if (!TimePin->DefaultValue.IsEmpty())
+			{
+				Time = FPinSource::FromLiteral(TimePin->DefaultValue);
+			}
+		}
+		CurveTimeSources.Add(Widget.WidgetGuid, Time);
+	}
+
+	if (Playback && !BuildPlayback(*Playback, Options))
+	{
+		ReportError(FText::Format(LOCTEXT("Expander.PlaybackFailed", "the playback of curve {0} of {1} could not be built."),
+			FCNACurveUtils::GetCurveDisplayName(*Playback), CNAExpanderLocal::GetAssetText(Asset)));
+	}
+}
+
+bool FCNAExpander::BuildPlayback(const FCNABodyWidget& Widget, FBoundaryOptions& Options)
+{
+	const FCNACurveSettings& Curve = Widget.Curve;
+	const float Length = FCNACurveUtils::GetPlaybackLength(Curve);
+	const float PlayRate = FMath::Max(Curve.PlayRate, 0.001f);
+	UClass* MathLibrary = UKismetMathLibrary::StaticClass();
+
+	TArray<FCNASignaturePin> Signature;
+	FCNAGraphUtils::GetSignature(Asset, Signature);
+	const FName DrivenInput = FCNACurveUtils::GetPrimaryExecPinName(Signature, EGPD_Input);
+	const FName DrivenOutput = FCNACurveUtils::GetPrimaryExecPinName(Signature, EGPD_Output);
+
+	auto Link = [](UEdGraphPin* From, UEdGraphPin* To)
+	{
+		if (From && To)
+		{
+			From->MakeLinkTo(To);
+		}
+	};
+	auto SpawnBranch = [this](const FPinSource& Condition) -> UK2Node_IfThenElse*
+	{
+		UK2Node_IfThenElse* Branch = Context.SpawnIntermediateNode<UK2Node_IfThenElse>(Node, SourceGraph);
+		Branch->AllocateDefaultPins();
+		ConnectPinSource(Condition, Branch->GetConditionPin());
+		return Branch;
+	};
+	auto SpawnSequence = [this]() -> UK2Node_ExecutionSequence*
+	{
+		UK2Node_ExecutionSequence* Sequence = Context.SpawnIntermediateNode<UK2Node_ExecutionSequence>(Node, SourceGraph);
+		Sequence->AllocateDefaultPins();
+		return Sequence;
+	};
+	// Wires of a command pin of the instance (Play, Stop ...) go to the first node of its chain.
+	auto MoveCurvePin = [this, &Widget](ECNACurvePinRole Role, UEdGraphPin* Target)
+	{
+		UEdGraphPin* Pin = Node->FindCurvePin(Widget.WidgetGuid, Role);
+		if (Pin && Target)
+		{
+			Context.MovePinLinksToIntermediate(*Pin, *Target);
+		}
+	};
+
+	// State of this instance between frames: position, playing, direction.
+	UEdGraphPin* TimeVar = SpawnPersistentVariable(UEdGraphSchema_K2::PC_Float);
+	UEdGraphPin* PlayingVar = SpawnPersistentVariable(UEdGraphSchema_K2::PC_Boolean);
+	UEdGraphPin* ReverseVar = SpawnPersistentVariable(UEdGraphSchema_K2::PC_Boolean);
+	UEdGraphPin* Self = GetSelfPin();
+	if (!TimeVar || !PlayingVar || !ReverseVar || !Self)
+	{
+		return false;
+	}
+	CurveTimeSources.Add(Widget.WidgetGuid, FPinSource::FromPin(TimeVar));
+
+	// The tick: Delay 0 resumes on the next frame (the latent action manager removes the finished action before it
+	// runs the continuation, and processes an object once per frame). A Delay call while one waits is ignored
+	// (same latent id), so Play on a playing node does not start a second loop.
+	UK2Node_CallFunction* Delay = SpawnCall(UKismetSystemLibrary::StaticClass(), FName(TEXT("Delay")));
+	if (!Delay)
+	{
+		return false;
+	}
+	Link(Self, Delay->FindPin(TEXT("WorldContextObject")));
+	if (UEdGraphPin* Duration = Delay->FindPin(TEXT("Duration")))
+	{
+		Duration->DefaultValue = TEXT("0.0");
+	}
+	UEdGraphPin* DelayExec = Delay->GetExecPin();
+	UEdGraphPin* DelayThen = Delay->GetThenPin();
+
+	// Commands: Play and Reverse set the direction, then Playing, then arm the loop.
+	const FAssignmentPins StartPlaying = SpawnAssignmentOf(PlayingVar, FPinSource::FromLiteral(TEXT("true")));
+	const FAssignmentPins Forward = SpawnAssignmentOf(ReverseVar, FPinSource::FromLiteral(TEXT("false")));
+	const FAssignmentPins StopPlaying = SpawnAssignmentOf(PlayingVar, FPinSource::FromLiteral(TEXT("false")));
+	if (!StartPlaying.IsValid() || !Forward.IsValid() || !StopPlaying.IsValid() || !DelayExec || !DelayThen)
+	{
+		return false;
+	}
+	Link(StartPlaying.Then, DelayExec);
+	Link(Forward.Then, StartPlaying.Exec);
+	MoveCurvePin(ECNACurvePinRole::Play, Forward.Exec);
+	MoveCurvePin(ECNACurvePinRole::Stop, StopPlaying.Exec);
+	if (Node->FindCurvePin(Widget.WidgetGuid, ECNACurvePinRole::PlayFromStart))
+	{
+		const FAssignmentPins Rewind = SpawnAssignmentOf(TimeVar, FPinSource::FromFloat(0.0f));
+		Link(Rewind.Then, Forward.Exec);
+		MoveCurvePin(ECNACurvePinRole::PlayFromStart, Rewind.Exec);
+	}
+	if (Node->FindCurvePin(Widget.WidgetGuid, ECNACurvePinRole::Reverse))
+	{
+		const FAssignmentPins Backward = SpawnAssignmentOf(ReverseVar, FPinSource::FromLiteral(TEXT("true")));
+		Link(Backward.Then, StartPlaying.Exec);
+		MoveCurvePin(ECNACurvePinRole::Reverse, Backward.Exec);
+	}
+
+	// Every tick: stop when Playing was cleared, else NewTime = Time + WorldDeltaSeconds * (Reverse ? -Rate : Rate).
+	UK2Node_IfThenElse* IfPlaying = SpawnBranch(FPinSource::FromPin(PlayingVar));
+	Link(DelayThen, IfPlaying->GetExecPin());
+	UEdGraphPin* DeltaSeconds = SpawnPureCall(UGameplayStatics::StaticClass(), FName(TEXT("GetWorldDeltaSeconds")),
+		{ FCallArgument{ TEXT("WorldContextObject"), FPinSource::FromPin(Self) } });
+	UEdGraphPin* SignedRate = SpawnPureCall(MathLibrary, FName(TEXT("SelectFloat")),
+		{ FCallArgument{ TEXT("A"), FPinSource::FromFloat(-PlayRate) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(PlayRate) },
+		  FCallArgument{ TEXT("bPickA"), FPinSource::FromPin(ReverseVar) } });
+	UEdGraphPin* Step = SpawnPureCall(MathLibrary, FName(TEXT("Multiply_FloatFloat")),
+		{ FCallArgument{ TEXT("A"), FPinSource::FromPin(DeltaSeconds) }, FCallArgument{ TEXT("B"), FPinSource::FromPin(SignedRate) } });
+	UEdGraphPin* NewTime = SpawnPureCall(MathLibrary, FName(TEXT("Add_FloatFloat")),
+		{ FCallArgument{ TEXT("A"), FPinSource::FromPin(TimeVar) }, FCallArgument{ TEXT("B"), FPinSource::FromPin(Step) } });
+	if (!DeltaSeconds || !SignedRate || !Step || !NewTime)
+	{
+		return false;
+	}
+
+	// Running: re-arm the tick first (the subgraph may stop or restart the playback), then run the subgraph.
+	UK2Node_ExecutionSequence* RunSequence = SpawnSequence();
+	UK2Node_ExecutionSequence* RunBody = SpawnSequence();
+	Link(RunSequence->GetThenPinGivenIndex(0), DelayExec);
+	Link(RunSequence->GetThenPinGivenIndex(1), RunBody->GetExecPin());
+	UEdGraphPin* FinishedSource = nullptr;
+
+	if (Curve.bLoop)
+	{
+		// Time = ((NewTime % Length) + Length) % Length wraps both directions; a loop never finishes.
+		UEdGraphPin* Rest = SpawnPureCall(MathLibrary, FName(TEXT("GenericPercent_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(NewTime) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
+		UEdGraphPin* Positive = SpawnPureCall(MathLibrary, FName(TEXT("Add_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Rest) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
+		UEdGraphPin* Wrapped = SpawnPureCall(MathLibrary, FName(TEXT("GenericPercent_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Positive) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
+		const FAssignmentPins SetWrapped = SpawnAssignmentOf(TimeVar, FPinSource::FromPin(Wrapped));
+		if (!Wrapped || !SetWrapped.IsValid())
+		{
+			return false;
+		}
+		Link(IfPlaying->GetThenPin(), SetWrapped.Exec);
+		Link(SetWrapped.Then, RunSequence->GetExecPin());
+	}
+	else
+	{
+		// The end in the current direction: NewTime <= 0 backwards, NewTime >= Length forwards.
+		UEdGraphPin* PastStart = SpawnPureCall(MathLibrary, FName(TEXT("LessEqual_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(NewTime) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(0.0f) } });
+		UEdGraphPin* PastEnd = SpawnPureCall(MathLibrary, FName(TEXT("GreaterEqual_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(NewTime) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
+		UEdGraphPin* Clamped = SpawnPureCall(MathLibrary, FName(TEXT("FClamp")),
+			{ FCallArgument{ TEXT("Value"), FPinSource::FromPin(NewTime) }, FCallArgument{ TEXT("Min"), FPinSource::FromFloat(0.0f) },
+			  FCallArgument{ TEXT("Max"), FPinSource::FromFloat(Length) } });
+		const FAssignmentPins SetTime = SpawnAssignmentOf(TimeVar, FPinSource::FromPin(NewTime));
+		const FAssignmentPins SetEnd = SpawnAssignmentOf(TimeVar, FPinSource::FromPin(Clamped));
+		const FAssignmentPins StopAtEnd = SpawnAssignmentOf(PlayingVar, FPinSource::FromLiteral(TEXT("false")));
+		if (!PastStart || !PastEnd || !Clamped || !SetTime.IsValid() || !SetEnd.IsValid() || !StopAtEnd.IsValid())
+		{
+			return false;
+		}
+		UK2Node_IfThenElse* IfReverse = SpawnBranch(FPinSource::FromPin(ReverseVar));
+		UK2Node_IfThenElse* IfPastStart = SpawnBranch(FPinSource::FromPin(PastStart));
+		UK2Node_IfThenElse* IfPastEnd = SpawnBranch(FPinSource::FromPin(PastEnd));
+		Link(IfPlaying->GetThenPin(), IfReverse->GetExecPin());
+		Link(IfReverse->GetThenPin(), IfPastStart->GetExecPin());
+		Link(IfReverse->GetElsePin(), IfPastEnd->GetExecPin());
+
+		// Still inside: store the position and run.
+		Link(IfPastStart->GetElsePin(), SetTime.Exec);
+		Link(IfPastEnd->GetElsePin(), SetTime.Exec);
+		Link(SetTime.Then, RunSequence->GetExecPin());
+
+		// The end: clamp, stop, run the subgraph a last time (Update), then Finished, like a Timeline.
+		Link(IfPastStart->GetThenPin(), SetEnd.Exec);
+		Link(IfPastEnd->GetThenPin(), SetEnd.Exec);
+		Link(SetEnd.Then, StopAtEnd.Exec);
+		UK2Node_ExecutionSequence* EndSequence = SpawnSequence();
+		Link(StopAtEnd.Then, EndSequence->GetExecPin());
+		Link(EndSequence->GetThenPinGivenIndex(0), RunBody->GetExecPin());
+		FinishedSource = EndSequence->GetThenPinGivenIndex(1);
+	}
+
+	// The subgraph runs from its first exec input; its first exec output leads to Update. Without one of them,
+	// Update fires right after the subgraph.
+	UEdGraphPin* BodyTrigger = RunBody->GetThenPinGivenIndex(0);
+	UEdGraphPin* UpdatePin = Node->FindCurvePin(Widget.WidgetGuid, ECNACurvePinRole::Update);
+	const TArray<UEdGraphPin*> UpdateConsumers = UpdatePin ? UpdatePin->LinkedTo : TArray<UEdGraphPin*>();
+	if (!DrivenInput.IsNone() && BodyTrigger)
+	{
+		FInputSource& Source = Options.InputOverrides.FindOrAdd(DrivenInput);
+		Source.Sources.Reset();
+		Source.Sources.Add(BodyTrigger);
+		Source.DefaultFrom = nullptr;
+	}
+	if (!DrivenOutput.IsNone())
+	{
+		Options.OutputOverrides.FindOrAdd(DrivenOutput).Append(UpdateConsumers);
+	}
+	if (DrivenInput.IsNone() || DrivenOutput.IsNone())
+	{
+		for (UEdGraphPin* Consumer : UpdateConsumers)
+		{
+			Link(RunBody->GetThenPinGivenIndex(1), Consumer);
+		}
+	}
+	if (UpdatePin)
+	{
+		UpdatePin->BreakAllPinLinks();
+	}
+
+	UEdGraphPin* FinishedPin = Node->FindCurvePin(Widget.WidgetGuid, ECNACurvePinRole::Finished);
+	if (FinishedPin && FinishedSource)
+	{
+		Context.MovePinLinksToIntermediate(*FinishedPin, *FinishedSource);
+	}
+
+	++CNAExpanderLocal::Stats.PlaybackLoops;
+	return true;
+}
+
+void FCNAExpander::ReplaceCurveValueNodes()
+{
+	for (UK2Node_CNACurveValue* CurveNode : CurveValueNodes)
+	{
+		UEdGraphPin* ValuePin = CurveNode->GetValuePin();
+		UEdGraphPin* TimePin = CurveNode->GetTimePin();
+		const TArray<UEdGraphPin*> ValueConsumers = ValuePin ? ValuePin->LinkedTo : TArray<UEdGraphPin*>();
+		const TArray<UEdGraphPin*> TimeConsumers = TimePin ? TimePin->LinkedTo : TArray<UEdGraphPin*>();
+		const FEdGraphPinType NodeValueType = ValuePin ? ValuePin->PinType : FEdGraphPinType();
+		// The clone has no asset of its own: the curve is looked up in the asset of the instance.
+		const FCNABodyWidget* Widget = CurveNode->FindCurveIn(Asset);
+		BreakLinksQuietly(CurveNode);
+		++CNAExpanderLocal::Stats.CurveValueNodes;
+
+		FFormatNamedArguments Arguments = FCNAMessages::AssetArgs(Asset);
+		Arguments.Add(TEXT("Node"), CurveNode->GetNodeTitle(ENodeTitleType::ListView));
+		Arguments.Add(TEXT("Curve"), CurveNode->CurveName.IsNone() ? LOCTEXT("Expander.NoCurve", "<none>") : FText::FromName(CurveNode->CurveName));
+		if (!Widget)
+		{
+			ReportCode(ECNAMessage::CNA023, Arguments);
+			continue;
+		}
+
+		if (TimeConsumers.Num() > 0)
+		{
+			const FPinSource* Time = CurveTimeSources.Find(Widget->WidgetGuid);
+			const FPinSource TimeSource = Time ? *Time : FPinSource::FromFloat(0.0f);
+			for (UEdGraphPin* Consumer : TimeConsumers)
+			{
+				ConnectPinSource(TimeSource, Consumer);
+			}
+		}
+		if (ValueConsumers.Num() == 0)
+		{
+			continue;
+		}
+		const FEdGraphPinType Expected = FCNACurveUtils::GetValuePinType(Widget->Curve.ValueType);
+		if (!FCNAPinUtils::AreTypesIdentical(NodeValueType, Expected))
+		{
+			Arguments.Add(TEXT("Type"), FCNAPinUtils::GetTypeText(Expected));
+			const FText Details = FText::Format(LOCTEXT("Expander.CurveValueOutdated", "{Node} is outdated: the curve {Curve} of {Asset} now gives {Type}. Use Refresh Node on it."), Arguments);
+			FCNAMessages::ReportTextToCompiler(Context.MessageLog, Node, ECNAMessage::CNA023,
+				FText::Format(NSLOCTEXT("NodeFactory", "Msg.WithCode", "{0}: {1}"), FText::FromString(FCNAMessages::GetCode(ECNAMessage::CNA023)), Details));
+			continue;
+		}
+		if (const FCurveEvaluation* Evaluation = GetCurveEvaluation(*Widget))
+		{
+			for (UEdGraphPin* Consumer : ValueConsumers)
+			{
+				ConnectPinSource(Evaluation->Value, Consumer);
+			}
+		}
+	}
+	CurveValueNodes.Reset();
+}
+
+const FCNAExpander::FCurveEvaluation* FCNAExpander::GetCurveEvaluation(const FCNABodyWidget& Widget)
+{
+	if (const FCurveEvaluation* Found = CurveEvaluations.Find(Widget.WidgetGuid))
+	{
+		return Found;
+	}
+
+	FCurveEvaluation Evaluation;
+	const FPinSource* Time = CurveTimeSources.Find(Widget.WidgetGuid);
+	Evaluation.Time = Time ? *Time : FPinSource::FromFloat(0.0f);
+	const bool bBuilt = Widget.Curve.bUseCurveAsset
+		? BuildAssetEvaluation(Widget.Curve, Evaluation.Time, Evaluation.Value)
+		: BuildBakedEvaluation(Widget.Curve, Evaluation.Time, Evaluation.Value);
+	if (!bBuilt)
+	{
+		ReportError(FText::Format(LOCTEXT("Expander.CurveFailed", "the value of curve {0} of {1} could not be built."),
+			FCNACurveUtils::GetCurveDisplayName(Widget), CNAExpanderLocal::GetAssetText(Asset)));
+		return nullptr;
+	}
+	++CNAExpanderLocal::Stats.CurveEvaluations;
+	// The evaluation is used right away; a later Add may move the elements of the map.
+	return &CurveEvaluations.Add(Widget.WidgetGuid, Evaluation);
+}
+
+bool FCNAExpander::BuildAssetEvaluation(const FCNACurveSettings& Curve, const FPinSource& Time, FPinSource& OutValue)
+{
+	UCurveBase* CurveAsset = FCNACurveUtils::LoadCurveAsset(Curve);
+	if (!CurveAsset)
+	{
+		// The validator reports the reason (CNA022) before the expansion.
+		return false;
+	}
+	UK2Node_CallFunction* Call = SpawnCall(FCNACurveUtils::GetCurveAssetClass(Curve.ValueType), FCNACurveUtils::GetCurveAssetGetterName(Curve.ValueType));
+	if (!Call)
+	{
+		return false;
+	}
+	// V-check: a const BlueprintCallable member is pure in 4.20.3; an impure call would need an exec wire here.
+	if (!Call->IsNodePure())
+	{
+		ReportError(FText::Format(LOCTEXT("Expander.CurveGetterImpure", "{0} is not pure in this engine version; the Curve asset cannot be read here."),
+			FText::FromName(FCNACurveUtils::GetCurveAssetGetterName(Curve.ValueType))));
+		return false;
+	}
+	UEdGraphPin* TargetPin = Call->FindPin(UEdGraphSchema_K2::PN_Self, EGPD_Input);
+	UEdGraphPin* TimePin = Call->FindPin(TEXT("InTime"), EGPD_Input);
+	UEdGraphPin* ResultPin = Call->GetReturnValuePin();
+	if (!TargetPin || !TimePin || !ResultPin)
+	{
+		ReportError(LOCTEXT("Expander.CurveGetterPins", "the getter of the Curve asset has an unexpected set of pins (V-check: Target, InTime, ReturnValue)."));
+		return false;
+	}
+	// The asset is the target as an object literal: the compiled class references it, so it is cooked with the game.
+	TargetPin->DefaultObject = CurveAsset;
+	ConnectPinSource(Time, TimePin);
+	OutValue = FPinSource::FromPin(ResultPin);
+	++CNAExpanderLocal::Stats.CurveAssetCalls;
+	return true;
+}
+
+bool FCNAExpander::BuildBakedEvaluation(const FCNACurveSettings& Curve, const FPinSource& Time, FPinSource& OutValue)
+{
+	UClass* MathLibrary = UKismetMathLibrary::StaticClass();
+	const int32 NumChannels = Curve.GetChannelCount();
+	const int32 NumSamples = FMath::Clamp(Curve.BakeSamples, 2, 1024);
+	float MinTime = 0.0f;
+	float MaxTime = 0.0f;
+	Curve.GetOwnTimeRange(MinTime, MaxTime);
+	const float Span = MaxTime - MinTime;
+
+	TArray<FPinSource> Channels;
+	if (!Time.Pin || Span <= KINDA_SMALL_NUMBER)
+	{
+		// A literal time or a flat curve: the value is known now.
+		const float LiteralTime = Time.Pin ? MinTime : FCString::Atof(*Time.Literal);
+		for (int32 Channel = 0; Channel < NumChannels; ++Channel)
+		{
+			Channels.Add(FPinSource::FromFloat(FCNACurveUtils::EvaluateChannel(Curve, Channel, LiteralTime)));
+		}
+	}
+	else
+	{
+		// Position among the samples: U = clamp((Time - Min) * (N - 1) / Span, 0, N - 1), the samples I0 = min(floor(U), N - 2)
+		// and I0 + 1, and Alpha = U - I0 between them. Shared by all channels.
+		UEdGraphPin* Offset = SpawnPureCall(MathLibrary, FName(TEXT("Subtract_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), Time }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(MinTime) } });
+		UEdGraphPin* Scaled = SpawnPureCall(MathLibrary, FName(TEXT("Multiply_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Offset) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(static_cast<float>(NumSamples - 1) / Span) } });
+		UEdGraphPin* Position = SpawnPureCall(MathLibrary, FName(TEXT("FClamp")),
+			{ FCallArgument{ TEXT("Value"), FPinSource::FromPin(Scaled) }, FCallArgument{ TEXT("Min"), FPinSource::FromFloat(0.0f) },
+			  FCallArgument{ TEXT("Max"), FPinSource::FromFloat(static_cast<float>(NumSamples - 1)) } });
+		UEdGraphPin* Floor = SpawnPureCall(MathLibrary, FName(TEXT("FFloor")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Position) } });
+		UEdGraphPin* Lower = SpawnPureCall(MathLibrary, FName(TEXT("Clamp")),
+			{ FCallArgument{ TEXT("Value"), FPinSource::FromPin(Floor) }, FCallArgument{ TEXT("Min"), FPinSource::FromInt(0) },
+			  FCallArgument{ TEXT("Max"), FPinSource::FromInt(NumSamples - 2) } });
+		UEdGraphPin* Upper = SpawnPureCall(MathLibrary, FName(TEXT("Add_IntInt")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Lower) }, FCallArgument{ TEXT("B"), FPinSource::FromInt(1) } });
+		UEdGraphPin* LowerAsFloat = SpawnPureCall(MathLibrary, FName(TEXT("Conv_IntToFloat")),
+			{ FCallArgument{ TEXT("InInt"), FPinSource::FromPin(Lower) } });
+		UEdGraphPin* Alpha = SpawnPureCall(MathLibrary, FName(TEXT("Subtract_FloatFloat")),
+			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Position) }, FCallArgument{ TEXT("B"), FPinSource::FromPin(LowerAsFloat) } });
+		if (!Offset || !Scaled || !Position || !Floor || !Lower || !Upper || !LowerAsFloat || !Alpha)
+		{
+			return false;
+		}
+
+		FEdGraphPinType FloatType;
+		FloatType.PinCategory = UEdGraphSchema_K2::PC_Float;
+		TArray<float> Samples;
+		for (int32 Channel = 0; Channel < NumChannels; ++Channel)
+		{
+			FCNACurveUtils::BakeChannel(Curve, Channel, MinTime, MaxTime, NumSamples, Samples);
+			const bool bConstant = !Samples.ContainsByPredicate([&Samples](float Sample) { return !FMath::IsNearlyEqual(Sample, Samples[0]); });
+			if (bConstant)
+			{
+				Channels.Add(FPinSource::FromFloat(Samples[0]));
+				continue;
+			}
+			// Value = Lerp(Samples[I0], Samples[I0 + 1], Alpha), the samples as a Make Array of literals.
+			UEdGraphPin* SampleArray = SpawnFloatArray(Samples);
+			UEdGraphPin* LowerArray = nullptr;
+			UEdGraphPin* LowerIndex = nullptr;
+			UEdGraphPin* UpperArray = nullptr;
+			UEdGraphPin* UpperIndex = nullptr;
+			UEdGraphPin* LowerItem = SpawnArrayGet(FloatType, LowerArray, LowerIndex);
+			UEdGraphPin* UpperItem = SpawnArrayGet(FloatType, UpperArray, UpperIndex);
+			if (!SampleArray || !LowerItem || !UpperItem)
+			{
+				return false;
+			}
+			SampleArray->MakeLinkTo(LowerArray);
+			SampleArray->MakeLinkTo(UpperArray);
+			Lower->MakeLinkTo(LowerIndex);
+			Upper->MakeLinkTo(UpperIndex);
+			UEdGraphPin* Value = SpawnPureCall(MathLibrary, FName(TEXT("Lerp")),
+				{ FCallArgument{ TEXT("A"), FPinSource::FromPin(LowerItem) }, FCallArgument{ TEXT("B"), FPinSource::FromPin(UpperItem) },
+				  FCallArgument{ TEXT("Alpha"), FPinSource::FromPin(Alpha) } });
+			if (!Value)
+			{
+				return false;
+			}
+			Channels.Add(FPinSource::FromPin(Value));
+			++CNAExpanderLocal::Stats.BakedChannels;
+		}
+	}
+
+	if (Channels.Num() != NumChannels)
+	{
+		return false;
+	}
+	switch (Curve.ValueType)
+	{
+	case ECNACurveValueType::Vector:
+		OutValue = FPinSource::FromPin(SpawnPureCall(MathLibrary, FName(TEXT("MakeVector")),
+			{ FCallArgument{ TEXT("X"), Channels[0] }, FCallArgument{ TEXT("Y"), Channels[1] }, FCallArgument{ TEXT("Z"), Channels[2] } }));
+		return OutValue.Pin != nullptr;
+	case ECNACurveValueType::LinearColor:
+		// V-check: UKismetMathLibrary::MakeColor(float R, float G, float B, float A) returns FLinearColor in 4.20.3.
+		OutValue = FPinSource::FromPin(SpawnPureCall(MathLibrary, FName(TEXT("MakeColor")),
+			{ FCallArgument{ TEXT("R"), Channels[0] }, FCallArgument{ TEXT("G"), Channels[1] }, FCallArgument{ TEXT("B"), Channels[2] },
+			  FCallArgument{ TEXT("A"), Channels[3] } }));
+		return OutValue.Pin != nullptr;
+	case ECNACurveValueType::Float:
+	default:
+		OutValue = Channels[0];
+		return true;
+	}
+}
+
+// Engine nodes spawned by the expansion
+
+UK2Node_CallFunction* FCNAExpander::SpawnCall(UClass* Class, FName FunctionName)
+{
+	UFunction* Function = Class ? Class->FindFunctionByName(FunctionName) : nullptr;
+	if (!Function)
+	{
+		ReportError(FText::Format(LOCTEXT("Expander.FunctionMissing", "the engine function {0}::{1} was not found (V-check of UE 4.20.3)."),
+			FText::FromString(GetNameSafe(Class)), FText::FromName(FunctionName)));
+		return nullptr;
+	}
+	UK2Node_CallFunction* Call = Context.SpawnIntermediateNode<UK2Node_CallFunction>(Node, SourceGraph);
+	Call->SetFromFunction(Function);
+	Call->AllocateDefaultPins();
+	return Call;
+}
+
+UEdGraphPin* FCNAExpander::SpawnPureCall(UClass* Class, FName FunctionName, const TArray<FCallArgument>& Arguments)
+{
+	UK2Node_CallFunction* Call = SpawnCall(Class, FunctionName);
+	if (!Call)
+	{
+		return nullptr;
+	}
+	for (const FCallArgument& Argument : Arguments)
+	{
+		UEdGraphPin* Pin = Call->FindPin(Argument.Name, EGPD_Input);
+		if (!Pin)
+		{
+			ReportError(FText::Format(LOCTEXT("Expander.CallPinMissing", "the pin {0} of the engine function {1} was not found (V-check of UE 4.20.3)."),
+				FText::FromName(Argument.Name), FText::FromName(FunctionName)));
+			return nullptr;
+		}
+		ConnectPinSource(Argument.Source, Pin);
+	}
+	return Call->GetReturnValuePin();
+}
+
+UEdGraphPin* FCNAExpander::SpawnArrayGet(const FEdGraphPinType& ElementType, UEdGraphPin*& OutArrayPin, UEdGraphPin*& OutIndexPin)
+{
+	OutArrayPin = nullptr;
+	OutIndexPin = nullptr;
+	// V-check: UKismetArrayLibrary::Array_Get(const TArray<int32>& TargetArray, int32 Index, int32& Item), pure and
+	// called through UK2Node_CallArrayFunction like the Get node of the editor.
+	UFunction* Function = UKismetArrayLibrary::StaticClass()->FindFunctionByName(FName(TEXT("Array_Get")));
+	if (!Function)
+	{
+		ReportError(LOCTEXT("Expander.ArrayGetMissing", "Array Get could not be created (V-check: UKismetArrayLibrary::Array_Get)."));
+		return nullptr;
+	}
+	UK2Node_CallArrayFunction* Get = Context.SpawnIntermediateNode<UK2Node_CallArrayFunction>(Node, SourceGraph);
+	Get->SetFromFunction(Function);
+	Get->AllocateDefaultPins();
+	OutArrayPin = Get->FindPin(TEXT("TargetArray"), EGPD_Input);
+	OutIndexPin = Get->FindPin(TEXT("Index"), EGPD_Input);
+	UEdGraphPin* ItemPin = Get->FindPin(TEXT("Item"), EGPD_Output);
+	if (!OutArrayPin || !OutIndexPin || !ItemPin)
+	{
+		ReportError(LOCTEXT("Expander.ArrayGetPins", "Array Get has an unexpected set of pins (V-check: TargetArray, Index, Item)."));
+		return nullptr;
+	}
+	// The Wildcard pins take the element type; MakeLinkTo does not propagate types. Container and reference flags
+	// of the function parameters stay.
+	for (UEdGraphPin* Pin : { OutArrayPin, ItemPin })
+	{
+		Pin->PinType.PinCategory = ElementType.PinCategory;
+		Pin->PinType.PinSubCategory = ElementType.PinSubCategory;
+		Pin->PinType.PinSubCategoryObject = ElementType.PinSubCategoryObject;
+	}
+	++CNAExpanderLocal::Stats.ArrayGetNodes;
+	return ItemPin;
+}
+
+UEdGraphPin* FCNAExpander::SpawnFloatArray(const TArray<float>& Values)
+{
+	// V-check: UK2Node_MakeArray keeps its pin count in the property NumInputs (UK2Node_MakeContainer in 4.20).
+	UIntProperty* NumInputsProperty = FindField<UIntProperty>(UK2Node_MakeArray::StaticClass(), TEXT("NumInputs"));
+	if (!NumInputsProperty || Values.Num() == 0)
+	{
+		ReportError(LOCTEXT("Expander.SampleArrayFailed", "the samples of a curve could not be stored (V-check: UK2Node_MakeArray::NumInputs)."));
+		return nullptr;
+	}
+	UK2Node_MakeArray* MakeArray = Context.SpawnIntermediateNode<UK2Node_MakeArray>(Node, SourceGraph);
+	NumInputsProperty->SetPropertyValue_InContainer(MakeArray, Values.Num());
+	MakeArray->AllocateDefaultPins();
+
+	FEdGraphPinType FloatType;
+	FloatType.PinCategory = UEdGraphSchema_K2::PC_Float;
+	UEdGraphPin* ArrayPin = nullptr;
+	int32 Index = 0;
+	for (UEdGraphPin* Pin : MakeArray->Pins)
+	{
+		if (!Pin)
+		{
+			continue;
+		}
+		if (Pin->Direction == EGPD_Output)
+		{
+			ArrayPin = Pin;
+			ArrayPin->PinType = FloatType;
+			ArrayPin->PinType.ContainerType = EPinContainerType::Array;
+		}
+		else if (Values.IsValidIndex(Index))
+		{
+			Pin->PinType = FloatType;
+			Pin->DefaultValue = FString::SanitizeFloat(Values[Index++]);
+		}
+	}
+	if (!ArrayPin || Index != Values.Num())
+	{
+		ReportError(LOCTEXT("Expander.SampleArrayPins", "Make Array of the curve samples has an unexpected set of pins."));
+		return nullptr;
+	}
+	++CNAExpanderLocal::Stats.MakeArrayNodes;
+	CNAExpanderLocal::Stats.MakeArrayElements += Values.Num();
+	return ArrayPin;
+}
+
+UEdGraphPin* FCNAExpander::SpawnPersistentVariable(FName Category)
+{
+	// V-check: FKismetCompilerContext::SpawnInternalVariable(UEdGraphNode*, FName Category, FName SubCategory, ...)
+	// exists since 4.18 (Do Once Multi Input keeps its state with it). It spawns a UK2Node_TemporaryVariable in the
+	// graph of the node; bIsPersistent makes it a member of the ubergraph frame, so the value survives between frames
+	// (Event Graph only, CNA020).
+	UK2Node_TemporaryVariable* Variable = Context.SpawnInternalVariable(Node, Category);
+	if (!Variable || Variable->GetGraph() != SourceGraph)
+	{
+		ReportError(LOCTEXT("Expander.PersistentFailed", "the state of the curve playback could not be created."));
+		return nullptr;
+	}
+	Variable->bIsPersistent = true;
+	if (Variable->Pins.Num() == 0)
+	{
+		Variable->AllocateDefaultPins();
+	}
+	++CNAExpanderLocal::Stats.TemporaryVariables;
+	return FindFirstPin(Variable, EGPD_Output);
+}
+
+FCNAExpander::FAssignmentPins FCNAExpander::SpawnAssignmentOf(UEdGraphPin* VariablePin, const FPinSource& Value)
+{
+	const FAssignmentPins Assignment = SpawnAssignment(VariablePin, VariablePin ? VariablePin->PinType : FEdGraphPinType());
+	if (Assignment.IsValid())
+	{
+		ConnectPinSource(Value, Assignment.Value);
+	}
+	return Assignment;
 }
 
 // Nested nodes and cleanup (steps 10 and 11)

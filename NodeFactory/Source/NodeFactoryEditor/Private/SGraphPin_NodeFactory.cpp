@@ -5,6 +5,8 @@
 #include "CNATypes.h"
 #include "CustomNodeAsset.h"
 #include "K2Node_CustomNode.h"
+#include "NodeFactoryStyle.h"
+#include "SGraphNode_NodeFactory.h"
 
 #include "EdGraph/EdGraphPin.h"
 #include "EdGraphSchema_K2.h"
@@ -21,6 +23,28 @@
 #include "KismetPins/SGraphPinVector.h"
 #include "KismetPins/SGraphPinVector2D.h"
 #endif
+#include "CNALocalization.h"
+
+namespace CNAPinStyleLocal
+{
+	const UCustomNodeAsset* GetAsset(const UEdGraphPin* Pin)
+	{
+		const UK2Node_CustomNode* Node = FCNAPinStyle::GetCustomNode(Pin);
+		return Node ? Node->GetCustomNodeAsset() : nullptr;
+	}
+
+	/** Override of the pin; element pins of a dynamic group use the override of the group. */
+	const FCNAPinOverride* FindOverride(const UCustomNodeAsset& Asset, FName PinName)
+	{
+		if (const FCNAPinOverride* Override = Asset.FindPinOverride(PinName))
+		{
+			return Override;
+		}
+		FName BaseName;
+		int32 Index = 0;
+		return CNATypes::ParseDynamicPinName(PinName, BaseName, Index) ? Asset.FindPinOverride(BaseName) : nullptr;
+	}
+}
 
 void SGraphPin_NodeFactory::Construct(const FArguments& InArgs, UEdGraphPin* InPin)
 {
@@ -54,13 +78,104 @@ bool FCNAPinStyle::GetLabelColor(const UEdGraphPin* Pin, FLinearColor& OutColor)
 bool FCNAPinStyle::HasBodyWidget(const UEdGraphPin* Pin)
 {
 	const UK2Node_CustomNode* Node = GetCustomNode(Pin);
-	// Compact nodes have no body (SGraphNodeK2Base::UpdateCompactNode), so their pins keep the own field.
-	if (!Node || Pin->ParentPin || Pin->Direction != EGPD_Input || Node->ShouldDrawCompact())
+	if (!Node || Pin->ParentPin || Pin->Direction != EGPD_Input)
+	{
+		return false;
+	}
+	// Compact nodes have no body (SGraphNodeK2Base::UpdateCompactNode), so their pins keep the own field. The
+	// state and transition looks have their own layout with a body in every case.
+	if (Node->ShouldDrawCompact() && SGraphNode_NodeFactory::GetLayoutForAsset(Node->GetCustomNodeAsset()) == ECNANodeLayout::Standard)
 	{
 		return false;
 	}
 	const FCNABodyWidget* Widget = Node->FindBodyWidget(Pin->PinName);
-	return Widget && FCNAPinUtils::CanBodyWidgetEditType(Widget->Type, Pin->PinType);
+	// A Curve widget is not bound to a pin, even when a pin has the same name.
+	return Widget && !Widget->IsCurve() && FCNAPinUtils::CanBodyWidgetEditType(Widget->Type, Pin->PinType);
+}
+
+ECNAPinShape FCNAPinStyle::GetPinShape(const UEdGraphPin* Pin)
+{
+	const UCustomNodeAsset* Asset = CNAPinStyleLocal::GetAsset(Pin);
+	if (!Asset || Pin->bOrphanedPin)
+	{
+		return ECNAPinShape::Default;
+	}
+	if (Pin->PinType.PinCategory == UEdGraphSchema_K2::PC_Exec)
+	{
+		if (Asset->NodeStyle == ECNANodeStyle::Animation && Asset->bExecPinsAsPosePins)
+		{
+			return ECNAPinShape::Pose;
+		}
+		if (Asset->NodeStyle == ECNANodeStyle::Niagara && Asset->bExecPinsAsParameterMap)
+		{
+			return ECNAPinShape::ParameterMap;
+		}
+	}
+	// Sub-pins of a split structure keep their own look.
+	if (!Pin->ParentPin)
+	{
+		const FCNAPinOverride* Override = CNAPinStyleLocal::FindOverride(*Asset, Pin->PinName);
+		if (Override && Override->bDrawAsPosePin)
+		{
+			return ECNAPinShape::Pose;
+		}
+	}
+	return ECNAPinShape::Default;
+}
+
+const FSlateBrush* FCNAPinStyle::GetShapedPinIcon(const UEdGraphPin* Pin, bool bConnected, bool bHovered)
+{
+	switch (GetPinShape(Pin))
+	{
+	case ECNAPinShape::Pose:
+		// The brushes of SGraphPinPose (4.20.3); the hovered variants fall back to the plain ones.
+		if (bConnected)
+		{
+			return bHovered ? FindBrush(TEXT("Graph.PosePin.ConnectedHovered"), TEXT("Graph.PosePin.Connected")) : FindBrush(TEXT("Graph.PosePin.Connected"), TEXT("Graph.Pin.Connected"));
+		}
+		return bHovered ? FindBrush(TEXT("Graph.PosePin.DisconnectedHovered"), TEXT("Graph.PosePin.Disconnected")) : FindBrush(TEXT("Graph.PosePin.Disconnected"), TEXT("Graph.Pin.Disconnected"));
+
+	case ECNAPinShape::ParameterMap:
+		// Niagara draws the Parameter Map with the default round pin of SGraphPin in the execution color.
+		return FindBrush(bConnected ? TEXT("Graph.Pin.Connected") : TEXT("Graph.Pin.Disconnected"));
+
+	case ECNAPinShape::Default:
+	default:
+		return nullptr;
+	}
+}
+
+bool FCNAPinStyle::UseNamespaceLabel(const UEdGraphPin* Pin)
+{
+	const UCustomNodeAsset* Asset = CNAPinStyleLocal::GetAsset(Pin);
+	return Asset && Asset->NodeStyle == ECNANodeStyle::Niagara && Asset->bNiagaraNamespaceLabels;
+}
+
+void FCNAPinStyle::SplitNamespaceLabel(const FText& Label, FText& OutNamespace, FText& OutName)
+{
+	const FString String = Label.ToString();
+	int32 Dot = INDEX_NONE;
+	// A trailing dot is part of the name, not a namespace separator.
+	if (String.FindLastChar(TEXT('.'), Dot) && Dot > 0 && Dot < String.Len() - 1)
+	{
+		OutNamespace = FText::FromString(String.Left(Dot + 1));
+		OutName = FText::FromString(String.Mid(Dot + 1));
+		return;
+	}
+	OutNamespace = FText::GetEmpty();
+	OutName = Label;
+}
+
+bool FCNAPinStyle::IgnoresReadOnlyDimming(const UEdGraphPin* Pin)
+{
+	const UK2Node_CustomNode* Node = GetCustomNode(Pin);
+	return Node && Node->IsPreviewNode() && Node->IsNodeEnabled() && !Pin->bOrphanedPin;
+}
+
+const FSlateBrush* FCNAPinStyle::FindBrush(FName Name, FName Fallback)
+{
+	const FSlateBrush* Brush = FNodeFactoryStyle::FindBrush(Name);
+	return Brush ? Brush : FNodeFactoryStyle::FindBrush(Fallback);
 }
 
 TSharedPtr<SGraphPin> FCNAPinStyle::CreatePinWidget(UEdGraphPin* Pin)

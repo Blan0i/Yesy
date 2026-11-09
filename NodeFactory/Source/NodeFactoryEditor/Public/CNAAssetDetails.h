@@ -4,14 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "IDetailCustomization.h"
-#include "IPropertyTypeCustomization.h"
 
 class IPropertyHandle;
+class IPropertyUtilities;
+class UCustomNodeAsset;
 
 /**
- * Orders the categories of the asset (Node, Appearance, Flags, Placement, Pins, Metadata, Internal), hides the
- * Blueprint options that do not apply to a node and replaces the Icon name by a picker with previews of the brushes
- * of the icon catalog (spec 3.2, 14).
+ * Lays out the categories of the asset (Node, Appearance, Icon, Compact, Widgets, Style, Flags, Placement, Pins,
+ * Metadata, Internal), hides the Blueprint options that do not apply to a node and every setting that does nothing
+ * for the current choice, names the settings in the plugin language and replaces the Icon name by a picker with
+ * previews of the brushes of the icon catalog (spec 3.2, 14). The Pins category lists stale pin references.
  */
 class NODEFACTORYEDITOR_API FCNAAssetDetails : public IDetailCustomization
 {
@@ -27,15 +29,21 @@ private:
 	FName GetCurrentIcon() const;
 	void SetIcon(FName NewIcon);
 
+	/** Menu of the stale references: point each one to a pin or remove it (one Undo step per action). */
+	TSharedRef<SWidget> MakeStaleReferenceMenu();
+	int32 GetStaleReferenceCount() const;
+
 	TSharedPtr<IPropertyHandle> IconHandle;
 	TSharedPtr<class SComboButton> IconCombo;
+	TWeakObjectPtr<UCustomNodeAsset> Asset;
+	TWeakPtr<IPropertyUtilities> PropertyUtilities;
 };
 
-/** Shows only the settings used by the selected body widget. */
-class NODEFACTORYEDITOR_API FCNABodyWidgetDetails : public IPropertyTypeCustomization
+/** Editor Preferences > Plugins > NodeFactory: language combo with native names, Russian names in Russian. */
+class NODEFACTORYEDITOR_API FCNAEditorSettingsDetails : public IDetailCustomization
 {
 public:
- static TSharedRef<IPropertyTypeCustomization> MakeInstance();
- virtual void CustomizeHeader(TSharedRef<IPropertyHandle> Handle, FDetailWidgetRow& Header, IPropertyTypeCustomizationUtils& Utils) override;
- virtual void CustomizeChildren(TSharedRef<IPropertyHandle> Handle, IDetailChildrenBuilder& Children, IPropertyTypeCustomizationUtils& Utils) override;
+	static TSharedRef<IDetailCustomization> MakeInstance();
+
+	virtual void CustomizeDetails(IDetailLayoutBuilder& DetailBuilder) override;
 };

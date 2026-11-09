@@ -13,6 +13,7 @@
 #include "Misc/UObjectToken.h"
 #include "Modules/ModuleManager.h"
 #include "Toolkits/AssetEditorManager.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -230,6 +231,10 @@ FText FCNAMessages::GetTemplate(ECNAMessage Code)
 	case ECNAMessage::CNA017: return NSLOCTEXT("NodeFactory", "Msg.CNA017", "{Node} references the local variable {Variable}, which does not exist in {Asset}.");
 	case ECNAMessage::CNA018: return NSLOCTEXT("NodeFactory", "Msg.CNA018", "{Asset} is pure and must not use local variables.");
 	case ECNAMessage::CNA019: return NSLOCTEXT("NodeFactory", "Msg.CNA019", "Icon texture {Texture} was not found or cannot be loaded; the default icon is used.");
+	case ECNAMessage::CNA020: return NSLOCTEXT("NodeFactory", "Msg.CNA020", "Curve {Curve} of {Asset} uses Playback, which only works on an impure node placed in an Event Graph.");
+	case ECNAMessage::CNA021: return NSLOCTEXT("NodeFactory", "Msg.CNA021", "{Asset} has more than one curve in Playback mode ({Curves}); only one is allowed per node.");
+	case ECNAMessage::CNA022: return NSLOCTEXT("NodeFactory", "Msg.CNA022", "Curve {Curve} of {Asset}: {Details}");
+	case ECNAMessage::CNA023: return NSLOCTEXT("NodeFactory", "Msg.CNA023", "{Node} references the curve {Curve}, which does not exist in {Asset}.");
 	default:                  return NSLOCTEXT("NodeFactory", "Msg.Unknown", "Unknown NodeFactory message.");
 	}
 }

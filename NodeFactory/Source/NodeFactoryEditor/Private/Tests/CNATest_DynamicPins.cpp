@@ -1,6 +1,7 @@
 // Copyright (c) NodeFactory. Dynamic pins and Make Array: check A7 of spec 12.2.
 
 #include "CNATestUtils.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 
@@ -50,6 +51,56 @@ bool FCNADynamicPinsTest::RunTest(const FString& Parameters)
 		const FCNAExpander::FStats& Stats = FCNAExpander::GetStats();
 		TestTrue(*FString::Printf(TEXT("Make Array of %d elements"), Count), Stats.MakeArrayNodes > 0 && Stats.MakeArrayElements == Count * Stats.MakeArrayNodes);
 	}
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FCNADynamicOutputPinsTest, "NodeFactory.Pins.DynamicOutput", CNA_TEST_FLAGS)
+
+bool FCNADynamicOutputPinsTest::RunTest(const FString& Parameters)
+{
+	FScope Scope;
+	// Values (array input) is returned as Results (array output); Results is a dynamic group of element outputs.
+	UCustomNodeAsset* Asset = MakeAsset(Scope, TEXT("CNATest_DynamicOutput"));
+	AddPin(Asset, EGPD_Input, UEdGraphSchema_K2::PC_Float, TEXT("Values"), EPinContainerType::Array);
+	AddPin(Asset, EGPD_Output, UEdGraphSchema_K2::PC_Float, TEXT("Results"), EPinContainerType::Array);
+	TestTrue(TEXT("Subgraph"), Link(Tunnel(Asset, EGPD_Input, TEXT("Values")), Tunnel(Asset, EGPD_Output, TEXT("Results"))));
+	FCNAPinOverride& Override = Asset->FindOrAddPinOverride(TEXT("Results"));
+	Override.bDynamicGroup = true;
+	Override.DynamicMin = 2;
+	Override.DynamicMax = 4;
+	Commit(Asset);
+
+	FCNADiagnosticList Diagnostics;
+	FCNAValidator::ValidateAsset(Asset, Diagnostics);
+	TestFalse(TEXT("An array output may be a dynamic group"), Diagnostics.Contains(ECNAMessage::CNA013));
+
+	UBlueprint* Blueprint = MakeBlueprint(Scope);
+	UEdGraph* Graph = nullptr;
+	UEdGraphPin* Start = EventThen(Blueprint, Graph);
+	UK2Node_CustomNode* Node = PlaceNode(Graph, Asset);
+	const FName First = CNATypes::MakeDynamicPinName(TEXT("Results"), 0);
+	const FName Second = CNATypes::MakeDynamicPinName(TEXT("Results"), 1);
+	TestTrue(TEXT("Element outputs instead of the array"), Node->FindPin(First, EGPD_Output) && Node->FindPin(Second, EGPD_Output)
+		&& !Node->FindPin(TEXT("Results")) && Node->GetDynamicPinCount() == 2);
+	const UEdGraphPin* ValuesPin = Node->FindPin(TEXT("Values"), EGPD_Input);
+	TestTrue(TEXT("The array input stays an array"), ValuesPin && ValuesPin->PinType.IsArray());
+
+	Node->AddDynamicElement();
+	TestTrue(TEXT("Add Pin adds an element output"), Node->FindPin(CNATypes::MakeDynamicPinName(TEXT("Results"), 2), EGPD_Output) != nullptr);
+
+	// Removing an element moves the wires of the later ones down.
+	UK2Node_CallFunction* Print = SpawnCall(Graph, UKismetSystemLibrary::StaticClass(), TEXT("PrintString"));
+	TestTrue(TEXT("Wires"), Link(Start, Node->FindPin(UEdGraphSchema_K2::PN_Execute)) && Link(Node->FindPin(UEdGraphSchema_K2::PN_Then), Print->GetExecPin())
+		&& Link(Node->FindPin(Second, EGPD_Output), Print->FindPin(TEXT("Duration"))));
+	Node->RemoveDynamicElement(0);
+	const UEdGraphPin* Moved = Node->FindPin(First, EGPD_Output);
+	TestTrue(TEXT("The wire moved to the previous element"), Moved && Moved->LinkedTo.Contains(Print->FindPin(TEXT("Duration"))));
+
+	// Each wired element reads the array output of the subgraph through Array Get.
+	FCNAExpander::ResetStats();
+	FCompilerResultsLog Results;
+	ExpectCompile(*this, Blueprint, true, Results);
+	TestTrue(TEXT("Array Get per wired element"), FCNAExpander::GetStats().ArrayGetNodes == 1);
 	return true;
 }
 
