@@ -71,6 +71,17 @@ struct NODEFACTORYEDITOR_API FCNAImportData
 	bool bCompact = false;
 	FText CompactTitle;
 
+	// appearance, node style families (missing in files of plugin 2.0: defaults of a new asset)
+	ECNANodeStyle NodeStyle = ECNANodeStyle::Blueprint;
+	ECNAAnimNodeStyle AnimStyle = ECNAAnimNodeStyle::AnimNode;
+	bool bExecPinsAsPosePins = true;
+	bool bShowFastPathIcon = false;
+	ECNANiagaraNodeStyle NiagaraStyle = ECNANiagaraNodeStyle::FunctionCall;
+	bool bNiagaraAddPinRows = true;
+	bool bNiagaraNamespaceLabels = true;
+	bool bExecPinsAsParameterMap = true;
+	FText NiagaraBodyText;
+
 	// flags
 	bool bPure = false;
 	bool bDevelopmentOnly = false;

@@ -10,6 +10,8 @@
 #include "CNAMessages.h"
 #include "CNAPinUtils.h"
 #include "CustomNodeAsset.h"
+#include "Curves/CurveBase.h"
+#include "Curves/CurveFloat.h"
 #include "NodeFactoryModule.h"
 
 #include "AssetRegistryModule.h"
@@ -41,6 +43,7 @@
 #include "UObject/UObjectHash.h"
 #include "UObject/UObjectIterator.h"
 #include "Widgets/Notifications/SNotificationList.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -180,6 +183,98 @@ namespace CNAJsonImporterLocal
 		{
 			OutErrors.Add(ForbiddenPathError(Owner, Forbidden));
 		}
+	}
+
+	/** Own curve channel: keys and the optional Curve Float it uses instead. A forbidden path is an error. */
+	void ReadCurveChannel(const TSharedPtr<FJsonObject>& Object, const TCHAR* Field, const FString& Owner, FRuntimeFloatCurve& OutChannel,
+		FCNAImportData& Data, TArray<FText>& OutErrors)
+	{
+		const TSharedPtr<FJsonObject> ChannelObject = FCNAJsonSchema::GetObject(Object, Field);
+		if (!ChannelObject.IsValid())
+		{
+			return;
+		}
+		const FString ChannelOwner = Owner + TEXT(".") + Field;
+		if (!FCNAJsonSchema::JsonToRichCurve(ChannelObject, OutChannel.EditorCurveData))
+		{
+			AddNote(Data.Notes, EMessageSeverity::Warning, FText::Format(LOCTEXT("Import.BadCurveKey", "{0}: a key without time or value was skipped."),
+				FText::FromString(ChannelOwner)));
+		}
+		OutChannel.ExternalCurve = nullptr;
+		const FString Path = FCNAJsonSchema::GetString(ChannelObject, CNAJsonFields::ExternalCurve).TrimStartAndEnd();
+		if (Path.IsEmpty())
+		{
+			return;
+		}
+		bool bForbidden = false;
+		UCurveFloat* External = Cast<UCurveFloat>(FCNAJsonSchema::ResolveObjectPath(Path, UCurveFloat::StaticClass(), bForbidden));
+		if (bForbidden)
+		{
+			OutErrors.Add(ForbiddenPathError(ChannelOwner + TEXT(".externalCurve"), Path));
+			return;
+		}
+		if (!External)
+		{
+			AddNote(Data.Notes, EMessageSeverity::Warning, FText::Format(LOCTEXT("Import.MissingExternalCurve", "{0}: Curve Float {1} was not found; the own keys are used."),
+				FText::FromString(ChannelOwner), FText::FromString(Path)));
+		}
+		OutChannel.ExternalCurve = External;
+	}
+
+	/** Settings of a Curve body widget; missing fields keep the defaults of FCNACurveSettings. */
+	void ReadCurveSettings(const TSharedPtr<FJsonObject>& Object, FCNACurveSettings& Curve, FCNAImportData& Data, TArray<FText>& OutErrors)
+	{
+		using namespace CNAJsonFields;
+		if (!Object.IsValid())
+		{
+			return;
+		}
+		const FString Owner(TEXT("appearance.bodyWidgets.curve"));
+		ReadEnum(Object, ValueType, Owner, &FCNAJsonSchema::StringToCurveValueType, Curve.ValueType, Data);
+		ReadEnum(Object, Mode, Owner, &FCNAJsonSchema::StringToCurveMode, Curve.Mode, Data);
+		Curve.bUseCurveAsset = FCNAJsonSchema::GetBool(Object, UseCurveAsset, Curve.bUseCurveAsset);
+
+		// Items 3: the asset must be under an allowed root. A missing asset keeps its path; Compile reports it.
+		const FString AssetPath = FCNAJsonSchema::GetString(Object, CurveAsset).TrimStartAndEnd();
+		if (!AssetPath.IsEmpty())
+		{
+			bool bForbidden = false;
+			const UObject* Found = FCNAJsonSchema::ResolveObjectPath(AssetPath, UCurveBase::StaticClass(), bForbidden);
+			if (bForbidden)
+			{
+				OutErrors.Add(ForbiddenPathError(Owner + TEXT(".curveAsset"), AssetPath));
+			}
+			else
+			{
+				Curve.CurveAsset = TSoftObjectPtr<UCurveBase>(FSoftObjectPath(AssetPath));
+				if (!Found)
+				{
+					AddNote(Data.Notes, EMessageSeverity::Warning, FText::Format(LOCTEXT("Import.MissingCurveAsset", "{0}: Curve asset {1} was not found; the path is kept."),
+						FText::FromString(Owner), FText::FromString(AssetPath)));
+				}
+			}
+		}
+
+		ReadCurveChannel(Object, CurveX, Owner, Curve.CurveX, Data, OutErrors);
+		ReadCurveChannel(Object, CurveY, Owner, Curve.CurveY, Data, OutErrors);
+		ReadCurveChannel(Object, CurveZ, Owner, Curve.CurveZ, Data, OutErrors);
+		ReadCurveChannel(Object, CurveW, Owner, Curve.CurveW, Data, OutErrors);
+		Curve.BakeSamples = ReadInt(Object, BakeSamples, Curve.BakeSamples, 2, 1024);
+		Curve.Length = FMath::Max(0.0f, static_cast<float>(FCNAJsonSchema::GetNumber(Object, Length, Curve.Length)));
+		Curve.bLoop = FCNAJsonSchema::GetBool(Object, Loop, Curve.bLoop);
+		Curve.PlayRate = FMath::Max(0.001f, static_cast<float>(FCNAJsonSchema::GetNumber(Object, PlayRate, Curve.PlayRate)));
+		Curve.bShowPlayFromStart = FCNAJsonSchema::GetBool(Object, ShowPlayFromStart, Curve.bShowPlayFromStart);
+		Curve.bShowReverse = FCNAJsonSchema::GetBool(Object, ShowReverse, Curve.bShowReverse);
+		Curve.TimeLabel = ReadText(Object, TimeLabel, Curve.TimeLabel);
+		Curve.PlayLabel = ReadText(Object, PlayLabel, Curve.PlayLabel);
+		Curve.PlayFromStartLabel = ReadText(Object, PlayFromStartLabel, Curve.PlayFromStartLabel);
+		Curve.StopLabel = ReadText(Object, StopLabel, Curve.StopLabel);
+		Curve.ReverseLabel = ReadText(Object, ReverseLabel, Curve.ReverseLabel);
+		Curve.UpdateLabel = ReadText(Object, UpdateLabel, Curve.UpdateLabel);
+		Curve.FinishedLabel = ReadText(Object, FinishedLabel, Curve.FinishedLabel);
+		ReadColor(Object, GraphBackgroundColor, Owner, Curve.GraphBackgroundColor, Data);
+		Curve.bShowKeys = FCNAJsonSchema::GetBool(Object, ShowKeys, Curve.bShowKeys);
+		Curve.bShowGrid = FCNAJsonSchema::GetBool(Object, ShowGrid, Curve.bShowGrid);
 	}
 
 	TArray<TSharedPtr<FJsonObject>> ReadObjects(const TSharedPtr<FJsonObject>& Object, const TCHAR* Field)
@@ -546,6 +641,15 @@ FCNAImportData::FCNAImportData()
 	bColorWires = Defaults->bColorWires;
 	bCompact = Defaults->bCompact;
 	CompactTitle = Defaults->CompactTitle;
+	NodeStyle = Defaults->NodeStyle;
+	AnimStyle = Defaults->AnimStyle;
+	bExecPinsAsPosePins = Defaults->bExecPinsAsPosePins;
+	bShowFastPathIcon = Defaults->bShowFastPathIcon;
+	NiagaraStyle = Defaults->NiagaraStyle;
+	bNiagaraAddPinRows = Defaults->bNiagaraAddPinRows;
+	bNiagaraNamespaceLabels = Defaults->bNiagaraNamespaceLabels;
+	bExecPinsAsParameterMap = Defaults->bExecPinsAsParameterMap;
+	NiagaraBodyText = Defaults->NiagaraBodyText;
 	bPure = Defaults->bPure;
 	bDevelopmentOnly = Defaults->bDevelopmentOnly;
 	bDeprecated = Defaults->bDeprecated;
@@ -702,6 +806,15 @@ void FCNAJsonImporter::ReadData(const TSharedPtr<FJsonObject>& Root, FCNAImportD
 	Data.bColorWires = FCNAJsonSchema::GetBool(AppearanceObject, ColorWires, Data.bColorWires);
 	Data.bCompact = FCNAJsonSchema::GetBool(AppearanceObject, Compact, Data.bCompact);
 	Data.CompactTitle = ReadText(AppearanceObject, CompactTitle, Data.CompactTitle);
+	ReadEnum(AppearanceObject, NodeStyle, AppearancePath, &FCNAJsonSchema::StringToNodeStyle, Data.NodeStyle, Data);
+	ReadEnum(AppearanceObject, AnimStyle, AppearancePath, &FCNAJsonSchema::StringToAnimNodeStyle, Data.AnimStyle, Data);
+	Data.bExecPinsAsPosePins = FCNAJsonSchema::GetBool(AppearanceObject, ExecPinsAsPosePins, Data.bExecPinsAsPosePins);
+	Data.bShowFastPathIcon = FCNAJsonSchema::GetBool(AppearanceObject, ShowFastPathIcon, Data.bShowFastPathIcon);
+	ReadEnum(AppearanceObject, NiagaraStyle, AppearancePath, &FCNAJsonSchema::StringToNiagaraNodeStyle, Data.NiagaraStyle, Data);
+	Data.bNiagaraAddPinRows = FCNAJsonSchema::GetBool(AppearanceObject, NiagaraAddPinRows, Data.bNiagaraAddPinRows);
+	Data.bNiagaraNamespaceLabels = FCNAJsonSchema::GetBool(AppearanceObject, NiagaraNamespaceLabels, Data.bNiagaraNamespaceLabels);
+	Data.bExecPinsAsParameterMap = FCNAJsonSchema::GetBool(AppearanceObject, ExecPinsAsParameterMap, Data.bExecPinsAsParameterMap);
+	Data.NiagaraBodyText = ReadText(AppearanceObject, NiagaraBodyText, Data.NiagaraBodyText);
 
 	// Items 3 and 6: the texture must be under an allowed root; a missing one falls back to the default icon.
 	TArray<FString> TexturePaths;
@@ -762,6 +875,12 @@ void FCNAJsonImporter::ReadData(const TSharedPtr<FJsonObject>& Root, FCNAImportD
 		Widget.Height = FMath::Clamp(static_cast<float>(FCNAJsonSchema::GetNumber(WidgetObject, Height, 0.0)), 0.0f, 600.0f);
 		Widget.SliderMin = FMath::Clamp(static_cast<float>(FCNAJsonSchema::GetNumber(WidgetObject, SliderMin, 0.0)), -1000000.0f, 1000000.0f);
 		Widget.SliderMax = FMath::Clamp(static_cast<float>(FCNAJsonSchema::GetNumber(WidgetObject, SliderMax, 1.0)), -1000000.0f, 1000000.0f);
+		// A missing or invalid Guid gets a new one from EnsureUniqueBodyWidgetGuids when the data is applied.
+		FGuid::Parse(FCNAJsonSchema::GetString(WidgetObject, WidgetGuid), Widget.WidgetGuid);
+		if (Widget.IsCurve())
+		{
+			ReadCurveSettings(FCNAJsonSchema::GetObject(WidgetObject, Curve), Widget.Curve, Data, OutErrors);
+		}
 	}
 
 	// flags
@@ -798,6 +917,7 @@ void FCNAJsonImporter::ReadData(const TSharedPtr<FJsonObject>& Root, FCNAImportD
 		ReadColor(OverrideObject, PinColor, Owner, Override.PinColor, Data);
 		Override.bOverrideLabelColor = FCNAJsonSchema::GetBool(OverrideObject, OverrideLabelColor, Override.bOverrideLabelColor);
 		ReadColor(OverrideObject, LabelColor, Owner, Override.LabelColor, Data);
+		Override.bDrawAsPosePin = FCNAJsonSchema::GetBool(OverrideObject, DrawAsPosePin, Override.bDrawAsPosePin);
 	}
 	for (const TSharedPtr<FJsonObject>& RedirectObject : ReadObjects(Root, PinRedirects))
 	{
@@ -1036,6 +1156,15 @@ void FCNAJsonImporter::CollectChanges(const UCustomNodeAsset* Asset, const FCNAI
 	Changes.Number(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, MinHeight), Asset->MinHeight, Data.MinHeight);
 	Changes.Structs(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, BodyWidgets), Asset->BodyWidgets, Data.BodyWidgets);
 	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bColorWires), Asset->bColorWires, Data.bColorWires);
+	Changes.String(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, NodeStyle), FCNAJsonSchema::NodeStyleToString(Asset->NodeStyle), FCNAJsonSchema::NodeStyleToString(Data.NodeStyle));
+	Changes.String(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, AnimStyle), FCNAJsonSchema::AnimNodeStyleToString(Asset->AnimStyle), FCNAJsonSchema::AnimNodeStyleToString(Data.AnimStyle));
+	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bExecPinsAsPosePins), Asset->bExecPinsAsPosePins, Data.bExecPinsAsPosePins);
+	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bShowFastPathIcon), Asset->bShowFastPathIcon, Data.bShowFastPathIcon);
+	Changes.String(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, NiagaraStyle), FCNAJsonSchema::NiagaraNodeStyleToString(Asset->NiagaraStyle), FCNAJsonSchema::NiagaraNodeStyleToString(Data.NiagaraStyle));
+	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bNiagaraAddPinRows), Asset->bNiagaraAddPinRows, Data.bNiagaraAddPinRows);
+	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bNiagaraNamespaceLabels), Asset->bNiagaraNamespaceLabels, Data.bNiagaraNamespaceLabels);
+	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bExecPinsAsParameterMap), Asset->bExecPinsAsParameterMap, Data.bExecPinsAsParameterMap);
+	Changes.Text(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, NiagaraBodyText), Asset->NiagaraBodyText, Data.NiagaraBodyText);
 
 	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bPure), Asset->bPure, Data.bPure);
 	Changes.Bool(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bDevelopmentOnly), Asset->bDevelopmentOnly, Data.bDevelopmentOnly);
@@ -1193,6 +1322,15 @@ bool FCNAJsonImporter::ApplyToAsset(UCustomNodeAsset* Asset, const FCNAImportDat
 		Asset->MinHeight = Data.MinHeight;
 		Asset->BodyWidgets = Data.BodyWidgets;
 		Asset->bColorWires = Data.bColorWires;
+		Asset->NodeStyle = Data.NodeStyle;
+		Asset->AnimStyle = Data.AnimStyle;
+		Asset->bExecPinsAsPosePins = Data.bExecPinsAsPosePins;
+		Asset->bShowFastPathIcon = Data.bShowFastPathIcon;
+		Asset->NiagaraStyle = Data.NiagaraStyle;
+		Asset->bNiagaraAddPinRows = Data.bNiagaraAddPinRows;
+		Asset->bNiagaraNamespaceLabels = Data.bNiagaraNamespaceLabels;
+		Asset->bExecPinsAsParameterMap = Data.bExecPinsAsParameterMap;
+		Asset->NiagaraBodyText = Data.NiagaraBodyText;
 		Asset->bPure = Data.bPure;
 		Asset->bDevelopmentOnly = Data.bDevelopmentOnly;
 		Asset->bDeprecated = Data.bDeprecated;
@@ -1209,6 +1347,8 @@ bool FCNAJsonImporter::ApplyToAsset(UCustomNodeAsset* Asset, const FCNAImportDat
 		// Variables before the graphs: Get Local and Set Local read their type while they are pasted.
 		Asset->LocalVariables = Data.LocalVariables;
 		Asset->EnsureUniqueLocalVariableGuids();
+		// Widgets of old files have no Guid; Curve pins are named after it.
+		Asset->EnsureUniqueBodyWidgetGuids();
 
 		// An asset without its graphs (made by hand or damaged) gets them first, then their nodes are replaced.
 		UCNAAssetFactory::CreateDefaultGraphs(Asset, /*bWithDefaultPins*/ false);
