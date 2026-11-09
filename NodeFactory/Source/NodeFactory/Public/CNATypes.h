@@ -212,7 +212,7 @@ struct NODEFACTORY_API FCNAPinOverride
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin")
 	FName PassThroughOf;
 
-	/** Array input only: the node shows a set of element pins instead of the array (spec 4.4). */
+	/** Array input or output: the node shows a set of element pins instead of the array (spec 4.4). */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dynamic Pins")
 	bool bDynamicGroup = false;
 

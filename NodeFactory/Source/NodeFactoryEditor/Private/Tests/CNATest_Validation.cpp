@@ -4,6 +4,7 @@
 #include "CNAValidator.h"
 #include "K2Node_GetLocal.h"
 #include "SCNALocalVariables.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

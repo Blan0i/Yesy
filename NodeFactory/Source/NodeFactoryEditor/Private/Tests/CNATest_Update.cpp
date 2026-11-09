@@ -1,6 +1,7 @@
 // Copyright (c) NodeFactory. Update of the instances: checks A5 and A6 of spec 12.2.
 
 #include "CNATestUtils.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

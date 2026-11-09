@@ -1,6 +1,7 @@
 // Copyright (c) NodeFactory. Wildcard pins: check A8 of spec 12.2.
 
 #include "CNATestUtils.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

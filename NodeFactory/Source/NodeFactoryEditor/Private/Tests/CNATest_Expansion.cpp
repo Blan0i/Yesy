@@ -5,6 +5,7 @@
 #include "CNAValidator.h"
 #include "K2Node_GetCaller.h"
 #include "K2Node_IfThenElse.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

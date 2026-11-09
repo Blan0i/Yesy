@@ -11,6 +11,7 @@
 #include "GraphEditorSettings.h"
 #include "KismetCompiler.h"
 #include "Textures/SlateIcon.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 

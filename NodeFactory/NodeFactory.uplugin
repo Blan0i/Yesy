@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 3,
-	"VersionName": "2.0.4-partial-experimental",
+	"Version": 4,
+	"VersionName": "2.1.0-experimental",
 	"FriendlyName": "NodeFactory",
 	"Description": "Describe a new Blueprint node with one Custom Node Asset: pins, appearance, the execution subgraph and the editor behavior live in a single asset with a live preview.",
 	"Category": "Blueprints",

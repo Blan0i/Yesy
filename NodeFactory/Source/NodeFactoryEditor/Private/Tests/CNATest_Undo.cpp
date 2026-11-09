@@ -5,6 +5,7 @@
 #include "Editor.h"
 #include "Editor/EditorEngine.h"
 #include "ScopedTransaction.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

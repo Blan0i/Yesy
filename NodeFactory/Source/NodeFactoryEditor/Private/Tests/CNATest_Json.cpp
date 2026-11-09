@@ -6,6 +6,7 @@
 #include "SCNALocalVariables.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

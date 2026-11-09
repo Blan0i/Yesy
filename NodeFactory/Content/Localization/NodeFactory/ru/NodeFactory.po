@@ -3045,11 +3045,11 @@ msgid "bDefaultToSelf of pin {Pin} of {Asset} only applies to a single object in
 msgstr "bDefaultToSelf пина {Pin} у {Asset} применяется только к одиночному входу-объекту; флаг игнорируется."
 
 #. Key:	Validator.DynamicNotArray
-#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 627
-#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 627
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 797
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 797
 msgctxt "NodeFactory,Validator.DynamicNotArray"
-msgid "Pin {Pin} of {Asset} is a dynamic group, but only an input array can be one (it is an {Direction} of type {Type})."
-msgstr "Пин {Pin} у {Asset} объявлен динамической группой, но ею может быть только входной массив (это {Direction} типа {Type})."
+msgid "Pin {Pin} of {Asset} is a dynamic group, but only an array can be one (it is an {Direction} of type {Type})."
+msgstr "Пин {Pin} у {Asset} объявлен динамической группой, но ею может быть только массив (это {Direction} типа {Type})."
 
 #. Key:	Validator.DynamicRange
 #. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 644
@@ -3253,3 +3253,2817 @@ msgstr "{Widget} на теле {Asset} не может редактироват�
 msgctxt "NodeFactory,WildcardContainerDisallowed"
 msgid "The container of the wire does not match the container of the Wildcard pin."
 msgstr "Контейнер провода не совпадает с контейнером пина Wildcard."
+
+#. Key:	Curve.PinForMessages
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNACurveUtils.cpp - line 236
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNACurveUtils.cpp - line 236
+msgctxt "NodeFactory,Curve.PinForMessages"
+msgid "{0} ({1})"
+msgstr "{0} ({1})"
+
+#. Key:	Curve.Unnamed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNACurveUtils.cpp - line 220
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNACurveUtils.cpp - line 220
+msgctxt "NodeFactory,Curve.Unnamed"
+msgid "<unnamed curve>"
+msgstr "<кривая без имени>"
+
+#. Key:	CurveGraph.AssetNotLoaded
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNACurveGraph.cpp - line 218
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNACurveGraph.cpp - line 218
+msgctxt "NodeFactory,CurveGraph.AssetNotLoaded"
+msgid "Curve asset not loaded or empty"
+msgstr "Ассет кривой не загружен или пуст"
+
+#. Key:	CurveGraph.NoAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNACurveGraph.cpp - line 218
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNACurveGraph.cpp - line 218
+msgctxt "NodeFactory,CurveGraph.NoAsset"
+msgid "No curve asset"
+msgstr "Нет ассета кривой"
+
+#. Key:	CurveGraph.NoKeys
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNACurveGraph.cpp - line 219
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNACurveGraph.cpp - line 219
+msgctxt "NodeFactory,CurveGraph.NoKeys"
+msgid "No keys"
+msgstr "Нет ключей"
+
+#. Key:	CurvePin.Finished
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 275
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 275
+msgctxt "NodeFactory,CurvePin.Finished"
+msgid "Finished"
+msgstr "Завершено"
+
+#. Key:	CurvePin.Play
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 270
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 270
+msgctxt "NodeFactory,CurvePin.Play"
+msgid "Play"
+msgstr "Воспроизвести"
+
+#. Key:	CurvePin.PlayFromStart
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 271
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 271
+msgctxt "NodeFactory,CurvePin.PlayFromStart"
+msgid "Play from Start"
+msgstr "Воспроизвести с начала"
+
+#. Key:	CurvePin.Reverse
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 273
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 273
+msgctxt "NodeFactory,CurvePin.Reverse"
+msgid "Reverse"
+msgstr "Назад"
+
+#. Key:	CurvePin.Stop
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 272
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 272
+msgctxt "NodeFactory,CurvePin.Stop"
+msgid "Stop"
+msgstr "Стоп"
+
+#. Key:	CurvePin.Time
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 269
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 269
+msgctxt "NodeFactory,CurvePin.Time"
+msgid "Time"
+msgstr "Время"
+
+#. Key:	CurvePin.Update
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 274
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 274
+msgctxt "NodeFactory,CurvePin.Update"
+msgid "Update"
+msgstr "Обновление"
+
+#. Key:	CurvePinTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 320
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 320
+msgctxt "NodeFactory,CurvePinTooltip"
+msgid "{0} of the curve {1}."
+msgstr "{0} кривой {1}."
+
+#. Key:	CurveValue.ChangeTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 108
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 108
+msgctxt "NodeFactory,CurveValue.ChangeTransaction"
+msgid "Change Curve"
+msgstr "Смена кривой"
+
+#. Key:	CurveValue.FullTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 159
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 159
+msgctxt "NodeFactory,CurveValue.FullTitle"
+msgid "Curve Value\n{0}"
+msgstr "Значение кривой\n{0}"
+
+#. Key:	CurveValue.Keywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 285
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 285
+msgctxt "NodeFactory,CurveValue.Keywords"
+msgid "curve value timeline track time"
+msgstr "curve value timeline track time кривая значение таймлайн трек время"
+
+#. Key:	CurveValue.MenuCategory
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 290
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 290
+msgctxt "NodeFactory,CurveValue.MenuCategory"
+msgid "Curves"
+msgstr "Кривые"
+
+#. Key:	CurveValue.MenuSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 237
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 237
+msgctxt "NodeFactory,CurveValue.MenuSection"
+msgid "Curve"
+msgstr "Кривая"
+
+#. Key:	CurveValue.MenuTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 163
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 163
+msgctxt "NodeFactory,CurveValue.MenuTitle"
+msgid "Curve Value: {0}"
+msgstr "Значение кривой: {0}"
+
+#. Key:	CurveValue.MissingTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 173
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 173
+msgctxt "NodeFactory,CurveValue.MissingTooltip"
+msgid "The curve {0} does not exist in this asset (CNA023)."
+msgstr "Кривой {0} нет в этом ассете (CNA023)."
+
+#. Key:	CurveValue.ModePlayback
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 176
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 176
+msgctxt "NodeFactory,CurveValue.ModePlayback"
+msgid "the playback position of the node"
+msgstr "позиции воспроизведения ноды"
+
+#. Key:	CurveValue.ModeTime
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 177
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 177
+msgctxt "NodeFactory,CurveValue.ModeTime"
+msgid "the Time pin of the node"
+msgstr "пину «Время» ноды"
+
+#. Key:	CurveValue.None
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 70
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 70
+msgctxt "NodeFactory,CurveValue.None"
+msgid "<none>"
+msgstr "<нет>"
+
+#. Key:	CurveValue.OutsideAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 306
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 306
+msgctxt "NodeFactory,CurveValue.OutsideAsset"
+msgid "@@ can only be used inside the Execution Graph of a Custom Node Asset."
+msgstr "@@ можно использовать только внутри графа выполнения ассета пользовательской ноды."
+
+#. Key:	CurveValue.TimePin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 138
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 138
+msgctxt "NodeFactory,CurveValue.TimePin"
+msgid "Time"
+msgstr "Время"
+
+#. Key:	CurveValue.TimePinTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 139
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 139
+msgctxt "NodeFactory,CurveValue.TimePinTooltip"
+msgid "Time at which the curve is read: the Time pin of the instance or the playback position."
+msgstr "Время, в которое читается кривая: пин «Время» экземпляра или позиция воспроизведения."
+
+#. Key:	CurveValue.Title
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 165
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 165
+msgctxt "NodeFactory,CurveValue.Title"
+msgid "Curve Value"
+msgstr "Значение кривой"
+
+#. Key:	CurveValue.Tooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 178
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 178
+msgctxt "NodeFactory,CurveValue.Tooltip"
+msgid "Value of the curve {0} ({1}) at {2}.\nIn a compiled Blueprint the curve is evaluated by engine nodes only."
+msgstr "Значение кривой {0} ({1}) по {2}.\nВ скомпилированном Blueprint кривая вычисляется только нодами движка."
+
+#. Key:	CurveValue.UseCurveMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 243
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 243
+msgctxt "NodeFactory,CurveValue.UseCurveMenu"
+msgid "Use {0}"
+msgstr "Использовать {0}"
+
+#. Key:	CurveValue.UseCurveMenuTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 244
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 244
+msgctxt "NodeFactory,CurveValue.UseCurveMenuTooltip"
+msgid "Read the curve {0} ({1})."
+msgstr "Читать кривую {0} ({1})."
+
+#. Key:	CurveValue.ValuePin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 132
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 132
+msgctxt "NodeFactory,CurveValue.ValuePin"
+msgid "Value"
+msgstr "Значение"
+
+#. Key:	CurveValue.ValuePinTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 133
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CNACurveValue.cpp - line 133
+msgctxt "NodeFactory,CurveValue.ValuePinTooltip"
+msgid "Value of the curve at the current time of the node instance."
+msgstr "Значение кривой в текущий момент времени экземпляра ноды."
+
+#. Key:	Details.BodyWidgetHeader
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1000
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1000
+msgctxt "NodeFactory,Details.BodyWidgetHeader"
+msgid "{0}: {1}"
+msgstr "{0}: {1}"
+
+#. Key:	Details.CategoryCompact
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 209
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 209
+msgctxt "NodeFactory,Details.CategoryCompact"
+msgid "Compact"
+msgstr "Компактный вид"
+
+#. Key:	Details.CategoryIcon
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 208
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 208
+msgctxt "NodeFactory,Details.CategoryIcon"
+msgid "Icon"
+msgstr "Значок"
+
+#. Key:	Details.CategoryStyle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 211
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 211
+msgctxt "NodeFactory,Details.CategoryStyle"
+msgid "Style"
+msgstr "Стиль"
+
+#. Key:	Details.CategoryWidgets
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 210
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 210
+msgctxt "NodeFactory,Details.CategoryWidgets"
+msgid "Widgets"
+msgstr "Виджеты"
+
+#. Key:	Details.CurveSourceAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1132
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1132
+msgctxt "NodeFactory,Details.CurveSourceAsset"
+msgid "Curve asset"
+msgstr "ассет кривой"
+
+#. Key:	Details.CurveSourceOwn
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1132
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1132
+msgctxt "NodeFactory,Details.CurveSourceOwn"
+msgid "own curve"
+msgstr "своя кривая"
+
+#. Key:	Details.CurveSummary
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1129
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1129
+msgctxt "NodeFactory,Details.CurveSummary"
+msgid "{0}, {1}, {2}"
+msgstr "{0}, {1}, {2}"
+
+#. Key:	Details.EmptyBadge
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 952
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 952
+msgctxt "NodeFactory,Details.EmptyBadge"
+msgid "(empty badge)"
+msgstr "(пустая метка)"
+
+#. Key:	Details.MultipleValues
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 483
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 483
+msgctxt "NodeFactory,Details.MultipleValues"
+msgid "Multiple Values"
+msgstr "Разные значения"
+
+#. Key:	Details.NoPinName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 705
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 705
+msgctxt "NodeFactory,Details.NoPinName"
+msgid "(no pin name)"
+msgstr "(нет имени пина)"
+
+#. Key:	Details.NoPins
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 601
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 601
+msgctxt "NodeFactory,Details.NoPins"
+msgid "The macro Execute has no matching pins."
+msgstr "В макросе Execute нет подходящих пинов."
+
+#. Key:	Details.OverrideStale
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 722
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 722
+msgctxt "NodeFactory,Details.OverrideStale"
+msgid "No pin of the macro Execute has this name (CNA014). Fix it in Pin Name or with Stale References."
+msgstr "Ни у одного пина макроса Execute нет такого имени (CNA014). Исправьте его в «Имени пина» или через «Устаревшие ссылки»."
+
+#. Key:	Details.PickPinTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 565
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 565
+msgctxt "NodeFactory,Details.PickPinTip"
+msgid "Pick a pin of the macro Execute."
+msgstr "Выбрать пин макроса Execute."
+
+#. Key:	Details.PinEntryInput
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 585
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 585
+msgctxt "NodeFactory,Details.PinEntryInput"
+msgid "{0}  (input, {1})"
+msgstr "{0}  (вход, {1})"
+
+#. Key:	Details.PinEntryOutput
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 586
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 586
+msgctxt "NodeFactory,Details.PinEntryOutput"
+msgid "{0}  (output, {1})"
+msgstr "{0}  (выход, {1})"
+
+#. Key:	Details.PinMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 525
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 525
+msgctxt "NodeFactory,Details.PinMissing"
+msgid "The macro Execute has no pin named {0} (CNA014). Pick a pin from the list, or use Stale References in the Pins category."
+msgstr "В макросе Execute нет пина с именем {0} (CNA014). Выберите пин из списка или воспользуйтесь «Устаревшими ссылками» в категории «Пины»."
+
+#. Key:	Details.PinNotInput
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 531
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 531
+msgctxt "NodeFactory,Details.PinNotInput"
+msgid "{0} is an output; an input pin is needed here."
+msgstr "{0} — выход; здесь нужен входной пин."
+
+#. Key:	Details.PinNotOutput
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 532
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 532
+msgctxt "NodeFactory,Details.PinNotOutput"
+msgid "{0} is an input; an output pin is needed here."
+msgstr "{0} — вход; здесь нужен выходной пин."
+
+#. Key:	Details.RedirectHeader
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 890
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 890
+msgctxt "NodeFactory,Details.RedirectHeader"
+msgid "{0} -> {1}"
+msgstr "{0} -> {1}"
+
+#. Key:	Details.StaleClear
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 612
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 612
+msgctxt "NodeFactory,Details.StaleClear"
+msgid "Clear Pass Through Of"
+msgstr "Очистить «Передать значение из»"
+
+#. Key:	Details.StaleClearTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 614
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 614
+msgctxt "NodeFactory,Details.StaleClearTip"
+msgid "The override stays, only its Pass Through Of is cleared."
+msgstr "Переопределение остаётся, очищается только «Передать значение из»."
+
+#. Key:	Details.StaleCount
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 448
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 448
+msgctxt "NodeFactory,Details.StaleCount"
+msgid "{0} to fix..."
+msgstr "Исправить: {0}..."
+
+#. Key:	Details.StaleEntryTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 565
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 565
+msgctxt "NodeFactory,Details.StaleEntryTip"
+msgid "Point this setting to an existing pin or remove it."
+msgstr "Направить эту настройку на существующий пин или удалить её."
+
+#. Key:	Details.StaleNoCandidates
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 600
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 600
+msgctxt "NodeFactory,Details.StaleNoCandidates"
+msgid "No pin fits this setting."
+msgstr "Нет подходящего пина."
+
+#. Key:	Details.StaleNone
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 558
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 558
+msgctxt "NodeFactory,Details.StaleNone"
+msgid "Every setting names an existing pin."
+msgstr "Все настройки ссылаются на существующие пины."
+
+#. Key:	Details.StalePinsSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 597
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 597
+msgctxt "NodeFactory,Details.StalePinsSection"
+msgid "Point to pin"
+msgstr "Направить на пин"
+
+#. Key:	Details.StaleReferences
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 408
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 408
+msgctxt "NodeFactory,Details.StaleReferences"
+msgid "Stale References"
+msgstr "Устаревшие ссылки"
+
+#. Key:	Details.StaleReferencesTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 420
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 420
+msgctxt "NodeFactory,Details.StaleReferencesTip"
+msgid "Settings that name a pin the macro Execute does not have, for example an override left by an interrupted rename (CNA014, CNA015). Point each one to a pin or remove it; nothing is changed without your choice and every action is one Undo step."
+msgstr "Настройки, которые ссылаются на пин, которого нет в макросе Execute, например переопределение, оставшееся после прерванного переименования (CNA014, CNA015). Направьте каждую на существующий пин или удалите; без вашего выбора ничего не меняется, и каждое действие — один шаг Undo."
+
+#. Key:	Details.StaleRemove
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 612
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 612
+msgctxt "NodeFactory,Details.StaleRemove"
+msgid "Remove this entry"
+msgstr "Удалить эту запись"
+
+#. Key:	Details.StaleRemoveSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 609
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 609
+msgctxt "NodeFactory,Details.StaleRemoveSection"
+msgid "Remove"
+msgstr "Удаление"
+
+#. Key:	Details.StaleRemoveTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 615
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 615
+msgctxt "NodeFactory,Details.StaleRemoveTip"
+msgid "Removes the pin override, body widget or pin redirect with all of its settings."
+msgstr "Удаляет переопределение пина, виджет на ноде или перенаправление пина со всеми его настройками."
+
+#. Key:	Details.StaleSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 555
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 555
+msgctxt "NodeFactory,Details.StaleSection"
+msgid "Settings that name a missing pin"
+msgstr "Настройки с несуществующим пином"
+
+#. Key:	Details.StaleSuggestedSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 587
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 587
+msgctxt "NodeFactory,Details.StaleSuggestedSection"
+msgid "Suggested"
+msgstr "Предлагается"
+
+#. Key:	Details.StaleUseSuggested
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 589
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 589
+msgctxt "NodeFactory,Details.StaleUseSuggested"
+msgid "Use {0}"
+msgstr "Использовать {0}"
+
+#. Key:	Details.StaleUseSuggestedTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 590
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 590
+msgctxt "NodeFactory,Details.StaleUseSuggestedTip"
+msgid "Replace {0} by {1}, the existing pin with the closest name."
+msgstr "Заменить {0} на {1} — существующий пин с самым похожим именем."
+
+#. Key:	Enum.AnimStyle.AnimNode
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 281
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 281
+msgctxt "NodeFactory,Enum.AnimStyle.AnimNode"
+msgid "Anim Node"
+msgstr "Anim-нода"
+
+#. Key:	Enum.AnimStyle.AssetPlayer
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 282
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 282
+msgctxt "NodeFactory,Enum.AnimStyle.AssetPlayer"
+msgid "Asset Player"
+msgstr "Проигрыватель ассета"
+
+#. Key:	Enum.AnimStyle.Blend
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 283
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 283
+msgctxt "NodeFactory,Enum.AnimStyle.Blend"
+msgid "Blend"
+msgstr "Смешивание"
+
+#. Key:	Enum.AnimStyle.BlendSimple
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 284
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 284
+msgctxt "NodeFactory,Enum.AnimStyle.BlendSimple"
+msgid "Blend Simple"
+msgstr "Простое смешивание"
+
+#. Key:	Enum.AnimStyle.Conduit
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 291
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 291
+msgctxt "NodeFactory,Enum.AnimStyle.Conduit"
+msgid "Conduit"
+msgstr "Канал (Conduit)"
+
+#. Key:	Enum.AnimStyle.Entry
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 293
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 293
+msgctxt "NodeFactory,Enum.AnimStyle.Entry"
+msgid "Entry"
+msgstr "Вход (Entry)"
+
+#. Key:	Enum.AnimStyle.RefPose
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 287
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 287
+msgctxt "NodeFactory,Enum.AnimStyle.RefPose"
+msgid "Ref Pose"
+msgstr "Референсная поза"
+
+#. Key:	Enum.AnimStyle.Result
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 289
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 289
+msgctxt "NodeFactory,Enum.AnimStyle.Result"
+msgid "Result"
+msgstr "Результат"
+
+#. Key:	Enum.AnimStyle.SkeletalControl
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 285
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 285
+msgctxt "NodeFactory,Enum.AnimStyle.SkeletalControl"
+msgid "Skeletal Control"
+msgstr "Управление скелетом"
+
+#. Key:	Enum.AnimStyle.SpaceConversion
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 286
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 286
+msgctxt "NodeFactory,Enum.AnimStyle.SpaceConversion"
+msgid "Space Conversion"
+msgstr "Преобразование пространства"
+
+#. Key:	Enum.AnimStyle.State
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 290
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 290
+msgctxt "NodeFactory,Enum.AnimStyle.State"
+msgid "State"
+msgstr "Состояние"
+
+#. Key:	Enum.AnimStyle.StateMachine
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 288
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 288
+msgctxt "NodeFactory,Enum.AnimStyle.StateMachine"
+msgid "State Machine"
+msgstr "Машина состояний"
+
+#. Key:	Enum.AnimStyle.Transition
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 292
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 292
+msgctxt "NodeFactory,Enum.AnimStyle.Transition"
+msgid "Transition"
+msgstr "Переход"
+
+#. Key:	Enum.BadgeCorner.BottomLeft
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 249
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 249
+msgctxt "NodeFactory,Enum.BadgeCorner.BottomLeft"
+msgid "Bottom Left"
+msgstr "Слева снизу"
+
+#. Key:	Enum.BadgeCorner.BottomRight
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 250
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 250
+msgctxt "NodeFactory,Enum.BadgeCorner.BottomRight"
+msgid "Bottom Right"
+msgstr "Справа снизу"
+
+#. Key:	Enum.BadgeCorner.TopLeft
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 247
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 247
+msgctxt "NodeFactory,Enum.BadgeCorner.TopLeft"
+msgid "Top Left"
+msgstr "Слева сверху"
+
+#. Key:	Enum.BadgeCorner.TopRight
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 248
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 248
+msgctxt "NodeFactory,Enum.BadgeCorner.TopRight"
+msgid "Top Right"
+msgstr "Справа сверху"
+
+#. Key:	Enum.BodyWidgetType.CheckBox
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 258
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 258
+msgctxt "NodeFactory,Enum.BodyWidgetType.CheckBox"
+msgid "Check Box"
+msgstr "Флажок"
+
+#. Key:	Enum.BodyWidgetType.ComboBox
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 259
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 259
+msgctxt "NodeFactory,Enum.BodyWidgetType.ComboBox"
+msgid "Combo Box"
+msgstr "Выпадающий список"
+
+#. Key:	Enum.BodyWidgetType.Curve
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 263
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 263
+msgctxt "NodeFactory,Enum.BodyWidgetType.Curve"
+msgid "Curve"
+msgstr "Кривая"
+
+#. Key:	Enum.BodyWidgetType.ScrollList
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 261
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 261
+msgctxt "NodeFactory,Enum.BodyWidgetType.ScrollList"
+msgid "Scroll List"
+msgstr "Прокручиваемый список"
+
+#. Key:	Enum.BodyWidgetType.Slider
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 262
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 262
+msgctxt "NodeFactory,Enum.BodyWidgetType.Slider"
+msgid "Slider"
+msgstr "Ползунок"
+
+#. Key:	Enum.BodyWidgetType.TextBox
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 260
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 260
+msgctxt "NodeFactory,Enum.BodyWidgetType.TextBox"
+msgid "Text Box"
+msgstr "Текстовое поле"
+
+#. Key:	Enum.ConnectionRule.ClassFilter
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 239
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 239
+msgctxt "NodeFactory,Enum.ConnectionRule.ClassFilter"
+msgid "Class Filter"
+msgstr "Фильтр класса"
+
+#. Key:	Enum.ConnectionRule.None
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 237
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 237
+msgctxt "NodeFactory,Enum.ConnectionRule.None"
+msgid "None"
+msgstr "Нет"
+
+#. Key:	Enum.ConnectionRule.SameTypeOnly
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 238
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 238
+msgctxt "NodeFactory,Enum.ConnectionRule.SameTypeOnly"
+msgid "Same Type Only"
+msgstr "Только тот же тип"
+
+#. Key:	Enum.CornerIcon.Client
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 227
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 227
+msgctxt "NodeFactory,Enum.CornerIcon.Client"
+msgid "Client"
+msgstr "Клиент"
+
+#. Key:	Enum.CornerIcon.Latent
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 225
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 225
+msgctxt "NodeFactory,Enum.CornerIcon.Latent"
+msgid "Latent"
+msgstr "Латентная"
+
+#. Key:	Enum.CornerIcon.Message
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 229
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 229
+msgctxt "NodeFactory,Enum.CornerIcon.Message"
+msgid "Message"
+msgstr "Сообщение"
+
+#. Key:	Enum.CornerIcon.Multicast
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 228
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 228
+msgctxt "NodeFactory,Enum.CornerIcon.Multicast"
+msgid "Multicast"
+msgstr "Multicast"
+
+#. Key:	Enum.CornerIcon.None
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 224
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 224
+msgctxt "NodeFactory,Enum.CornerIcon.None"
+msgid "None"
+msgstr "Нет"
+
+#. Key:	Enum.CornerIcon.Server
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 226
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 226
+msgctxt "NodeFactory,Enum.CornerIcon.Server"
+msgid "Server"
+msgstr "Сервер"
+
+#. Key:	Enum.CurveMode.EvaluateAtTime
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 325
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 325
+msgctxt "NodeFactory,Enum.CurveMode.EvaluateAtTime"
+msgid "Evaluate At Time"
+msgstr "По времени"
+
+#. Key:	Enum.CurveMode.Playback
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 326
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 326
+msgctxt "NodeFactory,Enum.CurveMode.Playback"
+msgid "Playback"
+msgstr "Воспроизведение"
+
+#. Key:	Enum.CurveValueType.Float
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 315
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 315
+msgctxt "NodeFactory,Enum.CurveValueType.Float"
+msgid "Float"
+msgstr "Float"
+
+#. Key:	Enum.CurveValueType.LinearColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 317
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 317
+msgctxt "NodeFactory,Enum.CurveValueType.LinearColor"
+msgid "Linear Color"
+msgstr "Linear Color"
+
+#. Key:	Enum.CurveValueType.Vector
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 316
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 316
+msgctxt "NodeFactory,Enum.CurveValueType.Vector"
+msgid "Vector"
+msgstr "Vector"
+
+#. Key:	Enum.NiagaraStyle.CustomHlsl
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 307
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 307
+msgctxt "NodeFactory,Enum.NiagaraStyle.CustomHlsl"
+msgid "Custom Hlsl"
+msgstr "Custom HLSL"
+
+#. Key:	Enum.NiagaraStyle.FunctionCall
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 301
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 301
+msgctxt "NodeFactory,Enum.NiagaraStyle.FunctionCall"
+msgid "Function Call"
+msgstr "Вызов функции"
+
+#. Key:	Enum.NiagaraStyle.Input
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 305
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 305
+msgctxt "NodeFactory,Enum.NiagaraStyle.Input"
+msgid "Input"
+msgstr "Вход"
+
+#. Key:	Enum.NiagaraStyle.MapGet
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 302
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 302
+msgctxt "NodeFactory,Enum.NiagaraStyle.MapGet"
+msgid "Map Get"
+msgstr "Map Get"
+
+#. Key:	Enum.NiagaraStyle.MapSet
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 303
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 303
+msgctxt "NodeFactory,Enum.NiagaraStyle.MapSet"
+msgid "Map Set"
+msgstr "Map Set"
+
+#. Key:	Enum.NiagaraStyle.Op
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 304
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 304
+msgctxt "NodeFactory,Enum.NiagaraStyle.Op"
+msgid "Op"
+msgstr "Операция"
+
+#. Key:	Enum.NiagaraStyle.Output
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 306
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 306
+msgctxt "NodeFactory,Enum.NiagaraStyle.Output"
+msgid "Output"
+msgstr "Выход"
+
+#. Key:	Enum.NodeStyle.Animation
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 272
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 272
+msgctxt "NodeFactory,Enum.NodeStyle.Animation"
+msgid "Animation"
+msgstr "Анимация"
+
+#. Key:	Enum.NodeStyle.Blueprint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 271
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 271
+msgctxt "NodeFactory,Enum.NodeStyle.Blueprint"
+msgid "Blueprint"
+msgstr "Blueprint"
+
+#. Key:	Enum.NodeStyle.Niagara
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 273
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 273
+msgctxt "NodeFactory,Enum.NodeStyle.Niagara"
+msgid "Niagara"
+msgstr "Niagara"
+
+#. Key:	Expander.ArrayGetMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1793
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1793
+msgctxt "NodeFactory,Expander.ArrayGetMissing"
+msgid "Array Get could not be created (V-check: UKismetArrayLibrary::Array_Get)."
+msgstr "не удалось создать Array Get (V-check: UKismetArrayLibrary::Array_Get)."
+
+#. Key:	Expander.ArrayGetPins
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1804
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1804
+msgctxt "NodeFactory,Expander.ArrayGetPins"
+msgid "Array Get has an unexpected set of pins (V-check: TargetArray, Index, Item)."
+msgstr "у Array Get неожиданный набор пинов (V-check: TargetArray, Index, Item)."
+
+#. Key:	Expander.CallPinMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1775
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1775
+msgctxt "NodeFactory,Expander.CallPinMissing"
+msgid "the pin {0} of the engine function {1} was not found (V-check of UE 4.20.3)."
+msgstr "пин {0} функции движка {1} не найден (V-check для UE 4.20.3)."
+
+#. Key:	Expander.CurveFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1589
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1589
+msgctxt "NodeFactory,Expander.CurveFailed"
+msgid "the value of curve {0} of {1} could not be built."
+msgstr "не удалось построить значение кривой {0} ассета {1}."
+
+#. Key:	Expander.CurveGetterImpure
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1614
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1614
+msgctxt "NodeFactory,Expander.CurveGetterImpure"
+msgid "{0} is not pure in this engine version; the Curve asset cannot be read here."
+msgstr "{0} в этой версии движка не является чистой функцией; ассет кривой здесь прочитать нельзя."
+
+#. Key:	Expander.CurveGetterPins
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1623
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1623
+msgctxt "NodeFactory,Expander.CurveGetterPins"
+msgid "the getter of the Curve asset has an unexpected set of pins (V-check: Target, InTime, ReturnValue)."
+msgstr "у функции чтения ассета кривой неожиданный набор пинов (V-check: Target, InTime, ReturnValue)."
+
+#. Key:	Expander.CurveValueOutdated
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1558
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1558
+msgctxt "NodeFactory,Expander.CurveValueOutdated"
+msgid "{Node} is outdated: the curve {Curve} of {Asset} now gives {Type}. Use Refresh Node on it."
+msgstr "{Node} устарела: кривая {Curve} ассета {Asset} теперь даёт {Type}. Выполните для неё Refresh Node."
+
+#. Key:	Expander.FunctionMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1753
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1753
+msgctxt "NodeFactory,Expander.FunctionMissing"
+msgid "the engine function {0}::{1} was not found (V-check of UE 4.20.3)."
+msgstr "функция движка {0}::{1} не найдена (V-check для UE 4.20.3)."
+
+#. Key:	Expander.NoCurve
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1534
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1534
+msgctxt "NodeFactory,Expander.NoCurve"
+msgid "<none>"
+msgstr "<нет>"
+
+#. Key:	Expander.PersistentFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1873
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1873
+msgctxt "NodeFactory,Expander.PersistentFailed"
+msgid "the state of the curve playback could not be created."
+msgstr "не удалось создать состояние воспроизведения кривой."
+
+#. Key:	Expander.PlaybackFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1298
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1298
+msgctxt "NodeFactory,Expander.PlaybackFailed"
+msgid "the playback of curve {0} of {1} could not be built."
+msgstr "не удалось построить воспроизведение кривой {0} ассета {1}."
+
+#. Key:	Expander.SampleArrayFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1825
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1825
+msgctxt "NodeFactory,Expander.SampleArrayFailed"
+msgid "the samples of a curve could not be stored (V-check: UK2Node_MakeArray::NumInputs)."
+msgstr "не удалось сохранить отсчёты кривой (V-check: UK2Node_MakeArray::NumInputs)."
+
+#. Key:	Expander.SampleArrayPins
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1856
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 1856
+msgctxt "NodeFactory,Expander.SampleArrayPins"
+msgid "Make Array of the curve samples has an unexpected set of pins."
+msgstr "у Make Array для отсчётов кривой неожиданный набор пинов."
+
+#. Key:	Import.BadCurveKey
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 200
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 200
+msgctxt "NodeFactory,Import.BadCurveKey"
+msgid "{0}: a key without time or value was skipped."
+msgstr "{0}: ключ без времени или значения пропущен."
+
+#. Key:	Import.MissingCurveAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 252
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 252
+msgctxt "NodeFactory,Import.MissingCurveAsset"
+msgid "{0}: Curve asset {1} was not found; the path is kept."
+msgstr "{0}: ассет кривой {1} не найден; путь сохранён."
+
+#. Key:	Import.MissingExternalCurve
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 218
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 218
+msgctxt "NodeFactory,Import.MissingExternalCurve"
+msgid "{0}: Curve Float {1} was not found; the own keys are used."
+msgstr "{0}: Curve Float {1} не найдена; используются собственные ключи."
+
+#. Key:	Msg.CNA020
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 234
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 234
+msgctxt "NodeFactory,Msg.CNA020"
+msgid "Curve {Curve} of {Asset} uses Playback, which only works on an impure node placed in an Event Graph."
+msgstr "Кривая {Curve} ассета {Asset} использует режим «Воспроизведение», который работает только на нечистой ноде в Event Graph."
+
+#. Key:	Msg.CNA021
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 235
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 235
+msgctxt "NodeFactory,Msg.CNA021"
+msgid "{Asset} has more than one curve in Playback mode ({Curves}); only one is allowed per node."
+msgstr "В {Asset} больше одной кривой в режиме «Воспроизведение» ({Curves}); на ноде допускается только одна."
+
+#. Key:	Msg.CNA022
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 236
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 236
+msgctxt "NodeFactory,Msg.CNA022"
+msgid "Curve {Curve} of {Asset}: {Details}"
+msgstr "Кривая {Curve} ассета {Asset}: {Details}"
+
+#. Key:	Msg.CNA023
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 237
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 237
+msgctxt "NodeFactory,Msg.CNA023"
+msgid "{Node} references the curve {Curve}, which does not exist in {Asset}."
+msgstr "{Node} ссылается на кривую {Curve}, которой нет в {Asset}."
+
+#. Key:	NodeMenu.CurveValueCurveEntry
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 390
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 390
+msgctxt "NodeFactory,NodeMenu.CurveValueCurveEntry"
+msgid "Curve Value: {0}"
+msgstr "Значение кривой: {0}"
+
+#. Key:	NodeMenu.CurveValueCurveEntryKeywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 393
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 393
+msgctxt "NodeFactory,NodeMenu.CurveValueCurveEntryKeywords"
+msgid "{0} Curve Value Timeline CNA"
+msgstr "{0} Curve Value Timeline CNA кривая значение таймлайн"
+
+#. Key:	NodeMenu.CurveValueCurveEntryTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 392
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 392
+msgctxt "NodeFactory,NodeMenu.CurveValueCurveEntryTooltip"
+msgid "Reads the curve {0} ({1})."
+msgstr "Читает кривую {0} ({1})."
+
+#. Key:	NodeMenu.CurveValueEntry
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 359
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 359
+msgctxt "NodeFactory,NodeMenu.CurveValueEntry"
+msgid "Curve Value"
+msgstr "Значение кривой"
+
+#. Key:	NodeMenu.CurveValueEntryKeywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 362
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 362
+msgctxt "NodeFactory,NodeMenu.CurveValueEntryKeywords"
+msgid "Curve Value Timeline Time CNA"
+msgstr "Curve Value Timeline Time CNA кривая значение время таймлайн"
+
+#. Key:	NodeMenu.CurveValueEntryTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 361
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 361
+msgctxt "NodeFactory,NodeMenu.CurveValueEntryTooltip"
+msgid "Reads a curve of this node at the current time of the instance. Choose the curve in the context menu of the node."
+msgstr "Читает кривую этой ноды в текущий момент времени экземпляра. Кривая выбирается в контекстном меню ноды."
+
+#. Key:	NodeMenu.CurvesCategory
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 351
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 351
+msgctxt "NodeFactory,NodeMenu.CurvesCategory"
+msgid "Curves"
+msgstr "Кривые"
+
+#. Key:	NodeWidget.FastPathFallback
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNAAnimStyles.cpp - line 143
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNAAnimStyles.cpp - line 143
+msgctxt "NodeFactory,NodeWidget.FastPathFallback"
+msgid "FAST"
+msgstr "FAST"
+
+#. Key:	NodeWidget.FastPathTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNAAnimStyles.cpp - line 125
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNAAnimStyles.cpp - line 125
+msgctxt "NodeFactory,NodeWidget.FastPathTooltip"
+msgid "Fast path enabled: This node is not using any Blueprint calls to update its data."
+msgstr "Fast path включён: эта нода не использует вызовы Blueprint для обновления своих данных."
+
+#. Key:	NodeWidget.NiagaraAddPin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 125
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 125
+msgctxt "NodeFactory,NodeWidget.NiagaraAddPin"
+msgid "Add Pin"
+msgstr "Добавить пин"
+
+#. Key:	NodeWidget.NiagaraAddPinGlyph
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 116
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 116
+msgctxt "NodeFactory,NodeWidget.NiagaraAddPinGlyph"
+msgid "+"
+msgstr "+"
+
+#. Key:	NodeWidget.NiagaraAddPinTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 151
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 151
+msgctxt "NodeFactory,NodeWidget.NiagaraAddPinTooltip"
+msgid "Add an element pin to the dynamic group of this node."
+msgstr "Добавить пин-элемент в динамическую группу этой ноды."
+
+#. Key:	NodeWidget.NiagaraBodyTextHint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 195
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNANiagara.cpp - line 195
+msgctxt "NodeFactory,NodeWidget.NiagaraBodyTextHint"
+msgid "Niagara Body Text of the asset"
+msgstr "Текст тела Niagara из ассета"
+
+#. Key:	NodeWidget.TransitionTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNAAnimStyles.cpp - line 56
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_CNAAnimStyles.cpp - line 56
+msgctxt "NodeFactory,NodeWidget.TransitionTooltip"
+msgid "{0}\n{1}"
+msgstr "{0}\n{1}"
+
+#. Key:	PinManager.FollowRenameTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 784
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 784
+msgctxt "NodeFactory,PinManager.FollowRenameTransaction"
+msgid "Update References of Renamed Pin"
+msgstr "Обновление ссылок переименованного пина"
+
+#. Key:	PinManager.RenameMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 275
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 275
+msgctxt "NodeFactory,PinManager.RenameMissing"
+msgid "Pin description not found."
+msgstr "Описание пина не найдено."
+
+#. Key:	Prop.Asset.AllowedGraphs
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 82
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 82
+msgctxt "NodeFactory,Prop.Asset.AllowedGraphs"
+msgid "Allowed Graphs"
+msgstr "Разрешённые графы"
+
+#. Key:	Prop.Asset.AllowedGraphs.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 82
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 82
+msgctxt "NodeFactory,Prop.Asset.AllowedGraphs.Tip"
+msgid "Graphs where the node can be placed."
+msgstr "Графы, в которых можно разместить ноду."
+
+#. Key:	Prop.Asset.AnimStyle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 68
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 68
+msgctxt "NodeFactory,Prop.Asset.AnimStyle"
+msgid "Anim Style"
+msgstr "Стиль анимации"
+
+#. Key:	Prop.Asset.AnimStyle.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 68
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 68
+msgctxt "NodeFactory,Prop.Asset.AnimStyle.Tip"
+msgid "Kind of Animation Blueprint node to imitate."
+msgstr "Какую ноду Animation Blueprint имитировать."
+
+#. Key:	Prop.Asset.AssetGuid
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 94
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 94
+msgctxt "NodeFactory,Prop.Asset.AssetGuid"
+msgid "Asset Guid"
+msgstr "Guid ассета"
+
+#. Key:	Prop.Asset.AssetGuid.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 94
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 94
+msgctxt "NodeFactory,Prop.Asset.AssetGuid.Tip"
+msgid "Identity of the asset, exported as \"id\" in JSON."
+msgstr "Идентификатор ассета, экспортируется в JSON как «id»."
+
+#. Key:	Prop.Asset.AssetVersion
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 93
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 93
+msgctxt "NodeFactory,Prop.Asset.AssetVersion"
+msgid "Asset Version"
+msgstr "Версия ассета"
+
+#. Key:	Prop.Asset.AssetVersion.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 93
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 93
+msgctxt "NodeFactory,Prop.Asset.AssetVersion.Tip"
+msgid "Grows when the pin structure changes; compared with the version of the placed nodes (CNA006)."
+msgstr "Растёт при изменении структуры пинов; сравнивается с версией размещённых нод (CNA006)."
+
+#. Key:	Prop.Asset.Author
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 88
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 88
+msgctxt "NodeFactory,Prop.Asset.Author"
+msgid "Author"
+msgstr "Автор"
+
+#. Key:	Prop.Asset.Author.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 88
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 88
+msgctxt "NodeFactory,Prop.Asset.Author.Tip"
+msgid "Author of the node."
+msgstr "Автор ноды."
+
+#. Key:	Prop.Asset.Badges
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 62
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 62
+msgctxt "NodeFactory,Prop.Asset.Badges"
+msgid "Badges"
+msgstr "Метки"
+
+#. Key:	Prop.Asset.Badges.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 62
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 62
+msgctxt "NodeFactory,Prop.Asset.Badges.Tip"
+msgid "Text badges in the corners of the node."
+msgstr "Текстовые метки в углах ноды."
+
+#. Key:	Prop.Asset.BodyWidgets
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 65
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 65
+msgctxt "NodeFactory,Prop.Asset.BodyWidgets"
+msgid "Body Widgets"
+msgstr "Виджеты на ноде"
+
+#. Key:	Prop.Asset.BodyWidgets.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 65
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 65
+msgctxt "NodeFactory,Prop.Asset.BodyWidgets.Tip"
+msgid "Widgets on the body of the node that edit the values of input pins, and curve graphs."
+msgstr "Виджеты на теле ноды, которые редактируют значения входных пинов, и графики кривых."
+
+#. Key:	Prop.Asset.Category
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 39
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 39
+msgctxt "NodeFactory,Prop.Asset.Category"
+msgid "Category"
+msgstr "Категория"
+
+#. Key:	Prop.Asset.Category.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 39
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 39
+msgctxt "NodeFactory,Prop.Asset.Category.Tip"
+msgid "Menu category; nesting with a vertical bar: \"Math|Vector\"."
+msgstr "Категория меню; вложенность через вертикальную черту: «Math|Vector»."
+
+#. Key:	Prop.Asset.CompactTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 60
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 60
+msgctxt "NodeFactory,Prop.Asset.CompactTitle"
+msgid "Compact Title"
+msgstr "Компактный заголовок"
+
+#. Key:	Prop.Asset.CompactTitle.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 60
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 60
+msgctxt "NodeFactory,Prop.Asset.CompactTitle.Tip"
+msgid "Large text of the compact node, for example \"+\" or \"SUM\"."
+msgstr "Крупный текст компактной ноды, например «+» или «SUM»."
+
+#. Key:	Prop.Asset.ContextClass
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 83
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 83
+msgctxt "NodeFactory,Prop.Asset.ContextClass"
+msgid "Context Class"
+msgstr "Класс контекста"
+
+#. Key:	Prop.Asset.ContextClass.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 83
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 83
+msgctxt "NodeFactory,Prop.Asset.ContextClass.Tip"
+msgid "Class whose Blueprints may use the node (CNA012); also the output type of Get Caller."
+msgstr "Класс, чьи Blueprint могут использовать ноду (CNA012); также тип выхода Get Caller."
+
+#. Key:	Prop.Asset.CornerIcon
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 57
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 57
+msgctxt "NodeFactory,Prop.Asset.CornerIcon"
+msgid "Corner Icon"
+msgstr "Угловая иконка"
+
+#. Key:	Prop.Asset.CornerIcon.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 57
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 57
+msgctxt "NodeFactory,Prop.Asset.CornerIcon.Tip"
+msgid "Default corner icon; a latent subgraph shows Latent. Hidden while a Corner Icon Texture is set."
+msgstr "Угловая иконка по умолчанию; латентный подграф показывает «Латентная». Скрыта, пока задана текстура угловой иконки."
+
+#. Key:	Prop.Asset.CornerIconTexture
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 54
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 54
+msgctxt "NodeFactory,Prop.Asset.CornerIconTexture"
+msgid "Corner Icon Texture"
+msgstr "Текстура угловой иконки"
+
+#. Key:	Prop.Asset.CornerIconTexture.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 54
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 54
+msgctxt "NodeFactory,Prop.Asset.CornerIconTexture.Tip"
+msgid "Optional texture replacing the corner icon, including the latent icon."
+msgstr "Необязательная текстура вместо угловой иконки, в том числе иконки латентности."
+
+#. Key:	Prop.Asset.CornerIconTextureSize
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 56
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 56
+msgctxt "NodeFactory,Prop.Asset.CornerIconTextureSize"
+msgid "Corner Icon Texture Size"
+msgstr "Размер текстуры угловой иконки"
+
+#. Key:	Prop.Asset.CornerIconTextureSize.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 56
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 56
+msgctxt "NodeFactory,Prop.Asset.CornerIconTextureSize.Tip"
+msgid "Size of the corner icon texture in slate units."
+msgstr "Размер текстуры угловой иконки в единицах Slate."
+
+#. Key:	Prop.Asset.CornerIconTextureTint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 55
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 55
+msgctxt "NodeFactory,Prop.Asset.CornerIconTextureTint"
+msgid "Corner Icon Texture Tint"
+msgstr "Оттенок текстуры угловой иконки"
+
+#. Key:	Prop.Asset.CornerIconTextureTint.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 55
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 55
+msgctxt "NodeFactory,Prop.Asset.CornerIconTextureTint.Tip"
+msgid "Color multiplied with the corner icon texture."
+msgstr "Цвет, на который умножается текстура угловой иконки."
+
+#. Key:	Prop.Asset.DefaultComment
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 42
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 42
+msgctxt "NodeFactory,Prop.Asset.DefaultComment"
+msgid "Default Comment"
+msgstr "Комментарий по умолчанию"
+
+#. Key:	Prop.Asset.DefaultComment.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 42
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 42
+msgctxt "NodeFactory,Prop.Asset.DefaultComment.Tip"
+msgid "Comment that appears when the node is placed."
+msgstr "Комментарий, который появляется при размещении ноды."
+
+#. Key:	Prop.Asset.DeprecationMessage
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 80
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 80
+msgctxt "NodeFactory,Prop.Asset.DeprecationMessage"
+msgid "Deprecation Message"
+msgstr "Сообщение об устаревании"
+
+#. Key:	Prop.Asset.DeprecationMessage.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 80
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 80
+msgctxt "NodeFactory,Prop.Asset.DeprecationMessage.Tip"
+msgid "Text of the warning CNA009."
+msgstr "Текст предупреждения CNA009."
+
+#. Key:	Prop.Asset.Description
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 89
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 89
+msgctxt "NodeFactory,Prop.Asset.Description"
+msgid "Description"
+msgstr "Описание"
+
+#. Key:	Prop.Asset.Description.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 89
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 89
+msgctxt "NodeFactory,Prop.Asset.Description.Tip"
+msgid "Description of the node for the Node Catalog and the Content Browser."
+msgstr "Описание ноды для каталога нод и Content Browser."
+
+#. Key:	Prop.Asset.DisplayName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 36
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 36
+msgctxt "NodeFactory,Prop.Asset.DisplayName"
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. Key:	Prop.Asset.DisplayName.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 36
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 36
+msgctxt "NodeFactory,Prop.Asset.DisplayName.Tip"
+msgid "Title of the node. Empty: the asset name without the CNA_ prefix."
+msgstr "Заголовок ноды. Пусто: имя ассета без префикса CNA_."
+
+#. Key:	Prop.Asset.HeaderColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 45
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 45
+msgctxt "NodeFactory,Prop.Asset.HeaderColor"
+msgid "Header Color"
+msgstr "Цвет заголовка"
+
+#. Key:	Prop.Asset.HeaderColor.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 45
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 45
+msgctxt "NodeFactory,Prop.Asset.HeaderColor.Tip"
+msgid "Color of the title bar; the checkbox on the left turns it on. Without it the colors of the Graph Editor settings or of the style are used."
+msgstr "Цвет полосы заголовка; включается галочкой слева. Без неё используются цвета из настроек Graph Editor или стиля."
+
+#. Key:	Prop.Asset.HeaderTextColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 46
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 46
+msgctxt "NodeFactory,Prop.Asset.HeaderTextColor"
+msgid "Header Text Color"
+msgstr "Цвет текста заголовка"
+
+#. Key:	Prop.Asset.HeaderTextColor.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 46
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 46
+msgctxt "NodeFactory,Prop.Asset.HeaderTextColor.Tip"
+msgid "Color of the title and subtitle text."
+msgstr "Цвет текста заголовка и подзаголовка."
+
+#. Key:	Prop.Asset.Icon
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 50
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 50
+msgctxt "NodeFactory,Prop.Asset.Icon"
+msgid "Icon"
+msgstr "Значок"
+
+#. Key:	Prop.Asset.Icon.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 50
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 50
+msgctxt "NodeFactory,Prop.Asset.Icon.Tip"
+msgid "Brush of the editor style in front of the title, like Branch or Function. Hidden while an Icon Texture is set."
+msgstr "Кисть стиля редактора перед заголовком, как у Branch или Function. Скрыт, пока задана текстура значка."
+
+#. Key:	Prop.Asset.IconTexture
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 52
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 52
+msgctxt "NodeFactory,Prop.Asset.IconTexture"
+msgid "Icon Texture"
+msgstr "Текстура значка"
+
+#. Key:	Prop.Asset.IconTexture.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 52
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 52
+msgctxt "NodeFactory,Prop.Asset.IconTexture.Tip"
+msgid "Texture shown instead of Icon; the UI texture group without mips is recommended."
+msgstr "Текстура вместо значка; рекомендуется группа текстур UI без мипов."
+
+#. Key:	Prop.Asset.IconTextureTint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 53
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 53
+msgctxt "NodeFactory,Prop.Asset.IconTextureTint"
+msgid "Icon Texture Tint"
+msgstr "Оттенок текстуры значка"
+
+#. Key:	Prop.Asset.IconTextureTint.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 53
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 53
+msgctxt "NodeFactory,Prop.Asset.IconTextureTint.Tip"
+msgid "Color multiplied with the icon texture."
+msgstr "Цвет, на который умножается текстура значка."
+
+#. Key:	Prop.Asset.IconTint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 51
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 51
+msgctxt "NodeFactory,Prop.Asset.IconTint"
+msgid "Icon Tint"
+msgstr "Оттенок значка"
+
+#. Key:	Prop.Asset.IconTint.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 51
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 51
+msgctxt "NodeFactory,Prop.Asset.IconTint.Tip"
+msgid "Color of the icon."
+msgstr "Цвет значка."
+
+#. Key:	Prop.Asset.Keywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 40
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 40
+msgctxt "NodeFactory,Prop.Asset.Keywords"
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+#. Key:	Prop.Asset.Keywords.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 40
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 40
+msgctxt "NodeFactory,Prop.Asset.Keywords.Tip"
+msgid "Search words of the action menu."
+msgstr "Слова для поиска в меню действий."
+
+#. Key:	Prop.Asset.MinHeight
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 64
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 64
+msgctxt "NodeFactory,Prop.Asset.MinHeight"
+msgid "Min Height"
+msgstr "Мин. высота"
+
+#. Key:	Prop.Asset.MinHeight.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 64
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 64
+msgctxt "NodeFactory,Prop.Asset.MinHeight.Tip"
+msgid "Minimum height of the node in slate units, 0 for automatic."
+msgstr "Минимальная высота ноды в единицах Slate, 0 — автоматически."
+
+#. Key:	Prop.Asset.MinWidth
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 63
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 63
+msgctxt "NodeFactory,Prop.Asset.MinWidth"
+msgid "Min Width"
+msgstr "Мин. ширина"
+
+#. Key:	Prop.Asset.MinWidth.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 63
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 63
+msgctxt "NodeFactory,Prop.Asset.MinWidth.Tip"
+msgid "Minimum width of the node in slate units, 0 for automatic."
+msgstr "Минимальная ширина ноды в единицах Slate, 0 — автоматически."
+
+#. Key:	Prop.Asset.NiagaraBodyText
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 75
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 75
+msgctxt "NodeFactory,Prop.Asset.NiagaraBodyText"
+msgid "Niagara Body Text"
+msgstr "Текст тела Niagara"
+
+#. Key:	Prop.Asset.NiagaraBodyText.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 75
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 75
+msgctxt "NodeFactory,Prop.Asset.NiagaraBodyText.Tip"
+msgid "Text shown in the text area of a Custom HLSL node (a note, read-only on instances)."
+msgstr "Текст в текстовой области ноды Custom HLSL (заметка, на экземплярах только для чтения)."
+
+#. Key:	Prop.Asset.NiagaraStyle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 71
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 71
+msgctxt "NodeFactory,Prop.Asset.NiagaraStyle"
+msgid "Niagara Style"
+msgstr "Стиль Niagara"
+
+#. Key:	Prop.Asset.NiagaraStyle.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 71
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 71
+msgctxt "NodeFactory,Prop.Asset.NiagaraStyle.Tip"
+msgid "Kind of Niagara script node to imitate."
+msgstr "Какую ноду скрипта Niagara имитировать."
+
+#. Key:	Prop.Asset.NodeStyle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 67
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 67
+msgctxt "NodeFactory,Prop.Asset.NodeStyle"
+msgid "Node Style"
+msgstr "Стиль ноды"
+
+#. Key:	Prop.Asset.NodeStyle.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 67
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 67
+msgctxt "NodeFactory,Prop.Asset.NodeStyle.Tip"
+msgid "Visual family of the node. The pins keep working as Blueprint pins in every family."
+msgstr "Визуальное семейство ноды. Во всех семействах пины работают как обычные пины Blueprint."
+
+#. Key:	Prop.Asset.PinLabelColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 47
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 47
+msgctxt "NodeFactory,Prop.Asset.PinLabelColor"
+msgid "Pin Label Color"
+msgstr "Цвет подписей пинов"
+
+#. Key:	Prop.Asset.PinLabelColor.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 47
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 47
+msgctxt "NodeFactory,Prop.Asset.PinLabelColor.Tip"
+msgid "Default color of all pin labels; per pin through Label Color of the pin override."
+msgstr "Цвет всех подписей пинов по умолчанию; для отдельного пина — «Цвет подписи» в переопределении пина."
+
+#. Key:	Prop.Asset.PinOverrides
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 85
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 85
+msgctxt "NodeFactory,Prop.Asset.PinOverrides"
+msgid "Pin Overrides"
+msgstr "Переопределения пинов"
+
+#. Key:	Prop.Asset.PinOverrides.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 85
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 85
+msgctxt "NodeFactory,Prop.Asset.PinOverrides.Tip"
+msgid "Settings of pins of the macro Execute, matched by pin name."
+msgstr "Настройки пинов макроса Execute, сопоставляются по имени пина."
+
+#. Key:	Prop.Asset.PinRedirects
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 86
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 86
+msgctxt "NodeFactory,Prop.Asset.PinRedirects"
+msgid "Pin Redirects"
+msgstr "Перенаправления пинов"
+
+#. Key:	Prop.Asset.PinRedirects.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 86
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 86
+msgctxt "NodeFactory,Prop.Asset.PinRedirects.Tip"
+msgid "Old pin name -> new pin name: keeps the wires of placed nodes after a pin was renamed. Renaming a pin adds them."
+msgstr "Старое имя пина -> новое имя: сохраняет провода размещённых нод после переименования пина. Переименование пина добавляет их само."
+
+#. Key:	Prop.Asset.SourceUrl
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 91
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 91
+msgctxt "NodeFactory,Prop.Asset.SourceUrl"
+msgid "Source Url"
+msgstr "Адрес источника"
+
+#. Key:	Prop.Asset.SourceUrl.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 91
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 91
+msgctxt "NodeFactory,Prop.Asset.SourceUrl.Tip"
+msgid "Address of the documentation, shown as text in the tooltip."
+msgstr "Адрес документации, показывается текстом в подсказке."
+
+#. Key:	Prop.Asset.Subtitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 37
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 37
+msgctxt "NodeFactory,Prop.Asset.Subtitle"
+msgid "Subtitle"
+msgstr "Подзаголовок"
+
+#. Key:	Prop.Asset.Subtitle.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 37
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 37
+msgctxt "NodeFactory,Prop.Asset.Subtitle.Tip"
+msgid "Second line of the title in a smaller font."
+msgstr "Вторая строка заголовка мелким шрифтом."
+
+#. Key:	Prop.Asset.Tags
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 90
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 90
+msgctxt "NodeFactory,Prop.Asset.Tags"
+msgid "Tags"
+msgstr "Теги"
+
+#. Key:	Prop.Asset.Tags.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 90
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 90
+msgctxt "NodeFactory,Prop.Asset.Tags.Tip"
+msgid "Tags of the Node Catalog."
+msgstr "Теги каталога нод."
+
+#. Key:	Prop.Asset.Tooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 38
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 38
+msgctxt "NodeFactory,Prop.Asset.Tooltip"
+msgid "Tooltip"
+msgstr "Подсказка"
+
+#. Key:	Prop.Asset.Tooltip.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 38
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 38
+msgctxt "NodeFactory,Prop.Asset.Tooltip.Tip"
+msgid "Tooltip of the node in the graph and in the action menu."
+msgstr "Подсказка ноды в графе и в меню действий."
+
+#. Key:	Prop.Asset.bAllowInstanceLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 43
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 43
+msgctxt "NodeFactory,Prop.Asset.bAllowInstanceLabel"
+msgid "Allow Instance Label"
+msgstr "Разрешить подпись экземпляра"
+
+#. Key:	Prop.Asset.bAllowInstanceLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 43
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 43
+msgctxt "NodeFactory,Prop.Asset.bAllowInstanceLabel.Tip"
+msgid "Allows renaming the instance: the label is shown as the second line."
+msgstr "Разрешает переименовать экземпляр: подпись показывается второй строкой."
+
+#. Key:	Prop.Asset.bColorWires
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 48
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 48
+msgctxt "NodeFactory,Prop.Asset.bColorWires"
+msgid "Color Wires"
+msgstr "Цветные провода"
+
+#. Key:	Prop.Asset.bColorWires.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 48
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 48
+msgctxt "NodeFactory,Prop.Asset.bColorWires.Tip"
+msgid "Wires connected to a pin with its own Pin Color get that color. Shown once a pin override sets a pin color."
+msgstr "Провода пина со своим «Цветом пина» получают этот цвет. Появляется, когда переопределение пина задаёт цвет пина."
+
+#. Key:	Prop.Asset.bCompact
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 59
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 59
+msgctxt "NodeFactory,Prop.Asset.bCompact"
+msgid "Compact"
+msgstr "Компактная"
+
+#. Key:	Prop.Asset.bCompact.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 59
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 59
+msgctxt "NodeFactory,Prop.Asset.bCompact.Tip"
+msgid "Compact look without a title bar, like the math operators. Only for a pure node (Flags, Pure)."
+msgstr "Компактный вид без полосы заголовка, как у математических операторов. Только для чистой ноды (Флаги, Чистая)."
+
+#. Key:	Prop.Asset.bDeprecated
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 79
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 79
+msgctxt "NodeFactory,Prop.Asset.bDeprecated"
+msgid "Deprecated"
+msgstr "Устаревшая"
+
+#. Key:	Prop.Asset.bDeprecated.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 79
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 79
+msgctxt "NodeFactory,Prop.Asset.bDeprecated.Tip"
+msgid "Compiling a Blueprint that uses the node produces the warning CNA009."
+msgstr "Компиляция Blueprint, использующего ноду, выдаёт предупреждение CNA009."
+
+#. Key:	Prop.Asset.bDevelopmentOnly
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 78
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 78
+msgctxt "NodeFactory,Prop.Asset.bDevelopmentOnly"
+msgid "Development Only"
+msgstr "Только для разработки"
+
+#. Key:	Prop.Asset.bDevelopmentOnly.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 78
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 78
+msgctxt "NodeFactory,Prop.Asset.bDevelopmentOnly.Tip"
+msgid "The node gets the standard Development Only state."
+msgstr "Нода получает стандартное состояние Development Only."
+
+#. Key:	Prop.Asset.bExecPinsAsParameterMap
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 74
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 74
+msgctxt "NodeFactory,Prop.Asset.bExecPinsAsParameterMap"
+msgid "Exec Pins As Parameter Map"
+msgstr "Exec-пины как Parameter Map"
+
+#. Key:	Prop.Asset.bExecPinsAsParameterMap.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 74
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 74
+msgctxt "NodeFactory,Prop.Asset.bExecPinsAsParameterMap.Tip"
+msgid "Exec pins are drawn as Parameter Map pins."
+msgstr "Exec-пины рисуются как пины Parameter Map."
+
+#. Key:	Prop.Asset.bExecPinsAsPosePins
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 69
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 69
+msgctxt "NodeFactory,Prop.Asset.bExecPinsAsPosePins"
+msgid "Exec Pins As Pose Pins"
+msgstr "Exec-пины как пины позы"
+
+#. Key:	Prop.Asset.bExecPinsAsPosePins.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 69
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 69
+msgctxt "NodeFactory,Prop.Asset.bExecPinsAsPosePins.Tip"
+msgid "Exec pins are drawn as pose pins, like the pose links of an AnimGraph."
+msgstr "Exec-пины рисуются как пины позы, как связи поз в AnimGraph."
+
+#. Key:	Prop.Asset.bHiddenInMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 41
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 41
+msgctxt "NodeFactory,Prop.Asset.bHiddenInMenu"
+msgid "Hidden In Menu"
+msgstr "Скрыта в меню"
+
+#. Key:	Prop.Asset.bHiddenInMenu.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 41
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 41
+msgctxt "NodeFactory,Prop.Asset.bHiddenInMenu.Tip"
+msgid "The node is not offered by the menu but keeps working in existing graphs."
+msgstr "Меню не предлагает ноду, но в существующих графах она продолжает работать."
+
+#. Key:	Prop.Asset.bNiagaraAddPinRows
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 72
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 72
+msgctxt "NodeFactory,Prop.Asset.bNiagaraAddPinRows"
+msgid "Niagara Add Pin Rows"
+msgstr "Строки «Add Pin» Niagara"
+
+#. Key:	Prop.Asset.bNiagaraAddPinRows.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 72
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 72
+msgctxt "NodeFactory,Prop.Asset.bNiagaraAddPinRows.Tip"
+msgid "\"Add Pin\" rows of Map Get / Map Set for the dynamic pins of the node."
+msgstr "Строки «Add Pin», как у Map Get / Map Set, для динамических пинов ноды."
+
+#. Key:	Prop.Asset.bNiagaraNamespaceLabels
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 73
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 73
+msgctxt "NodeFactory,Prop.Asset.bNiagaraNamespaceLabels"
+msgid "Niagara Namespace Labels"
+msgstr "Пространства имён Niagara"
+
+#. Key:	Prop.Asset.bNiagaraNamespaceLabels.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 73
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 73
+msgctxt "NodeFactory,Prop.Asset.bNiagaraNamespaceLabels.Tip"
+msgid "Pin names like \"Module.Speed\" show the namespace dimmed, as in Niagara."
+msgstr "В именах пинов вида «Module.Speed» пространство имён показывается приглушённым, как в Niagara."
+
+#. Key:	Prop.Asset.bPure
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 77
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 77
+msgctxt "NodeFactory,Prop.Asset.bPure"
+msgid "Pure"
+msgstr "Чистая"
+
+#. Key:	Prop.Asset.bPure.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 77
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 77
+msgctxt "NodeFactory,Prop.Asset.bPure.Tip"
+msgid "Node without exec pins; values are computed on every access. The subgraph must not execute nodes (CNA004). Pure nodes can use the compact look."
+msgstr "Нода без exec-пинов; значения вычисляются при каждом обращении. Подграф не должен выполнять ноды (CNA004). Чистые ноды могут быть компактными."
+
+#. Key:	Prop.Asset.bShowFastPathIcon
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 70
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 70
+msgctxt "NodeFactory,Prop.Asset.bShowFastPathIcon"
+msgid "Show Fast Path Icon"
+msgstr "Значок Fast Path"
+
+#. Key:	Prop.Asset.bShowFastPathIcon.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 70
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 70
+msgctxt "NodeFactory,Prop.Asset.bShowFastPathIcon.Tip"
+msgid "Lightning \"fast path\" mark in the corner, like anim nodes that use the fast path."
+msgstr "Значок молнии «fast path» в углу, как у anim-нод, использующих fast path."
+
+#. Key:	Prop.Badge.Color
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 127
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 127
+msgctxt "NodeFactory,Prop.Badge.Color"
+msgid "Color"
+msgstr "Цвет"
+
+#. Key:	Prop.Badge.Color.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 127
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 127
+msgctxt "NodeFactory,Prop.Badge.Color.Tip"
+msgid "Background of the badge."
+msgstr "Фон метки."
+
+#. Key:	Prop.Badge.Corner
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 129
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 129
+msgctxt "NodeFactory,Prop.Badge.Corner"
+msgid "Corner"
+msgstr "Угол"
+
+#. Key:	Prop.Badge.Corner.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 129
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 129
+msgctxt "NodeFactory,Prop.Badge.Corner.Tip"
+msgid "Corner of the node the badge is drawn in."
+msgstr "Угол ноды, в котором рисуется метка."
+
+#. Key:	Prop.Badge.Text
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 126
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 126
+msgctxt "NodeFactory,Prop.Badge.Text"
+msgid "Text"
+msgstr "Текст"
+
+#. Key:	Prop.Badge.Text.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 126
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 126
+msgctxt "NodeFactory,Prop.Badge.Text.Tip"
+msgid "Text of the badge, for example PURE or ASYNC."
+msgstr "Текст метки, например PURE или ASYNC."
+
+#. Key:	Prop.Badge.TextColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 128
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 128
+msgctxt "NodeFactory,Prop.Badge.TextColor"
+msgid "Text Color"
+msgstr "Цвет текста"
+
+#. Key:	Prop.Badge.TextColor.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 128
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 128
+msgctxt "NodeFactory,Prop.Badge.TextColor.Tip"
+msgid "Color of the text of the badge."
+msgstr "Цвет текста метки."
+
+#. Key:	Prop.BodyWidget.Curve
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 142
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 142
+msgctxt "NodeFactory,Prop.BodyWidget.Curve"
+msgid "Curve"
+msgstr "Кривая"
+
+#. Key:	Prop.BodyWidget.Curve.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 142
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 142
+msgctxt "NodeFactory,Prop.BodyWidget.Curve.Tip"
+msgid "Settings of the curve: source, value type, mode and the names of the created pins."
+msgstr "Настройки кривой: источник, тип значения, режим и имена создаваемых пинов."
+
+#. Key:	Prop.BodyWidget.CurveName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1059
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1059
+msgctxt "NodeFactory,Prop.BodyWidget.CurveName"
+msgid "Curve Name"
+msgstr "Имя кривой"
+
+#. Key:	Prop.BodyWidget.CurveName.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1060
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 1060
+msgctxt "NodeFactory,Prop.BodyWidget.CurveName.Tip"
+msgid "Name of the curve; the Curve Value node of the macro Execute finds the curve by its Guid and by this name."
+msgstr "Имя кривой; нода «Значение кривой» в макросе Execute находит кривую по её Guid и по этому имени."
+
+#. Key:	Prop.BodyWidget.Height
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 139
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 139
+msgctxt "NodeFactory,Prop.BodyWidget.Height"
+msgid "Height"
+msgstr "Высота"
+
+#. Key:	Prop.BodyWidget.Height.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 139
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 139
+msgctxt "NodeFactory,Prop.BodyWidget.Height.Tip"
+msgid "Height of a Scroll List or of the curve graph in slate units, 0 for the default."
+msgstr "Высота прокручиваемого списка или графика кривой в единицах Slate, 0 — по умолчанию."
+
+#. Key:	Prop.BodyWidget.Label
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 137
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 137
+msgctxt "NodeFactory,Prop.BodyWidget.Label"
+msgid "Label"
+msgstr "Подпись"
+
+#. Key:	Prop.BodyWidget.Label.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 137
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 137
+msgctxt "NodeFactory,Prop.BodyWidget.Label.Tip"
+msgid "Text left of the widget. Empty: the display name of the pin."
+msgstr "Текст слева от виджета. Пусто: отображаемое имя пина."
+
+#. Key:	Prop.BodyWidget.Options
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 136
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 136
+msgctxt "NodeFactory,Prop.BodyWidget.Options"
+msgid "Options"
+msgstr "Варианты"
+
+#. Key:	Prop.BodyWidget.Options.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 136
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 136
+msgctxt "NodeFactory,Prop.BodyWidget.Options.Tip"
+msgid "Entries of a Combo Box or a Scroll List."
+msgstr "Пункты выпадающего списка или прокручиваемого списка."
+
+#. Key:	Prop.BodyWidget.PinName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 134
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 134
+msgctxt "NodeFactory,Prop.BodyWidget.PinName"
+msgid "Pin Name"
+msgstr "Имя пина"
+
+#. Key:	Prop.BodyWidget.PinName.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 134
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 134
+msgctxt "NodeFactory,Prop.BodyWidget.PinName.Tip"
+msgid "Input pin whose default value the widget edits."
+msgstr "Входной пин, значение по умолчанию которого редактирует виджет."
+
+#. Key:	Prop.BodyWidget.SliderMax
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 141
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 141
+msgctxt "NodeFactory,Prop.BodyWidget.SliderMax"
+msgid "Slider Max"
+msgstr "Максимум ползунка"
+
+#. Key:	Prop.BodyWidget.SliderMax.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 141
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 141
+msgctxt "NodeFactory,Prop.BodyWidget.SliderMax.Tip"
+msgid "Upper bound of the slider; must be greater than Slider Min."
+msgstr "Верхняя граница ползунка; должна быть больше минимума."
+
+#. Key:	Prop.BodyWidget.SliderMin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 140
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 140
+msgctxt "NodeFactory,Prop.BodyWidget.SliderMin"
+msgid "Slider Min"
+msgstr "Минимум ползунка"
+
+#. Key:	Prop.BodyWidget.SliderMin.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 140
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 140
+msgctxt "NodeFactory,Prop.BodyWidget.SliderMin.Tip"
+msgid "Lower bound of the slider."
+msgstr "Нижняя граница ползунка."
+
+#. Key:	Prop.BodyWidget.Type
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 135
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 135
+msgctxt "NodeFactory,Prop.BodyWidget.Type"
+msgid "Type"
+msgstr "Тип"
+
+#. Key:	Prop.BodyWidget.Type.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 135
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 135
+msgctxt "NodeFactory,Prop.BodyWidget.Type.Tip"
+msgid "Kind of widget. A Curve draws a graph on the node and creates pins of its own."
+msgstr "Вид виджета. Кривая рисует график на ноде и создаёт свои пины."
+
+#. Key:	Prop.BodyWidget.WidgetGuid
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 143
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 143
+msgctxt "NodeFactory,Prop.BodyWidget.WidgetGuid"
+msgid "Widget Guid"
+msgstr "Guid виджета"
+
+#. Key:	Prop.BodyWidget.WidgetGuid.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 143
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 143
+msgctxt "NodeFactory,Prop.BodyWidget.WidgetGuid.Tip"
+msgid "Stable identity; the Curve Value node and the curve pins reference the widget by it."
+msgstr "Постоянный идентификатор; по нему на виджет ссылаются нода «Значение кривой» и пины кривой."
+
+#. Key:	Prop.BodyWidget.Width
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 138
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 138
+msgctxt "NodeFactory,Prop.BodyWidget.Width"
+msgid "Width"
+msgstr "Ширина"
+
+#. Key:	Prop.BodyWidget.Width.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 138
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 138
+msgctxt "NodeFactory,Prop.BodyWidget.Width.Tip"
+msgid "Width of the widget in slate units, 0 for automatic."
+msgstr "Ширина виджета в единицах Slate, 0 — автоматически."
+
+#. Key:	Prop.CurveSettings.BakeSamples
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 152
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 152
+msgctxt "NodeFactory,Prop.CurveSettings.BakeSamples"
+msgid "Bake Samples"
+msgstr "Число отсчётов"
+
+#. Key:	Prop.CurveSettings.BakeSamples.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 152
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 152
+msgctxt "NodeFactory,Prop.CurveSettings.BakeSamples.Tip"
+msgid "Own curve: number of values baked into the compiled Blueprint (linear interpolation between them)."
+msgstr "Своя кривая: сколько значений запекается в скомпилированный Blueprint (между ними линейная интерполяция)."
+
+#. Key:	Prop.CurveSettings.Channel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 170
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 170
+msgctxt "NodeFactory,Prop.CurveSettings.Channel.Tip"
+msgid "Channel of the own curve: edit the keys in the graph. The compiled Blueprint gets Bake Samples values of it."
+msgstr "Канал собственной кривой: ключи редактируются на графике. В скомпилированный Blueprint попадает «Число отсчётов» его значений."
+
+#. Key:	Prop.CurveSettings.CurveA
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 191
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 191
+msgctxt "NodeFactory,Prop.CurveSettings.CurveA"
+msgid "Curve A (Alpha)"
+msgstr "Кривая A (альфа)"
+
+#. Key:	Prop.CurveSettings.CurveAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 151
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 151
+msgctxt "NodeFactory,Prop.CurveSettings.CurveAsset"
+msgid "Curve Asset"
+msgstr "Ассет кривой"
+
+#. Key:	Prop.CurveSettings.CurveAsset.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 151
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 151
+msgctxt "NodeFactory,Prop.CurveSettings.CurveAsset.Tip"
+msgid "Curve Float, Curve Vector or Curve Linear Color matching the value type."
+msgstr "Curve Float, Curve Vector или Curve Linear Color, соответствующий типу значения."
+
+#. Key:	Prop.CurveSettings.CurveB
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 190
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 190
+msgctxt "NodeFactory,Prop.CurveSettings.CurveB"
+msgid "Curve B (Blue)"
+msgstr "Кривая B (синий)"
+
+#. Key:	Prop.CurveSettings.CurveFloat
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 182
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 182
+msgctxt "NodeFactory,Prop.CurveSettings.CurveFloat"
+msgid "Curve"
+msgstr "Кривая"
+
+#. Key:	Prop.CurveSettings.CurveG
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 189
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 189
+msgctxt "NodeFactory,Prop.CurveSettings.CurveG"
+msgid "Curve G (Green)"
+msgstr "Кривая G (зелёный)"
+
+#. Key:	Prop.CurveSettings.CurveR
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 188
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 188
+msgctxt "NodeFactory,Prop.CurveSettings.CurveR"
+msgid "Curve R (Red)"
+msgstr "Кривая R (красный)"
+
+#. Key:	Prop.CurveSettings.CurveW
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 174
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 174
+msgctxt "NodeFactory,Prop.CurveSettings.CurveW"
+msgid "Curve W"
+msgstr "Кривая W"
+
+#. Key:	Prop.CurveSettings.CurveX
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 171
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 171
+msgctxt "NodeFactory,Prop.CurveSettings.CurveX"
+msgid "Curve X"
+msgstr "Кривая X"
+
+#. Key:	Prop.CurveSettings.CurveY
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 172
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 172
+msgctxt "NodeFactory,Prop.CurveSettings.CurveY"
+msgid "Curve Y"
+msgstr "Кривая Y"
+
+#. Key:	Prop.CurveSettings.CurveZ
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 173
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 173
+msgctxt "NodeFactory,Prop.CurveSettings.CurveZ"
+msgid "Curve Z"
+msgstr "Кривая Z"
+
+#. Key:	Prop.CurveSettings.FinishedLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 164
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 164
+msgctxt "NodeFactory,Prop.CurveSettings.FinishedLabel"
+msgid "Finished Label"
+msgstr "Имя пина «Завершено»"
+
+#. Key:	Prop.CurveSettings.FinishedLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 164
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 164
+msgctxt "NodeFactory,Prop.CurveSettings.FinishedLabel.Tip"
+msgid "Name of the Finished output; empty uses \"Finished\". Renaming keeps the wires."
+msgstr "Имя выхода завершения; пусто — «Завершено». Переименование сохраняет провода."
+
+#. Key:	Prop.CurveSettings.GraphBackgroundColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 165
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 165
+msgctxt "NodeFactory,Prop.CurveSettings.GraphBackgroundColor"
+msgid "Graph Background Color"
+msgstr "Фон графика"
+
+#. Key:	Prop.CurveSettings.GraphBackgroundColor.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 165
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 165
+msgctxt "NodeFactory,Prop.CurveSettings.GraphBackgroundColor.Tip"
+msgid "Background of the graph drawn on the node."
+msgstr "Фон графика, рисуемого на ноде."
+
+#. Key:	Prop.CurveSettings.Length
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 153
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 153
+msgctxt "NodeFactory,Prop.CurveSettings.Length"
+msgid "Length"
+msgstr "Длительность"
+
+#. Key:	Prop.CurveSettings.Length.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 153
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 153
+msgctxt "NodeFactory,Prop.CurveSettings.Length.Tip"
+msgid "Playback length in seconds; 0 uses the time of the last key."
+msgstr "Длительность воспроизведения в секундах; 0 — до времени последнего ключа."
+
+#. Key:	Prop.CurveSettings.Mode
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 149
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 149
+msgctxt "NodeFactory,Prop.CurveSettings.Mode"
+msgid "Mode"
+msgstr "Режим"
+
+#. Key:	Prop.CurveSettings.Mode.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 149
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 149
+msgctxt "NodeFactory,Prop.CurveSettings.Mode.Tip"
+msgid "Evaluate At Time: the node gets a Time input. Playback: Play, Stop, Update and Finished pins like a Timeline (Event Graph only)."
+msgstr "По времени: нода получает вход «Время». Воспроизведение: пины Play, Stop, Update и Finished, как у Timeline (только Event Graph)."
+
+#. Key:	Prop.CurveSettings.PlayFromStartLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 160
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 160
+msgctxt "NodeFactory,Prop.CurveSettings.PlayFromStartLabel"
+msgid "Play From Start Label"
+msgstr "Имя пина «С начала»"
+
+#. Key:	Prop.CurveSettings.PlayFromStartLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 160
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 160
+msgctxt "NodeFactory,Prop.CurveSettings.PlayFromStartLabel.Tip"
+msgid "Name of the Play from Start input; empty uses \"Play from Start\". Renaming keeps the wires."
+msgstr "Имя входа запуска с начала; пусто — «Воспроизвести с начала». Переименование сохраняет провода."
+
+#. Key:	Prop.CurveSettings.PlayLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 159
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 159
+msgctxt "NodeFactory,Prop.CurveSettings.PlayLabel"
+msgid "Play Label"
+msgstr "Имя пина «Воспроизвести»"
+
+#. Key:	Prop.CurveSettings.PlayLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 159
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 159
+msgctxt "NodeFactory,Prop.CurveSettings.PlayLabel.Tip"
+msgid "Name of the Play input on the node; empty uses \"Play\". Renaming keeps the wires."
+msgstr "Имя входа запуска на ноде; пусто — «Воспроизвести». Переименование сохраняет провода."
+
+#. Key:	Prop.CurveSettings.PlayRate
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 155
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 155
+msgctxt "NodeFactory,Prop.CurveSettings.PlayRate"
+msgid "Play Rate"
+msgstr "Скорость"
+
+#. Key:	Prop.CurveSettings.PlayRate.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 155
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 155
+msgctxt "NodeFactory,Prop.CurveSettings.PlayRate.Tip"
+msgid "Speed of the playback, 1 is normal speed."
+msgstr "Скорость воспроизведения, 1 — обычная."
+
+#. Key:	Prop.CurveSettings.ReverseLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 162
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 162
+msgctxt "NodeFactory,Prop.CurveSettings.ReverseLabel"
+msgid "Reverse Label"
+msgstr "Имя пина «Назад»"
+
+#. Key:	Prop.CurveSettings.ReverseLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 162
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 162
+msgctxt "NodeFactory,Prop.CurveSettings.ReverseLabel.Tip"
+msgid "Name of the Reverse input; empty uses \"Reverse\". Renaming keeps the wires."
+msgstr "Имя входа обратного воспроизведения; пусто — «Назад». Переименование сохраняет провода."
+
+#. Key:	Prop.CurveSettings.StopLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 161
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 161
+msgctxt "NodeFactory,Prop.CurveSettings.StopLabel"
+msgid "Stop Label"
+msgstr "Имя пина «Стоп»"
+
+#. Key:	Prop.CurveSettings.StopLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 161
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 161
+msgctxt "NodeFactory,Prop.CurveSettings.StopLabel.Tip"
+msgid "Name of the Stop input; empty uses \"Stop\". Renaming keeps the wires."
+msgstr "Имя входа остановки; пусто — «Стоп». Переименование сохраняет провода."
+
+#. Key:	Prop.CurveSettings.TimeLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 158
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 158
+msgctxt "NodeFactory,Prop.CurveSettings.TimeLabel"
+msgid "Time Label"
+msgstr "Имя пина «Время»"
+
+#. Key:	Prop.CurveSettings.TimeLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 158
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 158
+msgctxt "NodeFactory,Prop.CurveSettings.TimeLabel.Tip"
+msgid "Name of the Time input on the node; empty uses \"Time\". Renaming keeps the wires."
+msgstr "Имя входа времени на ноде; пусто — «Время». Переименование сохраняет провода."
+
+#. Key:	Prop.CurveSettings.UpdateLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 163
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 163
+msgctxt "NodeFactory,Prop.CurveSettings.UpdateLabel"
+msgid "Update Label"
+msgstr "Имя пина «Обновление»"
+
+#. Key:	Prop.CurveSettings.UpdateLabel.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 163
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 163
+msgctxt "NodeFactory,Prop.CurveSettings.UpdateLabel.Tip"
+msgid "Name of the Update output; empty uses \"Update\". Renaming keeps the wires."
+msgstr "Имя выхода обновления; пусто — «Обновление». Переименование сохраняет провода."
+
+#. Key:	Prop.CurveSettings.ValueType
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 148
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 148
+msgctxt "NodeFactory,Prop.CurveSettings.ValueType"
+msgid "Value Type"
+msgstr "Тип значения"
+
+#. Key:	Prop.CurveSettings.ValueType.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 148
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 148
+msgctxt "NodeFactory,Prop.CurveSettings.ValueType.Tip"
+msgid "Type of the value inside the macro Execute: Float (one curve), Vector (X, Y, Z) or Linear Color (R, G, B, A)."
+msgstr "Тип значения внутри макроса Execute: Float (одна кривая), Vector (X, Y, Z) или Linear Color (R, G, B, A)."
+
+#. Key:	Prop.CurveSettings.bLoop
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 154
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 154
+msgctxt "NodeFactory,Prop.CurveSettings.bLoop"
+msgid "Loop"
+msgstr "Зациклить"
+
+#. Key:	Prop.CurveSettings.bLoop.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 154
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 154
+msgctxt "NodeFactory,Prop.CurveSettings.bLoop.Tip"
+msgid "At the end the playback starts again from the beginning."
+msgstr "В конце воспроизведение начинается сначала."
+
+#. Key:	Prop.CurveSettings.bShowGrid
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 167
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 167
+msgctxt "NodeFactory,Prop.CurveSettings.bShowGrid"
+msgid "Show Grid"
+msgstr "Показывать сетку"
+
+#. Key:	Prop.CurveSettings.bShowGrid.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 167
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 167
+msgctxt "NodeFactory,Prop.CurveSettings.bShowGrid.Tip"
+msgid "Draw a grid behind the curve."
+msgstr "Рисовать сетку под кривой."
+
+#. Key:	Prop.CurveSettings.bShowKeys
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 166
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 166
+msgctxt "NodeFactory,Prop.CurveSettings.bShowKeys"
+msgid "Show Keys"
+msgstr "Показывать ключи"
+
+#. Key:	Prop.CurveSettings.bShowKeys.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 166
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 166
+msgctxt "NodeFactory,Prop.CurveSettings.bShowKeys.Tip"
+msgid "Draw the keys of the curve on the graph."
+msgstr "Рисовать ключи кривой на графике."
+
+#. Key:	Prop.CurveSettings.bShowPlayFromStart
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 156
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 156
+msgctxt "NodeFactory,Prop.CurveSettings.bShowPlayFromStart"
+msgid "Show Play From Start"
+msgstr "Пин «С начала»"
+
+#. Key:	Prop.CurveSettings.bShowPlayFromStart.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 156
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 156
+msgctxt "NodeFactory,Prop.CurveSettings.bShowPlayFromStart.Tip"
+msgid "Create the Play from Start input."
+msgstr "Создать вход «Воспроизвести с начала»."
+
+#. Key:	Prop.CurveSettings.bShowReverse
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 157
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 157
+msgctxt "NodeFactory,Prop.CurveSettings.bShowReverse"
+msgid "Show Reverse"
+msgstr "Пин «Назад»"
+
+#. Key:	Prop.CurveSettings.bShowReverse.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 157
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 157
+msgctxt "NodeFactory,Prop.CurveSettings.bShowReverse.Tip"
+msgid "Create the Reverse input."
+msgstr "Создать вход «Назад»."
+
+#. Key:	Prop.CurveSettings.bUseCurveAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 150
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 150
+msgctxt "NodeFactory,Prop.CurveSettings.bUseCurveAsset"
+msgid "Use Curve Asset"
+msgstr "Использовать ассет кривой"
+
+#. Key:	Prop.CurveSettings.bUseCurveAsset.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 150
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 150
+msgctxt "NodeFactory,Prop.CurveSettings.bUseCurveAsset.Tip"
+msgid "Use a Curve asset of the project instead of the own curve."
+msgstr "Использовать ассет кривой проекта вместо собственной кривой."
+
+#. Key:	Prop.PinOverride.ClassFilter
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 112
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 112
+msgctxt "NodeFactory,Prop.PinOverride.ClassFilter"
+msgid "Class Filter"
+msgstr "Фильтр класса"
+
+#. Key:	Prop.PinOverride.ClassFilter.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 112
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 112
+msgctxt "NodeFactory,Prop.PinOverride.ClassFilter.Tip"
+msgid "Class of the Class Filter rule: only object or class pins of this class or its children."
+msgstr "Класс для правила «Фильтр класса»: только объектные или классовые пины этого класса или его потомков."
+
+#. Key:	Prop.PinOverride.ConnectionRule
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 111
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 111
+msgctxt "NodeFactory,Prop.PinOverride.ConnectionRule"
+msgid "Connection Rule"
+msgstr "Правило подключения"
+
+#. Key:	Prop.PinOverride.ConnectionRule.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 111
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 111
+msgctxt "NodeFactory,Prop.PinOverride.ConnectionRule.Tip"
+msgid "Restriction of the wires the pin accepts."
+msgstr "Ограничение проводов, которые принимает пин."
+
+#. Key:	Prop.PinOverride.DisplayName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 100
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 100
+msgctxt "NodeFactory,Prop.PinOverride.DisplayName"
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. Key:	Prop.PinOverride.DisplayName.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 100
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 100
+msgctxt "NodeFactory,Prop.PinOverride.DisplayName.Tip"
+msgid "Display name of the pin. Empty: the pin name."
+msgstr "Отображаемое имя пина. Пусто: имя пина."
+
+#. Key:	Prop.PinOverride.DynamicMax
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 109
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 109
+msgctxt "NodeFactory,Prop.PinOverride.DynamicMax"
+msgid "Dynamic Max"
+msgstr "Макс. число элементов"
+
+#. Key:	Prop.PinOverride.DynamicMax.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 109
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 109
+msgctxt "NodeFactory,Prop.PinOverride.DynamicMax.Tip"
+msgid "Upper bound of element pins."
+msgstr "Верхняя граница числа пинов-элементов."
+
+#. Key:	Prop.PinOverride.DynamicMin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 108
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 108
+msgctxt "NodeFactory,Prop.PinOverride.DynamicMin"
+msgid "Dynamic Min"
+msgstr "Мин. число элементов"
+
+#. Key:	Prop.PinOverride.DynamicMin.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 108
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 108
+msgctxt "NodeFactory,Prop.PinOverride.DynamicMin.Tip"
+msgid "Lower bound and initial number of element pins."
+msgstr "Нижняя граница и начальное число пинов-элементов."
+
+#. Key:	Prop.PinOverride.DynamicNameFormat
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 110
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 110
+msgctxt "NodeFactory,Prop.PinOverride.DynamicNameFormat"
+msgid "Dynamic Name Format"
+msgstr "Формат имени элемента"
+
+#. Key:	Prop.PinOverride.DynamicNameFormat.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 110
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 110
+msgctxt "NodeFactory,Prop.PinOverride.DynamicNameFormat.Tip"
+msgid "Display name of an element pin; {0} is the index starting at 0, {1} the index starting at 1. Empty: \"Name 0\"."
+msgstr "Отображаемое имя пина-элемента; {0} — индекс с 0, {1} — индекс с 1. Пусто: «Имя 0»."
+
+#. Key:	Prop.PinOverride.LabelColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 114
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 114
+msgctxt "NodeFactory,Prop.PinOverride.LabelColor"
+msgid "Label Color"
+msgstr "Цвет подписи"
+
+#. Key:	Prop.PinOverride.LabelColor.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 114
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 114
+msgctxt "NodeFactory,Prop.PinOverride.LabelColor.Tip"
+msgid "Color of the label of the pin; the checkbox on the left turns it on. Without it Pin Label Color of the asset is used."
+msgstr "Цвет подписи пина; включается галочкой слева. Без неё используется «Цвет подписей пинов» ассета."
+
+#. Key:	Prop.PinOverride.PassThroughOf
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 106
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 106
+msgctxt "NodeFactory,Prop.PinOverride.PassThroughOf"
+msgid "Pass Through Of"
+msgstr "Передать значение из"
+
+#. Key:	Prop.PinOverride.PassThroughOf.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 106
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 106
+msgctxt "NodeFactory,Prop.PinOverride.PassThroughOf.Tip"
+msgid "Output only: returns the value of the input with this name without computation (CNA015)."
+msgstr "Только для выхода: возвращает без вычислений значение входа с этим именем (CNA015)."
+
+#. Key:	Prop.PinOverride.PinColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 113
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 113
+msgctxt "NodeFactory,Prop.PinOverride.PinColor"
+msgid "Pin Color"
+msgstr "Цвет пина"
+
+#. Key:	Prop.PinOverride.PinColor.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 113
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 113
+msgctxt "NodeFactory,Prop.PinOverride.PinColor.Tip"
+msgid "Any color of the pin instead of the color of its type; the checkbox on the left turns it on. Also colors the wires when Color Wires is set."
+msgstr "Любой цвет пина вместо цвета его типа; включается галочкой слева. При включённом «Цветные провода» окрашивает и провода."
+
+#. Key:	Prop.PinOverride.PinName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 99
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 99
+msgctxt "NodeFactory,Prop.PinOverride.PinName"
+msgid "Pin Name"
+msgstr "Имя пина"
+
+#. Key:	Prop.PinOverride.PinName.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 99
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 99
+msgctxt "NodeFactory,Prop.PinOverride.PinName.Tip"
+msgid "Pin of the macro Execute this override applies to; for a dynamic group the array input. Pick it from the list to avoid typos."
+msgstr "Пин макроса Execute, к которому относится переопределение; для динамической группы — входной массив. Выбирайте из списка, чтобы не ошибиться в имени."
+
+#. Key:	Prop.PinOverride.Tooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 101
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 101
+msgctxt "NodeFactory,Prop.PinOverride.Tooltip"
+msgid "Tooltip"
+msgstr "Подсказка"
+
+#. Key:	Prop.PinOverride.Tooltip.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 101
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 101
+msgctxt "NodeFactory,Prop.PinOverride.Tooltip.Tip"
+msgid "Tooltip of the pin."
+msgstr "Всплывающая подсказка пина."
+
+#. Key:	Prop.PinOverride.bAdvanced
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 102
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 102
+msgctxt "NodeFactory,Prop.PinOverride.bAdvanced"
+msgid "Advanced"
+msgstr "Дополнительный"
+
+#. Key:	Prop.PinOverride.bAdvanced.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 102
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 102
+msgctxt "NodeFactory,Prop.PinOverride.bAdvanced.Tip"
+msgid "The pin goes to the Advanced section behind the arrow of the node."
+msgstr "Пин уходит в дополнительный раздел за стрелкой ноды."
+
+#. Key:	Prop.PinOverride.bDefaultToSelf
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 105
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 105
+msgctxt "NodeFactory,Prop.PinOverride.bDefaultToSelf"
+msgid "Default To Self"
+msgstr "По умолчанию Self"
+
+#. Key:	Prop.PinOverride.bDefaultToSelf.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 105
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 105
+msgctxt "NodeFactory,Prop.PinOverride.bDefaultToSelf.Tip"
+msgid "Object input only: when no wire is connected the expansion connects Self."
+msgstr "Только для объектного входа: если провод не подключён, раскрытие подключает Self."
+
+#. Key:	Prop.PinOverride.bDrawAsPosePin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 115
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 115
+msgctxt "NodeFactory,Prop.PinOverride.bDrawAsPosePin"
+msgid "Draw As Pose Pin"
+msgstr "Рисовать как пин позы"
+
+#. Key:	Prop.PinOverride.bDrawAsPosePin.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 115
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 115
+msgctxt "NodeFactory,Prop.PinOverride.bDrawAsPosePin.Tip"
+msgid "Draw the pin like a pose pin of the Animation Blueprint (person icon). Visual only."
+msgstr "Рисовать пин как пин позы Animation Blueprint (значок человечка). Только внешний вид."
+
+#. Key:	Prop.PinOverride.bDynamicGroup
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 107
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 107
+msgctxt "NodeFactory,Prop.PinOverride.bDynamicGroup"
+msgid "Dynamic Group"
+msgstr "Динамическая группа"
+
+#. Key:	Prop.PinOverride.bDynamicGroup.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 107
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 107
+msgctxt "NodeFactory,Prop.PinOverride.bDynamicGroup.Tip"
+msgid "Array input or output: the node shows a set of element pins instead of the array."
+msgstr "Для входного или выходного массива: вместо массива нода показывает набор пинов-элементов."
+
+#. Key:	Prop.PinOverride.bHiddenByDefault
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 103
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 103
+msgctxt "NodeFactory,Prop.PinOverride.bHiddenByDefault"
+msgid "Hidden By Default"
+msgstr "Скрыт по умолчанию"
+
+#. Key:	Prop.PinOverride.bHiddenByDefault.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 103
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 103
+msgctxt "NodeFactory,Prop.PinOverride.bHiddenByDefault.Tip"
+msgid "The pin is hidden when the node is created; the Behavior can show it."
+msgstr "Пин скрыт при создании ноды; Behavior может его показать."
+
+#. Key:	Prop.PinOverride.bRequired
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 104
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 104
+msgctxt "NodeFactory,Prop.PinOverride.bRequired"
+msgid "Required"
+msgstr "Обязательный"
+
+#. Key:	Prop.PinOverride.bRequired.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 104
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 104
+msgctxt "NodeFactory,Prop.PinOverride.bRequired.Tip"
+msgid "Input only: without a wire and without a value the compilation fails with CNA008."
+msgstr "Только для входа: без провода и без значения компиляция завершается ошибкой CNA008."
+
+#. Key:	Prop.PinRedirect.NewName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 121
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 121
+msgctxt "NodeFactory,Prop.PinRedirect.NewName"
+msgid "New Name"
+msgstr "Новое имя"
+
+#. Key:	Prop.PinRedirect.NewName.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 121
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 121
+msgctxt "NodeFactory,Prop.PinRedirect.NewName.Tip"
+msgid "Current name of the pin in the macro Execute."
+msgstr "Текущее имя пина в макросе Execute."
+
+#. Key:	Prop.PinRedirect.OldName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 120
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 120
+msgctxt "NodeFactory,Prop.PinRedirect.OldName"
+msgid "Old Name"
+msgstr "Старое имя"
+
+#. Key:	Prop.PinRedirect.OldName.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 120
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAStructCustomizations.cpp - line 120
+msgctxt "NodeFactory,Prop.PinRedirect.OldName.Tip"
+msgid "Name the placed nodes may still use."
+msgstr "Имя, которое ещё могут использовать размещённые ноды."
+
+#. Key:	Prop.Settings.CatalogFolder
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 648
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 648
+msgctxt "NodeFactory,Prop.Settings.CatalogFolder"
+msgid "Catalog Folder"
+msgstr "Папка каталога"
+
+#. Key:	Prop.Settings.CatalogFolder.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 648
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 648
+msgctxt "NodeFactory,Prop.Settings.CatalogFolder.Tip"
+msgid "Folder with the presets of the Node Catalog. Empty: <Project>/NodeFactory/Presets, else the Presets folder of the plugin."
+msgstr "Папка с пресетами каталога нод. Пусто: <Проект>/NodeFactory/Presets, иначе папка Presets плагина."
+
+#. Key:	Prop.Settings.Language
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 644
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 644
+msgctxt "NodeFactory,Prop.Settings.Language"
+msgid "Language"
+msgstr "Язык"
+
+#. Key:	Prop.Settings.Language.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 644
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 644
+msgctxt "NodeFactory,Prop.Settings.Language.Tip"
+msgid "Language of the NodeFactory UI, independent of the editor language. Russian & English: the node settings in the Details panel of a Custom Node Asset are Russian, everything else stays English. The Details panel of an open asset changes at once, other open windows after reopening them, menu commands after restarting the editor."
+msgstr "Язык интерфейса NodeFactory, независимо от языка редактора. Русский & English: настройки ноды в панели Details ассета пользовательской ноды на русском, всё остальное на английском. Панель Details открытого ассета меняется сразу, другие открытые окна — после повторного открытия, команды меню — после перезапуска редактора."
+
+#. Key:	Prop.Settings.MaxExpansionDepth
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 645
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 645
+msgctxt "NodeFactory,Prop.Settings.MaxExpansionDepth"
+msgid "Max Expansion Depth"
+msgstr "Макс. глубина раскрытия"
+
+#. Key:	Prop.Settings.MaxExpansionDepth.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 645
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 645
+msgctxt "NodeFactory,Prop.Settings.MaxExpansionDepth.Tip"
+msgid "Limit of nested custom nodes; deeper nesting fails with CNA002."
+msgstr "Предел вложенности пользовательских нод; более глубокая вложенность завершается ошибкой CNA002."
+
+#. Key:	Prop.Settings.MaxImportFileSizeKB
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 647
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 647
+msgctxt "NodeFactory,Prop.Settings.MaxImportFileSizeKB"
+msgid "Max Import File Size KB"
+msgstr "Макс. размер файла импорта, КБ"
+
+#. Key:	Prop.Settings.MaxImportFileSizeKB.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 647
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 647
+msgctxt "NodeFactory,Prop.Settings.MaxImportFileSizeKB.Tip"
+msgid "Largest JSON file the importer accepts, in kilobytes."
+msgstr "Самый большой JSON-файл, который принимает импорт, в килобайтах."
+
+#. Key:	Prop.Settings.bConfirmBulkUpdate
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 646
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 646
+msgctxt "NodeFactory,Prop.Settings.bConfirmBulkUpdate"
+msgid "Confirm Bulk Update"
+msgstr "Подтверждать массовое обновление"
+
+#. Key:	Prop.Settings.bConfirmBulkUpdate.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 646
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 646
+msgctxt "NodeFactory,Prop.Settings.bConfirmBulkUpdate.Tip"
+msgid "Ask before updating the instances of a changed asset."
+msgstr "Спрашивать перед обновлением экземпляров изменённого ассета."
+
+#. Key:	Prop.Settings.bVerboseLog
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 649
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 649
+msgctxt "NodeFactory,Prop.Settings.bVerboseLog"
+msgid "Verbose Log"
+msgstr "Подробный журнал"
+
+#. Key:	Prop.Settings.bVerboseLog.Tip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 649
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 649
+msgctxt "NodeFactory,Prop.Settings.bVerboseLog.Tip"
+msgid "Detailed output of LogNodeFactory: expansion steps, Behavior events, update decisions."
+msgstr "Подробный вывод LogNodeFactory: шаги раскрытия, события Behavior, решения об обновлении."
+
+#. Key:	Settings.CategoryCatalog
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 655
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 655
+msgctxt "NodeFactory,Settings.CategoryCatalog"
+msgid "Catalog"
+msgstr "Каталог"
+
+#. Key:	Settings.CategoryDiagnostics
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 656
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 656
+msgctxt "NodeFactory,Settings.CategoryDiagnostics"
+msgid "Diagnostics"
+msgstr "Диагностика"
+
+#. Key:	Settings.CategoryExpansion
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 652
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 652
+msgctxt "NodeFactory,Settings.CategoryExpansion"
+msgid "Expansion"
+msgstr "Раскрытие"
+
+#. Key:	Settings.CategoryJson
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 654
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 654
+msgctxt "NodeFactory,Settings.CategoryJson"
+msgid "JSON"
+msgstr "JSON"
+
+#. Key:	Settings.CategoryLanguage
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 651
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 651
+msgctxt "NodeFactory,Settings.CategoryLanguage"
+msgid "Language"
+msgstr "Язык"
+
+#. Key:	Settings.CategoryUpdate
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 653
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 653
+msgctxt "NodeFactory,Settings.CategoryUpdate"
+msgid "Update"
+msgstr "Обновление"
+
+#. Key:	Stale.BodyWidget
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 811
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 811
+msgctxt "NodeFactory,Stale.BodyWidget"
+msgid "Body widget of pin {0} (#{1})"
+msgstr "Виджет на ноде для пина {0} (№{1})"
+
+#. Key:	Stale.NotCandidate
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 960
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 960
+msgctxt "NodeFactory,Stale.NotCandidate"
+msgid "{0} cannot be used here: it does not exist, has the wrong direction or already has an override."
+msgstr "{0} здесь использовать нельзя: такого пина нет, у него другое направление или у него уже есть переопределение."
+
+#. Key:	Stale.Outdated
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 953
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 953
+msgctxt "NodeFactory,Stale.Outdated"
+msgid "The settings changed since the list was built. Open the list again."
+msgstr "Настройки изменились после построения списка. Откройте список снова."
+
+#. Key:	Stale.PassThrough
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 809
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 809
+msgctxt "NodeFactory,Stale.PassThrough"
+msgid "Pass Through Of {0} (override #{1})"
+msgstr "«Передать значение из» {0} (переопределение №{1})"
+
+#. Key:	Stale.PinOverride
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 816
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 816
+msgctxt "NodeFactory,Stale.PinOverride"
+msgid "Pin override {0} (#{1})"
+msgstr "Переопределение пина {0} (№{1})"
+
+#. Key:	Stale.Redirect
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 813
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 813
+msgctxt "NodeFactory,Stale.Redirect"
+msgid "Pin redirect to {0} (#{1})"
+msgstr "Перенаправление пина на {0} (№{1})"
+
+#. Key:	Stale.RemapTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 965
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 965
+msgctxt "NodeFactory,Stale.RemapTransaction"
+msgid "Fix Pin Reference"
+msgstr "Исправление ссылки на пин"
+
+#. Key:	Stale.RemoveTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 997
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 997
+msgctxt "NodeFactory,Stale.RemoveTransaction"
+msgid "Remove Pin Reference"
+msgstr "Удаление ссылки на пин"
+
+#. Key:	Validator.CurveAssetClass
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 589
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 589
+msgctxt "NodeFactory,Validator.CurveAssetClass"
+msgid "the Curve asset {Path} is a {Actual}, but the value type {Type} needs a {Class}."
+msgstr "ассет кривой {Path} — это {Actual}, а для типа значения {Type} нужен {Class}."
+
+#. Key:	Validator.CurveAssetMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 584
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 584
+msgctxt "NodeFactory,Validator.CurveAssetMissing"
+msgid "the Curve asset {Path} was not found."
+msgstr "ассет кривой {Path} не найден."
+
+#. Key:	Validator.CurveAssetNone
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 580
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 580
+msgctxt "NodeFactory,Validator.CurveAssetNone"
+msgid "no Curve asset is set; choose a {Class} or use the own curve."
+msgstr "ассет кривой не задан; выберите {Class} или используйте свою кривую."
+
+#. Key:	Validator.CurveEmpty
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 594
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 594
+msgctxt "NodeFactory,Validator.CurveEmpty"
+msgid "the curve has no keys; its value is 0."
+msgstr "у кривой нет ключей; её значение 0."
+
+#. Key:	Validator.CurveNameTwice
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 630
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 630
+msgctxt "NodeFactory,Validator.CurveNameTwice"
+msgid "another curve has the same name; Curve Value nodes pasted from other assets use the first one."
+msgstr "у другой кривой такое же имя; ноды «Значение кривой», вставленные из других ассетов, используют первую."
+
+#. Key:	Validator.CurveNoName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 626
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 626
+msgctxt "NodeFactory,Validator.CurveNoName"
+msgid "the curve has no name; give it one so Curve Value nodes can be told apart."
+msgstr "у кривой нет имени; задайте его, чтобы различать ноды «Значение кривой»."
+
+#. Key:	Validator.CurveValueOutdated
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 676
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 676
+msgctxt "NodeFactory,Validator.CurveValueOutdated"
+msgid "{Node} is outdated: the curve {Curve} of {Asset} now gives {Type}. Use Refresh Node on it."
+msgstr "{Node} устарела: кривая {Curve} ассета {Asset} теперь даёт {Type}. Выполните для неё Refresh Node."
+
+#. Key:	Validator.PlaybackLatent
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 615
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 615
+msgctxt "NodeFactory,Validator.PlaybackLatent"
+msgid "Curve {Curve} of {Asset} uses Playback, but the subgraph contains latent nodes ({Nodes}); they do not run while the curve plays."
+msgstr "Кривая {Curve} ассета {Asset} использует воспроизведение, но в подграфе есть латентные ноды ({Nodes}); во время воспроизведения кривой они не выполняются."
+
+#. Key:	Validator.SliderRange
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 988
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 988
+msgctxt "NodeFactory,Validator.SliderRange"
+msgid "Slider of pin {Pin} of {Asset} requires Slider Max greater than Slider Min."
+msgstr "Для ползунка пина {Pin} ассета {Asset} максимум должен быть больше минимума."

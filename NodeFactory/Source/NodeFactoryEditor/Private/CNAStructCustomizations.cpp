@@ -104,7 +104,7 @@ namespace CNADetails
 		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bRequired), FPropertyText(LOCTEXT("Prop.PinOverride.bRequired", "Required"), LOCTEXT("Prop.PinOverride.bRequired.Tip", "Input only: without a wire and without a value the compilation fails with CNA008.")));
 		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bDefaultToSelf), FPropertyText(LOCTEXT("Prop.PinOverride.bDefaultToSelf", "Default To Self"), LOCTEXT("Prop.PinOverride.bDefaultToSelf.Tip", "Object input only: when no wire is connected the expansion connects Self.")));
 		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, PassThroughOf), FPropertyText(LOCTEXT("Prop.PinOverride.PassThroughOf", "Pass Through Of"), LOCTEXT("Prop.PinOverride.PassThroughOf.Tip", "Output only: returns the value of the input with this name without computation (CNA015).")));
-		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bDynamicGroup), FPropertyText(LOCTEXT("Prop.PinOverride.bDynamicGroup", "Dynamic Group"), LOCTEXT("Prop.PinOverride.bDynamicGroup.Tip", "Array input only: the node shows a set of element pins instead of the array.")));
+		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bDynamicGroup), FPropertyText(LOCTEXT("Prop.PinOverride.bDynamicGroup", "Dynamic Group"), LOCTEXT("Prop.PinOverride.bDynamicGroup.Tip", "Array input or output: the node shows a set of element pins instead of the array.")));
 		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, DynamicMin), FPropertyText(LOCTEXT("Prop.PinOverride.DynamicMin", "Dynamic Min"), LOCTEXT("Prop.PinOverride.DynamicMin.Tip", "Lower bound and initial number of element pins.")));
 		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, DynamicMax), FPropertyText(LOCTEXT("Prop.PinOverride.DynamicMax", "Dynamic Max"), LOCTEXT("Prop.PinOverride.DynamicMax.Tip", "Upper bound of element pins.")));
 		Out.Add(GET_MEMBER_NAME_CHECKED(FCNAPinOverride, DynamicNameFormat), FPropertyText(LOCTEXT("Prop.PinOverride.DynamicNameFormat", "Dynamic Name Format"), LOCTEXT("Prop.PinOverride.DynamicNameFormat.Tip", "Display name of an element pin; {0} is the index starting at 0, {1} the index starting at 1. Empty: \"Name 0\".")));
@@ -811,7 +811,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 			Visibility = MakeVisibility([FindPin, IsOn, ValueHandle]()
 			{
 				FCNASignaturePin Pin;
-				return !FindPin(Pin) || (Pin.IsInput() && Pin.Type.IsArray()) || IsOn(ValueHandle);
+				return !FindPin(Pin) || Pin.Type.IsArray() || IsOn(ValueHandle);
 			});
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, DynamicMin)
