@@ -6,6 +6,7 @@
 #include "EdGraph/EdGraph.h"
 #include "Engine/Texture2D.h"
 #include "UObject/UnrealType.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 

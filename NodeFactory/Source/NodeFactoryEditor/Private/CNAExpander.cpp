@@ -1401,11 +1401,11 @@ bool FCNAExpander::BuildPlayback(const FCNABodyWidget& Widget, FBoundaryOptions&
 	if (Curve.bLoop)
 	{
 		// Time = ((NewTime % Length) + Length) % Length wraps both directions; a loop never finishes.
-		UEdGraphPin* Rest = SpawnPureCall(MathLibrary, FName(TEXT("GenericPercent_FloatFloat")),
+		UEdGraphPin* Rest = SpawnPureCall(MathLibrary, FName(TEXT("Percent_FloatFloat")),
 			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(NewTime) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
 		UEdGraphPin* Positive = SpawnPureCall(MathLibrary, FName(TEXT("Add_FloatFloat")),
 			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Rest) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
-		UEdGraphPin* Wrapped = SpawnPureCall(MathLibrary, FName(TEXT("GenericPercent_FloatFloat")),
+		UEdGraphPin* Wrapped = SpawnPureCall(MathLibrary, FName(TEXT("Percent_FloatFloat")),
 			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Positive) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
 		const FAssignmentPins SetWrapped = SpawnAssignmentOf(TimeVar, FPinSource::FromPin(Wrapped));
 		if (!Wrapped || !SetWrapped.IsValid())
