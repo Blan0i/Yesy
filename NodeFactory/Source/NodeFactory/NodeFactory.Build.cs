@@ -15,5 +15,12 @@ public class NodeFactory : ModuleRules
 			"CoreUObject",
 			"Engine"
 		});
+
+		// CNALocalization reads the Russian archive of the plugin (plugin folder, JSON).
+		PrivateDependencyModuleNames.AddRange(new string[]
+		{
+			"Projects",
+			"Json"
+		});
 	}
 }

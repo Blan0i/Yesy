@@ -1,6 +1,7 @@
 // Copyright (c) NodeFactory. Graph helpers (spec 4.1, 5.2, 10.2).
 
 #include "CNAGraphUtils.h"
+#include "CNACurveUtils.h"
 #include "CustomNodeAsset.h"
 #include "K2Node_CustomNode.h"
 #include "K2Node_GetCaller.h"
@@ -17,6 +18,7 @@
 #include "K2Node_Tunnel.h"
 #include "Internationalization/Text.h"
 #include "Misc/Crc.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -305,6 +307,8 @@ uint32 FCNAGraphUtils::ComputeSignatureHash(const UCustomNodeAsset* Asset)
 		}
 	}
 	Text += FString::Printf(TEXT("Pure:%d;Dev:%d;"), Asset->bPure ? 1 : 0, Asset->bDevelopmentOnly ? 1 : 0);
+	// Pins of the curve widgets; empty without curves, so the hash of older assets does not change.
+	Text += FCNACurveUtils::GetPinSignatureText(Asset);
 
 	return FCrc::StrCrc32(*Text);
 }
@@ -570,7 +574,8 @@ FString FCNAGraphUtils::DescribeDynamicPins(const UCustomNodeAsset* Asset)
 		{
 			continue;
 		}
-		const FCNASignaturePin* Pin = FindSignaturePin(Pins, Override.PinName, EGPD_Input);
+		// Array inputs and array outputs can both be dynamic groups.
+		const FCNASignaturePin* Pin = FindSignaturePin(Pins, Override.PinName);
 		if (Pin && Pin->Type.IsArray())
 		{
 			const FText ElementText = FCNAPinUtils::GetTypeText(FCNAPinUtils::GetElementType(Pin->Type));

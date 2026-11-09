@@ -25,7 +25,7 @@ struct FCNASignaturePin;
 /**
  * All checks of the plugin. The node checks run in ValidateNodeDuringCompilation and before the expansion
  * (spec 5.1, item 1); the asset checks run for Validate, IsDataValid and Compile of the asset (spec 10.2).
- * Every message carries a code CNA001..CNA019 (spec 10.1).
+ * Every message carries a code CNA001..CNA023 (spec 10.1).
  */
 struct NODEFACTORYEDITOR_API FCNAValidator
 {
@@ -33,7 +33,8 @@ struct NODEFACTORYEDITOR_API FCNAValidator
 
 	/**
 	 * Checks one node of a Blueprint that is being compiled: CNA005, CNA006, CNA009, CNA001, CNA002, CNA003,
-	 * CNA004, CNA018, CNA007, CNA008, CNA010, CNA012, CNA013, CNA015, CNA017. An error stops the expansion.
+	 * CNA004, CNA018, CNA007, CNA008, CNA010, CNA012, CNA013, CNA015, CNA017, CNA020-CNA023. An error stops the
+	 * expansion.
 	 */
 	static void ValidateNodeForCompilation(const UK2Node_CustomNode* Node, FCNADiagnosticList& Out);
 
@@ -82,6 +83,16 @@ struct NODEFACTORYEDITOR_API FCNAValidator
 
 	/** Shared count of the dynamic groups: the ranges must overlap (CNA013). */
 	static void CheckDynamicRanges(const UCustomNodeAsset* Asset, FCNADiagnosticList& Out);
+
+	/**
+	 * Curve widgets: Playback on a pure node (CNA020), more than one Playback curve (CNA021), Curve asset missing or
+	 * of the wrong class (CNA022). bIncludeWarnings adds the warnings of the asset checks: empty own curve, curve
+	 * names, latent nodes next to a playback loop.
+	 */
+	static void CheckCurves(const UCustomNodeAsset* Asset, const UObject* Context, bool bIncludeWarnings, FCNADiagnosticList& Out);
+
+	/** Curve Value nodes whose curve is missing or whose value type is outdated (CNA023). bOnlyWired skips unconnected nodes. */
+	static void CheckCurveValueNodes(const UCustomNodeAsset* Asset, bool bOnlyWired, const UObject* Context, FCNADiagnosticList& Out);
 
 	// Registration (NodeFactoryEditorModule)
 
