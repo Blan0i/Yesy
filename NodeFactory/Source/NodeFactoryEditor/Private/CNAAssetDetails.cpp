@@ -1,8 +1,11 @@
 // Copyright (c) NodeFactory. Node Settings: the Details of a Custom Node Asset (spec 3, 7.1).
 
 #include "CNAAssetDetails.h"
+#include "CNAEditorSettings.h"
+#include "CNAStructCustomizations.h"
 #include "CustomNodeAsset.h"
 #include "NodeFactoryStyle.h"
+#include "SCNAPinManager.h"
 
 #include "DetailLayoutBuilder.h"
 #include "DetailCategoryBuilder.h"
@@ -12,6 +15,8 @@
 #include "IPropertyUtilities.h"
 #include "PropertyHandle.h"
 #include "EditorStyleSet.h"
+#include "Framework/MultiBox/MultiBoxBuilder.h"
+#include "Misc/MessageDialog.h"
 #include "Widgets/Input/SComboButton.h"
 #include "Widgets/Input/SSearchBox.h"
 #include "Widgets/Input/SButton.h"
@@ -20,6 +25,7 @@
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/Views/SListView.h"
 #include "Widgets/Views/STableRow.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
