@@ -209,6 +209,173 @@ namespace CNATypes
 	{
 		return FLinearColor(FColor(0, 184, 169));
 	}
+
+	static const TCHAR* GetCurvePinRoleToken(ECNACurvePinRole Role)
+	{
+		switch (Role)
+		{
+		case ECNACurvePinRole::Time:          return TEXT("Time");
+		case ECNACurvePinRole::Play:          return TEXT("Play");
+		case ECNACurvePinRole::PlayFromStart: return TEXT("PlayFromStart");
+		case ECNACurvePinRole::Stop:          return TEXT("Stop");
+		case ECNACurvePinRole::Reverse:       return TEXT("Reverse");
+		case ECNACurvePinRole::Update:        return TEXT("Update");
+		case ECNACurvePinRole::Finished:      return TEXT("Finished");
+		default:                              return TEXT("Unknown");
+		}
+	}
+
+	FName MakeCurvePinName(const FGuid& WidgetGuid, ECNACurvePinRole Role)
+	{
+		return FName(*FString::Printf(TEXT("CNACurve_%s_%s"), *WidgetGuid.ToString(EGuidFormats::Digits), GetCurvePinRoleToken(Role)));
+	}
+
+	bool ParseCurvePinName(FName PinName, FGuid& OutWidgetGuid, ECNACurvePinRole& OutRole)
+	{
+		const FString Name = PinName.ToString();
+		const FString Prefix(TEXT("CNACurve_"));
+		if (!Name.StartsWith(Prefix, ESearchCase::CaseSensitive))
+		{
+			return false;
+		}
+		const FString Rest = Name.Mid(Prefix.Len());
+		FString GuidPart;
+		FString RolePart;
+		if (!Rest.Split(TEXT("_"), &GuidPart, &RolePart, ESearchCase::CaseSensitive, ESearchDir::FromStart))
+		{
+			return false;
+		}
+		if (!FGuid::ParseExact(GuidPart, EGuidFormats::Digits, OutWidgetGuid))
+		{
+			return false;
+		}
+		for (uint8 Index = 0; Index <= static_cast<uint8>(ECNACurvePinRole::Finished); ++Index)
+		{
+			const ECNACurvePinRole Role = static_cast<ECNACurvePinRole>(Index);
+			if (RolePart == GetCurvePinRoleToken(Role))
+			{
+				OutRole = Role;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	FText GetCurvePinRoleDefaultName(ECNACurvePinRole Role)
+	{
+		switch (Role)
+		{
+		case ECNACurvePinRole::Time:          return LOCTEXT("CurvePin.Time", "Time");
+		case ECNACurvePinRole::Play:          return LOCTEXT("CurvePin.Play", "Play");
+		case ECNACurvePinRole::PlayFromStart: return LOCTEXT("CurvePin.PlayFromStart", "Play from Start");
+		case ECNACurvePinRole::Stop:          return LOCTEXT("CurvePin.Stop", "Stop");
+		case ECNACurvePinRole::Reverse:       return LOCTEXT("CurvePin.Reverse", "Reverse");
+		case ECNACurvePinRole::Update:        return LOCTEXT("CurvePin.Update", "Update");
+		case ECNACurvePinRole::Finished:      return LOCTEXT("CurvePin.Finished", "Finished");
+		default:                              return FText::GetEmpty();
+		}
+	}
+
+	FLinearColor GetAnimStyleTitleColor(ECNAAnimNodeStyle Style)
+	{
+		// Values of GetNodeTitleColor in the AnimGraph module of 4.20.3; result-like nodes use the editor result color.
+		switch (Style)
+		{
+		case ECNAAnimNodeStyle::AssetPlayer:     return FLinearColor(0.10f, 0.60f, 0.12f);
+		case ECNAAnimNodeStyle::Blend:           return FLinearColor(0.2f, 0.8f, 0.2f);
+		case ECNAAnimNodeStyle::BlendSimple:     return FLinearColor(0.75f, 0.75f, 0.75f);
+		case ECNAAnimNodeStyle::SkeletalControl: return FLinearColor(0.75f, 0.75f, 0.10f);
+		case ECNAAnimNodeStyle::SpaceConversion: return FLinearColor(0.7f, 0.7f, 0.7f);
+		case ECNAAnimNodeStyle::RefPose:         return FLinearColor(FColor(200, 100, 100));
+		case ECNAAnimNodeStyle::StateMachine:    return FLinearColor(0.8f, 0.8f, 0.8f);
+		case ECNAAnimNodeStyle::Result:          return FLinearColor(1.0f, 0.65f, 0.4f);
+		case ECNAAnimNodeStyle::Transition:      return FLinearColor(FColor::Red);
+		case ECNAAnimNodeStyle::State:
+		case ECNAAnimNodeStyle::Conduit:
+		case ECNAAnimNodeStyle::Entry:           return FLinearColor(0.08f, 0.08f, 0.08f);
+		case ECNAAnimNodeStyle::AnimNode:
+		default:                                 return FLinearColor::Black;
+		}
+	}
+}
+
+// FCNACurveSettings
+
+FText FCNACurveSettings::GetPinLabel(ECNACurvePinRole Role) const
+{
+	const FText* Label = nullptr;
+	switch (Role)
+	{
+	case ECNACurvePinRole::Time:          Label = &TimeLabel; break;
+	case ECNACurvePinRole::Play:          Label = &PlayLabel; break;
+	case ECNACurvePinRole::PlayFromStart: Label = &PlayFromStartLabel; break;
+	case ECNACurvePinRole::Stop:          Label = &StopLabel; break;
+	case ECNACurvePinRole::Reverse:       Label = &ReverseLabel; break;
+	case ECNACurvePinRole::Update:        Label = &UpdateLabel; break;
+	case ECNACurvePinRole::Finished:      Label = &FinishedLabel; break;
+	default: break;
+	}
+	return (Label && !Label->IsEmptyOrWhitespace()) ? *Label : CNATypes::GetCurvePinRoleDefaultName(Role);
+}
+
+bool FCNACurveSettings::HasPinRole(ECNACurvePinRole Role) const
+{
+	if (Mode == ECNACurveMode::EvaluateAtTime)
+	{
+		return Role == ECNACurvePinRole::Time;
+	}
+	switch (Role)
+	{
+	case ECNACurvePinRole::Time:          return false;
+	case ECNACurvePinRole::PlayFromStart: return bShowPlayFromStart;
+	case ECNACurvePinRole::Reverse:       return bShowReverse;
+	default:                              return true;
+	}
+}
+
+int32 FCNACurveSettings::GetChannelCount() const
+{
+	switch (ValueType)
+	{
+	case ECNACurveValueType::Vector:      return 3;
+	case ECNACurveValueType::LinearColor: return 4;
+	case ECNACurveValueType::Float:
+	default:                              return 1;
+	}
+}
+
+const FRuntimeFloatCurve* FCNACurveSettings::GetChannel(int32 Index) const
+{
+	switch (Index)
+	{
+	case 0: return &CurveX;
+	case 1: return &CurveY;
+	case 2: return &CurveZ;
+	case 3: return &CurveW;
+	default: return nullptr;
+	}
+}
+
+bool FCNACurveSettings::GetOwnTimeRange(float& OutMin, float& OutMax) const
+{
+	bool bAny = false;
+	OutMin = 0.0f;
+	OutMax = 0.0f;
+	for (int32 Index = 0; Index < GetChannelCount(); ++Index)
+	{
+		const FRichCurve& Rich = GetChannel(Index)->EditorCurveData;
+		if (Rich.GetNumKeys() == 0)
+		{
+			continue;
+		}
+		float Min = 0.0f;
+		float Max = 0.0f;
+		Rich.GetTimeRange(Min, Max);
+		OutMin = bAny ? FMath::Min(OutMin, Min) : Min;
+		OutMax = bAny ? FMath::Max(OutMax, Max) : Max;
+		bAny = true;
+	}
+	return bAny;
 }
 
 #undef LOCTEXT_NAMESPACE

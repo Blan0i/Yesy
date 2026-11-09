@@ -73,6 +73,14 @@ UCustomNodeAsset::UCustomNodeAsset(const FObjectInitializer& ObjectInitializer)
 	MinWidth = 0.0f;
 	MinHeight = 0.0f;
 	bColorWires = true;
+	NodeStyle = ECNANodeStyle::Blueprint;
+	AnimStyle = ECNAAnimNodeStyle::AnimNode;
+	bExecPinsAsPosePins = true;
+	bShowFastPathIcon = false;
+	NiagaraStyle = ECNANiagaraNodeStyle::FunctionCall;
+	bNiagaraAddPinRows = true;
+	bNiagaraNamespaceLabels = true;
+	bExecPinsAsParameterMap = true;
 	bPure = false;
 	bDevelopmentOnly = false;
 	bDeprecated = false;
@@ -146,6 +154,7 @@ void UCustomNodeAsset::PostLoad()
 	}
 
 	EnsureUniqueLocalVariableGuids();
+	EnsureUniqueBodyWidgetGuids();
 	RefreshGraphPointers();
 
 	AssetVersion = FMath::Max(AssetVersion, 1);
@@ -180,6 +189,7 @@ void UCustomNodeAsset::PreSave(const ITargetPlatform* TargetPlatform)
 	if (TargetPlatform == nullptr)
 	{
 		EnsureUniqueLocalVariableGuids();
+		EnsureUniqueBodyWidgetGuids();
 		FCNAEditorHooks::OnAssetPreSave.Broadcast(this);
 	}
 }
@@ -194,6 +204,10 @@ void UCustomNodeAsset::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 	if (MemberName == GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, LocalVariables))
 	{
 		EnsureUniqueLocalVariableGuids();
+	}
+	else if (MemberName == GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, BodyWidgets))
+	{
+		EnsureUniqueBodyWidgetGuids();
 	}
 	else if (MemberName == GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, MinWidth))
 	{
@@ -463,6 +477,91 @@ bool UCustomNodeAsset::EnsureUniqueLocalVariableGuids()
 		Seen.Add(Variable.Guid);
 	}
 	return bChanged;
+}
+
+bool UCustomNodeAsset::EnsureUniqueBodyWidgetGuids()
+{
+	bool bChanged = false;
+	TSet<FGuid> Seen;
+	for (FCNABodyWidget& Widget : BodyWidgets)
+	{
+		if (!Widget.WidgetGuid.IsValid() || Seen.Contains(Widget.WidgetGuid))
+		{
+			Widget.WidgetGuid = FGuid::NewGuid();
+			bChanged = true;
+		}
+		Seen.Add(Widget.WidgetGuid);
+	}
+	return bChanged;
+}
+
+const FCNABodyWidget* UCustomNodeAsset::FindCurveWidget(const FGuid& WidgetGuid, FName FallbackName) const
+{
+	if (WidgetGuid.IsValid())
+	{
+		for (const FCNABodyWidget& Widget : BodyWidgets)
+		{
+			if (Widget.IsCurve() && Widget.WidgetGuid == WidgetGuid)
+			{
+				return &Widget;
+			}
+		}
+	}
+	if (!FallbackName.IsNone())
+	{
+		for (const FCNABodyWidget& Widget : BodyWidgets)
+		{
+			if (Widget.IsCurve() && Widget.PinName == FallbackName)
+			{
+				return &Widget;
+			}
+		}
+	}
+	return nullptr;
+}
+
+void UCustomNodeAsset::GetCurveWidgets(TArray<const FCNABodyWidget*>& OutWidgets) const
+{
+	OutWidgets.Reset();
+	for (const FCNABodyWidget& Widget : BodyWidgets)
+	{
+		if (Widget.IsCurve())
+		{
+			OutWidgets.Add(&Widget);
+		}
+	}
+}
+
+bool UCustomNodeAsset::GetStyleHeaderColor(FLinearColor& OutColor) const
+{
+	if (bUseHeaderColor)
+	{
+		OutColor = HeaderColor;
+		return true;
+	}
+	switch (NodeStyle)
+	{
+	case ECNANodeStyle::Animation:
+		OutColor = CNATypes::GetAnimStyleTitleColor(AnimStyle);
+		return true;
+	case ECNANodeStyle::Niagara:
+		// Header colors of the Niagara editor: function calls blue, map nodes grey, ops dark green.
+		switch (NiagaraStyle)
+		{
+		case ECNANiagaraNodeStyle::MapGet:
+		case ECNANiagaraNodeStyle::MapSet:     OutColor = FLinearColor(0.12f, 0.12f, 0.12f); break;
+		case ECNANiagaraNodeStyle::Op:         OutColor = FLinearColor(0.05f, 0.25f, 0.10f); break;
+		case ECNANiagaraNodeStyle::Input:
+		case ECNANiagaraNodeStyle::Output:     OutColor = FLinearColor(0.40f, 0.10f, 0.10f); break;
+		case ECNANiagaraNodeStyle::CustomHlsl: OutColor = FLinearColor(0.30f, 0.15f, 0.40f); break;
+		case ECNANiagaraNodeStyle::FunctionCall:
+		default:                               OutColor = FLinearColor(0.05f, 0.20f, 0.45f); break;
+		}
+		return true;
+	case ECNANodeStyle::Blueprint:
+	default:
+		return false;
+	}
 }
 
 #endif // WITH_EDITOR

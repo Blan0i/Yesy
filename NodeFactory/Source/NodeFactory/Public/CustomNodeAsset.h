@@ -186,6 +186,44 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Appearance|Widgets")
 	TArray<FCNABadge> Badges;
 
+	// Style families (Animation Blueprint and Niagara looks for ordinary Blueprint nodes)
+
+	/** Visual family of the node. The pins keep working as Blueprint pins in every family. */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	ECNANodeStyle NodeStyle;
+
+	/** Kind of Animation Blueprint node to imitate (NodeStyle == Animation). */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	ECNAAnimNodeStyle AnimStyle;
+
+	/** Animation: exec pins are drawn as pose pins, like the pose links of an AnimGraph. */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	bool bExecPinsAsPosePins;
+
+	/** Animation: lightning "fast path" mark in the corner, like anim nodes that use the fast path. */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	bool bShowFastPathIcon;
+
+	/** Kind of Niagara script node to imitate (NodeStyle == Niagara). */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	ECNANiagaraNodeStyle NiagaraStyle;
+
+	/** Niagara: "Add Pin" rows of Map Get / Map Set for the dynamic pins of the node. */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	bool bNiagaraAddPinRows;
+
+	/** Niagara: pin names like "Module.Speed" show the namespace dimmed, as in Niagara. */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	bool bNiagaraNamespaceLabels;
+
+	/** Niagara: exec pins are drawn as Parameter Map pins. */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style")
+	bool bExecPinsAsParameterMap;
+
+	/** Niagara Custom HLSL: text shown in the text area of the body (read-only on instances, a note). */
+	UPROPERTY(EditAnywhere, Category = "Appearance|Style", meta = (MultiLine = true))
+	FText NiagaraBodyText;
+
 	/** Minimum width of the node in slate units, 0 for automatic. */
 	UPROPERTY(EditAnywhere, Category = "Appearance|Widgets", meta = (ClampMin = "0", ClampMax = "1200", UIMin = "0", UIMax = "600"))
 	float MinWidth;
@@ -353,5 +391,17 @@ public:
 
 	/** Regenerates invalid or duplicated Guids of local variables. Returns true if anything changed. */
 	bool EnsureUniqueLocalVariableGuids();
+
+	/** Gives every body widget a unique WidgetGuid (copies of array elements share one). Returns true on change. */
+	bool EnsureUniqueBodyWidgetGuids();
+
+	/** Curve body widget by Guid; when no Guid matches and FallbackName is set, by PinName. */
+	const FCNABodyWidget* FindCurveWidget(const FGuid& WidgetGuid, FName FallbackName = NAME_None) const;
+
+	/** All Curve body widgets in order. */
+	void GetCurveWidgets(TArray<const FCNABodyWidget*>& OutWidgets) const;
+
+	/** Title color the node shows: HeaderColor when set, else the color of the style family (false: engine default). */
+	bool GetStyleHeaderColor(FLinearColor& OutColor) const;
 #endif // WITH_EDITOR
 };

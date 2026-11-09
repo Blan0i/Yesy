@@ -6,7 +6,11 @@
 #include "UObject/ObjectMacros.h"
 #include "Templates/SubclassOf.h"
 #include "EdGraph/EdGraphPin.h"
+#include "Curves/CurveFloat.h"
+#include "UObject/SoftObjectPtr.h"
 #include "CNATypes.generated.h"
+
+class UCurveBase;
 
 /** Icon in the corner of the node (spec 3.1, CornerIcon). Latent is forced when the subgraph is latent. */
 UENUM(BlueprintType)
@@ -53,7 +57,105 @@ enum class ECNABodyWidgetType : uint8
 	ComboBox,
 	TextBox,
 	ScrollList,
-	Slider
+	Slider,
+	/** Curve graph on the node, like a Timeline track. Creates its own pins (see FCNACurveSettings). */
+	Curve
+};
+
+/** Visual family of the node widget. Layout and behavior of the pins stay Blueprint pins in every family. */
+UENUM(BlueprintType)
+enum class ECNANodeStyle : uint8
+{
+	/** Standard Blueprint node. */
+	Blueprint,
+	/** Looks of the Animation Blueprint editor, the kind is chosen by ECNAAnimNodeStyle. */
+	Animation,
+	/** Looks of Niagara script nodes, the kind is chosen by ECNANiagaraNodeStyle. */
+	Niagara
+};
+
+/** Kind of Animation Blueprint node to imitate (colors match the AnimGraph module of 4.20.3). */
+UENUM(BlueprintType)
+enum class ECNAAnimNodeStyle : uint8
+{
+	/** Generic anim graph node (UAnimGraphNode_Base): black title. */
+	AnimNode,
+	/** Sequence Player, Random Player: green title (0.10, 0.60, 0.12). */
+	AssetPlayer,
+	/** Blend List, Blend Space, Layered Blend: light green title (0.2, 0.8, 0.2). */
+	Blend,
+	/** Two Way Blend, Apply Additive, Multi Way Blend: grey title (0.75, 0.75, 0.75). */
+	BlendSimple,
+	/** Skeletal controls (Modify Bone, IK): yellow title (0.75, 0.75, 0.10). */
+	SkeletalControl,
+	/** Slot, Local To Component, Component To Local: grey title (0.7, 0.7, 0.7). */
+	SpaceConversion,
+	/** Mesh Ref Pose, Transition Pose Evaluator: FColor(200, 100, 100). */
+	RefPose,
+	/** State Machine node of the AnimGraph: (0.8, 0.8, 0.8) with the state machine icon. */
+	StateMachine,
+	/** Final Animation Pose / Output Pose: result node body. */
+	Result,
+	/** State inside a state machine: rounded body, centered title. */
+	State,
+	/** Conduit inside a state machine. */
+	Conduit,
+	/** Transition rule: round icon between states. */
+	Transition,
+	/** Entry node of a state machine. */
+	Entry
+};
+
+/** Kind of Niagara script node to imitate (NiagaraEditor of 4.20.3). */
+UENUM(BlueprintType)
+enum class ECNANiagaraNodeStyle : uint8
+{
+	/** Module or function call. */
+	FunctionCall,
+	/** Parameter Map Get: "Add Pin" rows on the output side. */
+	MapGet,
+	/** Parameter Map Set: "Add Pin" rows on the input side. */
+	MapSet,
+	/** Math operation (Add, Multiply): compact header. */
+	Op,
+	/** Input parameter node. */
+	Input,
+	/** Output node of a script. */
+	Output,
+	/** Custom HLSL: text area on the body. */
+	CustomHlsl
+};
+
+/** Value type of a curve widget; decides the pins inside the subgraph. */
+UENUM(BlueprintType)
+enum class ECNACurveValueType : uint8
+{
+	Float,
+	Vector,
+	LinearColor
+};
+
+/** How the curve value is driven. */
+UENUM(BlueprintType)
+enum class ECNACurveMode : uint8
+{
+	/** An input pin gives the time, the subgraph reads the value at that time. */
+	EvaluateAtTime,
+	/** Timeline-like playback with Play, Stop, Update and Finished pins. Event Graph only. */
+	Playback
+};
+
+/** Role of a pin created by a curve widget. Pin names are derived from the widget Guid and the role. */
+UENUM(BlueprintType)
+enum class ECNACurvePinRole : uint8
+{
+	Time,
+	Play,
+	PlayFromStart,
+	Stop,
+	Reverse,
+	Update,
+	Finished
 };
 
 /**
@@ -148,6 +250,10 @@ struct NODEFACTORY_API FCNAPinOverride
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance", meta = (EditCondition = "bOverrideLabelColor"))
 	FLinearColor LabelColor = FLinearColor::White;
 
+	/** Draw the pin like a pose pin of the Animation Blueprint (person icon). Visual only. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance")
+	bool bDrawAsPosePin = false;
+
 	FCNAPinOverride() {}
 	explicit FCNAPinOverride(FName InPinName) : PinName(InPinName) {}
 
@@ -239,8 +345,103 @@ struct NODEFACTORY_API FCNABadge
 };
 
 /**
+ * Settings of a Curve body widget. The curve is either owned by the asset (CurveX..CurveW, baked into the compiled
+ * Blueprint as sampled values, so the game never needs the asset or the plugin) or a Curve asset of the project.
+ * Inside the macro Execute the value is read with the "Curve Value" node; the node instance gets the pins of Mode.
+ * Pin names are stable (Guid + role); the labels below are only display names, so renaming keeps the wires.
+ */
+USTRUCT(BlueprintType)
+struct NODEFACTORY_API FCNACurveSettings
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
+	ECNACurveValueType ValueType = ECNACurveValueType::Float;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
+	ECNACurveMode Mode = ECNACurveMode::EvaluateAtTime;
+
+	/** Use a Curve asset (CurveFloat, CurveVector or CurveLinearColor matching ValueType) instead of the own curve. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve")
+	bool bUseCurveAsset = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve", meta = (AllowedClasses = "CurveFloat,CurveVector,CurveLinearColor"))
+	TSoftObjectPtr<UCurveBase> CurveAsset;
+
+	/** Own curve: Float uses X; Vector uses X, Y, Z; LinearColor uses X, Y, Z, W as R, G, B, A. */
+	UPROPERTY(EditAnywhere, Category = "Curve")
+	FRuntimeFloatCurve CurveX;
+	UPROPERTY(EditAnywhere, Category = "Curve")
+	FRuntimeFloatCurve CurveY;
+	UPROPERTY(EditAnywhere, Category = "Curve")
+	FRuntimeFloatCurve CurveZ;
+	UPROPERTY(EditAnywhere, Category = "Curve")
+	FRuntimeFloatCurve CurveW;
+
+	/** Own curve: number of samples baked into the compiled Blueprint (linear interpolation between them). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Curve", meta = (ClampMin = "2", ClampMax = "1024", UIMin = "8", UIMax = "256"))
+	int32 BakeSamples = 64;
+
+	/** Playback length in seconds; 0 uses the time of the last key. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Playback", meta = (ClampMin = "0"))
+	float Length = 0.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Playback")
+	bool bLoop = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Playback", meta = (ClampMin = "0.001"))
+	float PlayRate = 1.0f;
+
+	/** Playback: also create the Play from Start and Reverse inputs. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Playback")
+	bool bShowPlayFromStart = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Playback")
+	bool bShowReverse = true;
+
+	/** Display names of the created pins; empty uses the default English name of the role. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin Names")
+	FText TimeLabel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin Names")
+	FText PlayLabel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin Names")
+	FText PlayFromStartLabel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin Names")
+	FText StopLabel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin Names")
+	FText ReverseLabel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin Names")
+	FText UpdateLabel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pin Names")
+	FText FinishedLabel;
+
+	/** Look of the graph drawn on the node. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Graph")
+	FLinearColor GraphBackgroundColor = FLinearColor(0.02f, 0.02f, 0.02f, 1.0f);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Graph")
+	bool bShowKeys = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Graph")
+	bool bShowGrid = true;
+
+	/** Label of a role: the user text or the default English name. */
+	FText GetPinLabel(ECNACurvePinRole Role) const;
+
+	/** The role exists on the node for this mode and these toggles. */
+	bool HasPinRole(ECNACurvePinRole Role) const;
+
+	/** Own curve channels used by ValueType: 1, 3 or 4. */
+	int32 GetChannelCount() const;
+
+	/** Own curve channel 0..3 (X, Y, Z, W); nullptr outside 0..3. */
+	const FRuntimeFloatCurve* GetChannel(int32 Index) const;
+
+	/** Time range of the own curve over the used channels; false when it has no keys. */
+	bool GetOwnTimeRange(float& OutMin, float& OutMax) const;
+};
+
+/**
  * Widget on the body of the node that edits the default value of an input pin (spec 3.2, BodyWidgets).
  * The value is stored as the default value of the pin and raises OnPinValueChanged.
+ * A Curve widget is not bound to a pin of the macro: PinName is its name and Curve holds its settings.
  */
 USTRUCT(BlueprintType)
 struct NODEFACTORY_API FCNABodyWidget
@@ -274,6 +475,16 @@ struct NODEFACTORY_API FCNABodyWidget
 	float SliderMin = 0.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Widget", meta = (ClampMin = "-1000000", ClampMax = "1000000"))
 	float SliderMax = 1.0f;
+
+	/** Settings of a Curve widget (Type == Curve). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Widget")
+	FCNACurveSettings Curve;
+
+	/** Stable identity; the Curve Value node and the curve pins reference the widget by it. */
+	UPROPERTY(VisibleAnywhere, Category = "Body Widget", AdvancedDisplay)
+	FGuid WidgetGuid;
+
+	bool IsCurve() const { return Type == ECNABodyWidgetType::Curve; }
 };
 
 /** Helpers shared by both modules. */
@@ -308,4 +519,16 @@ namespace CNATypes
 
 	/** Accent color of the plugin (asset color in the Content Browser, Behavior graph wires): RGB 0, 184, 169. */
 	NODEFACTORY_API FLinearColor GetAccentColor();
+
+	/** Stable pin name of a curve widget pin: "CNACurve_<Guid>_<Role>". */
+	NODEFACTORY_API FName MakeCurvePinName(const FGuid& WidgetGuid, ECNACurvePinRole Role);
+
+	/** Inverse of MakeCurvePinName. */
+	NODEFACTORY_API bool ParseCurvePinName(FName PinName, FGuid& OutWidgetGuid, ECNACurvePinRole& OutRole);
+
+	/** Default English name of a curve pin role ("Time", "Play", "Play from Start", ...). */
+	NODEFACTORY_API FText GetCurvePinRoleDefaultName(ECNACurvePinRole Role);
+
+	/** Title color of an anim node kind, as in the AnimGraph module of 4.20.3. */
+	NODEFACTORY_API FLinearColor GetAnimStyleTitleColor(ECNAAnimNodeStyle Style);
 }

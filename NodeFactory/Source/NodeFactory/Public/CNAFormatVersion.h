@@ -26,6 +26,8 @@ struct NODEFACTORY_API FCNAFormatVersion
 
 		/** AssetGuid and the cached data of the asset registry tags (bContainsLatent, dynamic pins). */
 		AssetGuidAndRegistryCache = 3,
+		/** Node style families, curve body widgets and WidgetGuid of body widgets. */
+		NodeStylesAndCurves = 4,
 
 		// -----<new versions can be added above this line>-------------------------------------------------
 		VersionPlusOne,
