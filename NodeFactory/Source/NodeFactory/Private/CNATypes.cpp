@@ -2,6 +2,7 @@
 
 #include "CNATypes.h"
 #include "Misc/Guid.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
