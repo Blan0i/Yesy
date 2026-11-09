@@ -9,6 +9,7 @@
 #include "CNAEditorSettings.h"
 #include "CNAGraphFactories.h"
 #include "CNAMessages.h"
+#include "CNAStructCustomizations.h"
 #include "CNANodeMenu.h"
 #include "CNAUpdateService.h"
 #include "CNAValidator.h"
@@ -25,6 +26,7 @@
 #include "Framework/Application/SlateApplication.h"
 #include "Framework/Docking/TabManager.h"
 #include "Modules/ModuleManager.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -35,6 +37,13 @@ namespace CNAEditorModuleLocal
 	const FName AssetToolsName(TEXT("AssetTools"));
 	const FName PropertyEditorName(TEXT("PropertyEditor"));
 	const FName SettingsName(TEXT("Settings"));
+
+	// USTRUCT names without the F prefix (RegisterCustomPropertyTypeLayout).
+	const FName PinOverrideStructName(TEXT("CNAPinOverride"));
+	const FName PinRedirectStructName(TEXT("CNAPinRedirect"));
+	const FName BadgeStructName(TEXT("CNABadge"));
+	const FName BodyWidgetStructName(TEXT("CNABodyWidget"));
+	const FName CurveSettingsStructName(TEXT("CNACurveSettings"));
 }
 
 bool FNodeFactoryEditorModule::IsAvailable()
@@ -56,6 +65,8 @@ void FNodeFactoryEditorModule::StartupModule()
 	FCNAEditorHooks::BehaviorBaseClass = UCNABehaviorBase::StaticClass();
 
 	RegisterSettings();
+	// The language of the plugin UI must be known before any panel or command creates its texts.
+	GetDefault<UCNAEditorSettings>()->ApplyLanguage();
 	FCNAValidator::Register();
 	FCNABehaviorHost::Startup();
 	FCNAGraphFactories::Register();
@@ -145,7 +156,14 @@ void FNodeFactoryEditorModule::RegisterDetails()
 	FPropertyEditorModule& PropertyModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>(CNAEditorModuleLocal::PropertyEditorName);
 	PropertyModule.RegisterCustomClassLayout(UCustomNodeAsset::StaticClass()->GetFName(),
 		FOnGetDetailCustomizationInstance::CreateStatic(&FCNAAssetDetails::MakeInstance));
-	PropertyModule.RegisterCustomPropertyTypeLayout(TEXT("CNABodyWidget"), FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FCNABodyWidgetDetails::MakeInstance));
+	PropertyModule.RegisterCustomClassLayout(UCNAEditorSettings::StaticClass()->GetFName(),
+		FOnGetDetailCustomizationInstance::CreateStatic(&FCNAEditorSettingsDetails::MakeInstance));
+	// Structs of the asset: only the settings that apply to the current choice, names in the plugin language.
+	PropertyModule.RegisterCustomPropertyTypeLayout(CNAEditorModuleLocal::PinOverrideStructName, FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FCNAPinOverrideDetails::MakeInstance));
+	PropertyModule.RegisterCustomPropertyTypeLayout(CNAEditorModuleLocal::PinRedirectStructName, FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FCNAPinRedirectDetails::MakeInstance));
+	PropertyModule.RegisterCustomPropertyTypeLayout(CNAEditorModuleLocal::BadgeStructName, FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FCNABadgeDetails::MakeInstance));
+	PropertyModule.RegisterCustomPropertyTypeLayout(CNAEditorModuleLocal::BodyWidgetStructName, FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FCNABodyWidgetDetails::MakeInstance));
+	PropertyModule.RegisterCustomPropertyTypeLayout(CNAEditorModuleLocal::CurveSettingsStructName, FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FCNACurveSettingsDetails::MakeInstance));
 	PropertyModule.NotifyCustomizationModuleChanged();
 	bDetailsRegistered = true;
 }
@@ -155,9 +173,14 @@ void FNodeFactoryEditorModule::UnregisterDetails()
 	if (bDetailsRegistered && FModuleManager::Get().IsModuleLoaded(CNAEditorModuleLocal::PropertyEditorName))
 	{
 		FPropertyEditorModule& PropertyModule = FModuleManager::GetModuleChecked<FPropertyEditorModule>(CNAEditorModuleLocal::PropertyEditorName);
-		// The class may already be gone during engine exit; the name is enough.
+		// The classes may already be gone during engine exit; the names are enough.
 		PropertyModule.UnregisterCustomClassLayout(FName(TEXT("CustomNodeAsset")));
-		PropertyModule.UnregisterCustomPropertyTypeLayout(TEXT("CNABodyWidget"));
+		PropertyModule.UnregisterCustomClassLayout(FName(TEXT("CNAEditorSettings")));
+		PropertyModule.UnregisterCustomPropertyTypeLayout(CNAEditorModuleLocal::PinOverrideStructName);
+		PropertyModule.UnregisterCustomPropertyTypeLayout(CNAEditorModuleLocal::PinRedirectStructName);
+		PropertyModule.UnregisterCustomPropertyTypeLayout(CNAEditorModuleLocal::BadgeStructName);
+		PropertyModule.UnregisterCustomPropertyTypeLayout(CNAEditorModuleLocal::BodyWidgetStructName);
+		PropertyModule.UnregisterCustomPropertyTypeLayout(CNAEditorModuleLocal::CurveSettingsStructName);
 		PropertyModule.NotifyCustomizationModuleChanged();
 	}
 	bDetailsRegistered = false;
