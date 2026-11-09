@@ -23,6 +23,40 @@ enum class ECNAPinFlag : uint8
 	Required
 };
 
+/** Setting of the asset that names a pin the macro Execute does not have (CNA014, CNA015). */
+enum class ECNAStaleReferenceKind : uint8
+{
+	/** PinOverrides[Index].PinName */
+	PinOverride,
+	/** PinOverrides[Index].PassThroughOf */
+	PassThrough,
+	/** BodyWidgets[Index].PinName (not Curve widgets: their PinName is only the name of the curve) */
+	BodyWidget,
+	/** PinRedirects[Index].NewName, after following the chain */
+	Redirect
+};
+
+struct NODEFACTORYEDITOR_API FCNAStaleReference
+{
+	ECNAStaleReferenceKind Kind = ECNAStaleReferenceKind::PinOverride;
+	int32 Index = INDEX_NONE;
+	/** The name that does not exist. */
+	FName Name;
+
+	/** "Pin Override Durati", "Body Widget Slider Duration"... for menus. */
+	FText Describe() const;
+};
+
+/** Names and types of the signature pins of both sides, to recognise a rename made outside the Pin Manager. */
+struct NODEFACTORYEDITOR_API FCNASignatureSnapshot
+{
+	TArray<FName> InputNames;
+	TArray<FString> InputTypes;
+	TArray<FName> OutputNames;
+	TArray<FString> OutputTypes;
+	bool bValid = false;
+};
+
 /**
  * Operations on the signature of an asset. The signature lives on Tunnel Input (inputs of the node) and Tunnel
  * Output (outputs of the node) of the macro Execute (spec 4.1). "Side" is always the side of the node:
@@ -83,9 +117,42 @@ struct NODEFACTORYEDITOR_API FCNAPinManagerOps
 	/** Problem of a pin for the status column: missing type object, override problems (CNA010, CNA011...). */
 	static bool GetPinProblem(const UCustomNodeAsset* Asset, EEdGraphPinDirection Side, FName PinName, FText& OutProblem);
 
+	// Renames made elsewhere (the Details of Tunnel Input / Tunnel Output, My Blueprint)
+
+	static void CaptureSignature(const UCustomNodeAsset* Asset, FCNASignatureSnapshot& OutSnapshot);
+
+	/**
+	 * Compares the signature with the snapshot. A pin that kept its side, position and type but changed its name
+	 * was renamed: its references follow (redirect for the wires of the instances, overrides, body widgets,
+	 * PassThroughOf, Behavior Graph literals) in one transaction. Nothing is changed while Undo / Redo runs.
+	 * The snapshot is updated. Returns the number of renames that were followed.
+	 */
+	static int32 FollowExternalRenames(UCustomNodeAsset* Asset, FCNASignatureSnapshot& InOutSnapshot);
+
+	// Stale references (settings that name a pin that does not exist)
+
+	static void FindStaleReferences(const UCustomNodeAsset* Asset, TArray<FCNAStaleReference>& OutReferences);
+
+	/** Pins a stale reference may be pointed to (inputs for body widgets and PassThroughOf, both sides otherwise). */
+	static void GetRemapCandidates(const UCustomNodeAsset* Asset, const FCNAStaleReference& Reference, TArray<FName>& OutPins);
+
+	/** Closest candidate by name ("Durati" -> "Duration"), None when nothing is close. */
+	static FName SuggestRemap(const UCustomNodeAsset* Asset, const FCNAStaleReference& Reference);
+
+	/** Points the reference to NewPin in one transaction. Fails when the target already has an override. */
+	static bool RemapStaleReference(UCustomNodeAsset* Asset, const FCNAStaleReference& Reference, FName NewPin, FText& OutError);
+
+	/** Removes the override, body widget or redirect, or clears PassThroughOf, in one transaction. */
+	static bool RemoveStaleReference(UCustomNodeAsset* Asset, const FCNAStaleReference& Reference, FText& OutError);
+
 private:
 	static void AddRedirect(UCustomNodeAsset& Asset, FName OldName, FName NewName);
 	static void RenameReferences(UCustomNodeAsset& Asset, FName OldName, FName NewName);
+	/** Name literals of the Behavior Graph that name the pin (actions of UCNABehaviorBase, Switch on Name, ==). */
+	static int32 RenameBehaviorReferences(UCustomNodeAsset& Asset, FName OldName, FName NewName, bool bApply);
+	/** Something still names OldName or the redirect OldName -> NewName is missing. */
+	static bool NeedsReferenceUpdate(const UCustomNodeAsset& Asset, FName OldName, FName NewName);
+	static bool IsStaleReferenceCurrent(const UCustomNodeAsset* Asset, const FCNAStaleReference& Reference);
 	static void FinishStructuralChange(UCustomNodeAsset* Asset, UK2Node_Tunnel* Tunnel);
 };
 

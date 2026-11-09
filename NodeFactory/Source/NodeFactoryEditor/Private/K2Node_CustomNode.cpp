@@ -193,17 +193,27 @@ void UK2Node_CustomNode::AllocateDefaultPins()
 		DynamicPinCount = FMath::Max(DynamicPinCount, 0);
 	}
 
-	// Inputs first, then outputs, each in the order of the Tunnel nodes (spec 4.1).
+	// A Playback curve drives the first exec input and output of the macro itself: the node shows Play ... Update
+	// instead, and ReallocatePinsDuringReconstruction moves their wires (GetCurveTakeoverPinName).
+	const bool bPlayback = FCNACurveUtils::FindPlaybackCurve(Asset) != nullptr;
+	const FName DrivenInput = bPlayback ? FCNACurveUtils::GetPrimaryExecPinName(Signature, EGPD_Input) : NAME_None;
+	const FName DrivenOutput = bPlayback ? FCNACurveUtils::GetPrimaryExecPinName(Signature, EGPD_Output) : NAME_None;
+
+	// Inputs first, then outputs, each in the order of the Tunnel nodes (spec 4.1). Curve exec pins come first
+	// like on a Timeline, the Time inputs of the curves after the inputs of the macro.
+	CreateCurvePins(*Asset, EGPD_Input, true);
 	for (const FCNASignaturePin& SignaturePin : Signature)
 	{
-		if (SignaturePin.IsInput())
+		if (SignaturePin.IsInput() && !(SignaturePin.IsExec() && SignaturePin.Name == DrivenInput))
 		{
 			CreatePinsForSignaturePin(*Asset, SignaturePin);
 		}
 	}
+	CreateCurvePins(*Asset, EGPD_Input, false);
+	CreateCurvePins(*Asset, EGPD_Output, true);
 	for (const FCNASignaturePin& SignaturePin : Signature)
 	{
-		if (!SignaturePin.IsInput())
+		if (!SignaturePin.IsInput() && !(SignaturePin.IsExec() && SignaturePin.Name == DrivenOutput))
 		{
 			CreatePinsForSignaturePin(*Asset, SignaturePin);
 		}
