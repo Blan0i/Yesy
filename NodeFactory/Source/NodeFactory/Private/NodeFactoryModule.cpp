@@ -2,6 +2,7 @@
 
 #include "NodeFactoryModule.h"
 #include "CNAFormatVersion.h"
+#include "CNALocalization.h"
 
 DEFINE_LOG_CATEGORY(LogNodeFactory);
 

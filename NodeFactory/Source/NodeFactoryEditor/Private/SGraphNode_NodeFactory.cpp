@@ -7,6 +7,8 @@
 #include "K2Node_CustomNode.h"
 #include "K2Node_GetLocal.h"
 #include "NodeFactoryStyle.h"
+#include "SCNACurveGraph.h"
+#include "SGraphPin_NodeFactory.h"
 
 #include "Brushes/SlateImageBrush.h"
 #include "Brushes/SlateNoResource.h"
@@ -38,6 +40,7 @@
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SNullWidget.h"
 #include "Widgets/Text/STextBlock.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -179,6 +182,33 @@ UK2Node_CustomNode* SGraphNode_NodeFactory::GetCustomNode() const
 	return Cast<UK2Node_CustomNode>(GraphNode);
 }
 
+const UCustomNodeAsset* SGraphNode_NodeFactory::GetAsset() const
+{
+	const UK2Node_CustomNode* Node = GetCustomNode();
+	return Node ? Node->GetCustomNodeAsset() : nullptr;
+}
+
+ECNANodeLayout SGraphNode_NodeFactory::GetLayoutForAsset(const UCustomNodeAsset* Asset)
+{
+	if (!Asset || Asset->NodeStyle != ECNANodeStyle::Animation)
+	{
+		return ECNANodeLayout::Standard;
+	}
+	switch (Asset->AnimStyle)
+	{
+	case ECNAAnimNodeStyle::Result:
+		return ECNANodeLayout::AnimResult;
+	case ECNAAnimNodeStyle::State:
+	case ECNAAnimNodeStyle::Conduit:
+	case ECNAAnimNodeStyle::Entry:
+		return ECNANodeLayout::AnimState;
+	case ECNAAnimNodeStyle::Transition:
+		return ECNANodeLayout::AnimTransition;
+	default:
+		return ECNANodeLayout::Standard;
+	}
+}
+
 void SGraphNode_NodeFactory::UpdateGraphNode()
 {
 	ComboData.Reset();
@@ -186,9 +216,26 @@ void SGraphNode_NodeFactory::UpdateGraphNode()
 	// The texture is loaded before the base layout asks GetIconAndTint, which then leaves the brush icon out.
 	RefreshIconBrush();
 
-	SGraphNodeK2Base::UpdateGraphNode();
 	const UK2Node_CustomNode* Node = GetCustomNode();
 	const UCustomNodeAsset* Asset = Node ? Node->GetCustomNodeAsset() : nullptr;
+
+	// CreateNodeContentArea and AddPin read the layout while the base builds the widget.
+	CurrentLayout = GetLayoutForAsset(Asset);
+	switch (CurrentLayout)
+	{
+	case ECNANodeLayout::AnimState:
+		UpdateAnimStateNode();
+		break;
+	case ECNANodeLayout::AnimTransition:
+		UpdateAnimTransitionNode();
+		break;
+	case ECNANodeLayout::Standard:
+	case ECNANodeLayout::AnimResult:
+	default:
+		SGraphNodeK2Base::UpdateGraphNode();
+		break;
+	}
+
 	TSharedPtr<SVerticalBox> BodyBox = ArrowBox;
 	ReplaceAdvancedViewArrow();
 	// Add space inside the body overlay, not outside its background.
