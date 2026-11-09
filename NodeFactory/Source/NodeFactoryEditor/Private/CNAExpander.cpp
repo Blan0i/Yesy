@@ -79,6 +79,26 @@ namespace CNAExpanderLocal
 		return Result;
 	}
 
+	/**
+	 * Exec output Index of a node in pin order (then_0, then_1 of a Sequence). UK2Node_ExecutionSequence is MinimalAPI;
+	 * walking the pins avoids depending on the export of its members.
+	 */
+	UEdGraphPin* GetExecOutput(const UEdGraphNode* GraphNode, int32 Index)
+	{
+		int32 Found = 0;
+		for (UEdGraphPin* Pin : GraphNode->Pins)
+		{
+			if (Pin && !Pin->ParentPin && Pin->Direction == EGPD_Output && Pin->PinType.PinCategory == UEdGraphSchema_K2::PC_Exec)
+			{
+				if (Found++ == Index)
+				{
+					return Pin;
+				}
+			}
+		}
+		return nullptr;
+	}
+
 	/** Same wording as FCNAMessages::AssetArgs: "Display (AssetName)" when they differ. */
 	FText GetAssetText(const UCustomNodeAsset* Asset)
 	{
@@ -1375,6 +1395,9 @@ bool FCNAExpander::BuildPlayback(const FCNABodyWidget& Widget, FBoundaryOptions&
 	}
 
 	// Every tick: stop when Playing was cleared, else NewTime = Time + WorldDeltaSeconds * (Reverse ? -Rate : Rate).
+	// V-check: UFUNCTIONs of 4.20.3 - UGameplayStatics::GetWorldDeltaSeconds(WorldContextObject), UKismetMathLibrary::
+	// SelectFloat(A, B, bPickA), Multiply_FloatFloat, Add_FloatFloat, Percent_FloatFloat (CustomThunk; its helper
+	// GenericPercent_FloatFloat is not reflected), LessEqual_FloatFloat, GreaterEqual_FloatFloat, FClamp(Value, Min, Max).
 	UK2Node_IfThenElse* IfPlaying = SpawnBranch(FPinSource::FromPin(PlayingVar));
 	Link(DelayThen, IfPlaying->GetExecPin());
 	UEdGraphPin* DeltaSeconds = SpawnPureCall(UGameplayStatics::StaticClass(), FName(TEXT("GetWorldDeltaSeconds")),
@@ -1394,18 +1417,18 @@ bool FCNAExpander::BuildPlayback(const FCNABodyWidget& Widget, FBoundaryOptions&
 	// Running: re-arm the tick first (the subgraph may stop or restart the playback), then run the subgraph.
 	UK2Node_ExecutionSequence* RunSequence = SpawnSequence();
 	UK2Node_ExecutionSequence* RunBody = SpawnSequence();
-	Link(RunSequence->GetThenPinGivenIndex(0), DelayExec);
-	Link(RunSequence->GetThenPinGivenIndex(1), RunBody->GetExecPin());
+	Link(CNAExpanderLocal::GetExecOutput(RunSequence, 0), DelayExec);
+	Link(CNAExpanderLocal::GetExecOutput(RunSequence, 1), RunBody->GetExecPin());
 	UEdGraphPin* FinishedSource = nullptr;
 
 	if (Curve.bLoop)
 	{
 		// Time = ((NewTime % Length) + Length) % Length wraps both directions; a loop never finishes.
-		UEdGraphPin* Rest = SpawnPureCall(MathLibrary, FName(TEXT("GenericPercent_FloatFloat")),
+		UEdGraphPin* Rest = SpawnPureCall(MathLibrary, FName(TEXT("Percent_FloatFloat")),
 			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(NewTime) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
 		UEdGraphPin* Positive = SpawnPureCall(MathLibrary, FName(TEXT("Add_FloatFloat")),
 			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Rest) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
-		UEdGraphPin* Wrapped = SpawnPureCall(MathLibrary, FName(TEXT("GenericPercent_FloatFloat")),
+		UEdGraphPin* Wrapped = SpawnPureCall(MathLibrary, FName(TEXT("Percent_FloatFloat")),
 			{ FCallArgument{ TEXT("A"), FPinSource::FromPin(Positive) }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(Length) } });
 		const FAssignmentPins SetWrapped = SpawnAssignmentOf(TimeVar, FPinSource::FromPin(Wrapped));
 		if (!Wrapped || !SetWrapped.IsValid())
@@ -1450,13 +1473,13 @@ bool FCNAExpander::BuildPlayback(const FCNABodyWidget& Widget, FBoundaryOptions&
 		Link(SetEnd.Then, StopAtEnd.Exec);
 		UK2Node_ExecutionSequence* EndSequence = SpawnSequence();
 		Link(StopAtEnd.Then, EndSequence->GetExecPin());
-		Link(EndSequence->GetThenPinGivenIndex(0), RunBody->GetExecPin());
-		FinishedSource = EndSequence->GetThenPinGivenIndex(1);
+		Link(CNAExpanderLocal::GetExecOutput(EndSequence, 0), RunBody->GetExecPin());
+		FinishedSource = CNAExpanderLocal::GetExecOutput(EndSequence, 1);
 	}
 
 	// The subgraph runs from its first exec input; its first exec output leads to Update. Without one of them,
 	// Update fires right after the subgraph.
-	UEdGraphPin* BodyTrigger = RunBody->GetThenPinGivenIndex(0);
+	UEdGraphPin* BodyTrigger = CNAExpanderLocal::GetExecOutput(RunBody, 0);
 	UEdGraphPin* UpdatePin = Node->FindCurvePin(Widget.WidgetGuid, ECNACurvePinRole::Update);
 	const TArray<UEdGraphPin*> UpdateConsumers = UpdatePin ? UpdatePin->LinkedTo : TArray<UEdGraphPin*>();
 	if (!DrivenInput.IsNone() && BodyTrigger)
@@ -1474,7 +1497,7 @@ bool FCNAExpander::BuildPlayback(const FCNABodyWidget& Widget, FBoundaryOptions&
 	{
 		for (UEdGraphPin* Consumer : UpdateConsumers)
 		{
-			Link(RunBody->GetThenPinGivenIndex(1), Consumer);
+			Link(CNAExpanderLocal::GetExecOutput(RunBody, 1), Consumer);
 		}
 	}
 	if (UpdatePin)
@@ -1632,6 +1655,8 @@ bool FCNAExpander::BuildBakedEvaluation(const FCNACurveSettings& Curve, const FP
 	{
 		// Position among the samples: U = clamp((Time - Min) * (N - 1) / Span, 0, N - 1), the samples I0 = min(floor(U), N - 2)
 		// and I0 + 1, and Alpha = U - I0 between them. Shared by all channels.
+		// V-check: UKismetMathLibrary UFUNCTIONs of 4.20.3 - Subtract_FloatFloat, Multiply_FloatFloat, FClamp, FFloor(A) -> int32,
+		// Clamp(Value, Min, Max) for int32, Add_IntInt, Conv_IntToFloat(InInt), Lerp(A, B, Alpha), MakeVector(X, Y, Z).
 		UEdGraphPin* Offset = SpawnPureCall(MathLibrary, FName(TEXT("Subtract_FloatFloat")),
 			{ FCallArgument{ TEXT("A"), Time }, FCallArgument{ TEXT("B"), FPinSource::FromFloat(MinTime) } });
 		UEdGraphPin* Scaled = SpawnPureCall(MathLibrary, FName(TEXT("Multiply_FloatFloat")),

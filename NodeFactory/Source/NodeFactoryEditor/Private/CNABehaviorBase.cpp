@@ -6,6 +6,7 @@
 #include "K2Node_CustomNode.h"
 #include "EdGraphSchema_K2.h"
 #include "UObject/Class.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 

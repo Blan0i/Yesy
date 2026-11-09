@@ -2,6 +2,7 @@
 // conversions, path checks and the deterministic writer (spec 8.1, 8.2).
 
 #include "CNAJsonSchema.h"
+#include "Curves/RichCurve.h"
 #include "EdGraphSchema_K2.h"
 #include "Interfaces/IPluginManager.h"
 #include "Internationalization/Internationalization.h"
@@ -13,6 +14,7 @@
 #include "Serialization/JsonSerializer.h"
 #include "UObject/Class.h"
 #include "UObject/UObjectGlobals.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -394,7 +396,17 @@ namespace CNAJsonSchemaLocal
 	static const TCHAR* const CornerIconNames[] = { TEXT("None"), TEXT("Latent"), TEXT("Server"), TEXT("Client"), TEXT("Multicast"), TEXT("Message") };
 	static const TCHAR* const ConnectionRuleNames[] = { TEXT("None"), TEXT("SameTypeOnly"), TEXT("ClassFilter") };
 	static const TCHAR* const BadgeCornerNames[] = { TEXT("TopLeft"), TEXT("TopRight"), TEXT("BottomLeft"), TEXT("BottomRight") };
-	static const TCHAR* const BodyWidgetTypeNames[] = { TEXT("CheckBox"), TEXT("ComboBox"), TEXT("TextBox"), TEXT("ScrollList"), TEXT("Slider") };
+	static const TCHAR* const BodyWidgetTypeNames[] = { TEXT("CheckBox"), TEXT("ComboBox"), TEXT("TextBox"), TEXT("ScrollList"), TEXT("Slider"), TEXT("Curve") };
+	static const TCHAR* const NodeStyleNames[] = { TEXT("Blueprint"), TEXT("Animation"), TEXT("Niagara") };
+	static const TCHAR* const AnimNodeStyleNames[] = { TEXT("AnimNode"), TEXT("AssetPlayer"), TEXT("Blend"), TEXT("BlendSimple"), TEXT("SkeletalControl"),
+		TEXT("SpaceConversion"), TEXT("RefPose"), TEXT("StateMachine"), TEXT("Result"), TEXT("State"), TEXT("Conduit"), TEXT("Transition"), TEXT("Entry") };
+	static const TCHAR* const NiagaraNodeStyleNames[] = { TEXT("FunctionCall"), TEXT("MapGet"), TEXT("MapSet"), TEXT("Op"), TEXT("Input"), TEXT("Output"), TEXT("CustomHlsl") };
+	static const TCHAR* const CurveValueTypeNames[] = { TEXT("Float"), TEXT("Vector"), TEXT("LinearColor") };
+	static const TCHAR* const CurveModeNames[] = { TEXT("EvaluateAtTime"), TEXT("Playback") };
+	// Order of ERichCurveInterpMode, ERichCurveTangentMode and ERichCurveExtrapolation (RichCurve.h of 4.20.3).
+	static const TCHAR* const InterpModeNames[] = { TEXT("Linear"), TEXT("Constant"), TEXT("Cubic"), TEXT("None") };
+	static const TCHAR* const TangentModeNames[] = { TEXT("Auto"), TEXT("User"), TEXT("Break"), TEXT("None") };
+	static const TCHAR* const ExtrapolationNames[] = { TEXT("Cycle"), TEXT("CycleWithOffset"), TEXT("Oscillate"), TEXT("Linear"), TEXT("Constant"), TEXT("None") };
 	static const TCHAR* const GraphKindNames[] = { TEXT("Function"), TEXT("EventGraph"), TEXT("Macro"), TEXT("ConstructionScript") };
 	static const TCHAR* const ContainerNames[] = { TEXT("None"), TEXT("Array"), TEXT("Set"), TEXT("Map") };
 
@@ -608,7 +620,48 @@ bool FCNAJsonSchema::ValidateStructure(const TSharedPtr<FJsonObject>& Root, TArr
 			CheckField(Widget, Height, EJson::Number, false, Path + TEXT(".bodyWidgets"), OutErrors);
 			CheckField(Widget, SliderMin, EJson::Number, false, Path + TEXT(".bodyWidgets"), OutErrors);
 			CheckField(Widget, SliderMax, EJson::Number, false, Path + TEXT(".bodyWidgets"), OutErrors);
+			CheckField(Widget, WidgetGuid, EJson::String, false, Path + TEXT(".bodyWidgets"), OutErrors);
+			if (CheckField(Widget, Curve, EJson::Object, false, Path + TEXT(".bodyWidgets"), OutErrors))
+			{
+				const TSharedPtr<FJsonObject> CurveObject = GetObject(Widget, Curve);
+				const FString CurvePath = Path + TEXT(".bodyWidgets.curve");
+				for (const TCHAR* Field : { ValueType, Mode, CurveAsset })
+				{
+					CheckField(CurveObject, Field, EJson::String, false, CurvePath, OutErrors);
+				}
+				for (const TCHAR* Field : { UseCurveAsset, Loop, ShowPlayFromStart, ShowReverse, ShowKeys, ShowGrid })
+				{
+					CheckField(CurveObject, Field, EJson::Boolean, false, CurvePath, OutErrors);
+				}
+				for (const TCHAR* Field : { BakeSamples, Length, PlayRate })
+				{
+					CheckField(CurveObject, Field, EJson::Number, false, CurvePath, OutErrors);
+				}
+				for (const TCHAR* Field : { TimeLabel, PlayLabel, PlayFromStartLabel, StopLabel, ReverseLabel, UpdateLabel, FinishedLabel })
+				{
+					CheckTextField(CurveObject, Field, CurvePath, OutErrors);
+				}
+				for (const TCHAR* Field : { CurveX, CurveY, CurveZ, CurveW })
+				{
+					if (CheckField(CurveObject, Field, EJson::Object, false, CurvePath, OutErrors))
+					{
+						const TSharedPtr<FJsonObject> ChannelObject = GetObject(CurveObject, Field);
+						const FString ChannelPath = CurvePath + TEXT(".") + Field;
+						CheckField(ChannelObject, Keys, EJson::Array, false, ChannelPath, OutErrors);
+						CheckField(ChannelObject, ExternalCurve, EJson::String, false, ChannelPath, OutErrors);
+					}
+				}
+			}
 		}
+		for (const TCHAR* Field : { NodeStyle, AnimStyle, NiagaraStyle })
+		{
+			CheckField(AppearanceObject, Field, EJson::String, false, Path, OutErrors);
+		}
+		for (const TCHAR* Field : { ExecPinsAsPosePins, ShowFastPathIcon, NiagaraAddPinRows, NiagaraNamespaceLabels, ExecPinsAsParameterMap })
+		{
+			CheckField(AppearanceObject, Field, EJson::Boolean, false, Path, OutErrors);
+		}
+		CheckTextField(AppearanceObject, NiagaraBodyText, Path, OutErrors);
 	}
 
 	// flags
@@ -1073,6 +1126,126 @@ bool FCNAJsonSchema::StringToBodyWidgetType(const FString& Text, ECNABodyWidgetT
 FString FCNAJsonSchema::GraphKindToString(ECNAGraphKind Kind)
 {
 	return CNAJsonSchemaLocal::EnumToString(Kind, CNAJsonSchemaLocal::GraphKindNames);
+}
+
+FString FCNAJsonSchema::NodeStyleToString(ECNANodeStyle Value)
+{
+	return CNAJsonSchemaLocal::EnumToString(Value, CNAJsonSchemaLocal::NodeStyleNames);
+}
+
+bool FCNAJsonSchema::StringToNodeStyle(const FString& Text, ECNANodeStyle& OutValue)
+{
+	return CNAJsonSchemaLocal::StringToEnum(Text, CNAJsonSchemaLocal::NodeStyleNames, OutValue);
+}
+
+FString FCNAJsonSchema::AnimNodeStyleToString(ECNAAnimNodeStyle Value)
+{
+	return CNAJsonSchemaLocal::EnumToString(Value, CNAJsonSchemaLocal::AnimNodeStyleNames);
+}
+
+bool FCNAJsonSchema::StringToAnimNodeStyle(const FString& Text, ECNAAnimNodeStyle& OutValue)
+{
+	return CNAJsonSchemaLocal::StringToEnum(Text, CNAJsonSchemaLocal::AnimNodeStyleNames, OutValue);
+}
+
+FString FCNAJsonSchema::NiagaraNodeStyleToString(ECNANiagaraNodeStyle Value)
+{
+	return CNAJsonSchemaLocal::EnumToString(Value, CNAJsonSchemaLocal::NiagaraNodeStyleNames);
+}
+
+bool FCNAJsonSchema::StringToNiagaraNodeStyle(const FString& Text, ECNANiagaraNodeStyle& OutValue)
+{
+	return CNAJsonSchemaLocal::StringToEnum(Text, CNAJsonSchemaLocal::NiagaraNodeStyleNames, OutValue);
+}
+
+FString FCNAJsonSchema::CurveValueTypeToString(ECNACurveValueType Value)
+{
+	return CNAJsonSchemaLocal::EnumToString(Value, CNAJsonSchemaLocal::CurveValueTypeNames);
+}
+
+bool FCNAJsonSchema::StringToCurveValueType(const FString& Text, ECNACurveValueType& OutValue)
+{
+	return CNAJsonSchemaLocal::StringToEnum(Text, CNAJsonSchemaLocal::CurveValueTypeNames, OutValue);
+}
+
+FString FCNAJsonSchema::CurveModeToString(ECNACurveMode Value)
+{
+	return CNAJsonSchemaLocal::EnumToString(Value, CNAJsonSchemaLocal::CurveModeNames);
+}
+
+bool FCNAJsonSchema::StringToCurveMode(const FString& Text, ECNACurveMode& OutValue)
+{
+	return CNAJsonSchemaLocal::StringToEnum(Text, CNAJsonSchemaLocal::CurveModeNames, OutValue);
+}
+
+TSharedRef<FJsonObject> FCNAJsonSchema::RichCurveToJson(const FRichCurve& Curve)
+{
+	using namespace CNAJsonSchemaLocal;
+	TSharedRef<FJsonObject> Object = MakeShared<FJsonObject>();
+	Object->SetStringField(CNAJsonFields::PreInfinity, EnumToString(static_cast<ERichCurveExtrapolation>(Curve.PreInfinityExtrap), ExtrapolationNames));
+	Object->SetStringField(CNAJsonFields::PostInfinity, EnumToString(static_cast<ERichCurveExtrapolation>(Curve.PostInfinityExtrap), ExtrapolationNames));
+	// MAX_flt means "no default value" (the curve evaluates to the default of the caller without keys).
+	if (Curve.DefaultValue != MAX_flt)
+	{
+		Object->SetNumberField(CNAJsonFields::DefaultValue, Curve.DefaultValue);
+	}
+	TArray<TSharedPtr<FJsonValue>> KeyValues;
+	for (auto It = Curve.GetKeyIterator(); It; ++It)
+	{
+		const FRichCurveKey& Key = *It;
+		TSharedRef<FJsonObject> KeyObject = MakeShared<FJsonObject>();
+		KeyObject->SetNumberField(CNAJsonFields::Time, Key.Time);
+		KeyObject->SetNumberField(CNAJsonFields::Value, Key.Value);
+		KeyObject->SetStringField(CNAJsonFields::Interp, EnumToString(static_cast<ERichCurveInterpMode>(Key.InterpMode), InterpModeNames));
+		KeyObject->SetStringField(CNAJsonFields::TangentMode, EnumToString(static_cast<ERichCurveTangentMode>(Key.TangentMode), TangentModeNames));
+		KeyObject->SetNumberField(CNAJsonFields::ArriveTangent, Key.ArriveTangent);
+		KeyObject->SetNumberField(CNAJsonFields::LeaveTangent, Key.LeaveTangent);
+		KeyValues.Add(MakeShared<FJsonValueObject>(KeyObject));
+	}
+	Object->SetArrayField(CNAJsonFields::Keys, KeyValues);
+	return Object;
+}
+
+bool FCNAJsonSchema::JsonToRichCurve(const TSharedPtr<FJsonObject>& Object, FRichCurve& OutCurve)
+{
+	using namespace CNAJsonSchemaLocal;
+	if (!Object.IsValid())
+	{
+		return false;
+	}
+	OutCurve.Reset();
+	ERichCurveExtrapolation Extrapolation = RCCE_Constant;
+	OutCurve.PreInfinityExtrap = StringToEnum(GetString(Object, CNAJsonFields::PreInfinity), ExtrapolationNames, Extrapolation) ? Extrapolation : RCCE_Constant;
+	Extrapolation = RCCE_Constant;
+	OutCurve.PostInfinityExtrap = StringToEnum(GetString(Object, CNAJsonFields::PostInfinity), ExtrapolationNames, Extrapolation) ? Extrapolation : RCCE_Constant;
+	OutCurve.DefaultValue = static_cast<float>(GetNumber(Object, CNAJsonFields::DefaultValue, MAX_flt));
+
+	bool bAllValid = true;
+	for (const TSharedPtr<FJsonValue>& Value : GetArray(Object, CNAJsonFields::Keys))
+	{
+		const TSharedPtr<FJsonObject> KeyObject = Value.IsValid() && Value->Type == EJson::Object ? Value->AsObject() : nullptr;
+		if (!KeyObject.IsValid() || !KeyObject->HasTypedField<EJson::Number>(CNAJsonFields::Time) || !KeyObject->HasTypedField<EJson::Number>(CNAJsonFields::Value))
+		{
+			bAllValid = false;
+			continue;
+		}
+		// AddKey keeps the keys sorted by time and gives each one a handle.
+		const FKeyHandle Handle = OutCurve.AddKey(static_cast<float>(GetNumber(KeyObject, CNAJsonFields::Time)), static_cast<float>(GetNumber(KeyObject, CNAJsonFields::Value)));
+		FRichCurveKey& Key = OutCurve.GetKey(Handle);
+		ERichCurveInterpMode Interp = RCIM_Linear;
+		if (StringToEnum(GetString(KeyObject, CNAJsonFields::Interp), InterpModeNames, Interp))
+		{
+			Key.InterpMode = Interp;
+		}
+		ERichCurveTangentMode Tangent = RCTM_Auto;
+		if (StringToEnum(GetString(KeyObject, CNAJsonFields::TangentMode), TangentModeNames, Tangent))
+		{
+			Key.TangentMode = Tangent;
+		}
+		Key.ArriveTangent = static_cast<float>(GetNumber(KeyObject, CNAJsonFields::ArriveTangent, 0.0));
+		Key.LeaveTangent = static_cast<float>(GetNumber(KeyObject, CNAJsonFields::LeaveTangent, 0.0));
+	}
+	return bAllValid;
 }
 
 TSharedRef<FJsonValue> FCNAJsonSchema::GraphKindsToJson(int32 Mask)
