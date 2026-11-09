@@ -1,8 +1,10 @@
 // Copyright (c) NodeFactory. Entries of the Blueprint action menu for custom nodes and local variables (spec 9.8, V9).
 
 #include "CNANodeMenu.h"
+#include "CNACurveUtils.h"
 #include "CNAMessages.h"
 #include "CustomNodeAsset.h"
+#include "K2Node_CNACurveValue.h"
 #include "K2Node_CustomNode.h"
 #include "K2Node_GetLocal.h"
 #include "K2Node_SetLocal.h"
@@ -19,6 +21,7 @@
 #include "EditorStyleSet.h"
 #include "Modules/ModuleManager.h"
 #include "UObject/UObjectIterator.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -113,6 +116,8 @@ namespace CNANodeMenuLocal
 
 	void OnAssetChanged(UCustomNodeAsset* Asset, FName PropertyName)
 	{
+		// Curve Value nodes follow the value type and the name of their curve.
+		FCNACurveUtils::SyncCurveValueNodes(Asset);
 		FCNANodeMenu::RequestRefresh();
 	}
 
@@ -334,6 +339,103 @@ void FCNANodeMenu::CustomizeLocalVariableNode(UEdGraphNode* NewNode, bool bIsTem
 	}
 }
 
+// Curves
+
+void FCNANodeMenu::RegisterCurveValueActions(FBlueprintActionDatabaseRegistrar& Registrar, UClass* NodeClass)
+{
+	if (!NodeClass || !Registrar.IsOpenForRegistration(NodeClass))
+	{
+		return;
+	}
+
+	const FText Category = LOCTEXT("NodeMenu.CurvesCategory", "Curves");
+	const FSlateIcon Icon(FEditorStyle::GetStyleSetName(), CNANodeMenuLocal::DefaultIconName);
+
+	// The unbound entry takes the first curve of the asset; the context menu of the node chooses another one.
+	if (UBlueprintNodeSpawner* Spawner = UBlueprintNodeSpawner::Create(NodeClass))
+	{
+		Spawner->CustomizeNodeDelegate = UBlueprintNodeSpawner::FCustomizeNodeDelegate::CreateStatic(&FCNANodeMenu::CustomizeCurveValueNode, FGuid(), FName());
+		FBlueprintActionUiSpec& Signature = Spawner->DefaultMenuSignature;
+		Signature.MenuName = LOCTEXT("NodeMenu.CurveValueEntry", "Curve Value");
+		Signature.Category = Category;
+		Signature.Tooltip = LOCTEXT("NodeMenu.CurveValueEntryTooltip", "Reads a curve of this node at the current time of the instance. Choose the curve in the context menu of the node.");
+		Signature.Keywords = LOCTEXT("NodeMenu.CurveValueEntryKeywords", "Curve Value Timeline Time CNA");
+		Signature.Icon = Icon;
+		Registrar.AddBlueprintAction(Spawner);
+	}
+
+	// One entry per curve of the assets in memory; IsCompatibleWithGraph keeps each entry in its own asset.
+	for (TObjectIterator<UCustomNodeAsset> It; It; ++It)
+	{
+		const UCustomNodeAsset* Asset = *It;
+		if (!Asset || Asset->IsPendingKill() || Asset->HasAnyFlags(RF_ClassDefaultObject | RF_Transient))
+		{
+			continue;
+		}
+		for (const FCNABodyWidget& Widget : Asset->BodyWidgets)
+		{
+			if (!Widget.IsCurve() || !Widget.WidgetGuid.IsValid())
+			{
+				continue;
+			}
+			UBlueprintNodeSpawner* Spawner = UBlueprintNodeSpawner::Create(NodeClass);
+			if (!Spawner)
+			{
+				continue;
+			}
+			Spawner->CustomizeNodeDelegate = UBlueprintNodeSpawner::FCustomizeNodeDelegate::CreateStatic(&FCNANodeMenu::CustomizeCurveValueNode, Widget.WidgetGuid, Widget.PinName);
+			FBlueprintActionUiSpec& Signature = Spawner->DefaultMenuSignature;
+			const FText CurveText = FCNACurveUtils::GetCurveDisplayName(Widget);
+			const FEdGraphPinType ValueType = FCNACurveUtils::GetValuePinType(Widget.Curve.ValueType);
+			Signature.MenuName = FText::Format(LOCTEXT("NodeMenu.CurveValueCurveEntry", "Curve Value: {0}"), CurveText);
+			Signature.Category = Category;
+			Signature.Tooltip = FText::Format(LOCTEXT("NodeMenu.CurveValueCurveEntryTooltip", "Reads the curve {0} ({1})."), CurveText, FCNAPinUtils::GetTypeText(ValueType));
+			Signature.Keywords = FText::Format(LOCTEXT("NodeMenu.CurveValueCurveEntryKeywords", "{0} Curve Value Timeline CNA"), CurveText);
+			Signature.Icon = Icon;
+			Signature.IconTint = FCNAPinUtils::GetTypeColor(ValueType);
+			Registrar.AddBlueprintAction(Spawner);
+		}
+	}
+}
+
+void FCNANodeMenu::CustomizeCurveValueNode(UEdGraphNode* NewNode, bool bIsTemplateNode, FGuid CurveGuid, FName CurveName)
+{
+	UK2Node_CNACurveValue* Node = Cast<UK2Node_CNACurveValue>(NewNode);
+	if (!Node)
+	{
+		return;
+	}
+
+	if (CurveGuid.IsValid())
+	{
+		const UCustomNodeAsset* Asset = bIsTemplateNode ? nullptr : Node->GetOwningAsset();
+		if (const FCNABodyWidget* Widget = Asset ? Asset->FindCurveWidget(CurveGuid, CurveName) : nullptr)
+		{
+			Node->InitCurve(*Widget);
+		}
+		else
+		{
+			Node->CurveGuid = CurveGuid;
+			Node->CurveName = CurveName;
+		}
+		return;
+	}
+
+	// Unbound entry: the first curve of the asset.
+	if (!bIsTemplateNode)
+	{
+		TArray<const FCNABodyWidget*> Curves;
+		if (const UCustomNodeAsset* Asset = Node->GetOwningAsset())
+		{
+			Asset->GetCurveWidgets(Curves);
+		}
+		if (Curves.Num() > 0)
+		{
+			Node->InitCurve(*Curves[0]);
+		}
+	}
+}
+
 // Refresh (V9)
 
 void FCNANodeMenu::RequestRefresh()
@@ -353,6 +455,7 @@ void FCNANodeMenu::RefreshNow()
 	Database.RefreshClassActions(UK2Node_CustomNode::StaticClass());
 	Database.RefreshClassActions(UK2Node_GetLocal::StaticClass());
 	Database.RefreshClassActions(UK2Node_SetLocal::StaticClass());
+	Database.RefreshClassActions(UK2Node_CNACurveValue::StaticClass());
 }
 
 int32 FCNANodeMenu::GetLastRegisteredCount()

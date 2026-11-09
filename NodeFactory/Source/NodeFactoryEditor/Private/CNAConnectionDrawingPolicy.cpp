@@ -5,10 +5,12 @@
 #include "CNATypes.h"
 #include "CustomNodeAsset.h"
 #include "K2Node_CustomNode.h"
+#include "SGraphPin_NodeFactory.h"
 
 #include "EdGraph/EdGraph.h"
 #include "EdGraph/EdGraphPin.h"
 #include "EdGraphSchema_K2.h"
+#include "CNALocalization.h"
 
 namespace CNAConnectionLocal
 {
@@ -117,7 +119,18 @@ bool FCNAConnectionDrawingPolicy::GetCustomWireColor(const UEdGraphPin* OutputPi
 	{
 		return true;
 	}
-	return CNAConnectionLocal::GetPinWireColor(InputPin, OutColor);
+	if (CNAConnectionLocal::GetPinWireColor(InputPin, OutColor))
+	{
+		return true;
+	}
+
+	// Pins drawn as pose pins get the white wire of AnimGraph pose links (exec wires are white already).
+	if (FCNAPinStyle::GetPinShape(OutputPin) == ECNAPinShape::Pose || FCNAPinStyle::GetPinShape(InputPin) == ECNAPinShape::Pose)
+	{
+		OutColor = FLinearColor::White;
+		return true;
+	}
+	return false;
 }
 
 FLinearColor FCNAConnectionDrawingPolicy::RecolorWire(const FLinearColor& EngineColor, const FLinearColor& TypeColor, const FLinearColor& CustomColor)

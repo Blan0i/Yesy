@@ -14,8 +14,8 @@ struct FCNALocalVariable;
 
 /**
  * Menu of custom nodes. All entries are recorded under the node classes (UK2Node_CustomNode, UK2Node_GetLocal,
- * UK2Node_SetLocal), so one RefreshClassActions per class rebuilds them; the refresh is debounced and runs on
- * the next ticks after the asset registry or an asset changed (V9).
+ * UK2Node_SetLocal, UK2Node_CNACurveValue), so one RefreshClassActions per class rebuilds them; the refresh is
+ * debounced and runs on the next ticks after the asset registry or an asset changed (V9).
  */
 class NODEFACTORYEDITOR_API FCNANodeMenu
 {
@@ -29,6 +29,9 @@ public:
 
 	/** Get Local or Set Local: one entry per local variable of every loaded asset, plus one unbound entry. */
 	static void RegisterLocalVariableActions(FBlueprintActionDatabaseRegistrar& Registrar, UClass* NodeClass);
+
+	/** Curve Value: one entry per curve of every loaded asset, plus one unbound entry. */
+	static void RegisterCurveValueActions(FBlueprintActionDatabaseRegistrar& Registrar, UClass* NodeClass);
 
 	/** Rebuilds the entries soon (debounced). Safe to call before Startup and after Shutdown (no effect). */
 	static void RequestRefresh();
@@ -48,5 +51,6 @@ public:
 private:
 	static void CustomizeCustomNode(UEdGraphNode* NewNode, bool bIsTemplateNode, FSoftObjectPath AssetPath);
 	static void CustomizeLocalVariableNode(UEdGraphNode* NewNode, bool bIsTemplateNode, FGuid VariableGuid, FName VariableName);
+	static void CustomizeCurveValueNode(UEdGraphNode* NewNode, bool bIsTemplateNode, FGuid CurveGuid, FName CurveName);
 	static bool IsMenuAsset(const FAssetData& AssetData);
 };
