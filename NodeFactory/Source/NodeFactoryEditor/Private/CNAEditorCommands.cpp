@@ -2,6 +2,7 @@
 
 #include "CNAEditorCommands.h"
 #include "NodeFactoryStyle.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
