@@ -13,6 +13,7 @@
 #include "Serialization/JsonSerializer.h"
 #include "UObject/Class.h"
 #include "UObject/UObjectGlobals.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 

@@ -16,6 +16,7 @@
 #include "Widgets/SWindow.h"
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/Views/STableRow.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 

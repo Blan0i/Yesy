@@ -11,6 +11,7 @@
 #include "UObject/Package.h"
 #include "UObject/Script.h"
 #include "UObject/UObjectGlobals.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
