@@ -49,15 +49,15 @@ namespace CNADetails
 	/** Asset the handle edits (first outer object). */
 	UCustomNodeAsset* GetAsset(const TSharedPtr<IPropertyHandle>& Handle);
 
-	/** Value readers; false for an invalid handle or several different values (then everything stays visible). */
+	/** Value readers; false for an invalid handle or several different values (then everything stays enabled). */
 	bool ReadBool(const TSharedPtr<IPropertyHandle>& Handle, bool& OutValue);
 	bool ReadByte(const TSharedPtr<IPropertyHandle>& Handle, uint8& OutValue);
 	bool ReadName(const TSharedPtr<IPropertyHandle>& Handle, FName& OutValue);
 	/** An object or soft object reference is set. */
 	bool ReadObjectSet(const TSharedPtr<IPropertyHandle>& Handle, bool& OutValue);
 
-	/** Visible while the predicate is true. */
-	TAttribute<EVisibility> MakeVisibility(TFunction<bool()> Predicate);
+	/** Enabled while the predicate is true; the row stays visible but greyed out otherwise. */
+	TAttribute<bool> MakeEnabled(TFunction<bool()> Predicate);
 
 	/** Native child handles of a struct property by member name. */
 	TSharedPtr<IPropertyHandle> Child(const TSharedRef<IPropertyHandle>& StructHandle, FName MemberName);
@@ -91,9 +91,9 @@ namespace CNADetails
 	/** Signature pin of the asset by name, or false. */
 	bool FindSignaturePin(const UCustomNodeAsset* Asset, FName PinName, FCNASignaturePin& OutPin);
 
-	/** Adds a child row: localized texts, visibility, translated enum combo in the Russian modes. */
+	/** Adds a child row: localized texts, enabled state, translated enum combo in the Russian modes. */
 	IDetailPropertyRow& AddChildRow(IDetailChildrenBuilder& Children, const TSharedRef<IPropertyHandle>& Handle,
-		const FPropertyTextMap& Texts, const TAttribute<EVisibility>& Visibility);
+		const FPropertyTextMap& Texts, const TAttribute<bool>& Enabled);
 
 	/** Properties marked InlineEditConditionToggle are drawn by the row of the property they enable. */
 	bool IsInlineToggle(const TSharedPtr<IPropertyHandle>& Handle);

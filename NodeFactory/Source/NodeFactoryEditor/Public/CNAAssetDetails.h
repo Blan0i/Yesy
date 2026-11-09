@@ -11,7 +11,7 @@ class UCustomNodeAsset;
 
 /**
  * Lays out the categories of the asset (Node, Appearance, Icon, Compact, Widgets, Style, Flags, Placement, Pins,
- * Metadata, Internal), hides the Blueprint options that do not apply to a node and every setting that does nothing
+ * Metadata, Internal), hides the Blueprint options that do not apply to a node, greys out every setting that does nothing
  * for the current choice, names the settings in the plugin language and replaces the Icon name by a picker with
  * previews of the brushes of the icon catalog (spec 3.2, 14). The Pins category lists stale pin references.
  */

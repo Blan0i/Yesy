@@ -141,11 +141,11 @@ namespace CNAAssetDetailsLocal
 	};
 
 	/**
-	 * Adds a property of the asset to a category in this order: name and tooltip in the plugin language, visibility,
+	 * Adds a property of the asset to a category in this order: name and tooltip in the plugin language, enabled state,
 	 * translated enum values in the Russian modes. Other rows keep the engine widgets (inline check boxes included).
 	 */
 	void AddAssetRow(IDetailLayoutBuilder& DetailBuilder, IDetailCategoryBuilder& Category, FName Name, const CNADetails::FPropertyTextMap& Texts,
-		const TAttribute<EVisibility>& Visibility, bool bAdvanced)
+		const TAttribute<bool>& Enabled, bool bAdvanced)
 	{
 		using namespace CNADetails;
 		const TSharedPtr<IPropertyHandle> Handle = DetailBuilder.GetProperty(Name);
@@ -156,10 +156,11 @@ namespace CNAAssetDetailsLocal
 		// V-check: IDetailCategoryBuilder::AddProperty(TSharedPtr<IPropertyHandle>, EPropertyLocation::Type) in 4.20.3.
 		IDetailPropertyRow& Row = Category.AddProperty(Handle, bAdvanced ? EPropertyLocation::Advanced : EPropertyLocation::Default);
 		LocalizeRow(Row, Texts, Name);
-		Row.Visibility(Visibility);
+		Row.IsEnabled(Enabled);
 		if (FCNALocalization::IsDetailsRussian() && GetPropertyEnum(Handle) && !Handle->IsEditConst())
 		{
 			Row.CustomWidget()
+				.IsEnabled(Enabled)
 				.NameContent()
 				[
 					Handle->CreatePropertyNameWidget(GetNameOverride(Texts, Name), GetToolTipOverride(Texts, Name))
@@ -219,13 +220,13 @@ void FCNAAssetDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 	{
 		return DetailBuilder.GetProperty(Name);
 	};
-	auto Add = [&DetailBuilder, &Texts](IDetailCategoryBuilder& Category, FName Name, const TAttribute<EVisibility>& Visibility)
+	auto Add = [&DetailBuilder, &Texts](IDetailCategoryBuilder& Category, FName Name, const TAttribute<bool>& Enabled)
 	{
-		AddAssetRow(DetailBuilder, Category, Name, Texts, Visibility, /*bAdvanced*/ false);
+		AddAssetRow(DetailBuilder, Category, Name, Texts, Enabled, /*bAdvanced*/ false);
 	};
-	const TAttribute<EVisibility> Always = EVisibility::Visible;
+	const TAttribute<bool> Always = true;
 
-	// Values the visibility depends on. Several selected assets with different values count as "applies".
+	// Values the enabled state depends on. Several selected assets with different values count as "applies".
 	const TSharedPtr<IPropertyHandle> PureHandle = Handle(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bPure));
 	const TSharedPtr<IPropertyHandle> CompactHandle = Handle(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bCompact));
 	const TSharedPtr<IPropertyHandle> DeprecatedHandle = Handle(GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bDeprecated));
@@ -279,9 +280,9 @@ void FCNAAssetDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 	Add(AppearanceCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, HeaderColor), Always);
 	Add(AppearanceCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, HeaderTextColor), Always);
 	Add(AppearanceCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, PinLabelColor), Always);
-	Add(AppearanceCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bColorWires), MakeVisibility([WeakAsset, ColorWiresHandle]()
+	Add(AppearanceCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bColorWires), MakeEnabled([WeakAsset, ColorWiresHandle]()
 	{
-		// Only wires of pins with their own Pin Color change; a checked box stays visible so it can be cleared.
+		// Only wires of pins with their own Pin Color change; a checked box stays enabled so it can be cleared.
 		const UCustomNodeAsset* Target = WeakAsset.Get();
 		if (!Target)
 		{
@@ -300,8 +301,10 @@ void FCNAAssetDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 	{
 		const FName IconName = GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, Icon);
 		IDetailPropertyRow& IconRow = IconCategory.AddProperty(IconHandle);
-		IconRow.Visibility(MakeVisibility([IconTextureHandle, IsUnset]() { return IsUnset(IconTextureHandle); }));
+		const TAttribute<bool> IconEnabled = MakeEnabled([IconTextureHandle, IsUnset]() { return IsUnset(IconTextureHandle); });
+		IconRow.IsEnabled(IconEnabled);
 		IconRow.CustomWidget()
+			.IsEnabled(IconEnabled)
 			.NameContent()
 			[
 				IconHandle->CreatePropertyNameWidget(GetNameOverride(Texts, IconName), GetToolTipOverride(Texts, IconName))
@@ -341,26 +344,26 @@ void FCNAAssetDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 			];
 	}
 	const TSharedPtr<IPropertyHandle> IconNameHandle = IconHandle;
-	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, IconTint), MakeVisibility([IconTextureHandle, IconNameHandle, IsUnset]()
+	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, IconTint), MakeEnabled([IconTextureHandle, IconNameHandle, IsUnset]()
 	{
 		FName Icon;
 		const bool bHasIcon = !ReadName(IconNameHandle, Icon) || !Icon.IsNone();
 		return IsUnset(IconTextureHandle) && bHasIcon;
 	}));
 	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, IconTexture), Always);
-	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, IconTextureTint), MakeVisibility([IconTextureHandle, IsSet]() { return IsSet(IconTextureHandle); }));
-	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CornerIcon), MakeVisibility([CornerTextureHandle, IsUnset]() { return IsUnset(CornerTextureHandle); }));
+	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, IconTextureTint), MakeEnabled([IconTextureHandle, IsSet]() { return IsSet(IconTextureHandle); }));
+	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CornerIcon), MakeEnabled([CornerTextureHandle, IsUnset]() { return IsUnset(CornerTextureHandle); }));
 	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CornerIconTexture), Always);
-	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CornerIconTextureTint), MakeVisibility([CornerTextureHandle, IsSet]() { return IsSet(CornerTextureHandle); }));
-	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CornerIconTextureSize), MakeVisibility([CornerTextureHandle, IsSet]() { return IsSet(CornerTextureHandle); }));
+	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CornerIconTextureTint), MakeEnabled([CornerTextureHandle, IsSet]() { return IsSet(CornerTextureHandle); }));
+	Add(IconCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CornerIconTextureSize), MakeEnabled([CornerTextureHandle, IsSet]() { return IsSet(CornerTextureHandle); }));
 
-	// Compact: only a pure node is drawn compact (CNA warning otherwise); a checked box stays visible.
-	Add(CompactCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bCompact), MakeVisibility([PureHandle, CompactHandle, IsTrue]()
+	// Compact: only a pure node is drawn compact (CNA warning otherwise); a checked box stays enabled.
+	Add(CompactCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bCompact), MakeEnabled([PureHandle, CompactHandle, IsTrue]()
 	{
 		bool bCompactOn = false;
 		return IsTrue(PureHandle) || (ReadBool(CompactHandle, bCompactOn) && bCompactOn);
 	}));
-	Add(CompactCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CompactTitle), MakeVisibility([PureHandle, CompactHandle, IsTrue]()
+	Add(CompactCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, CompactTitle), MakeEnabled([PureHandle, CompactHandle, IsTrue]()
 	{
 		return IsTrue(PureHandle) && IsTrue(CompactHandle);
 	}));
@@ -372,15 +375,15 @@ void FCNAAssetDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 	Add(WidgetsCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, BodyWidgets), Always);
 
 	// Style: the settings of the Animation and Niagara families only for that family.
-	const TAttribute<EVisibility> ForAnimation = MakeVisibility([IsNodeStyle]() { return IsNodeStyle(ECNANodeStyle::Animation); });
-	const TAttribute<EVisibility> ForNiagara = MakeVisibility([IsNodeStyle]() { return IsNodeStyle(ECNANodeStyle::Niagara); });
+	const TAttribute<bool> ForAnimation = MakeEnabled([IsNodeStyle]() { return IsNodeStyle(ECNANodeStyle::Animation); });
+	const TAttribute<bool> ForNiagara = MakeEnabled([IsNodeStyle]() { return IsNodeStyle(ECNANodeStyle::Niagara); });
 	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, NodeStyle), Always);
 	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, AnimStyle), ForAnimation);
 	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bExecPinsAsPosePins), ForAnimation);
 	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bShowFastPathIcon), ForAnimation);
 	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, NiagaraStyle), ForNiagara);
 	// The "Add Pin" rows only exist for the dynamic pin groups of the node.
-	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bNiagaraAddPinRows), MakeVisibility([IsNodeStyle, WeakAsset]()
+	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bNiagaraAddPinRows), MakeEnabled([IsNodeStyle, WeakAsset]()
 	{
 		const UCustomNodeAsset* Target = WeakAsset.Get();
 		const bool bHasDynamicGroup = !Target
@@ -389,7 +392,7 @@ void FCNAAssetDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 	}));
 	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bNiagaraNamespaceLabels), ForNiagara);
 	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bExecPinsAsParameterMap), ForNiagara);
-	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, NiagaraBodyText), MakeVisibility([IsNodeStyle, IsNiagaraStyle]()
+	Add(StyleCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, NiagaraBodyText), MakeEnabled([IsNodeStyle, IsNiagaraStyle]()
 	{
 		return IsNodeStyle(ECNANodeStyle::Niagara) && IsNiagaraStyle(ECNANiagaraNodeStyle::CustomHlsl);
 	}));
@@ -398,7 +401,7 @@ void FCNAAssetDetails::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 	Add(FlagsCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bPure), Always);
 	Add(FlagsCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bDevelopmentOnly), Always);
 	Add(FlagsCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, bDeprecated), Always);
-	Add(FlagsCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, DeprecationMessage), MakeVisibility([DeprecatedHandle, IsTrue]() { return IsTrue(DeprecatedHandle); }));
+	Add(FlagsCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, DeprecationMessage), MakeEnabled([DeprecatedHandle, IsTrue]() { return IsTrue(DeprecatedHandle); }));
 
 	// Placement
 	Add(PlacementCategory, GET_MEMBER_NAME_CHECKED(UCustomNodeAsset, AllowedGraphs), Always);

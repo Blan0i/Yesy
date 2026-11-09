@@ -1,4 +1,4 @@
-// Copyright (c) NodeFactory. Details of the structs of a Custom Node Asset (visibility by choice, plugin language).
+// Copyright (c) NodeFactory. Details of the structs of a Custom Node Asset (settings greyed out when they do not apply, plugin language).
 
 #include "CNAStructCustomizations.h"
 #include "CNAGraphUtils.h"
@@ -401,11 +401,11 @@ namespace CNADetails
 		return true;
 	}
 
-	TAttribute<EVisibility> MakeVisibility(TFunction<bool()> Predicate)
+	TAttribute<bool> MakeEnabled(TFunction<bool()> Predicate)
 	{
-		return TAttribute<EVisibility>::Create(TAttribute<EVisibility>::FGetter::CreateLambda([Predicate]()
+		return TAttribute<bool>::Create(TAttribute<bool>::FGetter::CreateLambda([Predicate]()
 		{
-			return Predicate() ? EVisibility::Visible : EVisibility::Collapsed;
+			return Predicate();
 		}));
 	}
 
@@ -613,16 +613,17 @@ namespace CNADetails
 	}
 
 	IDetailPropertyRow& AddChildRow(IDetailChildrenBuilder& Children, const TSharedRef<IPropertyHandle>& Handle,
-		const FPropertyTextMap& Texts, const TAttribute<EVisibility>& Visibility)
+		const FPropertyTextMap& Texts, const TAttribute<bool>& Enabled)
 	{
 		const FName Name = Handle->GetProperty() ? Handle->GetProperty()->GetFName() : NAME_None;
 		IDetailPropertyRow& Row = Children.AddProperty(Handle);
 		LocalizeRow(Row, Texts, Name);
-		Row.Visibility(Visibility);
+		Row.IsEnabled(Enabled);
 		// Enum values in Russian need a combo of our own; English keeps the engine combo.
 		if (FCNALocalization::IsDetailsRussian() && GetPropertyEnum(Handle) && !Handle->IsEditConst())
 		{
 			Row.CustomWidget()
+				.IsEnabled(Enabled)
 				.NameContent()
 				[
 					Handle->CreatePropertyNameWidget(GetNameOverride(Texts, Name), GetToolTipOverride(Texts, Name))
@@ -750,13 +751,13 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 	const TSharedPtr<IPropertyHandle> DynamicHandle = Child(Handle, GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bDynamicGroup));
 	const TSharedPtr<IPropertyHandle> RuleHandle = Child(Handle, GET_MEMBER_NAME_CHECKED(FCNAPinOverride, ConnectionRule));
 
-	// The pin of the override; false when it cannot be found (then the settings stay visible).
+	// The pin of the override; false when it cannot be found (then the settings stay enabled).
 	auto FindPin = [WeakAsset, PinNameHandle](FCNASignaturePin& OutPin) -> bool
 	{
 		FName Name;
 		return ReadName(PinNameHandle, Name) && FindSignaturePin(WeakAsset.Get(), Name, OutPin);
 	};
-	// A setting that is on stays visible, so a value that no longer applies can still be seen and turned off.
+	// A setting that is on stays enabled, so a value that no longer applies can still be seen and turned off.
 	auto IsOn = [](const TSharedPtr<IPropertyHandle>& ValueHandle) -> bool
 	{
 		bool bValue = false;
@@ -773,11 +774,11 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 		}
 		const FName Name = ChildHandle->GetProperty()->GetFName();
 		const TSharedPtr<IPropertyHandle> ValueHandle = ChildHandle;
-		TAttribute<EVisibility> Visibility = EVisibility::Visible;
+		TAttribute<bool> Enabled = true;
 
 		if (Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bRequired))
 		{
-			Visibility = MakeVisibility([FindPin, IsOn, ValueHandle]()
+			Enabled = MakeEnabled([FindPin, IsOn, ValueHandle]()
 			{
 				FCNASignaturePin Pin;
 				return !FindPin(Pin) || (Pin.IsInput() && !Pin.IsExec()) || IsOn(ValueHandle);
@@ -785,7 +786,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bDefaultToSelf))
 		{
-			Visibility = MakeVisibility([FindPin, IsOn, ValueHandle]()
+			Enabled = MakeEnabled([FindPin, IsOn, ValueHandle]()
 			{
 				FCNASignaturePin Pin;
 				if (!FindPin(Pin) || IsOn(ValueHandle))
@@ -799,7 +800,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, PassThroughOf))
 		{
-			Visibility = MakeVisibility([FindPin, ValueHandle]()
+			Enabled = MakeEnabled([FindPin, ValueHandle]()
 			{
 				FCNASignaturePin Pin;
 				FName Value;
@@ -808,7 +809,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, bDynamicGroup))
 		{
-			Visibility = MakeVisibility([FindPin, IsOn, ValueHandle]()
+			Enabled = MakeEnabled([FindPin, IsOn, ValueHandle]()
 			{
 				FCNASignaturePin Pin;
 				return !FindPin(Pin) || Pin.Type.IsArray() || IsOn(ValueHandle);
@@ -818,7 +819,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 			|| Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, DynamicMax)
 			|| Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, DynamicNameFormat))
 		{
-			Visibility = MakeVisibility([DynamicHandle]()
+			Enabled = MakeEnabled([DynamicHandle]()
 			{
 				bool bDynamic = false;
 				return !ReadBool(DynamicHandle, bDynamic) || bDynamic;
@@ -826,7 +827,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, ConnectionRule))
 		{
-			Visibility = MakeVisibility([FindPin, ValueHandle]()
+			Enabled = MakeEnabled([FindPin, ValueHandle]()
 			{
 				FCNASignaturePin Pin;
 				uint8 Rule = 0;
@@ -835,7 +836,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, ClassFilter))
 		{
-			Visibility = MakeVisibility([RuleHandle]()
+			Enabled = MakeEnabled([RuleHandle]()
 			{
 				uint8 Rule = 0;
 				return !ReadByte(RuleHandle, Rule) || Rule == static_cast<uint8>(ECNAConnectionRule::ClassFilter);
@@ -847,8 +848,9 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 			const bool bPassThrough = Name == GET_MEMBER_NAME_CHECKED(FCNAPinOverride, PassThroughOf);
 			IDetailPropertyRow& Row = Children.AddProperty(ChildHandle);
 			LocalizeRow(Row, Texts, Name);
-			Row.Visibility(Visibility);
+			Row.IsEnabled(Enabled);
 			Row.CustomWidget()
+				.IsEnabled(Enabled)
 				.NameContent()
 				[
 					ChildHandle->CreatePropertyNameWidget(GetNameOverride(Texts, Name), GetToolTipOverride(Texts, Name))
@@ -860,7 +862,7 @@ void FCNAPinOverrideDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 				];
 			continue;
 		}
-		AddChildRow(Children, ChildHandle, Texts, Visibility);
+		AddChildRow(Children, ChildHandle, Texts, Enabled);
 	}
 }
 
@@ -924,7 +926,7 @@ void FCNAPinRedirectDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handl
 				];
 			continue;
 		}
-		AddChildRow(Children, ChildHandle, Texts, EVisibility::Visible);
+		AddChildRow(Children, ChildHandle, Texts, true);
 	}
 }
 
@@ -969,7 +971,7 @@ void FCNABadgeDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handle, IDe
 	GetChildren(Handle, ChildHandles);
 	for (const TSharedRef<IPropertyHandle>& ChildHandle : ChildHandles)
 	{
-		AddChildRow(Children, ChildHandle, Texts, EVisibility::Visible);
+		AddChildRow(Children, ChildHandle, Texts, true);
 	}
 }
 
@@ -1018,7 +1020,7 @@ void FCNABodyWidgetDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handle
 	// Shown while the type is one of the given ones, or several widgets with different types are selected.
 	auto ForTypes = [TypeHandle](TArray<ECNABodyWidgetType> Types)
 	{
-		return MakeVisibility([TypeHandle, Types]()
+		return MakeEnabled([TypeHandle, Types]()
 		{
 			uint8 Type = 0;
 			return !ReadByte(TypeHandle, Type) || Types.Contains(static_cast<ECNABodyWidgetType>(Type));
@@ -1035,22 +1037,22 @@ void FCNABodyWidgetDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handle
 	for (const TSharedRef<IPropertyHandle>& ChildHandle : ChildHandles)
 	{
 		const FName Name = ChildHandle->GetProperty()->GetFName();
-		TAttribute<EVisibility> Visibility = EVisibility::Visible;
+		TAttribute<bool> Enabled = true;
 		if (Name == GET_MEMBER_NAME_CHECKED(FCNABodyWidget, Options))
 		{
-			Visibility = ForTypes({ ECNABodyWidgetType::ComboBox, ECNABodyWidgetType::ScrollList });
+			Enabled = ForTypes({ ECNABodyWidgetType::ComboBox, ECNABodyWidgetType::ScrollList });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNABodyWidget, Height))
 		{
-			Visibility = ForTypes({ ECNABodyWidgetType::ScrollList, ECNABodyWidgetType::Curve });
+			Enabled = ForTypes({ ECNABodyWidgetType::ScrollList, ECNABodyWidgetType::Curve });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNABodyWidget, SliderMin) || Name == GET_MEMBER_NAME_CHECKED(FCNABodyWidget, SliderMax))
 		{
-			Visibility = ForTypes({ ECNABodyWidgetType::Slider });
+			Enabled = ForTypes({ ECNABodyWidgetType::Slider });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNABodyWidget, Curve) || Name == GET_MEMBER_NAME_CHECKED(FCNABodyWidget, WidgetGuid))
 		{
-			Visibility = ForTypes({ ECNABodyWidgetType::Curve });
+			Enabled = ForTypes({ ECNABodyWidgetType::Curve });
 		}
 
 		if (Name == GET_MEMBER_NAME_CHECKED(FCNABodyWidget, PinName))
@@ -1080,7 +1082,7 @@ void FCNABodyWidgetDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Handle
 				];
 			continue;
 		}
-		AddChildRow(Children, ChildHandle, Texts, Visibility);
+		AddChildRow(Children, ChildHandle, Texts, Enabled);
 	}
 }
 
@@ -1154,7 +1156,7 @@ void FCNACurveSettingsDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Han
 	const bool bKnownValueType = ReadByte(ValueTypeHandle, RawValueType);
 	const ECNACurveValueType ValueType = static_cast<ECNACurveValueType>(RawValueType);
 
-	// Unknown (several values) counts as "yes": nothing is hidden for a mixed selection.
+	// Unknown (several values) counts as "yes": nothing is disabled for a mixed selection.
 	auto UsesAsset = [UseAssetHandle](bool bExpected)
 	{
 		bool bValue = false;
@@ -1186,12 +1188,27 @@ void FCNACurveSettingsDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Han
 		}
 	};
 
+	// The rows are greyed out while the owning body widget is not a Curve. Checked here as well, because the
+	// disabled state of the parent struct row may not reach its children (V-check: 4.20.3 property tree).
+	const TSharedPtr<IPropertyHandle> ParentHandle = Handle->GetParentHandle();
+	const TSharedPtr<IPropertyHandle> OwnerTypeHandle = ParentHandle.IsValid()
+		? ParentHandle->GetChildHandle(GET_MEMBER_NAME_CHECKED(FCNABodyWidget, Type)) : TSharedPtr<IPropertyHandle>();
+	auto IsCurveWidget = [OwnerTypeHandle]()
+	{
+		uint8 Type = 0;
+		return !ReadByte(OwnerTypeHandle, Type) || static_cast<ECNABodyWidgetType>(Type) == ECNABodyWidgetType::Curve;
+	};
+	auto WithOwner = [IsCurveWidget](const TAttribute<bool>& Inner)
+	{
+		return MakeEnabled([IsCurveWidget, Inner]() { return IsCurveWidget() && Inner.Get(); });
+	};
+
 	TArray<TSharedRef<IPropertyHandle>> ChildHandles;
 	GetChildren(Handle, ChildHandles);
 	for (const TSharedRef<IPropertyHandle>& ChildHandle : ChildHandles)
 	{
 		const FName Name = ChildHandle->GetProperty()->GetFName();
-		TAttribute<EVisibility> Visibility = EVisibility::Visible;
+		TAttribute<bool> Enabled = true;
 
 		int32 Channel = INDEX_NONE;
 		if (Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, CurveX)) { Channel = 0; }
@@ -1201,10 +1218,10 @@ void FCNACurveSettingsDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Han
 
 		if (Channel != INDEX_NONE)
 		{
-			Visibility = MakeVisibility([UsesAsset, UsesChannel, Channel]() { return UsesAsset(false) && UsesChannel(Channel); });
+			Enabled = MakeEnabled([UsesAsset, UsesChannel, Channel]() { return UsesAsset(false) && UsesChannel(Channel); });
 			// The row keeps the engine customization of FRuntimeFloatCurve (curve editor in the Details).
 			IDetailPropertyRow& Row = Children.AddProperty(ChildHandle);
-			Row.Visibility(Visibility);
+			Row.IsEnabled(WithOwner(Enabled));
 			if (bKnownValueType)
 			{
 				const FPropertyText* ChannelTexts = Texts.Find(Name);
@@ -1223,23 +1240,23 @@ void FCNACurveSettingsDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Han
 
 		if (Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, CurveAsset))
 		{
-			Visibility = MakeVisibility([UsesAsset]() { return UsesAsset(true); });
+			Enabled = MakeEnabled([UsesAsset]() { return UsesAsset(true); });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, BakeSamples))
 		{
-			Visibility = MakeVisibility([UsesAsset]() { return UsesAsset(false); });
+			Enabled = MakeEnabled([UsesAsset]() { return UsesAsset(false); });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, TimeLabel))
 		{
-			Visibility = MakeVisibility([IsMode]() { return IsMode(ECNACurveMode::EvaluateAtTime); });
+			Enabled = MakeEnabled([IsMode]() { return IsMode(ECNACurveMode::EvaluateAtTime); });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, PlayFromStartLabel))
 		{
-			Visibility = MakeVisibility([IsMode, IsOn, PlayFromStartHandle]() { return IsMode(ECNACurveMode::Playback) && IsOn(PlayFromStartHandle); });
+			Enabled = MakeEnabled([IsMode, IsOn, PlayFromStartHandle]() { return IsMode(ECNACurveMode::Playback) && IsOn(PlayFromStartHandle); });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, ReverseLabel))
 		{
-			Visibility = MakeVisibility([IsMode, IsOn, ReverseHandle]() { return IsMode(ECNACurveMode::Playback) && IsOn(ReverseHandle); });
+			Enabled = MakeEnabled([IsMode, IsOn, ReverseHandle]() { return IsMode(ECNACurveMode::Playback) && IsOn(ReverseHandle); });
 		}
 		else if (Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, Length)
 			|| Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, bLoop)
@@ -1251,9 +1268,9 @@ void FCNACurveSettingsDetails::CustomizeChildren(TSharedRef<IPropertyHandle> Han
 			|| Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, UpdateLabel)
 			|| Name == GET_MEMBER_NAME_CHECKED(FCNACurveSettings, FinishedLabel))
 		{
-			Visibility = MakeVisibility([IsMode]() { return IsMode(ECNACurveMode::Playback); });
+			Enabled = MakeEnabled([IsMode]() { return IsMode(ECNACurveMode::Playback); });
 		}
-		AddChildRow(Children, ChildHandle, Texts, Visibility);
+		AddChildRow(Children, ChildHandle, Texts, WithOwner(Enabled));
 	}
 }
 
