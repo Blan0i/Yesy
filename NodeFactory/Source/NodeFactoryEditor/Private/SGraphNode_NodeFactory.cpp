@@ -7,6 +7,8 @@
 #include "K2Node_CustomNode.h"
 #include "K2Node_GetLocal.h"
 #include "NodeFactoryStyle.h"
+#include "SCNACurveGraph.h"
+#include "SGraphPin_NodeFactory.h"
 
 #include "Brushes/SlateImageBrush.h"
 #include "Brushes/SlateNoResource.h"
@@ -38,6 +40,7 @@
 #include "Widgets/SBoxPanel.h"
 #include "Widgets/SNullWidget.h"
 #include "Widgets/Text/STextBlock.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -179,6 +182,33 @@ UK2Node_CustomNode* SGraphNode_NodeFactory::GetCustomNode() const
 	return Cast<UK2Node_CustomNode>(GraphNode);
 }
 
+const UCustomNodeAsset* SGraphNode_NodeFactory::GetAsset() const
+{
+	const UK2Node_CustomNode* Node = GetCustomNode();
+	return Node ? Node->GetCustomNodeAsset() : nullptr;
+}
+
+ECNANodeLayout SGraphNode_NodeFactory::GetLayoutForAsset(const UCustomNodeAsset* Asset)
+{
+	if (!Asset || Asset->NodeStyle != ECNANodeStyle::Animation)
+	{
+		return ECNANodeLayout::Standard;
+	}
+	switch (Asset->AnimStyle)
+	{
+	case ECNAAnimNodeStyle::Result:
+		return ECNANodeLayout::AnimResult;
+	case ECNAAnimNodeStyle::State:
+	case ECNAAnimNodeStyle::Conduit:
+	case ECNAAnimNodeStyle::Entry:
+		return ECNANodeLayout::AnimState;
+	case ECNAAnimNodeStyle::Transition:
+		return ECNANodeLayout::AnimTransition;
+	default:
+		return ECNANodeLayout::Standard;
+	}
+}
+
 void SGraphNode_NodeFactory::UpdateGraphNode()
 {
 	ComboData.Reset();
@@ -186,9 +216,26 @@ void SGraphNode_NodeFactory::UpdateGraphNode()
 	// The texture is loaded before the base layout asks GetIconAndTint, which then leaves the brush icon out.
 	RefreshIconBrush();
 
-	SGraphNodeK2Base::UpdateGraphNode();
 	const UK2Node_CustomNode* Node = GetCustomNode();
 	const UCustomNodeAsset* Asset = Node ? Node->GetCustomNodeAsset() : nullptr;
+
+	// CreateNodeContentArea and AddPin read the layout while the base builds the widget.
+	CurrentLayout = GetLayoutForAsset(Asset);
+	switch (CurrentLayout)
+	{
+	case ECNANodeLayout::AnimState:
+		UpdateAnimStateNode();
+		break;
+	case ECNANodeLayout::AnimTransition:
+		UpdateAnimTransitionNode();
+		break;
+	case ECNANodeLayout::Standard:
+	case ECNANodeLayout::AnimResult:
+	default:
+		SGraphNodeK2Base::UpdateGraphNode();
+		break;
+	}
+
 	TSharedPtr<SVerticalBox> BodyBox = ArrowBox;
 	ReplaceAdvancedViewArrow();
 	// Add space inside the body overlay, not outside its background.
@@ -203,7 +250,27 @@ void SGraphNode_NodeFactory::UpdateGraphNode()
 		}
 	}
 	BuildBadges();
+	BuildFastPathIndicator();
 	ScheduleSplitRefresh();
+}
+
+void SGraphNode_NodeFactory::AddPin(const TSharedRef<SGraphPin>& PinToAdd)
+{
+	if (UsesNiagaraMapRows(PinToAdd->GetDirection()))
+	{
+		AddNiagaraMapRowPin(PinToAdd);
+		return;
+	}
+	SGraphNodeK2Base::AddPin(PinToAdd);
+}
+
+TSharedRef<SWidget> SGraphNode_NodeFactory::CreateNodeContentArea()
+{
+	if (CurrentLayout == ECNANodeLayout::AnimResult)
+	{
+		return CreateAnimResultContentArea();
+	}
+	return SGraphNodeK2Base::CreateNodeContentArea();
 }
 
 void SGraphNode_NodeFactory::RefreshIconBrush()
@@ -292,8 +359,20 @@ TSharedRef<SWidget> SGraphNode_NodeFactory::CreateTitleWidget(TSharedPtr<SNodeTi
 		NodeTitle->SetColorAndOpacity(TextColor);
 	}
 
-	return SNew(SHorizontalBox)
-		+ SHorizontalBox::Slot()
+	TSharedRef<SHorizontalBox> Box = SNew(SHorizontalBox);
+	// State Machine of the AnimGraph: its icon in front of the title (only when the asset has no icon of its own).
+	if (const FSlateBrush* AnimIcon = GetAnimTitleIcon())
+	{
+		Box->AddSlot()
+			.AutoWidth()
+			.VAlign(VAlign_Center)
+			.Padding(0.0f, 0.0f, 4.0f, 0.0f)
+			[
+				SNew(SImage)
+				.Image(AnimIcon)
+			];
+	}
+	Box->AddSlot()
 		.AutoWidth()
 		.VAlign(VAlign_Center)
 		.Padding(0.0f, 0.0f, 4.0f, 0.0f)
@@ -302,13 +381,14 @@ TSharedRef<SWidget> SGraphNode_NodeFactory::CreateTitleWidget(TSharedPtr<SNodeTi
 			.Image(&IconTextureBrush)
 			.ColorAndOpacity(this, &SGraphNode_NodeFactory::GetIconTextureTint)
 			.Visibility(this, &SGraphNode_NodeFactory::GetIconTextureVisibility)
-		]
-		+ SHorizontalBox::Slot()
+		];
+	Box->AddSlot()
 		.AutoWidth()
 		.VAlign(VAlign_Center)
 		[
 			TitleWidget
 		];
+	return Box;
 }
 
 // Badges (spec 3.2)
@@ -362,13 +442,12 @@ TArray<FOverlayWidgetInfo> SGraphNode_NodeFactory::GetOverlayWidgets(bool bSelec
 		Info.OverlayOffset = FVector2D(WidgetSize.X - CornerTextureBrush.ImageSize.X * 0.5f, -CornerTextureBrush.ImageSize.Y * 0.5f);
 		Widgets.Add(Info);
 	}
-	if (BadgeWidgets.Num() == 0) return Widgets;
+	if (BadgeWidgets.Num() == 0 && !FastPathWidget.IsValid()) return Widgets;
 
-	// Horizontal position reached in every corner; badges of one corner line up next to each other.
-	float Advance[4] = { CNANodeWidgetLocal::BadgeMargin, CNANodeWidgetLocal::BadgeMargin, CNANodeWidgetLocal::BadgeMargin, CNANodeWidgetLocal::BadgeMargin };
-
+	// Width taken on the top right corner by the icons centered on it.
+	float CornerAdvance = 0.0f;
 	if (CornerTextureWidget.IsValid())
-		Advance[static_cast<int32>(ECNABadgeCorner::TopRight)] += CornerTextureBrush.ImageSize.X * 0.5f + CNANodeWidgetLocal::BadgeGap;
+		CornerAdvance += CornerTextureBrush.ImageSize.X * 0.5f + CNANodeWidgetLocal::BadgeGap;
 	// The corner icon of SGraphNodeK2Base (latent clock and the others) sits on the top right corner.
 	if (const UK2Node_CustomNode* Node = GetCustomNode())
 	{
@@ -376,9 +455,37 @@ TArray<FOverlayWidgetInfo> SGraphNode_NodeFactory::GetOverlayWidgets(bool bSelec
 		if (!CornerIcon.IsNone())
 		{
 			const FSlateBrush* CornerBrush = FNodeFactoryStyle::FindBrush(CornerIcon);
-			Advance[static_cast<int32>(ECNABadgeCorner::TopRight)] += CornerBrush ? CornerBrush->ImageSize.X * 0.5f + CNANodeWidgetLocal::BadgeGap : 12.0f;
+			CornerAdvance += CornerBrush ? CornerBrush->ImageSize.X * 0.5f + CNANodeWidgetLocal::BadgeGap : 12.0f;
 		}
 	}
+
+	// Fast path mark: on the corner like SAnimationGraphNode, or left of the corner icons when they take the corner.
+	if (FastPathWidget.IsValid())
+	{
+		FVector2D Size = FastPathWidget->GetDesiredSize();
+		if (Size.IsNearlyZero())
+		{
+			FastPathWidget->SlatePrepass(1.0f);
+			Size = FastPathWidget->GetDesiredSize();
+		}
+		FOverlayWidgetInfo Info(FastPathWidget);
+		if (CornerAdvance > 0.0f)
+		{
+			Info.OverlayOffset = FVector2D(WidgetSize.X - CNANodeWidgetLocal::BadgeMargin - CornerAdvance - Size.X, -Size.Y * 0.5f);
+			CornerAdvance += Size.X + CNANodeWidgetLocal::BadgeGap;
+		}
+		else
+		{
+			Info.OverlayOffset = FVector2D(WidgetSize.X - Size.X * 0.5f, -Size.Y * 0.5f);
+			CornerAdvance += Size.X * 0.5f + CNANodeWidgetLocal::BadgeGap;
+		}
+		Widgets.Add(Info);
+	}
+	if (BadgeWidgets.Num() == 0) return Widgets;
+
+	// Horizontal position reached in every corner; badges of one corner line up next to each other.
+	float Advance[4] = { CNANodeWidgetLocal::BadgeMargin, CNANodeWidgetLocal::BadgeMargin, CNANodeWidgetLocal::BadgeMargin, CNANodeWidgetLocal::BadgeMargin };
+	Advance[static_cast<int32>(ECNABadgeCorner::TopRight)] += CornerAdvance;
 
 	for (const FBadgeWidget& Badge : BadgeWidgets)
 	{
@@ -423,10 +530,26 @@ void SGraphNode_NodeFactory::CreateBelowPinControls(TSharedPtr<SVerticalBox> Mai
 		return;
 	}
 
+	// Custom HLSL of the Niagara style: the text area sits right below the pins, above the body widgets.
+	AddNiagaraBodyText(MainBox);
+
 	TSharedRef<SVerticalBox> Rows = SNew(SVerticalBox);
 	int32 NumRows = 0;
 	for (const FCNABodyWidget& Widget : Asset->BodyWidgets)
 	{
+		if (Widget.IsCurve())
+		{
+			// A Curve widget has no pin of its own: no lookup, the graph reads the asset.
+			Rows->AddSlot()
+				.AutoHeight()
+				.Padding(0.0f, 2.0f)
+				[
+					CreateCurveBodyWidget(Widget)
+				];
+			++NumRows;
+			continue;
+		}
+
 		UEdGraphPin* Pin = FCNAPinUtils::FindTopLevelPin(Node, Widget.PinName, EGPD_Input);
 		// Pins that cannot take the widget are reported by the validator (CNA014) and keep their own field.
 		if (!Pin || Pin->bHidden || Pin->bOrphanedPin || !FCNAPinUtils::CanBodyWidgetEditType(Widget.Type, Pin->PinType))
@@ -492,8 +615,42 @@ void SGraphNode_NodeFactory::CreateBelowPinControls(TSharedPtr<SVerticalBox> Mai
 	}
 }
 
+TSharedRef<SWidget> SGraphNode_NodeFactory::CreateCurveBodyWidget(const FCNABodyWidget& Widget)
+{
+	const UCustomNodeAsset* Asset = GetAsset();
+	const FText Label = Widget.Label.IsEmpty() ? FText::FromName(Widget.PinName) : Widget.Label;
+	const FVector2D Size(Widget.Width > 0.0f ? Widget.Width : 160.0f, Widget.Height > 0.0f ? Widget.Height : 80.0f);
+
+	return SNew(SVerticalBox)
+		.Cursor(EMouseCursor::Default)
+		+ SVerticalBox::Slot()
+		.AutoHeight()
+		.Padding(0.0f, 0.0f, 0.0f, 2.0f)
+		[
+			SNew(STextBlock)
+			.Visibility(Widget.PinName.IsNone() && Widget.Label.IsEmpty() ? EVisibility::Collapsed : EVisibility::Visible)
+			.Text(Label)
+			.ColorAndOpacity(FSlateColor(Asset ? Asset->PinLabelColor : FLinearColor::White))
+			.Font(FCoreStyle::GetDefaultFontStyle(TEXT("Regular"), 9))
+		]
+		+ SVerticalBox::Slot()
+		.AutoHeight()
+		.HAlign(HAlign_Left)
+		[
+			SNew(SCNACurveGraph)
+			.Asset(Asset)
+			.WidgetGuid(Widget.WidgetGuid)
+			.WidgetName(Widget.PinName)
+			.GraphSize(Size)
+		];
+}
+
 TSharedRef<SWidget> SGraphNode_NodeFactory::CreateBodyWidget(const FCNABodyWidget& Widget, UEdGraphPin* Pin)
 {
+	if (!Pin || Widget.IsCurve())
+	{
+		return SNullWidget::NullWidget;
+	}
 	const FEdGraphPinReference PinRef(Pin);
 	TWeakPtr<SGraphNode_NodeFactory> WeakThis = SharedThis(this);
 	auto IsEditable = [WeakThis, PinRef]() -> bool
@@ -697,6 +854,17 @@ TSharedRef<SWidget> SGraphNode_NodeFactory::CreateBodyWidget(const FCNABodyWidge
 
 void SGraphNode_NodeFactory::CreateInputSideAddButton(TSharedPtr<SVerticalBox> InputBox)
 {
+	// Niagara "Add Pin" rows replace the "+" button of the Blueprint look on both sides.
+	if (UsesNiagaraAddPinRow(EGPD_Input))
+	{
+		AddNiagaraAddPinRow(InputBox, EGPD_Input);
+		return;
+	}
+	if (UsesNiagaraAddPinRow(EGPD_Output))
+	{
+		return;
+	}
+
 	const UK2Node_CustomNode* Node = GetCustomNode();
 	if (!Node || !Node->HasDynamicPins() || !InputBox.IsValid())
 	{
@@ -719,6 +887,16 @@ void SGraphNode_NodeFactory::CreateInputSideAddButton(TSharedPtr<SVerticalBox> I
 		[
 			AddPinButton
 		];
+}
+
+void SGraphNode_NodeFactory::CreateOutputSideAddButton(TSharedPtr<SVerticalBox> OutputBox)
+{
+	if (UsesNiagaraAddPinRow(EGPD_Output))
+	{
+		AddNiagaraAddPinRow(OutputBox, EGPD_Output);
+		return;
+	}
+	SGraphNodeK2Base::CreateOutputSideAddButton(OutputBox);
 }
 
 FReply SGraphNode_NodeFactory::OnAddPin()

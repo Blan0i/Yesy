@@ -7,6 +7,18 @@
 #include "Engine/EngineTypes.h"
 #include "CNAEditorSettings.generated.h"
 
+/** Language of the NodeFactory UI; the same values as ECNALanguageMode of CNALocalization.h. */
+UENUM()
+enum class ECNAPluginLanguage : uint8
+{
+	/** The whole NodeFactory UI in Russian. */
+	Russian,
+	/** The whole NodeFactory UI in English. */
+	English,
+	/** Node settings in the Details panel of a Custom Node Asset in Russian, everything else in English. */
+	RussianAndEnglish UMETA(DisplayName = "Russian & English")
+};
+
 /**
  * User settings of the plugin. They live in the per-user editor config, so the plugin never writes into the
  * configuration of the project (spec D7).
@@ -18,6 +30,13 @@ class NODEFACTORYEDITOR_API UCNAEditorSettings : public UObject
 
 public:
 	UCNAEditorSettings();
+
+	/**
+	 * Language of the NodeFactory UI, independent of the editor language. The Details panel of an open asset
+	 * changes at once; other open windows after reopening them; menu commands after restarting the editor.
+	 */
+	UPROPERTY(config, EditAnywhere, Category = "Language")
+	ECNAPluginLanguage Language;
 
 	/** Limit of nested custom nodes; deeper nesting fails with CNA002 (spec 5.2). */
 	UPROPERTY(config, EditAnywhere, Category = "Expansion", meta = (ClampMin = "1", ClampMax = "128", UIMin = "1", UIMax = "64"))
@@ -56,6 +75,9 @@ public:
 
 	/** Sets the Live Preview toggle and saves the config. */
 	void SetLivePreviewEnabled(bool bEnabled);
+
+	/** Pushes Language to FCNALocalization (startup and every change). */
+	void ApplyLanguage() const;
 
 #if WITH_EDITOR
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
