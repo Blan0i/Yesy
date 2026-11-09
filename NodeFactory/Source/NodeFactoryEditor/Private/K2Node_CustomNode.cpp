@@ -36,7 +36,7 @@
 namespace CNACustomNodeLocal
 {
 	/** Default menu category of assets without Category. */
-	const FText DefaultCategory = NSLOCTEXT("NodeFactory", "DefaultMenuCategory", "Custom Nodes");
+	FText GetDefaultCategory() { return NSLOCTEXT("NodeFactory", "DefaultMenuCategory", "Custom Nodes"); }
 
 	/** The node may raise Behavior events: it is a real node of an editor graph or of the Live Preview. */
 	bool CanRaiseEvents(const UK2Node_CustomNode* Node)
@@ -1045,7 +1045,7 @@ FText UK2Node_CustomNode::GetMenuCategory() const
 	{
 		Category = TemplateData.Category;
 	}
-	return Category.IsEmpty() ? CNACustomNodeLocal::DefaultCategory : Category;
+	return Category.IsEmpty() ? CNACustomNodeLocal::GetDefaultCategory() : Category;
 }
 
 FSlateIcon UK2Node_CustomNode::GetIconAndTint(FLinearColor& OutColor) const

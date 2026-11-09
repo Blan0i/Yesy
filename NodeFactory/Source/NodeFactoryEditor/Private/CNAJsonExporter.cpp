@@ -6,6 +6,8 @@
 #include "CNAMessages.h"
 #include "CNAPinUtils.h"
 #include "CustomNodeAsset.h"
+#include "Curves/CurveBase.h"
+#include "Curves/CurveFloat.h"
 #include "NodeFactoryModule.h"
 #include "DesktopPlatformModule.h"
 #include "EdGraph/EdGraph.h"
@@ -22,6 +24,7 @@
 #include "Misc/MessageDialog.h"
 #include "Misc/Paths.h"
 #include "Widgets/Notifications/SNotificationList.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
@@ -35,6 +38,46 @@ namespace CNAJsonExporterLocal
 	FString ObjectToPath(const UObject* Object)
 	{
 		return Object ? Object->GetPathName() : FString();
+	}
+
+	/** Own curve channel: its keys, or the path of the Curve Float it uses instead (FRuntimeFloatCurve::ExternalCurve). */
+	TSharedRef<FJsonObject> BuildCurveChannel(const FRuntimeFloatCurve& Channel)
+	{
+		TSharedRef<FJsonObject> Object = FCNAJsonSchema::RichCurveToJson(Channel.EditorCurveData);
+		Object->SetStringField(CNAJsonFields::ExternalCurve, ObjectToPath(Channel.ExternalCurve));
+		return Object;
+	}
+
+	/** Settings of a Curve body widget; all fields in a fixed order, the four channels always (deterministic). */
+	TSharedRef<FJsonObject> BuildCurveSettings(const FCNACurveSettings& Curve)
+	{
+		using namespace CNAJsonFields;
+		TSharedRef<FJsonObject> Object = MakeShared<FJsonObject>();
+		Object->SetStringField(ValueType, FCNAJsonSchema::CurveValueTypeToString(Curve.ValueType));
+		Object->SetStringField(Mode, FCNAJsonSchema::CurveModeToString(Curve.Mode));
+		Object->SetBoolField(UseCurveAsset, Curve.bUseCurveAsset);
+		Object->SetStringField(CurveAsset, Curve.CurveAsset.IsNull() ? FString() : Curve.CurveAsset.ToSoftObjectPath().ToString());
+		Object->SetObjectField(CurveX, BuildCurveChannel(Curve.CurveX));
+		Object->SetObjectField(CurveY, BuildCurveChannel(Curve.CurveY));
+		Object->SetObjectField(CurveZ, BuildCurveChannel(Curve.CurveZ));
+		Object->SetObjectField(CurveW, BuildCurveChannel(Curve.CurveW));
+		Object->SetNumberField(BakeSamples, Curve.BakeSamples);
+		Object->SetNumberField(Length, Curve.Length);
+		Object->SetBoolField(Loop, Curve.bLoop);
+		Object->SetNumberField(PlayRate, Curve.PlayRate);
+		Object->SetBoolField(ShowPlayFromStart, Curve.bShowPlayFromStart);
+		Object->SetBoolField(ShowReverse, Curve.bShowReverse);
+		Object->SetField(TimeLabel, FCNAJsonSchema::TextToJson(Curve.TimeLabel));
+		Object->SetField(PlayLabel, FCNAJsonSchema::TextToJson(Curve.PlayLabel));
+		Object->SetField(PlayFromStartLabel, FCNAJsonSchema::TextToJson(Curve.PlayFromStartLabel));
+		Object->SetField(StopLabel, FCNAJsonSchema::TextToJson(Curve.StopLabel));
+		Object->SetField(ReverseLabel, FCNAJsonSchema::TextToJson(Curve.ReverseLabel));
+		Object->SetField(UpdateLabel, FCNAJsonSchema::TextToJson(Curve.UpdateLabel));
+		Object->SetField(FinishedLabel, FCNAJsonSchema::TextToJson(Curve.FinishedLabel));
+		Object->SetField(GraphBackgroundColor, FCNAJsonSchema::ColorToJson(Curve.GraphBackgroundColor));
+		Object->SetBoolField(ShowKeys, Curve.bShowKeys);
+		Object->SetBoolField(ShowGrid, Curve.bShowGrid);
+		return Object;
 	}
 
 	TSharedRef<FJsonObject> BuildAppearance(const UCustomNodeAsset* Asset)
@@ -81,6 +124,12 @@ namespace CNAJsonExporterLocal
 			WidgetObject->SetNumberField(Height, Widget.Height);
 			WidgetObject->SetNumberField(SliderMin, Widget.SliderMin);
 			WidgetObject->SetNumberField(SliderMax, Widget.SliderMax);
+			// The Guid names the pins of a Curve widget (CNACurve_<Guid>_<Role>), so wires survive Export -> Import.
+			WidgetObject->SetStringField(WidgetGuid, Widget.WidgetGuid.ToString(EGuidFormats::DigitsWithHyphens));
+			if (Widget.IsCurve())
+			{
+				WidgetObject->SetObjectField(Curve, BuildCurveSettings(Widget.Curve));
+			}
 			WidgetValues.Add(MakeShared<FJsonValueObject>(WidgetObject));
 		}
 		Object->SetArrayField(BodyWidgets, WidgetValues);
@@ -88,6 +137,17 @@ namespace CNAJsonExporterLocal
 		Object->SetBoolField(ColorWires, Asset->bColorWires);
 		Object->SetBoolField(Compact, Asset->bCompact);
 		Object->SetField(CompactTitle, FCNAJsonSchema::TextToJson(Asset->CompactTitle));
+
+		// Node style families (plugin 2.1), always written so the file states the look completely.
+		Object->SetStringField(NodeStyle, FCNAJsonSchema::NodeStyleToString(Asset->NodeStyle));
+		Object->SetStringField(AnimStyle, FCNAJsonSchema::AnimNodeStyleToString(Asset->AnimStyle));
+		Object->SetBoolField(ExecPinsAsPosePins, Asset->bExecPinsAsPosePins);
+		Object->SetBoolField(ShowFastPathIcon, Asset->bShowFastPathIcon);
+		Object->SetStringField(NiagaraStyle, FCNAJsonSchema::NiagaraNodeStyleToString(Asset->NiagaraStyle));
+		Object->SetBoolField(NiagaraAddPinRows, Asset->bNiagaraAddPinRows);
+		Object->SetBoolField(NiagaraNamespaceLabels, Asset->bNiagaraNamespaceLabels);
+		Object->SetBoolField(ExecPinsAsParameterMap, Asset->bExecPinsAsParameterMap);
+		Object->SetField(NiagaraBodyText, FCNAJsonSchema::TextToJson(Asset->NiagaraBodyText));
 		return Object;
 	}
 
@@ -131,6 +191,7 @@ namespace CNAJsonExporterLocal
 			Object->SetField(PinColor, FCNAJsonSchema::ColorToJson(Override.PinColor));
 			Object->SetBoolField(OverrideLabelColor, Override.bOverrideLabelColor);
 			Object->SetField(LabelColor, FCNAJsonSchema::ColorToJson(Override.LabelColor));
+			Object->SetBoolField(DrawAsPosePin, Override.bDrawAsPosePin);
 			Values.Add(MakeShared<FJsonValueObject>(Object));
 		}
 		return Values;

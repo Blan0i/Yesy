@@ -7,6 +7,7 @@
 
 #include "BlueprintActionDatabaseRegistrar.h"
 #include "EdGraphSchema_K2.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 

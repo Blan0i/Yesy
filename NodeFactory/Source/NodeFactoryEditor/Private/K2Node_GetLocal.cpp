@@ -16,6 +16,7 @@
 #include "KismetCompiler.h"
 #include "ScopedTransaction.h"
 #include "Textures/SlateIcon.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 

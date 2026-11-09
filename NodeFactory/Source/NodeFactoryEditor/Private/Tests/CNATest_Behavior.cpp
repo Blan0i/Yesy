@@ -4,6 +4,7 @@
 #include "CNABehaviorBase.h"
 #include "CNABehaviorHost.h"
 #include "K2Node_Event.h"
+#include "CNALocalization.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
 

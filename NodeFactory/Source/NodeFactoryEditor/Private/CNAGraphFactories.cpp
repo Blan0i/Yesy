@@ -16,6 +16,7 @@
 #include "SGraphNode.h"
 #include "SGraphPin.h"
 #include "UObject/Class.h"
+#include "CNALocalization.h"
 
 namespace CNAGraphFactoriesLocal
 {

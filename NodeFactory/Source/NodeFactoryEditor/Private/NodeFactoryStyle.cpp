@@ -11,6 +11,7 @@
 #include "Brushes/SlateImageBrush.h"
 #include "Brushes/SlateBoxBrush.h"
 #include "Brushes/SlateColorBrush.h"
+#include "CNALocalization.h"
 
 #define LOCTEXT_NAMESPACE "NodeFactory"
 
