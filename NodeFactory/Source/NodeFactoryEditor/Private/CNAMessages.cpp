@@ -1,4 +1,4 @@
-// Copyright (c) NodeFactory. Message codes CNA001-CNA019, their texts and the Message Log "NodeFactory" (spec 10.1).
+// Copyright (c) NodeFactory. Message codes CNA001-CNA023, their texts and the Message Log "NodeFactory" (spec 10.1).
 
 #include "CNAMessages.h"
 #include "CNAEditorSettings.h"

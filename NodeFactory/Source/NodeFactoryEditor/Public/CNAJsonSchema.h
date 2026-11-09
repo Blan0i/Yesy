@@ -9,6 +9,8 @@
 #include "Dom/JsonValue.h"
 #include "EdGraph/EdGraphPin.h"
 
+struct FRichCurve;
+
 /**
  * Names of the JSON fields (spec 8.1). The exporter writes them in the order of this list; arrays keep the order
  * of the asset. There are no time stamps, so a diff in source control shows only real changes.
@@ -63,6 +65,17 @@ namespace CNAJsonFields
 	static const TCHAR* const Compact = TEXT("compact");
 	static const TCHAR* const CompactTitle = TEXT("compactTitle");
 
+	// appearance, node style families (optional, plugin 2.1)
+	static const TCHAR* const NodeStyle = TEXT("nodeStyle");
+	static const TCHAR* const AnimStyle = TEXT("animStyle");
+	static const TCHAR* const ExecPinsAsPosePins = TEXT("execPinsAsPosePins");
+	static const TCHAR* const ShowFastPathIcon = TEXT("showFastPathIcon");
+	static const TCHAR* const NiagaraStyle = TEXT("niagaraStyle");
+	static const TCHAR* const NiagaraAddPinRows = TEXT("niagaraAddPinRows");
+	static const TCHAR* const NiagaraNamespaceLabels = TEXT("niagaraNamespaceLabels");
+	static const TCHAR* const ExecPinsAsParameterMap = TEXT("execPinsAsParameterMap");
+	static const TCHAR* const NiagaraBodyText = TEXT("niagaraBodyText");
+
 	// badge, body widget
 	static const TCHAR* const Color = TEXT("color");
 	static const TCHAR* const TextColor = TEXT("textColor");
@@ -75,6 +88,45 @@ namespace CNAJsonFields
 	static const TCHAR* const Height = TEXT("height");
 	static const TCHAR* const SliderMin = TEXT("sliderMin");
 	static const TCHAR* const SliderMax = TEXT("sliderMax");
+	static const TCHAR* const WidgetGuid = TEXT("widgetGuid");
+	static const TCHAR* const Curve = TEXT("curve");
+
+	// curve settings of a Curve body widget (optional, plugin 2.1); "valueType" is ValueType below
+	static const TCHAR* const Mode = TEXT("mode");
+	static const TCHAR* const UseCurveAsset = TEXT("useCurveAsset");
+	static const TCHAR* const CurveAsset = TEXT("curveAsset");
+	static const TCHAR* const CurveX = TEXT("curveX");
+	static const TCHAR* const CurveY = TEXT("curveY");
+	static const TCHAR* const CurveZ = TEXT("curveZ");
+	static const TCHAR* const CurveW = TEXT("curveW");
+	static const TCHAR* const BakeSamples = TEXT("bakeSamples");
+	static const TCHAR* const Length = TEXT("length");
+	static const TCHAR* const Loop = TEXT("loop");
+	static const TCHAR* const PlayRate = TEXT("playRate");
+	static const TCHAR* const ShowPlayFromStart = TEXT("showPlayFromStart");
+	static const TCHAR* const ShowReverse = TEXT("showReverse");
+	static const TCHAR* const TimeLabel = TEXT("timeLabel");
+	static const TCHAR* const PlayLabel = TEXT("playLabel");
+	static const TCHAR* const PlayFromStartLabel = TEXT("playFromStartLabel");
+	static const TCHAR* const StopLabel = TEXT("stopLabel");
+	static const TCHAR* const ReverseLabel = TEXT("reverseLabel");
+	static const TCHAR* const UpdateLabel = TEXT("updateLabel");
+	static const TCHAR* const FinishedLabel = TEXT("finishedLabel");
+	static const TCHAR* const GraphBackgroundColor = TEXT("graphBackgroundColor");
+	static const TCHAR* const ShowKeys = TEXT("showKeys");
+	static const TCHAR* const ShowGrid = TEXT("showGrid");
+
+	// own curve channel (FRuntimeFloatCurve); "defaultValue" is DefaultValue below
+	static const TCHAR* const Keys = TEXT("keys");
+	static const TCHAR* const Time = TEXT("time");
+	static const TCHAR* const Value = TEXT("value");
+	static const TCHAR* const Interp = TEXT("interp");
+	static const TCHAR* const TangentMode = TEXT("tangentMode");
+	static const TCHAR* const ArriveTangent = TEXT("arriveTangent");
+	static const TCHAR* const LeaveTangent = TEXT("leaveTangent");
+	static const TCHAR* const PreInfinity = TEXT("preInfinity");
+	static const TCHAR* const PostInfinity = TEXT("postInfinity");
+	static const TCHAR* const ExternalCurve = TEXT("externalCurve");
 
 	// flags
 	static const TCHAR* const Pure = TEXT("pure");
@@ -102,6 +154,7 @@ namespace CNAJsonFields
 	static const TCHAR* const PinColor = TEXT("pinColor");
 	static const TCHAR* const OverrideLabelColor = TEXT("overrideLabelColor");
 	static const TCHAR* const LabelColor = TEXT("labelColor");
+	static const TCHAR* const DrawAsPosePin = TEXT("drawAsPosePin");
 
 	// redirect
 	static const TCHAR* const OldName = TEXT("oldName");
@@ -138,6 +191,8 @@ namespace CNAJsonFields
  *  1 - first format: texts are plain strings, allowedGraphs is a bit mask, t3d is one string;
  *  2 - texts are objects {text, namespace, key} (spec 9.3), allowedGraphs lists the graph kinds by name and t3d is
  *      an array of lines, so a diff shows changed nodes line by line.
+ *      Plugin 2.1 adds optional fields (node style families, drawAsPosePin, widgetGuid and curve of body widgets);
+ *      files without them import with the defaults of a new asset, so the version stays 2.
  * Older files are migrated in memory before they are read; newer files are refused (spec 8.2, item 2).
  */
 struct NODEFACTORYEDITOR_API FCNAJsonSchema
@@ -233,6 +288,25 @@ struct NODEFACTORYEDITOR_API FCNAJsonSchema
 	static FString BodyWidgetTypeToString(ECNABodyWidgetType Value);
 	static bool StringToBodyWidgetType(const FString& Text, ECNABodyWidgetType& OutValue);
 	static FString GraphKindToString(ECNAGraphKind Kind);
+	static FString NodeStyleToString(ECNANodeStyle Value);
+	static bool StringToNodeStyle(const FString& Text, ECNANodeStyle& OutValue);
+	static FString AnimNodeStyleToString(ECNAAnimNodeStyle Value);
+	static bool StringToAnimNodeStyle(const FString& Text, ECNAAnimNodeStyle& OutValue);
+	static FString NiagaraNodeStyleToString(ECNANiagaraNodeStyle Value);
+	static bool StringToNiagaraNodeStyle(const FString& Text, ECNANiagaraNodeStyle& OutValue);
+	static FString CurveValueTypeToString(ECNACurveValueType Value);
+	static bool StringToCurveValueType(const FString& Text, ECNACurveValueType& OutValue);
+	static FString CurveModeToString(ECNACurveMode Value);
+	static bool StringToCurveMode(const FString& Text, ECNACurveMode& OutValue);
+
+	/**
+	 * Keys of an own curve: {preInfinity, postInfinity, defaultValue (only when set), keys: [{time, value, interp,
+	 * tangentMode, arriveTangent, leaveTangent}]} in key order.
+	 */
+	static TSharedRef<FJsonObject> RichCurveToJson(const FRichCurve& Curve);
+
+	/** Replaces the keys of a curve; unknown enum names keep the defaults. Returns false for a malformed key. */
+	static bool JsonToRichCurve(const TSharedPtr<FJsonObject>& Object, FRichCurve& OutCurve);
 
 	/** AllowedGraphs mask as ["Function", "EventGraph", ...]. */
 	static TSharedRef<FJsonValue> GraphKindsToJson(int32 Mask);
