@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 2,
+  "engineVersion": "4.20.3",
+  "pluginVersion": "2.0.0",
+  "id": "7990B7A5-DEE6-5CF1-9797-6810FED69BD7",
+  "name": "CNA_BuildArray",
+  "displayName": {
+    "text": "Make String List",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BuildArray.DisplayName"
+  },
+  "subtitle": {
+    "text": "Dynamic pins",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BuildArray.Subtitle"
+  },
+  "tooltip": {
+    "text": "Collects the Item pins into an array and joins them with Separator. Use the + button to add pins (2 to 8).",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BuildArray.Tooltip"
+  },
+  "category": {
+    "text": "NodeFactory|Examples",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BuildArray.Category"
+  },
+  "keywords": {
+    "text": "array list make join string dynamic",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BuildArray.Keywords"
+  },
+  "defaultComment": {
+    "text": "",
+    "namespace": "",
+    "key": ""
+  },
+  "appearance": {
+    "useHeaderColor": true,
+    "headerColor": "#1565C0",
+    "headerTextColor": "#FFFFFF",
+    "pinLabelColor": "#FFFFFF",
+    "icon": "GraphEditor.MakeArray_16x",
+    "iconTint": "#FFFFFF",
+    "iconTexture": "",
+    "iconTextureTint": "#FFFFFF",
+    "cornerIcon": "None",
+    "badges": [],
+    "minWidth": 160,
+    "bodyWidgets": [],
+    "colorWires": true,
+    "compact": false,
+    "compactTitle": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    }
+  },
+  "flags": {
+    "pure": true,
+    "developmentOnly": false,
+    "deprecated": false,
+    "deprecationMessage": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    },
+    "allowedGraphs": [
+      "Function",
+      "EventGraph",
+      "Macro",
+      "ConstructionScript"
+    ],
+    "contextClass": "",
+    "hiddenInMenu": false,
+    "allowInstanceLabel": false
+  },
+  "pinOverrides": [
+    {
+      "pinName": "Items",
+      "displayName": {
+        "text": "Items",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BuildArray.Pin.Items.DisplayName"
+      },
+      "tooltip": {
+        "text": "One element per pin.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BuildArray.Pin.Items.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": true,
+      "dynamicMin": 2,
+      "dynamicMax": 8,
+      "dynamicNameFormat": {
+        "text": "Item {1}",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BuildArray.Pin.Items.DynamicNameFormat"
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "Separator",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "Placed between two items in Joined.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BuildArray.Pin.Separator.Tooltip"
+      },
+      "advanced": true,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "List",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "The items as an array.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BuildArray.Pin.List.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "Joined",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "The items as one string.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BuildArray.Pin.Joined.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    }
+  ],
+  "pinRedirects": [],
+  "localVariables": [],
+  "graph": {
+    "signature": [
+      {
+        "name": "Items",
+        "direction": "Input",
+        "type": {
+          "category": "string",
+          "subCategory": "",
+          "object": "",
+          "container": "Array",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "Separator",
+        "direction": "Input",
+        "type": {
+          "category": "string",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "List",
+        "direction": "Output",
+        "type": {
+          "category": "string",
+          "subCategory": "",
+          "object": "",
+          "container": "Array",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "Joined",
+        "direction": "Output",
+        "type": {
+          "category": "string",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      }
+    ],
+    "t3d": [
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_0\"",
+      "   bCanHaveOutputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=-480",
+      "   NodePosY=0",
+      "   NodeGuid=0EB4886221985A41AEBCC487712A7F54",
+      "   CustomProperties Pin (PinId=D0410CA60E99519C9278ACE44F50E744,PinName=\"Items\",Direction=\"EGPD_Output\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=Array,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 69645621CE42547F9C95B4E3937CC781,K2Node_CallFunction_0 81B4F9EBAAC25932A6644C9E0C7F57B3,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=5C3C9A394BFD54BC8C81CC3382390721,PinName=\"Separator\",Direction=\"EGPD_Output\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\", \",AutogeneratedDefaultValue=\", \",LinkedTo=(K2Node_CallFunction_0 4B3532A06C6A5A19A4EC02223F4CFBFF,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"Items\",PinType=(PinCategory=\"string\",ContainerType=Array),DesiredPinDirection=EGPD_Output)",
+      "   CustomProperties UserDefinedPin (PinName=\"Separator\",PinType=(PinCategory=\"string\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\", \")",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_1\"",
+      "   bCanHaveInputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=352",
+      "   NodePosY=0",
+      "   NodeGuid=60771D7BC1B950C09EEDA1F3D43C0D0B",
+      "   CustomProperties Pin (PinId=69645621CE42547F9C95B4E3937CC781,PinName=\"List\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=Array,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_0 D0410CA60E99519C9278ACE44F50E744,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=EBC653DFEF40565B887C04353AF96BB0,PinName=\"Joined\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_0 E30FD6946C3559AFB7F0E92EEA88C602,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"List\",PinType=(PinCategory=\"string\",ContainerType=Array),DesiredPinDirection=EGPD_Input)",
+      "   CustomProperties UserDefinedPin (PinName=\"Joined\",PinType=(PinCategory=\"string\"),DesiredPinDirection=EGPD_Input)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_0\"",
+      "   bIsPureFunc=True",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetStringLibrary\"',MemberName=\"JoinStringArray\")",
+      "   NodePosX=-112",
+      "   NodePosY=96",
+      "   NodeGuid=8AFCCBA5DDD65336B4ED06950ACFEBF7",
+      "   CustomProperties Pin (PinId=81B4F9EBAAC25932A6644C9E0C7F57B3,PinName=\"SourceArray\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=Array,PinType.bIsReference=True,PinType.bIsConst=True,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_0 D0410CA60E99519C9278ACE44F50E744,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=4B3532A06C6A5A19A4EC02223F4CFBFF,PinName=\"Separator\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\" \",AutogeneratedDefaultValue=\" \",LinkedTo=(K2Node_Tunnel_0 5C3C9A394BFD54BC8C81CC3382390721,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=E30FD6946C3559AFB7F0E92EEA88C602,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 EBC653DFEF40565B887C04353AF96BB0,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object"
+    ]
+  },
+  "behavior": {
+    "t3d": []
+  },
+  "textures": [],
+  "meta": {
+    "author": "NodeFactory",
+    "description": "Pure node whose array input Items is a dynamic group: every Item pin becomes one element (Make Array during the expansion).",
+    "tags": [
+      "example",
+      "pure",
+      "array",
+      "dynamic pins"
+    ],
+    "sourceUrl": ""
+  }
+}

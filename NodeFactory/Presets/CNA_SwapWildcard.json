@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 2,
+  "engineVersion": "4.20.3",
+  "pluginVersion": "2.0.0",
+  "id": "DC45DDA1-A853-55D3-9115-207B7DC05CF1",
+  "name": "CNA_SwapWildcard",
+  "displayName": {
+    "text": "Swap Values",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_SwapWildcard.DisplayName"
+  },
+  "subtitle": {
+    "text": "Wildcard",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_SwapWildcard.Subtitle"
+  },
+  "tooltip": {
+    "text": "Returns the two inputs in swapped order. Any type: the first wire decides the type of all four pins.",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_SwapWildcard.Tooltip"
+  },
+  "category": {
+    "text": "NodeFactory|Examples",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_SwapWildcard.Category"
+  },
+  "keywords": {
+    "text": "swap exchange wildcard any",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_SwapWildcard.Keywords"
+  },
+  "defaultComment": {
+    "text": "",
+    "namespace": "",
+    "key": ""
+  },
+  "appearance": {
+    "useHeaderColor": true,
+    "headerColor": "#6D4C41",
+    "headerTextColor": "#FFFFFF",
+    "pinLabelColor": "#FFFFFF",
+    "icon": "GraphEditor.Select_16x",
+    "iconTint": "#FFFFFF",
+    "iconTexture": "",
+    "iconTextureTint": "#FFFFFF",
+    "cornerIcon": "None",
+    "badges": [],
+    "minWidth": 0,
+    "bodyWidgets": [],
+    "colorWires": true,
+    "compact": false,
+    "compactTitle": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    }
+  },
+  "flags": {
+    "pure": true,
+    "developmentOnly": false,
+    "deprecated": false,
+    "deprecationMessage": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    },
+    "allowedGraphs": [
+      "Function",
+      "EventGraph",
+      "Macro",
+      "ConstructionScript"
+    ],
+    "contextClass": "",
+    "hiddenInMenu": false,
+    "allowInstanceLabel": false
+  },
+  "pinOverrides": [
+    {
+      "pinName": "OutA",
+      "displayName": {
+        "text": "A",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_SwapWildcard.Pin.OutA.DisplayName"
+      },
+      "tooltip": {
+        "text": "Receives the value of input B.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_SwapWildcard.Pin.OutA.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "OutB",
+      "displayName": {
+        "text": "B",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_SwapWildcard.Pin.OutB.DisplayName"
+      },
+      "tooltip": {
+        "text": "Receives the value of input A.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_SwapWildcard.Pin.OutB.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    }
+  ],
+  "pinRedirects": [],
+  "localVariables": [],
+  "graph": {
+    "signature": [
+      {
+        "name": "A",
+        "direction": "Input",
+        "type": {
+          "category": "wildcard",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "B",
+        "direction": "Input",
+        "type": {
+          "category": "wildcard",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "OutA",
+        "direction": "Output",
+        "type": {
+          "category": "wildcard",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "OutB",
+        "direction": "Output",
+        "type": {
+          "category": "wildcard",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      }
+    ],
+    "t3d": [
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_0\"",
+      "   bCanHaveOutputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=-320",
+      "   NodePosY=0",
+      "   NodeGuid=1FB0C3D30463579C802F13EB4DEF7F89",
+      "   CustomProperties Pin (PinId=5488C4853C1E526583C9A448A8F4B4FA,PinName=\"A\",Direction=\"EGPD_Output\",PinType.PinCategory=\"wildcard\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 6C4C3FD985FF57BF9293F45F0093DF66,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=5EC5D93455A15EBF85F8716EDC5E56E1,PinName=\"B\",Direction=\"EGPD_Output\",PinType.PinCategory=\"wildcard\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 006E7FC4DA06571F9F35F2EC56A80600,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"A\",PinType=(PinCategory=\"wildcard\"),DesiredPinDirection=EGPD_Output)",
+      "   CustomProperties UserDefinedPin (PinName=\"B\",PinType=(PinCategory=\"wildcard\"),DesiredPinDirection=EGPD_Output)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_1\"",
+      "   bCanHaveInputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=240",
+      "   NodePosY=0",
+      "   NodeGuid=D7638C5EFDA9534697B2F2B24864BCB9",
+      "   CustomProperties Pin (PinId=006E7FC4DA06571F9F35F2EC56A80600,PinName=\"OutA\",PinType.PinCategory=\"wildcard\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_0 5EC5D93455A15EBF85F8716EDC5E56E1,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=6C4C3FD985FF57BF9293F45F0093DF66,PinName=\"OutB\",PinType.PinCategory=\"wildcard\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_0 5488C4853C1E526583C9A448A8F4B4FA,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"OutA\",PinType=(PinCategory=\"wildcard\"),DesiredPinDirection=EGPD_Input)",
+      "   CustomProperties UserDefinedPin (PinName=\"OutB\",PinType=(PinCategory=\"wildcard\"),DesiredPinDirection=EGPD_Input)",
+      "End Object"
+    ]
+  },
+  "behavior": {
+    "t3d": []
+  },
+  "textures": [],
+  "meta": {
+    "author": "NodeFactory",
+    "description": "Pure node with Wildcard pins wired straight through the macro. Without a wire the node reports CNA007.",
+    "tags": [
+      "example",
+      "pure",
+      "wildcard"
+    ],
+    "sourceUrl": ""
+  }
+}

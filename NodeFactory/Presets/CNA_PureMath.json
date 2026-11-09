@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 2,
+  "engineVersion": "4.20.3",
+  "pluginVersion": "2.0.0",
+  "id": "05604DEC-C061-5CFB-8983-FA295B325D9D",
+  "name": "CNA_PureMath",
+  "displayName": {
+    "text": "Multiply Add",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_PureMath.DisplayName"
+  },
+  "subtitle": {
+    "text": "A * B + C",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_PureMath.Subtitle"
+  },
+  "tooltip": {
+    "text": "Pure math example: returns A * B + C. A compact pure node with three Float inputs and one Float output.",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_PureMath.Tooltip"
+  },
+  "category": {
+    "text": "NodeFactory|Examples",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_PureMath.Category"
+  },
+  "keywords": {
+    "text": "math multiply add mad fma",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_PureMath.Keywords"
+  },
+  "defaultComment": {
+    "text": "",
+    "namespace": "",
+    "key": ""
+  },
+  "appearance": {
+    "useHeaderColor": true,
+    "headerColor": "#2E7D32",
+    "headerTextColor": "#FFFFFF",
+    "pinLabelColor": "#FFFFFF",
+    "icon": "GraphEditor.PureFunction_16x",
+    "iconTint": "#FFFFFF",
+    "iconTexture": "",
+    "iconTextureTint": "#FFFFFF",
+    "cornerIcon": "None",
+    "badges": [],
+    "minWidth": 0,
+    "bodyWidgets": [],
+    "colorWires": true,
+    "compact": true,
+    "compactTitle": {
+      "text": "A*B+C",
+      "namespace": "NodeFactoryPresets",
+      "key": "CNA_PureMath.CompactTitle"
+    }
+  },
+  "flags": {
+    "pure": true,
+    "developmentOnly": false,
+    "deprecated": false,
+    "deprecationMessage": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    },
+    "allowedGraphs": [
+      "Function",
+      "EventGraph",
+      "Macro",
+      "ConstructionScript"
+    ],
+    "contextClass": "",
+    "hiddenInMenu": false,
+    "allowInstanceLabel": false
+  },
+  "pinOverrides": [
+    {
+      "pinName": "A",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "First factor.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_PureMath.Pin.A.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "B",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "Second factor.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_PureMath.Pin.B.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "C",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "Added to the product.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_PureMath.Pin.C.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "Result",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "A * B + C",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_PureMath.Pin.Result.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    }
+  ],
+  "pinRedirects": [],
+  "localVariables": [],
+  "graph": {
+    "signature": [
+      {
+        "name": "A",
+        "direction": "Input",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "B",
+        "direction": "Input",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "C",
+        "direction": "Input",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "Result",
+        "direction": "Output",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      }
+    ],
+    "t3d": [
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_0\"",
+      "   bCanHaveOutputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=-480",
+      "   NodePosY=0",
+      "   NodeGuid=4AE0EBE58CDE5D5BB96A94158D946842",
+      "   CustomProperties Pin (PinId=4769E651C11C58C186C664FE24E976B5,PinName=\"A\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_CallFunction_0 46BAAC942B0D5C7F8C5B3C222F508AB7,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=790DD70438A553BD82162105AA5D458D,PinName=\"B\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"1.0\",AutogeneratedDefaultValue=\"1.0\",LinkedTo=(K2Node_CallFunction_0 DF0BA11601765EF180B98C0C65149A8E,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=F3CD7242F78258F280D526C8E2A386B9,PinName=\"C\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_CallFunction_1 109D4BA6F6185AE3BBC1C0CFB6DB29D7,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"A\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"0.0\")",
+      "   CustomProperties UserDefinedPin (PinName=\"B\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"1.0\")",
+      "   CustomProperties UserDefinedPin (PinName=\"C\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"0.0\")",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_1\"",
+      "   bCanHaveInputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=400",
+      "   NodePosY=0",
+      "   NodeGuid=643E6204C15154A491D335C0AAFE4E8B",
+      "   CustomProperties Pin (PinId=85300135CC025FF7A81D7949A7017B61,PinName=\"Result\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_1 1F69B7211A2C535E8B7CBDA724D720E2,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"Result\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Input)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_0\"",
+      "   bIsPureFunc=True",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetMathLibrary\"',MemberName=\"Multiply_FloatFloat\")",
+      "   NodePosX=-176",
+      "   NodePosY=-48",
+      "   NodeGuid=A856685650DB58EEBCF56FECFB44C158",
+      "   CustomProperties Pin (PinId=46BAAC942B0D5C7F8C5B3C222F508AB7,PinName=\"A\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_Tunnel_0 4769E651C11C58C186C664FE24E976B5,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=DF0BA11601765EF180B98C0C65149A8E,PinName=\"B\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_Tunnel_0 790DD70438A553BD82162105AA5D458D,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=FF2D0552BAF654C0BE23471D0014E46A,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_1 6763B35959285A428353B754488D4D1E,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_1\"",
+      "   bIsPureFunc=True",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetMathLibrary\"',MemberName=\"Add_FloatFloat\")",
+      "   NodePosX=112",
+      "   NodePosY=16",
+      "   NodeGuid=57C409DC5DDF5C009C3EE85A6AC9C7B9",
+      "   CustomProperties Pin (PinId=6763B35959285A428353B754488D4D1E,PinName=\"A\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_CallFunction_0 FF2D0552BAF654C0BE23471D0014E46A,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=109D4BA6F6185AE3BBC1C0CFB6DB29D7,PinName=\"B\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"1.0\",AutogeneratedDefaultValue=\"1.0\",LinkedTo=(K2Node_Tunnel_0 F3CD7242F78258F280D526C8E2A386B9,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=1F69B7211A2C535E8B7CBDA724D720E2,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 85300135CC025FF7A81D7949A7017B61,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object"
+    ]
+  },
+  "behavior": {
+    "t3d": []
+  },
+  "textures": [],
+  "meta": {
+    "author": "NodeFactory",
+    "description": "Pure node: Multiply (Float) and Add (Float) inside the macro Execute. Shows the compact look and pin overrides.",
+    "tags": [
+      "example",
+      "pure",
+      "math",
+      "compact"
+    ],
+    "sourceUrl": ""
+  }
+}

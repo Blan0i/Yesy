@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 2,
+  "engineVersion": "4.20.3",
+  "pluginVersion": "2.0.0",
+  "id": "390FEECB-5CDD-5F13-940D-F4ABE32A355F",
+  "name": "CNA_BehaviorToggle",
+  "displayName": {
+    "text": "Print With Details",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BehaviorToggle.DisplayName"
+  },
+  "subtitle": {
+    "text": "Editor Behavior",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BehaviorToggle.Subtitle"
+  },
+  "tooltip": {
+    "text": "Prints Message. With Show Details checked it also prints Details; the Details pin is visible only while Show Details is checked.",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BehaviorToggle.Tooltip"
+  },
+  "category": {
+    "text": "NodeFactory|Examples",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BehaviorToggle.Category"
+  },
+  "keywords": {
+    "text": "print log behavior details toggle show hide",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_BehaviorToggle.Keywords"
+  },
+  "defaultComment": {
+    "text": "",
+    "namespace": "",
+    "key": ""
+  },
+  "appearance": {
+    "useHeaderColor": true,
+    "headerColor": "#AD1457",
+    "headerTextColor": "#FFFFFF",
+    "pinLabelColor": "#FFFFFF",
+    "icon": "GraphEditor.Branch_16x",
+    "iconTint": "#FFFFFF",
+    "iconTexture": "",
+    "iconTextureTint": "#FFFFFF",
+    "cornerIcon": "None",
+    "badges": [],
+    "minWidth": 200,
+    "bodyWidgets": [
+      {
+        "pinName": "ShowDetails",
+        "type": "CheckBox",
+        "options": [],
+        "label": {
+          "text": "Show Details",
+          "namespace": "NodeFactoryPresets",
+          "key": "CNA_BehaviorToggle.Widget.ShowDetails.Label"
+        },
+        "width": 0
+      }
+    ],
+    "colorWires": true,
+    "compact": false,
+    "compactTitle": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    }
+  },
+  "flags": {
+    "pure": false,
+    "developmentOnly": false,
+    "deprecated": false,
+    "deprecationMessage": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    },
+    "allowedGraphs": [
+      "Function",
+      "EventGraph",
+      "Macro",
+      "ConstructionScript"
+    ],
+    "contextClass": "",
+    "hiddenInMenu": false,
+    "allowInstanceLabel": false
+  },
+  "pinOverrides": [
+    {
+      "pinName": "ShowDetails",
+      "displayName": {
+        "text": "Show Details",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BehaviorToggle.Pin.ShowDetails.DisplayName"
+      },
+      "tooltip": {
+        "text": "Shows the Details pin and prints it.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BehaviorToggle.Pin.ShowDetails.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "Details",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "Printed after Message when Show Details is checked.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_BehaviorToggle.Pin.Details.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": true,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    }
+  ],
+  "pinRedirects": [],
+  "localVariables": [],
+  "graph": {
+    "signature": [
+      {
+        "name": "execute",
+        "direction": "Input",
+        "type": {
+          "category": "exec",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "Message",
+        "direction": "Input",
+        "type": {
+          "category": "string",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "ShowDetails",
+        "direction": "Input",
+        "type": {
+          "category": "bool",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "Details",
+        "direction": "Input",
+        "type": {
+          "category": "string",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "then",
+        "direction": "Output",
+        "type": {
+          "category": "exec",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      }
+    ],
+    "t3d": [
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_0\"",
+      "   bCanHaveOutputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=-640",
+      "   NodePosY=0",
+      "   NodeGuid=88CB0F2084575CB3A88A5CB4EE84AFEB",
+      "   CustomProperties Pin (PinId=0EC51D627D2B54739D02558401A15898,PinName=\"execute\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_0 96F36E3BE8B0571E99D494F5337282FA,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=AFAF5F3DDFBA57F7A8A7B3E0980B1A90,PinName=\"Message\",Direction=\"EGPD_Output\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"Hello\",AutogeneratedDefaultValue=\"Hello\",LinkedTo=(K2Node_CallFunction_0 31F1E6A2C16F58B8BD8F507131F7B459,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=98A53BD1245A530C843AEDC4B42823E2,PinName=\"ShowDetails\",Direction=\"EGPD_Output\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"false\",AutogeneratedDefaultValue=\"false\",LinkedTo=(K2Node_IfThenElse_0 5AE33E50D2DD51DF81F2D9E0AC670198,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=8B3E5B07985E5AF1B163DC1D2B95A7D1,PinName=\"Details\",Direction=\"EGPD_Output\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_1 12C97A9973695E0FBB8B186D2B1E66DD,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"execute\",PinType=(PinCategory=\"exec\"),DesiredPinDirection=EGPD_Output)",
+      "   CustomProperties UserDefinedPin (PinName=\"Message\",PinType=(PinCategory=\"string\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"Hello\")",
+      "   CustomProperties UserDefinedPin (PinName=\"ShowDetails\",PinType=(PinCategory=\"bool\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"false\")",
+      "   CustomProperties UserDefinedPin (PinName=\"Details\",PinType=(PinCategory=\"string\"),DesiredPinDirection=EGPD_Output)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_1\"",
+      "   bCanHaveInputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=592",
+      "   NodePosY=0",
+      "   NodeGuid=882FBCD5912D5697838E86FF5183989A",
+      "   CustomProperties Pin (PinId=27E6E6EDD154598B821B5A4B40529381,PinName=\"then\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_1 52DBDF65E19E5038A8370765169526A0,K2Node_IfThenElse_0 7B0CC9B13DA3523FAE7994564F9C2D4A,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"then\",PinType=(PinCategory=\"exec\"),DesiredPinDirection=EGPD_Input)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_0\"",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetSystemLibrary\"',MemberName=\"PrintString\")",
+      "   NodePosX=-320",
+      "   NodePosY=-32",
+      "   NodeGuid=B43B340FCF9653B683C5FDB1DB8073FC",
+      "   CustomProperties Pin (PinId=96F36E3BE8B0571E99D494F5337282FA,PinName=\"execute\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_0 0EC51D627D2B54739D02558401A15898,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=4E9FE516FBAA509E90100B226A33B653,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_IfThenElse_0 D2B3D69195B45615B3AD0FA667B6268E,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=31F1E6A2C16F58B8BD8F507131F7B459,PinName=\"InString\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"Hello\",AutogeneratedDefaultValue=\"Hello\",LinkedTo=(K2Node_Tunnel_0 AFAF5F3DDFBA57F7A8A7B3E0980B1A90,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_IfThenElse Name=\"K2Node_IfThenElse_0\"",
+      "   NodePosX=-16",
+      "   NodePosY=0",
+      "   NodeGuid=FAD6D738E948546F91743DD2690E1018",
+      "   CustomProperties Pin (PinId=D2B3D69195B45615B3AD0FA667B6268E,PinName=\"execute\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_0 4E9FE516FBAA509E90100B226A33B653,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=5AE33E50D2DD51DF81F2D9E0AC670198,PinName=\"Condition\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"true\",AutogeneratedDefaultValue=\"true\",LinkedTo=(K2Node_Tunnel_0 98A53BD1245A530C843AEDC4B42823E2,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=4544ED70E2A35CD0B8AB4127EA2E5645,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_1 D5E7F3E45AB35FB88ADB6B23EA2B201C,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=7B0CC9B13DA3523FAE7994564F9C2D4A,PinName=\"else\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 27E6E6EDD154598B821B5A4B40529381,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_1\"",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetSystemLibrary\"',MemberName=\"PrintString\")",
+      "   NodePosX=240",
+      "   NodePosY=-112",
+      "   NodeGuid=09E3147846DA5670B0C22FC9006F974F",
+      "   CustomProperties Pin (PinId=D5E7F3E45AB35FB88ADB6B23EA2B201C,PinName=\"execute\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_IfThenElse_0 4544ED70E2A35CD0B8AB4127EA2E5645,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=52DBDF65E19E5038A8370765169526A0,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 27E6E6EDD154598B821B5A4B40529381,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=12C97A9973695E0FBB8B186D2B1E66DD,PinName=\"InString\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"Hello\",AutogeneratedDefaultValue=\"Hello\",LinkedTo=(K2Node_Tunnel_0 8B3E5B07985E5AF1B163DC1D2B95A7D1,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object"
+    ]
+  },
+  "behavior": {
+    "t3d": [
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name=\"K2Node_Event_0\"",
+      "   EventReference=(MemberParent=Class'\"/Script/NodeFactoryEditor.CNABehaviorBase\"',MemberName=\"OnNodePlaced\")",
+      "   bOverrideFunction=True",
+      "   NodePosX=-464",
+      "   NodePosY=-176",
+      "   NodeGuid=9FB1D5C784C857F88307C18C5FE63219",
+      "   CustomProperties Pin (PinId=0F252769C5725E1AB044BBEE23F0B7CE,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_2 421B69F173FE5F01BB6209F58EC98136,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=9AAED4F5FE5E5527B1072D9A9E4F8085,PinName=\"Node\",Direction=\"EGPD_Output\",PinType.PinCategory=\"object\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=Class'/Script/CoreUObject.Object',PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name=\"K2Node_Event_1\"",
+      "   EventReference=(MemberParent=Class'\"/Script/NodeFactoryEditor.CNABehaviorBase\"',MemberName=\"OnPinValueChanged\")",
+      "   bOverrideFunction=True",
+      "   NodePosX=-464",
+      "   NodePosY=80",
+      "   bCommentBubbleVisible=True",
+      "   NodeComment=\"Runs for every edited default value; the visibility is simply computed again.\"",
+      "   NodeGuid=380D1EA4210A5EE3B53ADD5496AD94FA",
+      "   CustomProperties Pin (PinId=641540B2E6CA54A9A1EB8E1A40FDFCCE,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_3 61EC0C05309C55119B94AA6D71409C39,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=B7AA9A20E42C5C0DBA7255AC2939138F,PinName=\"PinName\",Direction=\"EGPD_Output\",PinType.PinCategory=\"name\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=D3ECCDD86F7054DAAF91E7185B128D50,PinName=\"NewValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_0\"",
+      "   bIsPureFunc=True",
+      "   bIsConstFunc=True",
+      "   FunctionReference=(MemberName=\"GetPinValue\",bSelfContext=True)",
+      "   NodePosX=-464",
+      "   NodePosY=336",
+      "   NodeGuid=B8E40CD8ECB754489909F49AEFC76890",
+      "   CustomProperties Pin (PinId=23000B58B1FA59DEA21253AD7B35B92F,PinName=\"PinName\",PinType.PinCategory=\"name\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"ShowDetails\",AutogeneratedDefaultValue=\"ShowDetails\",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=8E56BA44D7CF5B40918F206045DA706F,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_1 FC3AA426C819576588F71D10B9B73B31,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_1\"",
+      "   bIsPureFunc=True",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetStringLibrary\"',MemberName=\"EqualEqual_StriStri\")",
+      "   NodePosX=-144",
+      "   NodePosY=336",
+      "   NodeGuid=CD2A8A2120EC5CA8861591A9C57EC70B",
+      "   CustomProperties Pin (PinId=FC3AA426C819576588F71D10B9B73B31,PinName=\"A\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_0 8E56BA44D7CF5B40918F206045DA706F,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=5E3E40CCBD63559296C04E69C039DCCD,PinName=\"B\",PinType.PinCategory=\"string\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"true\",AutogeneratedDefaultValue=\"true\",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=CBBF90EECCEF5778B4FA06B520BF78FF,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_2 E7B9D05CCF0A56A09CB67543B9F98193,K2Node_CallFunction_3 A0D992F5E04E5025B7DF2601C139F91F,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_2\"",
+      "   FunctionReference=(MemberName=\"SetPinVisibility\",bSelfContext=True)",
+      "   NodePosX=160",
+      "   NodePosY=-176",
+      "   NodeGuid=40A789EE9DC2556C8AA1CB8C846D3E91",
+      "   CustomProperties Pin (PinId=421B69F173FE5F01BB6209F58EC98136,PinName=\"execute\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Event_0 0F252769C5725E1AB044BBEE23F0B7CE,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=7490745DC6B55EFB9BD3BBA2183A5B83,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=3A3B264B981952FD91B8CD4486927884,PinName=\"PinName\",PinType.PinCategory=\"name\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"Details\",AutogeneratedDefaultValue=\"Details\",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=E7B9D05CCF0A56A09CB67543B9F98193,PinName=\"bVisible\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"false\",AutogeneratedDefaultValue=\"false\",LinkedTo=(K2Node_CallFunction_1 CBBF90EECCEF5778B4FA06B520BF78FF,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=90D889927875597E920E684C515748F3,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_3\"",
+      "   FunctionReference=(MemberName=\"SetPinVisibility\",bSelfContext=True)",
+      "   NodePosX=160",
+      "   NodePosY=80",
+      "   NodeGuid=D2646A9899515AA984676168889DD745",
+      "   CustomProperties Pin (PinId=61EC0C05309C55119B94AA6D71409C39,PinName=\"execute\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Event_1 641540B2E6CA54A9A1EB8E1A40FDFCCE,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=EA73BDBEB3D25F9DACD1DED24D91AD28,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=1199390581A95E7B9F52E239E06823B7,PinName=\"PinName\",PinType.PinCategory=\"name\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"Details\",AutogeneratedDefaultValue=\"Details\",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=A0D992F5E04E5025B7DF2601C139F91F,PinName=\"bVisible\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"false\",AutogeneratedDefaultValue=\"false\",LinkedTo=(K2Node_CallFunction_1 CBBF90EECCEF5778B4FA06B520BF78FF,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=DCE3DC27E67D5FE984806445272DB45F,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object"
+    ]
+  },
+  "textures": [],
+  "meta": {
+    "author": "NodeFactory",
+    "description": "The Editor Behavior Graph handles On Node Placed and On Pin Value Changed and calls Set Pin Visibility. The check box in the node body edits Show Details.",
+    "tags": [
+      "example",
+      "behavior",
+      "body widget"
+    ],
+    "sourceUrl": ""
+  }
+}

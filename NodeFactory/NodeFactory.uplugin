@@ -1,0 +1,36 @@
+{
+	"FileVersion": 3,
+	"Version": 3,
+	"VersionName": "2.0.4-partial-experimental",
+	"FriendlyName": "NodeFactory",
+	"Description": "Describe a new Blueprint node with one Custom Node Asset: pins, appearance, the execution subgraph and the editor behavior live in a single asset with a live preview.",
+	"Category": "Blueprints",
+	"CreatedBy": "Blatnoi",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"EngineVersion": "4.20.0",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"EnabledByDefault": true,
+	"Modules": [
+		{
+			"Name": "NodeFactory",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "NodeFactoryEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	],
+	"LocalizationTargets": [
+		{
+			"Name": "NodeFactory",
+			"LoadingPolicy": "Editor"
+		}
+	]
+}

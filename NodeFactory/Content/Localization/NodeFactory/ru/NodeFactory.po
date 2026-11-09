@@ -1,0 +1,3255 @@
+# NodeFactory localization (ru).
+# Unreal PO format: msgctxt is "Namespace,Key" (spec 9.3).
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: NodeFactory 2.0.0\n"
+"POT-Creation-Date: 2024-11-05 12:00\n"
+"PO-Revision-Date: 2024-11-05 12:00\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Key:	AddDynamicPinTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 421
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 421
+msgctxt "NodeFactory,AddDynamicPinTransaction"
+msgid "Add Pin"
+msgstr "Добавление пина"
+
+#. Key:	AddElementMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1966
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1966
+msgctxt "NodeFactory,AddElementMenu"
+msgid "Add Pin"
+msgstr "Добавить пин"
+
+#. Key:	AddElementMenuTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1967
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1967
+msgctxt "NodeFactory,AddElementMenuTooltip"
+msgid "Adds an element pin."
+msgstr "Добавляет пин-элемент."
+
+#. Key:	AddInputPin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 27
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 27
+msgctxt "NodeFactory,AddInputPin"
+msgid "Add Input"
+msgstr "Добавить вход"
+
+#. Key:	AddInputPin_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 27
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 27
+msgctxt "NodeFactory,AddInputPin_ToolTip"
+msgid "Add an input pin to Tunnel Input of the Execution Graph."
+msgstr "Добавить входной пин в Tunnel Input графа выполнения."
+
+#. Key:	AddLocalVariable
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 29
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 29
+msgctxt "NodeFactory,AddLocalVariable"
+msgid "Add Variable"
+msgstr "Добавить переменную"
+
+#. Key:	AddLocalVariable_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 29
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 29
+msgctxt "NodeFactory,AddLocalVariable_ToolTip"
+msgid "Add a local variable of the subgraph."
+msgstr "Добавить локальную переменную подграфа."
+
+#. Key:	AddOutputPin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 28
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 28
+msgctxt "NodeFactory,AddOutputPin"
+msgid "Add Output"
+msgstr "Добавить выход"
+
+#. Key:	AddOutputPin_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 28
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 28
+msgctxt "NodeFactory,AddOutputPin_ToolTip"
+msgid "Add an output pin to Tunnel Output of the Execution Graph."
+msgstr "Добавить выходной пин в Tunnel Output графа выполнения."
+
+#. Key:	AssetEditor.BehaviorCorner
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetEditor.cpp - line 62
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetEditor.cpp - line 62
+msgctxt "NodeFactory,AssetEditor.BehaviorCorner"
+msgid "EDITOR BEHAVIOR"
+msgstr "ПОВЕДЕНИЕ В РЕДАКТОРЕ"
+
+#. Key:	AssetEditor.ExecuteCorner
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetEditor.cpp - line 66
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetEditor.cpp - line 66
+msgctxt "NodeFactory,AssetEditor.ExecuteCorner"
+msgid "EXECUTION GRAPH"
+msgstr "ГРАФ ВЫПОЛНЕНИЯ"
+
+#. Key:	AssetEditor.ToolkitName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetEditor.cpp - line 78
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetEditor.cpp - line 78
+msgctxt "NodeFactory,AssetEditor.ToolkitName"
+msgid "Custom Node Editor"
+msgstr "Редактор пользовательской ноды"
+
+#. Key:	AssetTooltipLine
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 924
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 924
+msgctxt "NodeFactory,AssetTooltipLine"
+msgid "Custom Node Asset: {0}"
+msgstr "Ассет пользовательской ноды: {0}"
+
+#. Key:	AssignmentFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 678
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 678
+msgctxt "NodeFactory,AssignmentFailed"
+msgid "an assignment of a local variable could not be created."
+msgstr "не удалось создать присваивание локальной переменной."
+
+#. Key:	Behavior.ChangePinDataTypeFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 112
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 112
+msgctxt "NodeFactory,Behavior.ChangePinDataTypeFailed"
+msgid "ChangePinDataType({0}): {1}"
+msgstr "ChangePinDataType({0}): {1}"
+
+#. Key:	Behavior.CompileFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 154
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 154
+msgctxt "NodeFactory,Behavior.CompileFailed"
+msgid "the asset has compile errors, Behavior events are not called."
+msgstr "в ассете есть ошибки компиляции, события Behavior не вызываются."
+
+#. Key:	Behavior.NoAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 142
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 142
+msgctxt "NodeFactory,Behavior.NoAsset"
+msgid "the asset is missing."
+msgstr "ассет отсутствует."
+
+#. Key:	Behavior.NotCompiled
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 149
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 149
+msgctxt "NodeFactory,Behavior.NotCompiled"
+msgid "the asset is not compiled, Behavior events are not called. Compile the asset."
+msgstr "ассет не скомпилирован, события Behavior не вызываются. Скомпилируйте ассет."
+
+#. Key:	Behavior.RenamePinFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 96
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 96
+msgctxt "NodeFactory,Behavior.RenamePinFailed"
+msgid "RenamePin({0}): {1}"
+msgstr "RenamePin({0}): {1}"
+
+#. Key:	Behavior.SetPinVisibilityFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 80
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 80
+msgctxt "NodeFactory,Behavior.SetPinVisibilityFailed"
+msgid "SetPinVisibility({0}): {1}"
+msgstr "SetPinVisibility({0}): {1}"
+
+#. Key:	Behavior.SetRuleFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 152
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorBase.cpp - line 152
+msgctxt "NodeFactory,Behavior.SetRuleFailed"
+msgid "SetPinConnectionRule({0}): {1}"
+msgstr "SetPinConnectionRule({0}): {1}"
+
+#. Key:	Behavior.StaleClass
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 164
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 164
+msgctxt "NodeFactory,Behavior.StaleClass"
+msgid "the compiled class is outdated, compile the asset."
+msgstr "скомпилированный класс устарел, скомпилируйте ассет."
+
+#. Key:	Behavior.Transaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 255
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 255
+msgctxt "NodeFactory,Behavior.Transaction"
+msgid "NodeFactory Behavior: {0}"
+msgstr "NodeFactory, Behavior: {0}"
+
+#. Key:	Behavior.WrongParent
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 159
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNABehaviorHost.cpp - line 159
+msgctxt "NodeFactory,Behavior.WrongParent"
+msgid "the parent class of the asset is not CNA Behavior Base."
+msgstr "родительский класс ассета не CNA Behavior Base."
+
+#. Key:	BehaviorHideConnected
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1280
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1280
+msgctxt "NodeFactory,BehaviorHideConnected"
+msgid "a connected pin cannot be hidden"
+msgstr "подключённый пин нельзя скрыть"
+
+#. Key:	BehaviorInvalidType
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1354
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1354
+msgctxt "NodeFactory,BehaviorInvalidType"
+msgid "the new type is not a data type"
+msgstr "новый тип не является типом данных"
+
+#. Key:	BehaviorMissingTypeObject
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1359
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1359
+msgctxt "NodeFactory,BehaviorMissingTypeObject"
+msgid "the type {0} is incomplete"
+msgstr "тип {0} неполный"
+
+#. Key:	BehaviorNotWildcard
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1349
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1349
+msgctxt "NodeFactory,BehaviorNotWildcard"
+msgid "only Wildcard pins can change their type"
+msgstr "менять тип могут только пины Wildcard"
+
+#. Key:	BehaviorPinNotFound
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1275
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1275
+msgctxt "NodeFactory,BehaviorPinNotFound"
+msgid "the node has no pin with this name"
+msgstr "у ноды нет пина с таким именем"
+
+#. Key:	BehaviorRuleNeedsClass
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1431
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1431
+msgctxt "NodeFactory,BehaviorRuleNeedsClass"
+msgid "the rule ClassFilter needs a class"
+msgstr "правилу ClassFilter нужен класс"
+
+#. Key:	BehaviorTypeBreaksWire
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1396
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1396
+msgctxt "NodeFactory,BehaviorTypeBreaksWire"
+msgid "the wire of {0} does not accept {1}"
+msgstr "провод пина {0} не принимает {1}"
+
+#. Key:	BehaviorWildcardConnected
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1371
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1371
+msgctxt "NodeFactory,BehaviorWildcardConnected"
+msgid "connected Wildcard pins keep their resolved type"
+msgstr "подключённые пины Wildcard сохраняют разрешённый тип"
+
+#. Key:	CallerPinTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 48
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 48
+msgctxt "NodeFactory,CallerPinTooltip"
+msgid "The object whose Blueprint executes the custom node (Self of the caller)."
+msgstr "Объект, чей Blueprint выполняет пользовательскую ноду (Self вызывающего)."
+
+#. Key:	Catalog.Details
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 405
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 405
+msgctxt "NodeFactory,Catalog.Details"
+msgid "{0}\n{1}\n\nAuthor: {2}\nFile: {3}"
+msgstr "{0}\n{1}\n\nАвтор: {2}\nФайл: {3}"
+
+#. Key:	Catalog.Empty
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 398
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 398
+msgctxt "NodeFactory,Catalog.Empty"
+msgid "The preset folder has no JSON files. Export a node with Export JSON into this folder or change the folder in Editor Preferences, NodeFactory."
+msgstr "В папке пресетов нет файлов JSON. Экспортируйте ноду командой Export JSON в эту папку или смените папку в Editor Preferences, NodeFactory."
+
+#. Key:	Catalog.Import
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 221
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 221
+msgctxt "NodeFactory,Catalog.Import"
+msgid "Import"
+msgstr "Импорт"
+
+#. Key:	Catalog.ImportFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 346
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 346
+msgctxt "NodeFactory,Catalog.ImportFailed"
+msgid "{0} was not imported:{1}"
+msgstr "{0} не импортирован:{1}"
+
+#. Key:	Catalog.ImportTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 222
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 222
+msgctxt "NodeFactory,Catalog.ImportTip"
+msgid "Create a Custom Node Asset from the selected preset in the folder on the left; a taken name gets _1 (double click does the same)."
+msgstr "Создать ассет пользовательской ноды из выбранного пресета в папке слева; к занятому имени добавляется _1 (то же делает двойной щелчок)."
+
+#. Key:	Catalog.Imported
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 351
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 351
+msgctxt "NodeFactory,Catalog.Imported"
+msgid "Imported {0} as {1}"
+msgstr "{0} импортирован как {1}"
+
+#. Key:	Catalog.Impure
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 273
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 273
+msgctxt "NodeFactory,Catalog.Impure"
+msgid "Impure"
+msgstr "Нечистая"
+
+#. Key:	Catalog.NoCategory
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 272
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 272
+msgctxt "NodeFactory,Catalog.NoCategory"
+msgid "No category"
+msgstr "Без категории"
+
+#. Key:	Catalog.OpenFolder
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 144
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 144
+msgctxt "NodeFactory,Catalog.OpenFolder"
+msgid "Open Folder"
+msgstr "Открыть папку"
+
+#. Key:	Catalog.OpenFolderTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 145
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 145
+msgctxt "NodeFactory,Catalog.OpenFolderTip"
+msgid "Show the preset folder in the file explorer. The folder is set in Editor Preferences, NodeFactory."
+msgstr "Показать папку пресетов в проводнике. Папка задаётся в Editor Preferences, NodeFactory."
+
+#. Key:	Catalog.Problem
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 403
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 403
+msgctxt "NodeFactory,Catalog.Problem"
+msgid "{0}\n\nThe file cannot be imported:\n{1}"
+msgstr "{0}\n\nФайл нельзя импортировать:\n{1}"
+
+#. Key:	Catalog.Pure
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 273
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 273
+msgctxt "NodeFactory,Catalog.Pure"
+msgid "Pure"
+msgstr "Чистая"
+
+#. Key:	Catalog.Rescan
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 135
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 135
+msgctxt "NodeFactory,Catalog.Rescan"
+msgid "Rescan"
+msgstr "Обновить"
+
+#. Key:	Catalog.RescanTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 136
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 136
+msgctxt "NodeFactory,Catalog.RescanTip"
+msgid "Read the preset folder again."
+msgstr "Заново прочитать папку пресетов."
+
+#. Key:	Catalog.RowDetails
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 271
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 271
+msgctxt "NodeFactory,Catalog.RowDetails"
+msgid "{0}  |  {1}  |  {2}"
+msgstr "{0}  |  {1}  |  {2}"
+
+#. Key:	Catalog.SearchHint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 123
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 123
+msgctxt "NodeFactory,Catalog.SearchHint"
+msgid "Search by name, category or tag"
+msgstr "Поиск по имени, категории или тегу"
+
+#. Key:	Catalog.SelectHint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 399
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 399
+msgctxt "NodeFactory,Catalog.SelectHint"
+msgid "Select a preset to see its description."
+msgstr "Выберите пресет, чтобы увидеть его описание."
+
+#. Key:	Catalog.Summary
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 388
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 388
+msgctxt "NodeFactory,Catalog.Summary"
+msgid "{0} of {1} preset(s) in {2}"
+msgstr "Пресетов: {0} из {1} в {2}"
+
+#. Key:	Catalog.TargetLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 201
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 201
+msgctxt "NodeFactory,Catalog.TargetLabel"
+msgid "Import into"
+msgstr "Импортировать в"
+
+#. Key:	Catalog.ValidateAll
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 158
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 158
+msgctxt "NodeFactory,Catalog.ValidateAll"
+msgid "Validate All"
+msgstr "Проверить все"
+
+#. Key:	Catalog.ValidateAllTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 159
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNANodeCatalog.cpp - line 159
+msgctxt "NodeFactory,Catalog.ValidateAllTip"
+msgid "Check every Custom Node Asset of the project and write the results into the Message Log NodeFactory."
+msgstr "Проверить все ассеты пользовательских нод проекта и записать результаты в Message Log NodeFactory."
+
+#. Key:	ChangeLocalVariableTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 84
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 84
+msgctxt "NodeFactory,ChangeLocalVariableTransaction"
+msgid "Change Local Variable"
+msgstr "Изменение локальной переменной"
+
+#. Key:	ClassFilterDisallowed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1128
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1128
+msgctxt "NodeFactory,ClassFilterDisallowed"
+msgid "Only references to {0} or its children can be connected."
+msgstr "Можно подключать только ссылки на {0} или его наследников."
+
+#. Key:	Commands.Context
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 11
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 11
+msgctxt "NodeFactory,Commands.Context"
+msgid "NodeFactory"
+msgstr "NodeFactory"
+
+#. Key:	CornerIcon.Client
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 169
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 169
+msgctxt "NodeFactory,CornerIcon.Client"
+msgid "Client"
+msgstr "Клиент"
+
+#. Key:	CornerIcon.Latent
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 167
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 167
+msgctxt "NodeFactory,CornerIcon.Latent"
+msgid "Latent"
+msgstr "Латентная"
+
+#. Key:	CornerIcon.Message
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 171
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 171
+msgctxt "NodeFactory,CornerIcon.Message"
+msgid "Message"
+msgstr "Сообщение"
+
+#. Key:	CornerIcon.Multicast
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 170
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 170
+msgctxt "NodeFactory,CornerIcon.Multicast"
+msgid "Multicast"
+msgstr "Мультикаст"
+
+#. Key:	CornerIcon.None
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 173
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 173
+msgctxt "NodeFactory,CornerIcon.None"
+msgid "None"
+msgstr "Нет"
+
+#. Key:	CornerIcon.Server
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 168
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 168
+msgctxt "NodeFactory,CornerIcon.Server"
+msgid "Server"
+msgstr "Сервер"
+
+#. Key:	CustomNodeMenuSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1945
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1945
+msgctxt "NodeFactory,CustomNodeMenuSection"
+msgid "Custom Node"
+msgstr "Пользовательская нода"
+
+#. Key:	DefaultMenuCategory
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 180
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 180
+msgctxt "NodeFactory,DefaultMenuCategory"
+msgid "Custom Nodes"
+msgstr "Пользовательские ноды"
+
+#. Key:	DeprecatedTooltipLine
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 915
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 915
+msgctxt "NodeFactory,DeprecatedTooltipLine"
+msgid "Deprecated: {0}"
+msgstr "Устарела: {0}"
+
+#. Key:	Details.CategoryAppearance
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 149
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 149
+msgctxt "NodeFactory,Details.CategoryAppearance"
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#. Key:	Details.CategoryFlags
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 150
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 150
+msgctxt "NodeFactory,Details.CategoryFlags"
+msgid "Flags"
+msgstr "Флаги"
+
+#. Key:	Details.CategoryInternal
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 154
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 154
+msgctxt "NodeFactory,Details.CategoryInternal"
+msgid "Internal"
+msgstr "Служебное"
+
+#. Key:	Details.CategoryMetadata
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 153
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 153
+msgctxt "NodeFactory,Details.CategoryMetadata"
+msgid "Metadata"
+msgstr "Метаданные"
+
+#. Key:	Details.CategoryNode
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 148
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 148
+msgctxt "NodeFactory,Details.CategoryNode"
+msgid "Node"
+msgstr "Нода"
+
+#. Key:	Details.CategoryPins
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 152
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 152
+msgctxt "NodeFactory,Details.CategoryPins"
+msgid "Pins"
+msgstr "Пины"
+
+#. Key:	Details.CategoryPlacement
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 151
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 151
+msgctxt "NodeFactory,Details.CategoryPlacement"
+msgid "Placement"
+msgstr "Размещение"
+
+#. Key:	Details.IconMultiple
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 238
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 238
+msgctxt "NodeFactory,Details.IconMultiple"
+msgid "Multiple Values"
+msgstr "Несколько значений"
+
+#. Key:	Details.IconNone
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 122
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 122
+msgctxt "NodeFactory,Details.IconNone"
+msgid "None"
+msgstr "Нет"
+
+#. Key:	Details.IconSearch
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 55
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 55
+msgctxt "NodeFactory,Details.IconSearch"
+msgid "Search icons"
+msgstr "Поиск значков"
+
+#. Key:	Details.IconUnknown
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 246
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetDetails.cpp - line 246
+msgctxt "NodeFactory,Details.IconUnknown"
+msgid "{0} (unknown brush)"
+msgstr "{0} (неизвестная кисть)"
+
+#. Key:	DynamicPinDefaultName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 51
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 51
+msgctxt "NodeFactory,DynamicPinDefaultName"
+msgid "{0} {1}"
+msgstr "{0} {1}"
+
+#. Key:	EditorMode.LivePreview
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 100
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 100
+msgctxt "NodeFactory,EditorMode.LivePreview"
+msgid "Live Preview"
+msgstr "Живой предпросмотр"
+
+#. Key:	EditorMode.LivePreviewTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 101
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 101
+msgctxt "NodeFactory,EditorMode.LivePreviewTip"
+msgid "The node as it appears in a Blueprint, updated on every change."
+msgstr "Нода в том виде, как она выглядит в Blueprint; обновляется при каждом изменении."
+
+#. Key:	EditorMode.LocalVariables
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 96
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 96
+msgctxt "NodeFactory,EditorMode.LocalVariables"
+msgid "Local Variables"
+msgstr "Локальные переменные"
+
+#. Key:	EditorMode.LocalVariablesTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 97
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 97
+msgctxt "NodeFactory,EditorMode.LocalVariablesTip"
+msgid "Variables of one node instance, used by Get Local and Set Local in the Execution Graph."
+msgstr "Переменные одного экземпляра ноды; их используют Get Local и Set Local в графе выполнения."
+
+#. Key:	EditorMode.Log
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 104
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 104
+msgctxt "NodeFactory,EditorMode.Log"
+msgid "NodeFactory Log"
+msgstr "Журнал NodeFactory"
+
+#. Key:	EditorMode.LogTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 105
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 105
+msgctxt "NodeFactory,EditorMode.LogTip"
+msgid "Messages of validation, import, export and updates of the nodes (Message Log NodeFactory)."
+msgstr "Сообщения проверки, импорта, экспорта и обновления нод (Message Log NodeFactory)."
+
+#. Key:	EditorMode.Name
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 78
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 78
+msgctxt "NodeFactory,EditorMode.Name"
+msgid "Custom Node"
+msgstr "Пользовательская нода"
+
+#. Key:	EditorMode.NodeSettings
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 88
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 88
+msgctxt "NodeFactory,EditorMode.NodeSettings"
+msgid "Node Settings"
+msgstr "Настройки ноды"
+
+#. Key:	EditorMode.NodeSettingsTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 89
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 89
+msgctxt "NodeFactory,EditorMode.NodeSettingsTip"
+msgid "Name, category, keywords, tooltip, colors, icons and flags of the node."
+msgstr "Имя, категория, ключевые слова, подсказка, цвета, значки и флаги ноды."
+
+#. Key:	EditorMode.PinManager
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 92
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 92
+msgctxt "NodeFactory,EditorMode.PinManager"
+msgid "Pin Manager"
+msgstr "Менеджер пинов"
+
+#. Key:	EditorMode.PinManagerTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 93
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorMode.cpp - line 93
+msgctxt "NodeFactory,EditorMode.PinManagerTip"
+msgid "Pins of the node: order, types, containers, default values and visibility flags."
+msgstr "Пины ноды: порядок, типы, контейнеры, значения по умолчанию и флаги видимости."
+
+#. Key:	Expander.AssetWithName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 81
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 81
+msgctxt "NodeFactory,Expander.AssetWithName"
+msgid "{0} ({1})"
+msgstr "{0} ({1})"
+
+#. Key:	Export.DialogTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 284
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 284
+msgctxt "NodeFactory,Export.DialogTitle"
+msgid "Export {0} to JSON"
+msgstr "Экспорт {0} в JSON"
+
+#. Key:	Export.Done
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 310
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 310
+msgctxt "NodeFactory,Export.Done"
+msgid "{0} exported to {1}"
+msgstr "{0} экспортирован в {1}"
+
+#. Key:	Export.NoAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 249
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 249
+msgctxt "NodeFactory,Export.NoAsset"
+msgid "No asset to export."
+msgstr "Нет ассета для экспорта."
+
+#. Key:	Export.NoPath
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 254
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 254
+msgctxt "NodeFactory,Export.NoPath"
+msgid "No file name given."
+msgstr "Имя файла не задано."
+
+#. Key:	Export.WriteFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 261
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonExporter.cpp - line 261
+msgctxt "NodeFactory,Export.WriteFailed"
+msgid "Could not write {0}. Check that the folder exists and the file is not read only."
+msgstr "Не удалось записать {0}. Проверьте, что папка существует, а файл доступен для записи."
+
+#. Key:	ExportJson
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 21
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 21
+msgctxt "NodeFactory,ExportJson"
+msgid "Export JSON"
+msgstr "Экспорт JSON"
+
+#. Key:	ExportJson_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 21
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 21
+msgctxt "NodeFactory,ExportJson_ToolTip"
+msgid "Write this node to a readable JSON file (both graphs, settings and metadata)."
+msgstr "Записать эту ноду в читаемый JSON-файл (оба графа, настройки и метаданные)."
+
+#. Key:	Factory.DisplayName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetFactory.cpp - line 41
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetFactory.cpp - line 41
+msgctxt "NodeFactory,Factory.DisplayName"
+msgid "Custom Node Asset"
+msgstr "Ассет пользовательской ноды"
+
+#. Key:	Factory.Tooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetFactory.cpp - line 46
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetFactory.cpp - line 46
+msgctxt "NodeFactory,Factory.Tooltip"
+msgid "A Blueprint node of your own: logic in the macro Execute, look and pins in the Details, editor reactions in the Behavior Graph."
+msgstr "Собственная нода Blueprint: логика в макросе Execute, вид и пины в Details, реакции редактора в Behavior Graph."
+
+#. Key:	FindItem
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 26
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 26
+msgctxt "NodeFactory,FindItem"
+msgid "Find"
+msgstr "Найти"
+
+#. Key:	FindItem_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 26
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 26
+msgctxt "NodeFactory,FindItem_ToolTip"
+msgid "Filter the list by name."
+msgstr "Отфильтровать список по имени."
+
+#. Key:	GetCallerKeywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 83
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 83
+msgctxt "NodeFactory,GetCallerKeywords"
+msgid "self owner caller world context this"
+msgstr "self owner caller world context this вызывающий владелец контекст"
+
+#. Key:	GetCallerMenuCategory
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 88
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 88
+msgctxt "NodeFactory,GetCallerMenuCategory"
+msgid "Custom Node"
+msgstr "Пользовательская нода"
+
+#. Key:	GetCallerOutsideAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 110
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 110
+msgctxt "NodeFactory,GetCallerOutsideAsset"
+msgid "@@ can only be used inside the Execution Graph of a Custom Node Asset."
+msgstr "@@ можно использовать только внутри графа выполнения ассета пользовательской ноды."
+
+#. Key:	GetCallerTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 54
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 54
+msgctxt "NodeFactory,GetCallerTitle"
+msgid "Get Caller"
+msgstr "Get Caller"
+
+#. Key:	GetCallerTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 60
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetCaller.cpp - line 60
+msgctxt "NodeFactory,GetCallerTooltip"
+msgid "Returns the object that executes this custom node ({0}).\nConnect it to Target pins of its functions and to WorldContext pins."
+msgstr "Возвращает объект, который выполняет эту пользовательскую ноду ({0}).\nПодключайте его к пинам Target его функций и к пинам WorldContext."
+
+#. Key:	GetLocalFullTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 277
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 277
+msgctxt "NodeFactory,GetLocalFullTitle"
+msgid "Get {0}\nLocal Variable"
+msgstr "Get {0}\nЛокальная переменная"
+
+#. Key:	GetLocalMenuTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 273
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 273
+msgctxt "NodeFactory,GetLocalMenuTitle"
+msgid "Get {0}"
+msgstr "Get {0}"
+
+#. Key:	GetLocalMissingTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 287
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 287
+msgctxt "NodeFactory,GetLocalMissingTooltip"
+msgid "The local variable {0} does not exist in this asset (CNA017)."
+msgstr "Локальной переменной {0} нет в этом ассете (CNA017)."
+
+#. Key:	GetLocalNoTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 289
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 289
+msgctxt "NodeFactory,GetLocalNoTooltip"
+msgid "Reads the local variable of this node instance."
+msgstr "Читает локальную переменную этого экземпляра ноды."
+
+#. Key:	GetLocalTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 279
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 279
+msgctxt "NodeFactory,GetLocalTitle"
+msgid "Get {0}"
+msgstr "Get {0}"
+
+#. Key:	GetLocalTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 290
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 290
+msgctxt "NodeFactory,GetLocalTooltip"
+msgid "Get {0} ({1})\n{2}"
+msgstr "Get {0} ({1})\n{2}"
+
+#. Key:	GraphKind.ConstructionScript
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 184
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 184
+msgctxt "NodeFactory,GraphKind.ConstructionScript"
+msgid "Construction Script"
+msgstr "Скрипт конструирования"
+
+#. Key:	GraphKind.EventGraph
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 182
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 182
+msgctxt "NodeFactory,GraphKind.EventGraph"
+msgid "Event Graph"
+msgstr "Граф событий"
+
+#. Key:	GraphKind.Function
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 181
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 181
+msgctxt "NodeFactory,GraphKind.Function"
+msgid "Function"
+msgstr "Функция"
+
+#. Key:	GraphKind.Macro
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 183
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 183
+msgctxt "NodeFactory,GraphKind.Macro"
+msgid "Macro"
+msgstr "Макрос"
+
+#. Key:	GraphKind.NoneAllowed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 202
+#: Plugins/NodeFactory/Source/NodeFactory/Private/CNATypes.cpp - line 202
+msgctxt "NodeFactory,GraphKind.NoneAllowed"
+msgid "No graph"
+msgstr "Ни одного графа"
+
+#. Key:	HiddenPinDisallowed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1094
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1094
+msgctxt "NodeFactory,HiddenPinDisallowed"
+msgid "The pin is hidden and cannot be connected."
+msgstr "Пин скрыт, его нельзя подключить."
+
+#. Key:	HiddenPinHover
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 338
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 338
+msgctxt "NodeFactory,HiddenPinHover"
+msgid "(hidden: cannot be connected)"
+msgstr "(скрыт: подключение невозможно)"
+
+#. Key:	Import.ArrayChange
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 499
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 499
+msgctxt "NodeFactory,Import.ArrayChange"
+msgid "{0}: {1} -> {2} entries, contents changed"
+msgstr "{0}: записей {1} -> {2}, содержимое изменено"
+
+#. Key:	Import.BadColor
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 126
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 126
+msgctxt "NodeFactory,Import.BadColor"
+msgid "{0}.{1} is not a color ([r, g, b, a] or \"#RRGGBB\"); the default is kept."
+msgstr "{0}.{1} не является цветом ([r, g, b, a] или \"#RRGGBB\"); оставлено значение по умолчанию."
+
+#. Key:	Import.BadEnum
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 146
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 146
+msgctxt "NodeFactory,Import.BadEnum"
+msgid "{0}.{1}: unknown value \"{2}\"; the default is kept."
+msgstr "{0}.{1}: неизвестное значение \"{2}\"; оставлено значение по умолчанию."
+
+#. Key:	Import.BadFolder
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1427
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1427
+msgctxt "NodeFactory,Import.BadFolder"
+msgid "{0} is not a content folder."
+msgstr "{0} не является папкой контента."
+
+#. Key:	Import.BehaviorChanged
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1095
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1095
+msgctxt "NodeFactory,Import.BehaviorChanged"
+msgid "Editor Behavior Graph: {0} -> {1} nodes, replaced"
+msgstr "Editor Behavior Graph: нод {0} -> {1}, заменён"
+
+#. Key:	Import.BehaviorGraph
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 638
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 638
+msgctxt "NodeFactory,Import.BehaviorGraph"
+msgid "Editor Behavior Graph"
+msgstr "Editor Behavior Graph"
+
+#. Key:	Import.Cancelled
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1369
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1369
+msgctxt "NodeFactory,Import.Cancelled"
+msgid "Import cancelled; the asset was not changed."
+msgstr "Импорт отменён; ассет не изменён."
+
+#. Key:	Import.Confirm
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1365
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1365
+msgctxt "NodeFactory,Import.Confirm"
+msgid "Overwrite {0} with {1}?\n\n{2}\n\nThe import can be undone with Undo in one step."
+msgstr "Перезаписать {0} данными из {1}?\n\n{2}\n\nИмпорт отменяется одной командой Undo."
+
+#. Key:	Import.ConfirmTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1359
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1359
+msgctxt "NodeFactory,Import.ConfirmTitle"
+msgid "Import and Overwrite"
+msgstr "Импорт с перезаписью"
+
+#. Key:	Import.CreateFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1439
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1439
+msgctxt "NodeFactory,Import.CreateFailed"
+msgid "Asset {0} could not be created in {1}."
+msgstr "Не удалось создать ассет {0} в {1}."
+
+#. Key:	Import.Created
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1451
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1451
+msgctxt "NodeFactory,Import.Created"
+msgid "{0} created from {1}."
+msgstr "{0} создан из {1}."
+
+#. Key:	Import.DialogTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1401
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1401
+msgctxt "NodeFactory,Import.DialogTitle"
+msgid "Import JSON into {0}"
+msgstr "Импорт JSON в {0}"
+
+#. Key:	Import.Done
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1380
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1380
+msgctxt "NodeFactory,Import.Done"
+msgid "{0} imported into {1}."
+msgstr "{0} импортирован в {1}."
+
+#. Key:	Import.EmptyExecute
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 834
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 834
+msgctxt "NodeFactory,Import.EmptyExecute"
+msgid "{0}: the graph is empty, the Tunnel nodes Inputs and Outputs are missing (CNA005)."
+msgstr "{0}: граф пуст, нет узлов Tunnel Inputs и Outputs (CNA005)."
+
+#. Key:	Import.ExecuteChanged
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1090
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1090
+msgctxt "NodeFactory,Import.ExecuteChanged"
+msgid "Execution Graph: {0} -> {1} nodes, replaced"
+msgstr "Execution Graph: нод {0} -> {1}, заменён"
+
+#. Key:	Import.ExecuteGraph
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 637
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 637
+msgctxt "NodeFactory,Import.ExecuteGraph"
+msgid "Execution Graph"
+msgstr "Execution Graph"
+
+#. Key:	Import.Failed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1498
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1498
+msgctxt "NodeFactory,Import.Failed"
+msgid "{0} was not imported, the asset was not changed:\n\n{1}"
+msgstr "{0} не импортирован, ассет не изменён:\n\n{1}"
+
+#. Key:	Import.ForbiddenPath
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 60
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 60
+msgctxt "NodeFactory,Import.ForbiddenPath"
+msgid "{0}: the path {1} is outside the allowed roots (/Script/, /Game/, /Engine/ and the content of enabled plugins). The file is not imported."
+msgstr "{0}: путь {1} вне разрешённых корней (/Script/, /Game/, /Engine/ и контент включённых плагинов). Файл не импортирован."
+
+#. Key:	Import.IdInUse
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1147
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1147
+msgctxt "NodeFactory,Import.IdInUse"
+msgid "Id {0} of the file is already used by another asset; {1} gets a new id."
+msgstr "Id {0} из файла уже занят другим ассетом; {1} получает новый id."
+
+#. Key:	Import.Input
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 506
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 506
+msgctxt "NodeFactory,Import.Input"
+msgid "Input"
+msgstr "Вход"
+
+#. Key:	Import.MissingClass
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 168
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 168
+msgctxt "NodeFactory,Import.MissingClass"
+msgid "{0}.{1}: class {2} was not found; the field is left empty."
+msgstr "{0}.{1}: класс {2} не найден; поле оставлено пустым."
+
+#. Key:	Import.MissingNodeClasses
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 876
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 876
+msgctxt "NodeFactory,Import.MissingNodeClasses"
+msgid "{0}: the node classes {1} do not exist in this project (a plugin or module is missing). The graphs are not imported and the asset is not changed."
+msgstr "{0}: классов нод {1} нет в этом проекте (не хватает плагина или модуля). Графы не импортированы, ассет не изменён."
+
+#. Key:	Import.MissingObjects
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 919
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 919
+msgctxt "NodeFactory,Import.MissingObjects"
+msgid "{0}: referenced objects were not found: {1}. The nodes that use them report errors when the asset is compiled."
+msgstr "{0}: не найдены объекты, на которые есть ссылки: {1}. Ноды, которые их используют, выдадут ошибки при компиляции ассета."
+
+#. Key:	Import.MoreLines
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 75
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 75
+msgctxt "NodeFactory,Import.MoreLines"
+msgid "... and {0} more"
+msgstr "... и ещё {0}"
+
+#. Key:	Import.NoAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1132
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1132
+msgctxt "NodeFactory,Import.NoAsset"
+msgid "No asset to import into."
+msgstr "Нет ассета для импорта."
+
+#. Key:	Import.NoChanges
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1362
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1362
+msgctxt "NodeFactory,Import.NoChanges"
+msgid "{0} matches {1}; nothing to change."
+msgstr "{0} совпадает с {1}; менять нечего."
+
+#. Key:	Import.NoClass
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 856
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 856
+msgctxt "NodeFactory,Import.NoClass"
+msgid "{0}: object {1} has no class, the text is damaged."
+msgstr "{0}: у объекта {1} нет класса, текст повреждён."
+
+#. Key:	Import.NoFile
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 571
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 571
+msgctxt "NodeFactory,Import.NoFile"
+msgid "File {0} was not found."
+msgstr "Файл {0} не найден."
+
+#. Key:	Import.NoSize
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 580
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 580
+msgctxt "NodeFactory,Import.NoSize"
+msgid "The size of {0} cannot be read."
+msgstr "Не удаётся определить размер {0}."
+
+#. Key:	Import.NoTunnels
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 886
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 886
+msgctxt "NodeFactory,Import.NoTunnels"
+msgid "{0}: the Tunnel nodes Inputs and Outputs are missing (CNA005)."
+msgstr "{0}: нет узлов Tunnel Inputs и Outputs (CNA005)."
+
+#. Key:	Import.NodesMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1287
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1287
+msgctxt "NodeFactory,Import.NodesMissing"
+msgid "Graph {0}: {1} of {2} nodes could be created from the T3D text."
+msgstr "Граф {0}: из текста T3D создано нод: {1} из {2}."
+
+#. Key:	Import.OtherName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 998
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 998
+msgctxt "NodeFactory,Import.OtherName"
+msgid "The file was exported from {0}; the asset keeps its name {1} and its id."
+msgstr "Файл экспортирован из {0}; ассет сохраняет своё имя {1} и свой id."
+
+#. Key:	Import.Output
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 506
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 506
+msgctxt "NodeFactory,Import.Output"
+msgid "Output"
+msgstr "Выход"
+
+#. Key:	Import.OverrideAdded
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1043
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1043
+msgctxt "NodeFactory,Import.OverrideAdded"
+msgid "+ pin override {0}"
+msgstr "+ переопределение пина {0}"
+
+#. Key:	Import.OverrideChanged
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1047
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1047
+msgctxt "NodeFactory,Import.OverrideChanged"
+msgid "~ pin override {0}"
+msgstr "~ переопределение пина {0}"
+
+#. Key:	Import.OverrideRemoved
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1054
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1054
+msgctxt "NodeFactory,Import.OverrideRemoved"
+msgid "- pin override {0}"
+msgstr "- переопределение пина {0}"
+
+#. Key:	Import.Page
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1346
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1346
+msgctxt "NodeFactory,Import.Page"
+msgid "Import {0} into {1}"
+msgstr "Импорт {0} в {1}"
+
+#. Key:	Import.PinAdded
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 955
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 955
+msgctxt "NodeFactory,Import.PinAdded"
+msgid "+ {0} {1} ({2})"
+msgstr "+ {0} {1} ({2})"
+
+#. Key:	Import.PinChanged
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 959
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 959
+msgctxt "NodeFactory,Import.PinChanged"
+msgid "~ {0} {1}: {2} -> {3}"
+msgstr "~ {0} {1}: {2} -> {3}"
+
+#. Key:	Import.PinOrder
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 990
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 990
+msgctxt "NodeFactory,Import.PinOrder"
+msgid "~ order of the {0} pins"
+msgstr "~ порядок пинов ({0})"
+
+#. Key:	Import.PinRemoved
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 967
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 967
+msgctxt "NodeFactory,Import.PinRemoved"
+msgid "- {0} {1} ({2})"
+msgstr "- {0} {1} ({2})"
+
+#. Key:	Import.PinSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1113
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1113
+msgctxt "NodeFactory,Import.PinSection"
+msgid "Pins ({0}):"
+msgstr "Пины ({0}):"
+
+#. Key:	Import.PropertyChange
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 452
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 452
+msgctxt "NodeFactory,Import.PropertyChange"
+msgid "{0}: {1} -> {2}"
+msgstr "{0}: {1} -> {2}"
+
+#. Key:	Import.PropertySection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1118
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1118
+msgctxt "NodeFactory,Import.PropertySection"
+msgid "Properties ({0}):"
+msgstr "Свойства ({0}):"
+
+#. Key:	Import.ReadFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 593
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 593
+msgctxt "NodeFactory,Import.ReadFailed"
+msgid "{0} cannot be read."
+msgstr "Не удаётся прочитать {0}."
+
+#. Key:	Import.RefusedClasses
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 881
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 881
+msgctxt "NodeFactory,Import.RefusedClasses"
+msgid "{0}: objects of the classes {1} are not graph nodes and are not created by the import."
+msgstr "{0}: объекты классов {1} не являются нодами графа, импорт их не создаёт."
+
+#. Key:	Import.TooLarge
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 585
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 585
+msgctxt "NodeFactory,Import.TooLarge"
+msgid "{0} has {1} KB, more than the limit of {2} KB (Editor Preferences, Plugins, NodeFactory, Max Import File Size)."
+msgstr "Размер {0} — {1} КБ, больше предела {2} КБ (Editor Preferences, Plugins, NodeFactory, Max Import File Size)."
+
+#. Key:	Import.Transaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1140
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1140
+msgctxt "NodeFactory,Import.Transaction"
+msgid "Import {0} from JSON"
+msgstr "Импорт {0} из JSON"
+
+#. Key:	Import.Unbalanced
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 842
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 842
+msgctxt "NodeFactory,Import.Unbalanced"
+msgid "{0}: Begin Object and End Object do not match, the text is damaged."
+msgstr "{0}: Begin Object и End Object не совпадают, текст повреждён."
+
+#. Key:	Import.VariableAdded
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1063
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1063
+msgctxt "NodeFactory,Import.VariableAdded"
+msgid "+ local variable {0} ({1})"
+msgstr "+ локальная переменная {0} ({1})"
+
+#. Key:	Import.VariableChanged
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1067
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1067
+msgctxt "NodeFactory,Import.VariableChanged"
+msgid "~ local variable {0}"
+msgstr "~ локальная переменная {0}"
+
+#. Key:	Import.VariableRemoved
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1074
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonImporter.cpp - line 1074
+msgctxt "NodeFactory,Import.VariableRemoved"
+msgid "- local variable {0}"
+msgstr "- локальная переменная {0}"
+
+#. Key:	ImportJson
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 20
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 20
+msgctxt "NodeFactory,ImportJson"
+msgid "Import JSON"
+msgstr "Импорт JSON"
+
+#. Key:	ImportJson_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 20
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 20
+msgctxt "NodeFactory,ImportJson_ToolTip"
+msgid "Overwrite this node from a JSON file. A summary of the changes is shown first; the import is one Undo step."
+msgstr "Перезаписать эту ноду из JSON-файла. Сначала показывается сводка изменений; импорт отменяется одним шагом Undo."
+
+#. Key:	InstanceGraphMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 498
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 498
+msgctxt "NodeFactory,InstanceGraphMissing"
+msgid "the subgraph of {0} uses {1}, whose graph was not found."
+msgstr "подграф {0} использует {1}, граф которого не найден."
+
+#. Key:	Json.BadId
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 569
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 569
+msgctxt "NodeFactory,Json.BadId"
+msgid "Field \"id\" is not a GUID: {0}"
+msgstr "Поле \"id\" не является GUID: {0}"
+
+#. Key:	Json.Empty
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 456
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 456
+msgctxt "NodeFactory,Json.Empty"
+msgid "The file is empty."
+msgstr "Файл пуст."
+
+#. Key:	Json.EmptyName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 574
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 574
+msgctxt "NodeFactory,Json.EmptyName"
+msgid "Field \"name\" is empty."
+msgstr "Поле \"name\" пустое."
+
+#. Key:	Json.Migrated1
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 541
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 541
+msgctxt "NodeFactory,Json.Migrated1"
+msgid "The file was migrated from schemaVersion 1: texts got namespace and key fields, graph kinds are listed by name."
+msgstr "Файл перенесён со schemaVersion 1: тексты получили поля namespace и key, виды графов перечислены по именам."
+
+#. Key:	Json.MissingField
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 202
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 202
+msgctxt "NodeFactory,Json.MissingField"
+msgid "Field \"{0}\" is missing."
+msgstr "Нет поля \"{0}\"."
+
+#. Key:	Json.NoRoot
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 521
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 521
+msgctxt "NodeFactory,Json.NoRoot"
+msgid "The file does not contain a JSON object."
+msgstr "Файл не содержит объект JSON."
+
+#. Key:	Json.NoVersion
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 534
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 534
+msgctxt "NodeFactory,Json.NoVersion"
+msgid "The file has no valid schemaVersion; it was not written by NodeFactory."
+msgstr "В файле нет корректного schemaVersion; он записан не NodeFactory."
+
+#. Key:	Json.ParseError
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 464
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 464
+msgctxt "NodeFactory,Json.ParseError"
+msgid "The file is not valid JSON: {0}"
+msgstr "Файл не является корректным JSON: {0}"
+
+#. Key:	Json.TooNew
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 528
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 528
+msgctxt "NodeFactory,Json.TooNew"
+msgid "The file has schemaVersion {0}; this version of NodeFactory reads up to {1}. Update the plugin to import it."
+msgstr "У файла schemaVersion {0}; эта версия NodeFactory читает до {1}. Обновите плагин, чтобы импортировать файл."
+
+#. Key:	Json.TypeArray
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 187
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 187
+msgctxt "NodeFactory,Json.TypeArray"
+msgid "an array"
+msgstr "массивом"
+
+#. Key:	Json.TypeBool
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 186
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 186
+msgctxt "NodeFactory,Json.TypeBool"
+msgid "true or false"
+msgstr "true или false"
+
+#. Key:	Json.TypeNull
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 189
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 189
+msgctxt "NodeFactory,Json.TypeNull"
+msgid "null"
+msgstr "null"
+
+#. Key:	Json.TypeNumber
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 185
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 185
+msgctxt "NodeFactory,Json.TypeNumber"
+msgid "a number"
+msgstr "числом"
+
+#. Key:	Json.TypeObject
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 188
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 188
+msgctxt "NodeFactory,Json.TypeObject"
+msgid "an object"
+msgstr "объектом"
+
+#. Key:	Json.TypeString
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 184
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 184
+msgctxt "NodeFactory,Json.TypeString"
+msgid "a string"
+msgstr "строкой"
+
+#. Key:	Json.WrongElement
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 281
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 281
+msgctxt "NodeFactory,Json.WrongElement"
+msgid "Element {1} of \"{0}\" must be an object."
+msgstr "Элемент {1} поля \"{0}\" должен быть объектом."
+
+#. Key:	Json.WrongLines
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 253
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 253
+msgctxt "NodeFactory,Json.WrongLines"
+msgid "Field \"{0}\" must be a string or an array of strings."
+msgstr "Поле \"{0}\" должно быть строкой или массивом строк."
+
+#. Key:	Json.WrongText
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 226
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 226
+msgctxt "NodeFactory,Json.WrongText"
+msgid "Field \"{0}\" must be a text object {text, namespace, key}."
+msgstr "Поле \"{0}\" должно быть текстовым объектом {text, namespace, key}."
+
+#. Key:	Json.WrongTextures
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 673
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 673
+msgctxt "NodeFactory,Json.WrongTextures"
+msgid "Field \"textures\" must be an array of strings."
+msgstr "Поле \"textures\" должно быть массивом строк."
+
+#. Key:	Json.WrongType
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 209
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAJsonSchema.cpp - line 209
+msgctxt "NodeFactory,Json.WrongType"
+msgid "Field \"{0}\" must be {1}."
+msgstr "Поле \"{0}\" должно быть {1}."
+
+#. Key:	LivePreview
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 22
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 22
+msgctxt "NodeFactory,LivePreview"
+msgid "Live Preview"
+msgstr "Живой предпросмотр"
+
+#. Key:	LivePreview.Building
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 355
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 355
+msgctxt "NodeFactory,LivePreview.Building"
+msgid "Building the preview..."
+msgstr "Построение предпросмотра..."
+
+#. Key:	LivePreview.Corner
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 231
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 231
+msgctxt "NodeFactory,LivePreview.Corner"
+msgid "PREVIEW"
+msgstr "ПРЕДПРОСМОТР"
+
+#. Key:	LivePreview.NoGraph
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 353
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 353
+msgctxt "NodeFactory,LivePreview.NoGraph"
+msgid "The Execution Graph has no Tunnel Input or Tunnel Output (CNA005), so there is no node to show."
+msgstr "В графе выполнения нет Tunnel Input или Tunnel Output (CNA005), показать ноду нельзя."
+
+#. Key:	LivePreview.NoNode
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 330
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 330
+msgctxt "NodeFactory,LivePreview.NoNode"
+msgid "No preview"
+msgstr "Нет предпросмотра"
+
+#. Key:	LivePreview.Off
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 349
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 349
+msgctxt "NodeFactory,LivePreview.Off"
+msgid "Live Preview is off. The toolbar button or the button below turns it on."
+msgstr "Живой предпросмотр выключен. Включить его можно кнопкой на панели инструментов или кнопкой ниже."
+
+#. Key:	LivePreview.Rebuild
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 48
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 48
+msgctxt "NodeFactory,LivePreview.Rebuild"
+msgid "Rebuild"
+msgstr "Перестроить"
+
+#. Key:	LivePreview.RebuildTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 49
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 49
+msgctxt "NodeFactory,LivePreview.RebuildTip"
+msgid "Place the node again: Behavior receives OnNodePlaced and the pins start with their default values."
+msgstr "Поставить ноду заново: Behavior получает OnNodePlaced, пины начинают со значений по умолчанию."
+
+#. Key:	LivePreview.Status
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 341
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 341
+msgctxt "NodeFactory,LivePreview.Status"
+msgid "{0} input(s), {1} output(s). Read-only: the node as it appears in a Blueprint."
+msgstr "Входов: {0}, выходов: {1}. Только чтение: нода в том виде, как она выглядит в Blueprint."
+
+#. Key:	LivePreview.TurnOn
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 88
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALivePreview.cpp - line 88
+msgctxt "NodeFactory,LivePreview.TurnOn"
+msgid "Turn On Live Preview"
+msgstr "Включить живой предпросмотр"
+
+#. Key:	LivePreview_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 22
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 22
+msgctxt "NodeFactory,LivePreview_ToolTip"
+msgid "Show the node as it appears in a Blueprint graph and update it after every change."
+msgstr "Показывать ноду так, как она выглядит в графе Blueprint, и обновлять её после каждого изменения."
+
+#. Key:	LocalOutsideAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 237
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 237
+msgctxt "NodeFactory,LocalOutsideAsset"
+msgid "@@ can only be used inside the Execution Graph of a Custom Node Asset."
+msgstr "@@ можно использовать только внутри графа выполнения ассета пользовательской ноды."
+
+#. Key:	LocalVariableKeywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 221
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 221
+msgctxt "NodeFactory,LocalVariableKeywords"
+msgid "local variable temp temporary"
+msgstr "local variable temp temporary локальная переменная временная"
+
+#. Key:	LocalVariableMenuSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 175
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 175
+msgctxt "NodeFactory,LocalVariableMenuSection"
+msgid "Local Variable"
+msgstr "Локальная переменная"
+
+#. Key:	LocalVariableNone
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 58
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 58
+msgctxt "NodeFactory,LocalVariableNone"
+msgid "<none>"
+msgstr "<нет>"
+
+#. Key:	LocalVariablesMenuCategory
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 226
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 226
+msgctxt "NodeFactory,LocalVariablesMenuCategory"
+msgid "Local Variables"
+msgstr "Локальные переменные"
+
+#. Key:	LocalVars.Add
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 809
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 809
+msgctxt "NodeFactory,LocalVars.Add"
+msgid "+ Variable"
+msgstr "+ Переменная"
+
+#. Key:	LocalVars.AddTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 147
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 147
+msgctxt "NodeFactory,LocalVars.AddTransaction"
+msgid "Add Local Variable"
+msgstr "Добавление локальной переменной"
+
+#. Key:	LocalVars.BadCharacter
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 125
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 125
+msgctxt "NodeFactory,LocalVars.BadCharacter"
+msgid "The name cannot contain quotes, commas, periods, colons, the characters | / \\ or tabs."
+msgstr "Имя не может содержать кавычки, запятые, точки, двоеточия, символы | / \\ и табуляцию."
+
+#. Key:	LocalVars.BadPath
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 356
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 356
+msgctxt "NodeFactory,LocalVars.BadPath"
+msgid "Enter an object path, for example /Game/Folder/Asset.Asset."
+msgstr "Введите путь объекта, например /Game/Folder/Asset.Asset."
+
+#. Key:	LocalVars.ColDefault
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 761
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 761
+msgctxt "NodeFactory,LocalVars.ColDefault"
+msgid "Default"
+msgstr "По умолчанию"
+
+#. Key:	LocalVars.ColDefaultTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 762
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 762
+msgctxt "NodeFactory,LocalVars.ColDefaultTip"
+msgid "Value of the variable on every entry into the node."
+msgstr "Значение переменной при каждом входе в ноду."
+
+#. Key:	LocalVars.ColName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 755
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 755
+msgctxt "NodeFactory,LocalVars.ColName"
+msgid "Name"
+msgstr "Имя"
+
+#. Key:	LocalVars.ColTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 765
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 765
+msgctxt "NodeFactory,LocalVars.ColTooltip"
+msgid "Tooltip"
+msgstr "Подсказка"
+
+#. Key:	LocalVars.ColType
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 758
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 758
+msgctxt "NodeFactory,LocalVars.ColType"
+msgid "Type"
+msgstr "Тип"
+
+#. Key:	LocalVars.ColUses
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 768
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 768
+msgctxt "NodeFactory,LocalVars.ColUses"
+msgid "Uses"
+msgstr "Исп."
+
+#. Key:	LocalVars.ContainerDefault
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 518
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 518
+msgctxt "NodeFactory,LocalVars.ContainerDefault"
+msgid "Empty"
+msgstr "Пусто"
+
+#. Key:	LocalVars.ContainerDefaultTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 520
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 520
+msgctxt "NodeFactory,LocalVars.ContainerDefaultTip"
+msgid "Containers start empty on every entry into the node."
+msgstr "Контейнеры пусты при каждом входе в ноду."
+
+#. Key:	LocalVars.DefaultHint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 565
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 565
+msgctxt "NodeFactory,LocalVars.DefaultHint"
+msgid "Default of the type"
+msgstr "Значение типа по умолчанию"
+
+#. Key:	LocalVars.DefaultTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 566
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 566
+msgctxt "NodeFactory,LocalVars.DefaultTip"
+msgid "Value assigned on every entry into the node, in the text form of pin values (for example 1.5 or X=1,Y=2,Z=3)."
+msgstr "Значение, присваиваемое при каждом входе в ноду, в текстовой форме значений пинов (например 1.5 или X=1,Y=2,Z=3)."
+
+#. Key:	LocalVars.DefaultTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 238
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 238
+msgctxt "NodeFactory,LocalVars.DefaultTransaction"
+msgid "Change Local Variable Default"
+msgstr "Изменение значения локальной переменной по умолчанию"
+
+#. Key:	LocalVars.EmptyName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 112
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 112
+msgctxt "NodeFactory,LocalVars.EmptyName"
+msgid "Enter a name for the variable."
+msgstr "Введите имя переменной."
+
+#. Key:	LocalVars.LongName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 117
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 117
+msgctxt "NodeFactory,LocalVars.LongName"
+msgid "The name is longer than {0} characters."
+msgstr "Имя длиннее {0} символов."
+
+#. Key:	LocalVars.MenuVariable
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 887
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 887
+msgctxt "NodeFactory,LocalVars.MenuVariable"
+msgid "Local Variable"
+msgstr "Локальная переменная"
+
+#. Key:	LocalVars.Missing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 86
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 86
+msgctxt "NodeFactory,LocalVars.Missing"
+msgid "The local variable does not exist any more."
+msgstr "Этой локальной переменной больше нет."
+
+#. Key:	LocalVars.MoveTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 305
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 305
+msgctxt "NodeFactory,LocalVars.MoveTransaction"
+msgid "Move Local Variable"
+msgstr "Перемещение локальной переменной"
+
+#. Key:	LocalVars.NameTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 501
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 501
+msgctxt "NodeFactory,LocalVars.NameTip"
+msgid "Name of the variable. F2 or double click renames it; Get Local and Set Local keep it by its id."
+msgstr "Имя переменной. F2 или двойной щелчок — переименовать; Get Local и Set Local держат её по id."
+
+#. Key:	LocalVars.NameUsed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 134
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 134
+msgctxt "NodeFactory,LocalVars.NameUsed"
+msgid "A local variable named {0} already exists."
+msgstr "Локальная переменная с именем {0} уже есть."
+
+#. Key:	LocalVars.PureWarning
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 821
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 821
+msgctxt "NodeFactory,LocalVars.PureWarning"
+msgid "The node is pure: local variables are not allowed and compilation fails (CNA018). Clear Pure or remove the variables."
+msgstr "Нода чистая (Pure): локальные переменные запрещены, компиляция завершится ошибкой (CNA018). Снимите Pure или удалите переменные."
+
+#. Key:	LocalVars.RemoveTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 470
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 470
+msgctxt "NodeFactory,LocalVars.RemoveTip"
+msgid "Remove the variable (Delete)."
+msgstr "Удалить переменную (Delete)."
+
+#. Key:	LocalVars.RemoveTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 281
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 281
+msgctxt "NodeFactory,LocalVars.RemoveTransaction"
+msgid "Remove Local Variable"
+msgstr "Удаление локальной переменной"
+
+#. Key:	LocalVars.RemoveUsed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 1090
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 1090
+msgctxt "NodeFactory,LocalVars.RemoveUsed"
+msgid "Local variable {0} is used by {1} Get Local or Set Local node(s). Remove the variable together with these nodes?"
+msgstr "Локальная переменная {0} используется в {1} нодах Get Local или Set Local. Удалить переменную вместе с этими нодами?"
+
+#. Key:	LocalVars.RenameTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 181
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 181
+msgctxt "NodeFactory,LocalVars.RenameTransaction"
+msgid "Rename Local Variable"
+msgstr "Переименование локальной переменной"
+
+#. Key:	LocalVars.SearchHint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 788
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 788
+msgctxt "NodeFactory,LocalVars.SearchHint"
+msgid "Filter variables by name or type (Ctrl+F)"
+msgstr "Фильтр переменных по имени или типу (Ctrl+F)"
+
+#. Key:	LocalVars.Summary
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 1116
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 1116
+msgctxt "NodeFactory,LocalVars.Summary"
+msgid "{0} variable(s). Each instance of the node has its own copies, reset to the defaults on every entry. F2 renames, Delete removes, Alt+Up and Alt+Down reorder."
+msgstr "Переменных: {0}. У каждого экземпляра ноды свои копии, они сбрасываются к значениям по умолчанию при каждом входе. F2 переименовывает, Delete удаляет, Alt+Up и Alt+Down меняют порядок."
+
+#. Key:	LocalVars.TooltipHint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 455
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 455
+msgctxt "NodeFactory,LocalVars.TooltipHint"
+msgid "Tooltip"
+msgstr "Подсказка"
+
+#. Key:	LocalVars.TooltipTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 259
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 259
+msgctxt "NodeFactory,LocalVars.TooltipTransaction"
+msgid "Change Local Variable Tooltip"
+msgstr "Изменение подсказки локальной переменной"
+
+#. Key:	LocalVars.TypeNotAllowed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 199
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 199
+msgctxt "NodeFactory,LocalVars.TypeNotAllowed"
+msgid "Exec, Wildcard and delegates cannot be stored in a local variable."
+msgstr "Exec, Wildcard и делегаты нельзя хранить в локальной переменной."
+
+#. Key:	LocalVars.TypeTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 210
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 210
+msgctxt "NodeFactory,LocalVars.TypeTransaction"
+msgid "Change Local Variable Type"
+msgstr "Изменение типа локальной переменной"
+
+#. Key:	LocalVars.UsesTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 464
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNALocalVariables.cpp - line 464
+msgctxt "NodeFactory,LocalVars.UsesTip"
+msgid "Get Local and Set Local nodes of the Execution Graph that use the variable."
+msgstr "Ноды Get Local и Set Local графа выполнения, которые используют переменную."
+
+#. Key:	MacroTooDeep
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 461
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 461
+msgctxt "NodeFactory,MacroTooDeep"
+msgid "the macros inside the subgraph of {0} are nested deeper than {1} levels."
+msgstr "макросы в подграфе {0} вложены глубже {1} уровней."
+
+#. Key:	MakeArrayMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 844
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 844
+msgctxt "NodeFactory,MakeArrayMissing"
+msgid "Make Array of the dynamic pins could not be created (V-check: UK2Node_MakeArray::NumInputs)."
+msgstr "Не удалось создать Make Array для динамических пинов (V-check: UK2Node_MakeArray::NumInputs)."
+
+#. Key:	MakeArrayPins
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 872
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 872
+msgctxt "NodeFactory,MakeArrayPins"
+msgid "Make Array of the dynamic pins has an unexpected set of pins."
+msgstr "У Make Array для динамических пинов неожиданный набор пинов."
+
+#. Key:	MessageLogLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 346
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 346
+msgctxt "NodeFactory,MessageLogLabel"
+msgid "NodeFactory"
+msgstr "NodeFactory"
+
+#. Key:	MissingAssetTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 840
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 840
+msgctxt "NodeFactory,MissingAssetTitle"
+msgid "Missing Custom Node ({0})"
+msgstr "Отсутствует пользовательская нода ({0})"
+
+#. Key:	MissingAssetTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 907
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 907
+msgctxt "NodeFactory,MissingAssetTooltip"
+msgid "The Custom Node Asset {0} was not found (CNA005)."
+msgstr "Ассет пользовательской ноды {0} не найден (CNA005)."
+
+#. Key:	Module.CatalogTab
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 172
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 172
+msgctxt "NodeFactory,Module.CatalogTab"
+msgid "Node Catalog"
+msgstr "Каталог нод"
+
+#. Key:	Module.CatalogTabTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 173
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 173
+msgctxt "NodeFactory,Module.CatalogTabTip"
+msgid "Presets of custom nodes: search, then import into a Content Browser folder."
+msgstr "Пресеты пользовательских нод: поиск и импорт в папку Content Browser."
+
+#. Key:	Module.SettingsDescription
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 98
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 98
+msgctxt "NodeFactory,Module.SettingsDescription"
+msgid "Custom Node Assets: preset folder of the Node Catalog, Live Preview, update of the nodes and import limits."
+msgstr "Ассеты пользовательских нод: папка пресетов каталога нод, живой предпросмотр, обновление нод и ограничения импорта."
+
+#. Key:	Module.SettingsName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 97
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/NodeFactoryEditorModule.cpp - line 97
+msgctxt "NodeFactory,Module.SettingsName"
+msgid "NodeFactory"
+msgstr "NodeFactory"
+
+#. Key:	MoveItemDown
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 31
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 31
+msgctxt "NodeFactory,MoveItemDown"
+msgid "Move Down"
+msgstr "Переместить вниз"
+
+#. Key:	MoveItemDown_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 31
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 31
+msgctxt "NodeFactory,MoveItemDown_ToolTip"
+msgid "Move the selected pin one row down."
+msgstr "Переместить выбранный пин на одну строку вниз."
+
+#. Key:	MoveItemUp
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 30
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 30
+msgctxt "NodeFactory,MoveItemUp"
+msgid "Move Up"
+msgstr "Переместить вверх"
+
+#. Key:	MoveItemUp_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 30
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 30
+msgctxt "NodeFactory,MoveItemUp_ToolTip"
+msgid "Move the selected pin one row up."
+msgstr "Переместить выбранный пин на одну строку вверх."
+
+#. Key:	Msg.AssetWithName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 251
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 251
+msgctxt "NodeFactory,Msg.AssetWithName"
+msgid "{0} ({1})"
+msgstr "{0} ({1})"
+
+#. Key:	Msg.CNA001
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 214
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 214
+msgctxt "NodeFactory,Msg.CNA001"
+msgid "Cycle of nested custom nodes: {Chain}. Expansion stopped."
+msgstr "Цикл вложенных пользовательских нод: {Chain}. Раскрытие остановлено."
+
+#. Key:	Msg.CNA002
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 215
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 215
+msgctxt "NodeFactory,Msg.CNA002"
+msgid "Expansion depth {Depth} of {Asset} exceeds the limit {Limit} (Editor Preferences, NodeFactory, Max Expansion Depth)."
+msgstr "Глубина раскрытия {Depth} у {Asset} превышает предел {Limit} (Editor Preferences, NodeFactory, Max Expansion Depth)."
+
+#. Key:	Msg.CNA003
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 216
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 216
+msgctxt "NodeFactory,Msg.CNA003"
+msgid "{Asset} contains latent nodes ({Nodes}) and cannot be used in this graph. Latent nodes are only allowed in an Event Graph."
+msgstr "{Asset} содержит латентные ноды ({Nodes}) и не может использоваться в этом графе. Латентные ноды допустимы только в Event Graph."
+
+#. Key:	Msg.CNA004
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 217
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 217
+msgctxt "NodeFactory,Msg.CNA004"
+msgid "{Asset} is pure, but its subgraph contains execution nodes: {Nodes}."
+msgstr "{Asset} помечен как чистый (Pure), но в его подграфе есть ноды выполнения: {Nodes}."
+
+#. Key:	Msg.CNA005
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 218
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 218
+msgctxt "NodeFactory,Msg.CNA005"
+msgid "Custom Node Asset {Asset}, its macro Execute or its Tunnel nodes were not found."
+msgstr "Не найден ассет пользовательской ноды {Asset}, его макрос Execute или его узлы Tunnel."
+
+#. Key:	Msg.CNA006
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 219
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 219
+msgctxt "NodeFactory,Msg.CNA006"
+msgid "The node is outdated: NodeVersion {NodeVersion} differs from AssetVersion {AssetVersion} of {Asset}. Use Recompile Node to update it."
+msgstr "Нода устарела: NodeVersion {NodeVersion} не совпадает с AssetVersion {AssetVersion} у {Asset}. Обновите её командой Recompile Node."
+
+#. Key:	Msg.CNA007
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 220
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 220
+msgctxt "NodeFactory,Msg.CNA007"
+msgid "The Wildcard type of {Asset} is not resolved. Connect a wire to one of its Wildcard pins."
+msgstr "Тип Wildcard у {Asset} не определён. Подключите провод к одному из его пинов Wildcard."
+
+#. Key:	Msg.CNA008
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 221
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 221
+msgctxt "NodeFactory,Msg.CNA008"
+msgid "Required pin {Pin} of {Asset} has no wire and no value."
+msgstr "Обязательный пин {Pin} у {Asset} не подключён и не имеет значения."
+
+#. Key:	Msg.CNA009
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 222
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 222
+msgctxt "NodeFactory,Msg.CNA009"
+msgid "{Asset} is deprecated: {Message}"
+msgstr "{Asset} устарел (deprecated): {Message}"
+
+#. Key:	Msg.CNA010
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 223
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 223
+msgctxt "NodeFactory,Msg.CNA010"
+msgid "Type {Type} of pin {Pin} was not found: the class, structure or enumeration is missing."
+msgstr "Тип {Type} пина {Pin} не найден: класс, структура или перечисление отсутствует."
+
+#. Key:	Msg.CNA011
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 224
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 224
+msgctxt "NodeFactory,Msg.CNA011"
+msgid "Behavior of {Asset}: {Details}"
+msgstr "Behavior у {Asset}: {Details}"
+
+#. Key:	Msg.CNA012
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 225
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 225
+msgctxt "NodeFactory,Msg.CNA012"
+msgid "Blueprint {Blueprint} does not derive from {ContextClass} required by {Asset} or does not provide a world context."
+msgstr "Blueprint {Blueprint} не наследуется от {ContextClass}, который требует {Asset}, или не предоставляет контекст мира (world context)."
+
+#. Key:	Msg.CNA013
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 226
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 226
+msgctxt "NodeFactory,Msg.CNA013"
+msgid "{Count} dynamic pins of {Pin} are outside the range {Min}..{Max}."
+msgstr "Динамических пинов {Pin}: {Count}, это вне диапазона {Min}..{Max}."
+
+#. Key:	Msg.CNA014
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 227
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 227
+msgctxt "NodeFactory,Msg.CNA014"
+msgid "Pin override {Pin} of {Asset} does not match any pin of the macro Execute."
+msgstr "Переопределение пина {Pin} у {Asset} не соответствует ни одному пину макроса Execute."
+
+#. Key:	Msg.CNA015
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 228
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 228
+msgctxt "NodeFactory,Msg.CNA015"
+msgid "PassThroughOf of pin {Pin} points to {Target}, which does not exist or has an incompatible type."
+msgstr "PassThroughOf пина {Pin} указывает на {Target}, который не существует или имеет несовместимый тип."
+
+#. Key:	Msg.CNA016
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 229
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 229
+msgctxt "NodeFactory,Msg.CNA016"
+msgid "Updating {Asset} in {Blueprint} lost the wire of pin {Pin}."
+msgstr "При обновлении {Asset} в {Blueprint} потерян провод пина {Pin}."
+
+#. Key:	Msg.CNA017
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 230
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 230
+msgctxt "NodeFactory,Msg.CNA017"
+msgid "{Node} references the local variable {Variable}, which does not exist in {Asset}."
+msgstr "{Node} ссылается на локальную переменную {Variable}, которой нет в {Asset}."
+
+#. Key:	Msg.CNA018
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 231
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 231
+msgctxt "NodeFactory,Msg.CNA018"
+msgid "{Asset} is pure and must not use local variables."
+msgstr "{Asset} помечен как чистый (Pure) и не должен использовать локальные переменные."
+
+#. Key:	Msg.CNA019
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 232
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 232
+msgctxt "NodeFactory,Msg.CNA019"
+msgid "Icon texture {Texture} was not found or cannot be loaded; the default icon is used."
+msgstr "Текстура иконки {Texture} не найдена или не может быть загружена; используется иконка по умолчанию."
+
+#. Key:	Msg.NoAsset
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 259
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 259
+msgctxt "NodeFactory,Msg.NoAsset"
+msgid "<missing asset>"
+msgstr "<ассет отсутствует>"
+
+#. Key:	Msg.Unknown
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 233
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 233
+msgctxt "NodeFactory,Msg.Unknown"
+msgid "Unknown NodeFactory message."
+msgstr "Неизвестное сообщение NodeFactory."
+
+#. Key:	Msg.WithCode
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 113
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAMessages.cpp - line 113
+msgctxt "NodeFactory,Msg.WithCode"
+msgid "{0}: {1}"
+msgstr "{0}: {1}"
+
+#. Key:	NodeMenu.GetLocalEntry
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 258
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 258
+msgctxt "NodeFactory,NodeMenu.GetLocalEntry"
+msgid "Get Local Variable"
+msgstr "Get Local Variable"
+
+#. Key:	NodeMenu.GetLocalEntryTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 262
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 262
+msgctxt "NodeFactory,NodeMenu.GetLocalEntryTooltip"
+msgid "Reads a local variable of this node instance. Choose the variable on the node."
+msgstr "Читает локальную переменную этого экземпляра ноды. Переменная выбирается на ноде."
+
+#. Key:	NodeMenu.GetLocalVariableEntry
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 291
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 291
+msgctxt "NodeFactory,NodeMenu.GetLocalVariableEntry"
+msgid "Get {0}"
+msgstr "Get {0}"
+
+#. Key:	NodeMenu.LocalEntryKeywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 263
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 263
+msgctxt "NodeFactory,NodeMenu.LocalEntryKeywords"
+msgid "Local Variable Temporary CNA"
+msgstr "Local Variable Temporary CNA локальная временная переменная"
+
+#. Key:	NodeMenu.LocalVariableEntryKeywords
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 294
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 294
+msgctxt "NodeFactory,NodeMenu.LocalVariableEntryKeywords"
+msgid "{0} Local Variable CNA"
+msgstr "{0} Local Variable CNA локальная переменная"
+
+#. Key:	NodeMenu.LocalVariableEntryTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 293
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 293
+msgctxt "NodeFactory,NodeMenu.LocalVariableEntryTooltip"
+msgid "{0} ({1})\n{2}"
+msgstr "{0} ({1})\n{2}"
+
+#. Key:	NodeMenu.LocalVariablesCategory
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 249
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 249
+msgctxt "NodeFactory,NodeMenu.LocalVariablesCategory"
+msgid "Local Variables"
+msgstr "Локальные переменные"
+
+#. Key:	NodeMenu.SetLocalEntry
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 258
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 258
+msgctxt "NodeFactory,NodeMenu.SetLocalEntry"
+msgid "Set Local Variable"
+msgstr "Set Local Variable"
+
+#. Key:	NodeMenu.SetLocalEntryTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 261
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 261
+msgctxt "NodeFactory,NodeMenu.SetLocalEntryTooltip"
+msgid "Writes a local variable of this node instance. Choose the variable on the node."
+msgstr "Записывает локальную переменную этого экземпляра ноды. Переменная выбирается на ноде."
+
+#. Key:	NodeMenu.SetLocalVariableEntry
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 291
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNANodeMenu.cpp - line 291
+msgctxt "NodeFactory,NodeMenu.SetLocalVariableEntry"
+msgid "Set {0}"
+msgstr "Set {0}"
+
+#. Key:	NodeWidget.AddDynamicPinButton
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 620
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 620
+msgctxt "NodeFactory,NodeWidget.AddDynamicPinButton"
+msgid "Add pin"
+msgstr "Добавить пин"
+
+#. Key:	NodeWidget.AddDynamicPinButtonTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 621
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 621
+msgctxt "NodeFactory,NodeWidget.AddDynamicPinButtonTooltip"
+msgid "Add an element pin to the dynamic group of this node."
+msgstr "Добавить пин-элемент в динамическую группу этой ноды."
+
+#. Key:	NodeWidget.BodyWidgetTextTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 83
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 83
+msgctxt "NodeFactory,NodeWidget.BodyWidgetTextTransaction"
+msgid "Change Pin Value"
+msgstr "Изменение значения пина"
+
+#. Key:	NodeWidget.BodyWidgetValueTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 66
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 66
+msgctxt "NodeFactory,NodeWidget.BodyWidgetValueTransaction"
+msgid "Change Pin Value"
+msgstr "Изменение значения пина"
+
+#. Key:	NodeWidget.ChooseLocalVariableTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 823
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 823
+msgctxt "NodeFactory,NodeWidget.ChooseLocalVariableTooltip"
+msgid "Choose the local variable of the asset this node reads or writes."
+msgstr "Выберите локальную переменную ассета, которую эта нода читает или записывает."
+
+#. Key:	NodeWidget.LocalVariableEntryTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 875
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 875
+msgctxt "NodeFactory,NodeWidget.LocalVariableEntryTooltip"
+msgid "{0}\n{1}"
+msgstr "{0}\n{1}"
+
+#. Key:	NodeWidget.LocalVariablesSection
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 859
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 859
+msgctxt "NodeFactory,NodeWidget.LocalVariablesSection"
+msgid "Local Variables"
+msgstr "Локальные переменные"
+
+#. Key:	NodeWidget.NoLocalVariables
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 863
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 863
+msgctxt "NodeFactory,NodeWidget.NoLocalVariables"
+msgid "No local variables"
+msgstr "Нет локальных переменных"
+
+#. Key:	NodeWidget.NoLocalVariablesTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 864
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 864
+msgctxt "NodeFactory,NodeWidget.NoLocalVariablesTooltip"
+msgid "Add variables in the Local Variables panel of the asset."
+msgstr "Добавьте переменные в панели Local Variables ассета."
+
+#. Key:	NodeWidget.OutdatedBadge
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 308
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 308
+msgctxt "NodeFactory,NodeWidget.OutdatedBadge"
+msgid "OUTDATED"
+msgstr "УСТАРЕЛА"
+
+#. Key:	NodeWidget.OutdatedBadgeTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 311
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SGraphNode_NodeFactory.cpp - line 311
+msgctxt "NodeFactory,NodeWidget.OutdatedBadgeTooltip"
+msgid "The asset changed after this node was built (CNA006). Use Refresh Node or recompile the Blueprint."
+msgstr "Ассет изменился после построения этой ноды (CNA006). Выполните Refresh Node или перекомпилируйте Blueprint."
+
+#. Key:	OpenAssetMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1951
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1951
+msgctxt "NodeFactory,OpenAssetMenu"
+msgid "Open Custom Node Asset"
+msgstr "Открыть ассет пользовательской ноды"
+
+#. Key:	OpenAssetMenuTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1952
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1952
+msgctxt "NodeFactory,OpenAssetMenuTooltip"
+msgid "Opens the asset window of this node (V10)."
+msgstr "Открывает окно ассета этой ноды (V10)."
+
+#. Key:	OpenCatalog
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 25
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 25
+msgctxt "NodeFactory,OpenCatalog"
+msgid "Node Catalog"
+msgstr "Каталог нод"
+
+#. Key:	OpenCatalog_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 25
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 25
+msgctxt "NodeFactory,OpenCatalog_ToolTip"
+msgid "Open the catalog of node presets."
+msgstr "Открыть каталог пресетов нод."
+
+#. Key:	PinManager.AddInput
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1109
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1109
+msgctxt "NodeFactory,PinManager.AddInput"
+msgid "+ Input"
+msgstr "+ Вход"
+
+#. Key:	PinManager.AddOutput
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1109
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1109
+msgctxt "NodeFactory,PinManager.AddOutput"
+msgid "+ Output"
+msgstr "+ Выход"
+
+#. Key:	PinManager.AddTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 243
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 243
+msgctxt "NodeFactory,PinManager.AddTransaction"
+msgid "Add Pin"
+msgstr "Добавление пина"
+
+#. Key:	PinManager.AdvancedTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 671
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 671
+msgctxt "NodeFactory,PinManager.AdvancedTip"
+msgid "Advanced: the pin is behind the arrow at the bottom of the node."
+msgstr "Advanced: пин скрыт за стрелкой внизу ноды."
+
+#. Key:	PinManager.ColAdvanced
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1042
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1042
+msgctxt "NodeFactory,PinManager.ColAdvanced"
+msgid "Adv"
+msgstr "Доп"
+
+#. Key:	PinManager.ColAdvancedTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1043
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1043
+msgctxt "NodeFactory,PinManager.ColAdvancedTip"
+msgid "Advanced pin"
+msgstr "Дополнительный пин (Advanced)"
+
+#. Key:	PinManager.ColDefault
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1037
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1037
+msgctxt "NodeFactory,PinManager.ColDefault"
+msgid "Default"
+msgstr "По умолчанию"
+
+#. Key:	PinManager.ColDefaultTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1038
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1038
+msgctxt "NodeFactory,PinManager.ColDefaultTip"
+msgid "Value of the pin when nothing is connected."
+msgstr "Значение пина, когда к нему ничего не подключено."
+
+#. Key:	PinManager.ColHidden
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1048
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1048
+msgctxt "NodeFactory,PinManager.ColHidden"
+msgid "Hid"
+msgstr "Скр"
+
+#. Key:	PinManager.ColHiddenTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1049
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1049
+msgctxt "NodeFactory,PinManager.ColHiddenTip"
+msgid "Hidden by default"
+msgstr "Скрыт по умолчанию"
+
+#. Key:	PinManager.ColName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1028
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1028
+msgctxt "NodeFactory,PinManager.ColName"
+msgid "Name"
+msgstr "Имя"
+
+#. Key:	PinManager.ColRequired
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1056
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1056
+msgctxt "NodeFactory,PinManager.ColRequired"
+msgid "Req"
+msgstr "Обяз"
+
+#. Key:	PinManager.ColRequiredTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1057
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1057
+msgctxt "NodeFactory,PinManager.ColRequiredTip"
+msgid "Required pin (CNA008)"
+msgstr "Обязательный пин (CNA008)"
+
+#. Key:	PinManager.ColType
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1031
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1031
+msgctxt "NodeFactory,PinManager.ColType"
+msgid "Type"
+msgstr "Тип"
+
+#. Key:	PinManager.DefaultTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 400
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 400
+msgctxt "NodeFactory,PinManager.DefaultTransaction"
+msgid "Change Pin Default Value"
+msgstr "Изменение значения пина по умолчанию"
+
+#. Key:	PinManager.DragLabel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 614
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 614
+msgctxt "NodeFactory,PinManager.DragLabel"
+msgid "Move {0}"
+msgstr "Переместить {0}"
+
+#. Key:	PinManager.FlagTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 417
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 417
+msgctxt "NodeFactory,PinManager.FlagTransaction"
+msgid "Change Pin Visibility"
+msgstr "Изменение видимости пина"
+
+#. Key:	PinManager.HiddenTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 675
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 675
+msgctxt "NodeFactory,PinManager.HiddenTip"
+msgid "Hidden: the pin is created hidden; Behavior can show it."
+msgstr "Скрыт: пин создаётся скрытым; Behavior может его показать."
+
+#. Key:	PinManager.Hint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 989
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 989
+msgctxt "NodeFactory,PinManager.Hint"
+msgid "Drag rows to change the order. F2 renames, Delete removes, Ctrl+F filters. Other pin settings are in Node Settings, Pins."
+msgstr "Перетаскивайте строки, чтобы изменить порядок. F2 переименовывает, Delete удаляет, Ctrl+F фильтрует. Остальные настройки пинов — в Node Settings, Pins."
+
+#. Key:	PinManager.InputsTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1570
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1570
+msgctxt "NodeFactory,PinManager.InputsTitle"
+msgid "Inputs (Tunnel Input): {0}"
+msgstr "Входы (Tunnel Input): {0}"
+
+#. Key:	PinManager.MenuAdd
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1139
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1139
+msgctxt "NodeFactory,PinManager.MenuAdd"
+msgid "Add"
+msgstr "Добавить"
+
+#. Key:	PinManager.MenuPin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1131
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1131
+msgctxt "NodeFactory,PinManager.MenuPin"
+msgid "Pin"
+msgstr "Пин"
+
+#. Key:	PinManager.MoveTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 378
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 378
+msgctxt "NodeFactory,PinManager.MoveTransaction"
+msgid "Move Pin"
+msgstr "Перемещение пина"
+
+#. Key:	PinManager.NameEmpty
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 179
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 179
+msgctxt "NodeFactory,PinManager.NameEmpty"
+msgid "The name cannot be empty."
+msgstr "Имя не может быть пустым."
+
+#. Key:	PinManager.NameInvalidChar
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 191
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 191
+msgctxt "NodeFactory,PinManager.NameInvalidChar"
+msgid "The character '{0}' is not allowed in a pin name."
+msgstr "Символ '{0}' недопустим в имени пина."
+
+#. Key:	PinManager.NameNone
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 198
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 198
+msgctxt "NodeFactory,PinManager.NameNone"
+msgid "None is not a valid pin name."
+msgstr "None не является допустимым именем пина."
+
+#. Key:	PinManager.NameTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 729
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 729
+msgctxt "NodeFactory,PinManager.NameTip"
+msgid "Name of the pin. F2 or double click renames it; the old name is kept in Pin Redirects so wires survive."
+msgstr "Имя пина. F2 или двойной щелчок — переименование; старое имя сохраняется в Pin Redirects, поэтому провода не теряются."
+
+#. Key:	PinManager.NameTooLong
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 184
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 184
+msgctxt "NodeFactory,PinManager.NameTooLong"
+msgid "The name is longer than 100 characters."
+msgstr "Имя длиннее 100 символов."
+
+#. Key:	PinManager.NameUsed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 210
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 210
+msgctxt "NodeFactory,PinManager.NameUsed"
+msgid "A pin named {0} already exists. Names are unique across inputs and outputs."
+msgstr "Пин с именем {0} уже существует. Имена уникальны среди входов и выходов."
+
+#. Key:	PinManager.NoDefault
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 791
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 791
+msgctxt "NodeFactory,PinManager.NoDefault"
+msgid "-"
+msgstr "-"
+
+#. Key:	PinManager.NoTunnel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 224
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 224
+msgctxt "NodeFactory,PinManager.NoTunnel"
+msgid "The Execution Graph has no Tunnel Input or Tunnel Output (CNA005)."
+msgstr "В графе выполнения нет Tunnel Input или Tunnel Output (CNA005)."
+
+#. Key:	PinManager.NoTunnels
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 964
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 964
+msgctxt "NodeFactory,PinManager.NoTunnels"
+msgid "The Execution Graph has no Tunnel Input or Tunnel Output (CNA005). Import the node from JSON or create a new asset."
+msgstr "В графе выполнения нет Tunnel Input или Tunnel Output (CNA005). Импортируйте ноду из JSON или создайте новый ассет."
+
+#. Key:	PinManager.OutputsTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1571
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1571
+msgctxt "NodeFactory,PinManager.OutputsTitle"
+msgid "Outputs (Tunnel Output): {0}"
+msgstr "Выходы (Tunnel Output): {0}"
+
+#. Key:	PinManager.RemoveLinkedQuestion
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1416
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 1416
+msgctxt "NodeFactory,PinManager.RemoveLinkedQuestion"
+msgid "Pin {0} is connected inside the Execution Graph. Remove it together with its wires?"
+msgstr "Пин {0} подключён внутри графа выполнения. Удалить его вместе с проводами?"
+
+#. Key:	PinManager.RemoveTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 701
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 701
+msgctxt "NodeFactory,PinManager.RemoveTip"
+msgid "Remove the pin (Delete)."
+msgstr "Удалить пин (Delete)."
+
+#. Key:	PinManager.RemoveTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 330
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 330
+msgctxt "NodeFactory,PinManager.RemoveTransaction"
+msgid "Remove Pin"
+msgstr "Удаление пина"
+
+#. Key:	PinManager.RenameFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 274
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 274
+msgctxt "NodeFactory,PinManager.RenameFailed"
+msgid "Pin {0} could not be renamed."
+msgstr "Не удалось переименовать пин {0}."
+
+#. Key:	PinManager.RenameTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 268
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 268
+msgctxt "NodeFactory,PinManager.RenameTransaction"
+msgid "Rename Pin"
+msgstr "Переименование пина"
+
+#. Key:	PinManager.RequiredTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 679
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 679
+msgctxt "NodeFactory,PinManager.RequiredTip"
+msgid "Required: compilation fails when the pin has neither a wire nor a value (CNA008)."
+msgstr "Обязательный: компиляция завершается ошибкой, если у пина нет ни провода, ни значения (CNA008)."
+
+#. Key:	PinManager.SearchHint
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 953
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 953
+msgctxt "NodeFactory,PinManager.SearchHint"
+msgid "Filter pins by name or type (Ctrl+F)"
+msgstr "Фильтр пинов по имени или типу (Ctrl+F)"
+
+#. Key:	PinManager.TypeTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 303
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAPinManager.cpp - line 303
+msgctxt "NodeFactory,PinManager.TypeTransaction"
+msgid "Change Pin Type"
+msgstr "Изменение типа пина"
+
+#. Key:	RecompileNode
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 24
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 24
+msgctxt "NodeFactory,RecompileNode"
+msgid "Recompile Node"
+msgstr "Recompile Node"
+
+#. Key:	RecompileNode_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 24
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 24
+msgctxt "NodeFactory,RecompileNode_ToolTip"
+msgid "Compile the asset, raise its version and offer to update all Blueprints that use the node."
+msgstr "Скомпилировать ассет, повысить его версию и предложить обновить все Blueprint, которые используют ноду."
+
+#. Key:	RefreshNodeMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1993
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1993
+msgctxt "NodeFactory,RefreshNodeMenu"
+msgid "Refresh Node"
+msgstr "Обновить ноду"
+
+#. Key:	RefreshNodeMenuTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1994
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1994
+msgctxt "NodeFactory,RefreshNodeMenuTooltip"
+msgid "Rebuilds the pins from the asset; wires are kept where possible."
+msgstr "Перестраивает пины по ассету; провода по возможности сохраняются."
+
+#. Key:	RefreshNodeTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1869
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1869
+msgctxt "NodeFactory,RefreshNodeTransaction"
+msgid "Refresh Custom Node"
+msgstr "Обновление пользовательской ноды"
+
+#. Key:	RemoveDynamicPinTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 434
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 434
+msgctxt "NodeFactory,RemoveDynamicPinTransaction"
+msgid "Remove Pin"
+msgstr "Удаление пина"
+
+#. Key:	RemoveElementMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1983
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1983
+msgctxt "NodeFactory,RemoveElementMenu"
+msgid "Remove Pin"
+msgstr "Удалить пин"
+
+#. Key:	RemoveElementMenuTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1984
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1984
+msgctxt "NodeFactory,RemoveElementMenuTooltip"
+msgid "Removes this element pin; its wire is broken."
+msgstr "Удаляет этот пин-элемент; его провод разрывается."
+
+#. Key:	ResetBehaviorMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 2001
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 2001
+msgctxt "NodeFactory,ResetBehaviorMenu"
+msgid "Reset Behavior Changes"
+msgstr "Сбросить изменения Behavior"
+
+#. Key:	ResetBehaviorMenuTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 2002
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 2002
+msgctxt "NodeFactory,ResetBehaviorMenuTooltip"
+msgid "Removes pin visibility, names, rules and the title set by the Behavior of this node."
+msgstr "Убирает видимость пинов, имена, правила и заголовок, заданные Behavior этой ноды."
+
+#. Key:	ResetInstanceOverridesTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 724
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 724
+msgctxt "NodeFactory,ResetInstanceOverridesTransaction"
+msgid "Reset Behavior Changes"
+msgstr "Сброс изменений Behavior"
+
+#. Key:	SameTypeOnlyDisallowed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1117
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1117
+msgctxt "NodeFactory,SameTypeOnlyDisallowed"
+msgid "Only wires of type {0} can be connected."
+msgstr "Можно подключать только провода типа {0}."
+
+#. Key:	SetLocalFullTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 75
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 75
+msgctxt "NodeFactory,SetLocalFullTitle"
+msgid "Set {0}\nLocal Variable"
+msgstr "Set {0}\nЛокальная переменная"
+
+#. Key:	SetLocalMissingTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 85
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 85
+msgctxt "NodeFactory,SetLocalMissingTooltip"
+msgid "The local variable {0} does not exist in this asset (CNA017)."
+msgstr "Локальной переменной {0} нет в этом ассете (CNA017)."
+
+#. Key:	SetLocalOutputTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 65
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 65
+msgctxt "NodeFactory,SetLocalOutputTooltip"
+msgid "Value of the variable after the assignment."
+msgstr "Значение переменной после присваивания."
+
+#. Key:	SetLocalTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 77
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 77
+msgctxt "NodeFactory,SetLocalTitle"
+msgid "Set {0}"
+msgstr "Set {0}"
+
+#. Key:	SetLocalTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 87
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 87
+msgctxt "NodeFactory,SetLocalTooltip"
+msgid "Set {0} ({1})\nThe value lives while this node instance executes; every entry through an exec input resets it to {2}."
+msgstr "Set {0} ({1})\nЗначение живёт, пока выполняется этот экземпляр ноды; каждый вход через exec-пин сбрасывает его в значение {2}."
+
+#. Key:	SetLocalTypeDefault
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 89
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_SetLocal.cpp - line 89
+msgctxt "NodeFactory,SetLocalTypeDefault"
+msgid "the default of the type"
+msgstr "по умолчанию для типа"
+
+#. Key:	SourceUrlTooltipLine
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 921
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 921
+msgctxt "NodeFactory,SourceUrlTooltipLine"
+msgid "Documentation: {0}"
+msgstr "Документация: {0}"
+
+#. Key:	TemporaryFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 556
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 556
+msgctxt "NodeFactory,TemporaryFailed"
+msgid "the local variable {0} of {1} could not be created."
+msgstr "не удалось создать локальную переменную {0} для {1}."
+
+#. Key:	Tests.SplitPin
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/Tests/CNATest_Undo.cpp - line 37
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/Tests/CNATest_Undo.cpp - line 37
+msgctxt "NodeFactory,Tests.SplitPin"
+msgid "Split Struct Pin"
+msgstr "Разделить пин структуры"
+
+#. Key:	ToggleAdvancedTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 812
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 812
+msgctxt "NodeFactory,ToggleAdvancedTransaction"
+msgid "Toggle Advanced Pins"
+msgstr "Показать/скрыть дополнительные пины"
+
+#. Key:	TooManyInlined
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 453
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAExpander.cpp - line 453
+msgctxt "NodeFactory,TooManyInlined"
+msgid "the subgraph of {0} contains more than {1} macros and collapsed graphs; the expansion stopped."
+msgstr "подграф {0} содержит больше {1} макросов и свёрнутых графов; раскрытие остановлено."
+
+#. Key:	TypeActions.CannotOpen
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 76
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 76
+msgctxt "NodeFactory,TypeActions.CannotOpen"
+msgid "{0} could not be opened: its generated class is missing. Check that the NodeFactory plugin is enabled and recompile the asset."
+msgstr "Не удалось открыть {0}: отсутствует сгенерированный класс. Проверьте, что плагин NodeFactory включён, и перекомпилируйте ассет."
+
+#. Key:	TypeActions.Export
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 46
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 46
+msgctxt "NodeFactory,TypeActions.Export"
+msgid "Export to JSON"
+msgstr "Экспорт в JSON"
+
+#. Key:	TypeActions.ExportTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 47
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 47
+msgctxt "NodeFactory,TypeActions.ExportTip"
+msgid "Write the asset into a readable JSON file."
+msgstr "Записать ассет в читаемый JSON-файл."
+
+#. Key:	TypeActions.Import
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 51
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 51
+msgctxt "NodeFactory,TypeActions.Import"
+msgid "Import and Overwrite from JSON"
+msgstr "Импорт из JSON с перезаписью"
+
+#. Key:	TypeActions.ImportTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 52
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 52
+msgctxt "NodeFactory,TypeActions.ImportTip"
+msgid "Replace the content of the asset by a JSON file after the safety checks. One asset at a time."
+msgstr "Заменить содержимое ассета JSON-файлом после проверок безопасности. Только один ассет за раз."
+
+#. Key:	TypeActions.Name
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 22
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 22
+msgctxt "NodeFactory,TypeActions.Name"
+msgid "Custom Node Asset"
+msgstr "Ассет пользовательской ноды"
+
+#. Key:	TypeActions.Recompile
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 41
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 41
+msgctxt "NodeFactory,TypeActions.Recompile"
+msgid "Recompile Node"
+msgstr "Recompile Node"
+
+#. Key:	TypeActions.RecompileTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 42
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 42
+msgctxt "NodeFactory,TypeActions.RecompileTip"
+msgid "Compile the asset and update every Blueprint that uses the node."
+msgstr "Скомпилировать ассет и обновить все Blueprint, которые используют ноду."
+
+#. Key:	TypeActions.Validate
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 57
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 57
+msgctxt "NodeFactory,TypeActions.Validate"
+msgid "Validate"
+msgstr "Проверить"
+
+#. Key:	TypeActions.ValidateTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 58
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAAssetTypeActions.cpp - line 58
+msgctxt "NodeFactory,TypeActions.ValidateTip"
+msgid "Check the asset and write the result into the Message Log NodeFactory."
+msgstr "Проверить ассет и записать результат в Message Log NodeFactory."
+
+#. Key:	UnboundTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 842
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 842
+msgctxt "NodeFactory,UnboundTitle"
+msgid "Custom Node"
+msgstr "Пользовательская нода"
+
+#. Key:	Update.CannotCheckOut
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 298
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 298
+msgctxt "NodeFactory,Update.CannotCheckOut"
+msgid "{0} (cannot be checked out)"
+msgstr "{0} (нельзя извлечь из системы контроля версий)"
+
+#. Key:	Update.CheckOutFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 305
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 305
+msgctxt "NodeFactory,Update.CheckOutFailed"
+msgid "Check out of {0} file(s) failed"
+msgstr "Не удалось извлечь файлов: {0}"
+
+#. Key:	Update.FailedList
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1015
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1015
+msgctxt "NodeFactory,Update.FailedList"
+msgid "Not updated: {0}"
+msgstr "Не обновлены: {0}"
+
+#. Key:	Update.Loading
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 816
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 816
+msgctxt "NodeFactory,Update.Loading"
+msgid "Loading {0}"
+msgstr "Загрузка {0}"
+
+#. Key:	Update.LostList
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1010
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1010
+msgctxt "NodeFactory,Update.LostList"
+msgid "Lost wires (CNA016): {0}"
+msgstr "Потеряны провода (CNA016): {0}"
+
+#. Key:	Update.MapItem
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 350
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 350
+msgctxt "NodeFactory,Update.MapItem"
+msgid "{0} (level Blueprint, open the level to update it)"
+msgstr "{0} (Blueprint уровня; откройте уровень, чтобы обновить его)"
+
+#. Key:	Update.MapSkipped
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 827
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 827
+msgctxt "NodeFactory,Update.MapSkipped"
+msgid "{0} (level Blueprint, open the level to update it)"
+msgstr "{0} (Blueprint уровня; откройте уровень, чтобы обновить его)"
+
+#. Key:	Update.NoInstances
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 768
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 768
+msgctxt "NodeFactory,Update.NoInstances"
+msgid "{0}: no Blueprint uses the node; nothing to update."
+msgstr "{0}: ни один Blueprint не использует ноду; обновлять нечего."
+
+#. Key:	Update.OpenedKept
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 980
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 980
+msgctxt "NodeFactory,Update.OpenedKept"
+msgid "{0} keeps {1} outdated custom {1}|plural(one=node,other=nodes) (CNA006)."
+msgstr "{0}: осталось устаревших пользовательских нод: {1} (CNA006)."
+
+#. Key:	Update.PageTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 787
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 787
+msgctxt "NodeFactory,Update.PageTitle"
+msgid "Update of {0}"
+msgstr "Обновление {0}"
+
+#. Key:	Update.Progress
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 804
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 804
+msgctxt "NodeFactory,Update.Progress"
+msgid "Updating custom nodes..."
+msgstr "Обновление пользовательских нод..."
+
+#. Key:	Update.ReasonOpened
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 318
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 318
+msgctxt "NodeFactory,Update.ReasonOpened"
+msgid "This Blueprint contains nodes of {0} built from an older version of the asset. Updating rebuilds their pins; wires are kept by name, by the pin redirects and by type and position."
+msgstr "Этот Blueprint содержит ноды {0}, построенные по более старой версии ассета. Обновление перестраивает их пины; провода сохраняются по имени, по перенаправлениям пинов (Pin Redirects), по типу и позиции."
+
+#. Key:	Update.ReasonRecompile
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 314
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 314
+msgctxt "NodeFactory,Update.ReasonRecompile"
+msgid "Recompile Node rebuilds every instance of {0}. Wires are kept by pin name, by the pin redirects and by type and position; losses are reported as CNA016."
+msgstr "Recompile Node перестраивает все экземпляры {0}. Провода сохраняются по имени пина, по перенаправлениям пинов (Pin Redirects), по типу и позиции; потери отображаются как CNA016."
+
+#. Key:	Update.ReasonSaved
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 323
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 323
+msgctxt "NodeFactory,Update.ReasonSaved"
+msgid "The pins of {0} changed. The nodes in the Blueprints below are outdated (CNA006). Updating rebuilds their pins; wires are kept by name, by the pin redirects and by type and position."
+msgstr "Пины {0} изменились. Ноды в Blueprint ниже устарели (CNA006). Обновление перестраивает их пины; провода сохраняются по имени, по перенаправлениям пинов (Pin Redirects), по типу и позиции."
+
+#. Key:	Update.RecompileTransaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 933
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 933
+msgctxt "NodeFactory,Update.RecompileTransaction"
+msgid "Recompile Node"
+msgstr "Recompile Node"
+
+#. Key:	Update.ShowLog
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1044
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1044
+msgctxt "NodeFactory,Update.ShowLog"
+msgid "Show Message Log"
+msgstr "Открыть Message Log"
+
+#. Key:	Update.SkippedList
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1019
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 1019
+msgctxt "NodeFactory,Update.SkippedList"
+msgid "Left outdated, the compiler reports CNA006 until they are updated: {0}"
+msgstr "Оставлены устаревшими, компилятор сообщает CNA006, пока их не обновят: {0}"
+
+#. Key:	Update.SummaryCancelled
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 488
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 488
+msgctxt "NodeFactory,Update.SummaryCancelled"
+msgid "Cancelled by the user."
+msgstr "Отменено пользователем."
+
+#. Key:	Update.SummaryFailed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 480
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 480
+msgctxt "NodeFactory,Update.SummaryFailed"
+msgid "Failed: {Failed}."
+msgstr "С ошибкой: {Failed}."
+
+#. Key:	Update.SummaryLost
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 476
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 476
+msgctxt "NodeFactory,Update.SummaryLost"
+msgid "Lost wires: {Lost}."
+msgstr "Потеряно проводов: {Lost}."
+
+#. Key:	Update.SummaryNodes
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 470
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 470
+msgctxt "NodeFactory,Update.SummaryNodes"
+msgid "Updated {Nodes} {Nodes}|plural(one=node,other=nodes) in {Blueprints} {Blueprints}|plural(one=Blueprint,other=Blueprints)."
+msgstr "Обновлено нод: {Nodes}, Blueprint: {Blueprints}."
+
+#. Key:	Update.SummarySkipped
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 484
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 484
+msgctxt "NodeFactory,Update.SummarySkipped"
+msgid "Left outdated: {Skipped}."
+msgstr "Оставлено устаревшими: {Skipped}."
+
+#. Key:	Update.Transaction
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 872
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 872
+msgctxt "NodeFactory,Update.Transaction"
+msgid "Update Custom Nodes"
+msgstr "Обновление пользовательских нод"
+
+#. Key:	Update.Updating
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 875
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAUpdateService.cpp - line 875
+msgctxt "NodeFactory,Update.Updating"
+msgid "Updating {0}"
+msgstr "Обновление {0}"
+
+#. Key:	UpdateDialog.Cancel
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 148
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 148
+msgctxt "NodeFactory,UpdateDialog.Cancel"
+msgid "Cancel"
+msgstr "Отмена"
+
+#. Key:	UpdateDialog.CancelTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 144
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 144
+msgctxt "NodeFactory,UpdateDialog.CancelTooltip"
+msgid "Change nothing. The nodes stay outdated and the compiler reports CNA006."
+msgstr "Ничего не менять. Ноды остаются устаревшими, компилятор сообщает CNA006."
+
+#. Key:	UpdateDialog.CheckOut
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 97
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 97
+msgctxt "NodeFactory,UpdateDialog.CheckOut"
+msgid "Check out the Blueprints from source control"
+msgstr "Извлечь Blueprint из системы контроля версий"
+
+#. Key:	UpdateDialog.DefaultReason
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 61
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 61
+msgctxt "NodeFactory,UpdateDialog.DefaultReason"
+msgid "The nodes of this asset in the Blueprints below are outdated. Updating rebuilds their pins; wires are kept by name, by the pin redirects and by type and position."
+msgstr "Ноды этого ассета в Blueprint ниже устарели. Обновление перестраивает их пины; провода сохраняются по имени, по перенаправлениям пинов (Pin Redirects), по типу и позиции."
+
+#. Key:	UpdateDialog.Loaded
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 158
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 158
+msgctxt "NodeFactory,UpdateDialog.Loaded"
+msgid "loaded"
+msgstr "загружен"
+
+#. Key:	UpdateDialog.OnDisk
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 158
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 158
+msgctxt "NodeFactory,UpdateDialog.OnDisk"
+msgid "on disk"
+msgstr "на диске"
+
+#. Key:	UpdateDialog.Skip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 134
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 134
+msgctxt "NodeFactory,UpdateDialog.Skip"
+msgid "Skip"
+msgstr "Пропустить"
+
+#. Key:	UpdateDialog.SkipTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 130
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 130
+msgctxt "NodeFactory,UpdateDialog.SkipTooltip"
+msgid "Update only the Blueprints that are already loaded; Blueprints on disk are not loaded and keep outdated nodes (CNA006)."
+msgstr "Обновить только уже загруженные Blueprint; Blueprint на диске не загружаются и сохраняют устаревшие ноды (CNA006)."
+
+#. Key:	UpdateDialog.Summary
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 183
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 183
+msgctxt "NodeFactory,UpdateDialog.Summary"
+msgid "{0} Blueprint(s), {1} of them loaded:"
+msgstr "Blueprint: {0}, из них загружено: {1}:"
+
+#. Key:	UpdateDialog.Title
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 51
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 51
+msgctxt "NodeFactory,UpdateDialog.Title"
+msgid "Custom Node Asset {0} changed"
+msgstr "Ассет пользовательской ноды {0} изменён"
+
+#. Key:	UpdateDialog.UpdateAll
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 120
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 120
+msgctxt "NodeFactory,UpdateDialog.UpdateAll"
+msgid "Update All"
+msgstr "Обновить все"
+
+#. Key:	UpdateDialog.UpdateAllTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 116
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 116
+msgctxt "NodeFactory,UpdateDialog.UpdateAllTooltip"
+msgid "Load every listed Blueprint and update its nodes. Nothing is saved automatically."
+msgstr "Загрузить все перечисленные Blueprint и обновить их ноды. Ничего не сохраняется автоматически."
+
+#. Key:	UpdateDialog.WindowTitle
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 216
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/SCNAUpdateDialog.cpp - line 216
+msgctxt "NodeFactory,UpdateDialog.WindowTitle"
+msgid "Update Custom Nodes"
+msgstr "Обновление пользовательских нод"
+
+#. Key:	UseVariableMenu
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 180
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 180
+msgctxt "NodeFactory,UseVariableMenu"
+msgid "Use {0}"
+msgstr "Использовать {0}"
+
+#. Key:	UseVariableMenuTooltip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 181
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_GetLocal.cpp - line 181
+msgctxt "NodeFactory,UseVariableMenuTooltip"
+msgid "Reference the local variable {0} ({1})."
+msgstr "Ссылаться на локальную переменную {0} ({1})."
+
+#. Key:	Validate
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 23
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 23
+msgctxt "NodeFactory,Validate"
+msgid "Validate"
+msgstr "Проверить"
+
+#. Key:	Validate_ToolTip
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 23
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAEditorCommands.cpp - line 23
+msgctxt "NodeFactory,Validate_ToolTip"
+msgid "Check the asset and write the results into the Message Log NodeFactory."
+msgstr "Проверить ассет и записать результаты в Message Log NodeFactory."
+
+#. Key:	Validator.CheckBox
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 68
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 68
+msgctxt "NodeFactory,Validator.CheckBox"
+msgid "CheckBox"
+msgstr "CheckBox"
+
+#. Key:	Validator.ClassFilterEmpty
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 673
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 673
+msgctxt "NodeFactory,Validator.ClassFilterEmpty"
+msgid "ConnectionRule ClassFilter of pin {Pin} of {Asset} has no class; the rule is ignored."
+msgstr "ConnectionRule ClassFilter пина {Pin} у {Asset} не содержит класса; правило игнорируется."
+
+#. Key:	Validator.ClassFilterNotObject
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 678
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 678
+msgctxt "NodeFactory,Validator.ClassFilterNotObject"
+msgid "ConnectionRule ClassFilter of pin {Pin} of {Asset} needs an object or class pin (the pin is {Type}); the rule is ignored."
+msgstr "ConnectionRule ClassFilter пина {Pin} у {Asset} требует пин объекта или класса (тип пина: {Type}); правило игнорируется."
+
+#. Key:	Validator.Clean
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 863
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 863
+msgctxt "NodeFactory,Validator.Clean"
+msgid "{Asset}: no problems found."
+msgstr "{Asset}: проблем не найдено."
+
+#. Key:	Validator.ComboBox
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 70
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 70
+msgctxt "NodeFactory,Validator.ComboBox"
+msgid "ComboBox"
+msgstr "ComboBox"
+
+#. Key:	Validator.CompactNotPure
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 782
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 782
+msgctxt "NodeFactory,Validator.CompactNotPure"
+msgid "{Asset} uses bCompact, but only a pure node can be drawn compact; the node keeps its normal title."
+msgstr "{Asset} использует bCompact, но компактной может быть только чистая (Pure) нода; нода сохраняет обычный заголовок."
+
+#. Key:	Validator.CompilePage
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 1009
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 1009
+msgctxt "NodeFactory,Validator.CompilePage"
+msgid "Compile {0}"
+msgstr "Компиляция {0}"
+
+#. Key:	Validator.ContextDeprecated
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 844
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 844
+msgctxt "NodeFactory,Validator.ContextDeprecated"
+msgid "ContextClass {Class} of {Asset} is deprecated."
+msgstr "ContextClass {Class} у {Asset} устарел (deprecated)."
+
+#. Key:	Validator.ContextInterface
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 834
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 834
+msgctxt "NodeFactory,Validator.ContextInterface"
+msgid "ContextClass {Class} of {Asset} is an interface; Get Caller needs a class the calling Blueprint derives from."
+msgstr "ContextClass {Class} у {Asset} является интерфейсом; Get Caller нужен класс, от которого наследуется вызывающий Blueprint."
+
+#. Key:	Validator.ContextStale
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 839
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 839
+msgctxt "NodeFactory,Validator.ContextStale"
+msgid "ContextClass {Class} of {Asset} is an outdated copy of a class; select the class again."
+msgstr "ContextClass {Class} у {Asset} является устаревшей копией класса; выберите класс заново."
+
+#. Key:	Validator.DefaultToSelfIgnored
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 656
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 656
+msgctxt "NodeFactory,Validator.DefaultToSelfIgnored"
+msgid "bDefaultToSelf of pin {Pin} of {Asset} only applies to a single object input; it is ignored."
+msgstr "bDefaultToSelf пина {Pin} у {Asset} применяется только к одиночному входу-объекту; флаг игнорируется."
+
+#. Key:	Validator.DynamicNotArray
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 627
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 627
+msgctxt "NodeFactory,Validator.DynamicNotArray"
+msgid "Pin {Pin} of {Asset} is a dynamic group, but only an input array can be one (it is an {Direction} of type {Type})."
+msgstr "Пин {Pin} у {Asset} объявлен динамической группой, но ею может быть только входной массив (это {Direction} типа {Type})."
+
+#. Key:	Validator.DynamicRange
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 644
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 644
+msgctxt "NodeFactory,Validator.DynamicRange"
+msgid "Range {Min}..{Max} of dynamic group {Pin} of {Asset} is invalid and is used as {FixedMin}..{FixedMax}. Use 0 <= DynamicMin <= DynamicMax <= {Limit}, DynamicMax >= 1."
+msgstr "Диапазон {Min}..{Max} динамической группы {Pin} у {Asset} некорректен и используется как {FixedMin}..{FixedMax}. Требуется 0 <= DynamicMin <= DynamicMax <= {Limit}, DynamicMax >= 1."
+
+#. Key:	Validator.Input
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 60
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 60
+msgctxt "NodeFactory,Validator.Input"
+msgid "input"
+msgstr "вход"
+
+#. Key:	Validator.NoDeprecationMessage
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 174
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 174
+msgctxt "NodeFactory,Validator.NoDeprecationMessage"
+msgid "no replacement was named."
+msgstr "замена не указана."
+
+#. Key:	Validator.NoVariable
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 472
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 472
+msgctxt "NodeFactory,Validator.NoVariable"
+msgid "<none>"
+msgstr "<нет>"
+
+#. Key:	Validator.Output
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 60
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 60
+msgctxt "NodeFactory,Validator.Output"
+msgid "output"
+msgstr "выход"
+
+#. Key:	Validator.OverrideTwice
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 583
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 583
+msgctxt "NodeFactory,Validator.OverrideTwice"
+msgid "Pin {Pin} of {Asset} has more than one override; the first one is used."
+msgstr "У пина {Pin} в {Asset} больше одного переопределения; используется первое."
+
+#. Key:	Validator.Page
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 853
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 853
+msgctxt "NodeFactory,Validator.Page"
+msgid "Validate {0}"
+msgstr "Проверка {0}"
+
+#. Key:	Validator.PageMany
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 875
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 875
+msgctxt "NodeFactory,Validator.PageMany"
+msgid "Validate {0} Custom Node Assets"
+msgstr "Проверка ассетов пользовательских нод: {0}"
+
+#. Key:	Validator.PassThroughOnInput
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 419
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 419
+msgctxt "NodeFactory,Validator.PassThroughOnInput"
+msgid "PassThroughOf of pin {Pin} of {Asset} points to {Target}, but {Pin} is an input; only an output can pass the value of an input through."
+msgstr "PassThroughOf пина {Pin} у {Asset} указывает на {Target}, но {Pin} является входом; пропускать значение входа может только выход."
+
+#. Key:	Validator.Progress
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 877
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 877
+msgctxt "NodeFactory,Validator.Progress"
+msgid "Validating Custom Node Assets..."
+msgstr "Проверка ассетов пользовательских нод..."
+
+#. Key:	Validator.RangesDoNotOverlap
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 509
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 509
+msgctxt "NodeFactory,Validator.RangesDoNotOverlap"
+msgid "The dynamic groups of {Asset} share one pin count, but their ranges do not overlap: {Ranges}."
+msgstr "Динамические группы {Asset} используют общее число пинов, но их диапазоны не пересекаются: {Ranges}."
+
+#. Key:	Validator.RedirectIncomplete
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 538
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 538
+msgctxt "NodeFactory,Validator.RedirectIncomplete"
+msgid "Pin redirect {Old} -> {New} of {Asset} is incomplete or points to itself; it is ignored."
+msgstr "Перенаправление пина {Old} -> {New} у {Asset} неполное или указывает само на себя; оно игнорируется."
+
+#. Key:	Validator.RedirectTargetMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 543
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 543
+msgctxt "NodeFactory,Validator.RedirectTargetMissing"
+msgid "Pin redirect {Old} -> {New} of {Asset} points to a pin that does not exist in the macro Execute."
+msgstr "Перенаправление пина {Old} -> {New} у {Asset} указывает на пин, которого нет в макросе Execute."
+
+#. Key:	Validator.RedirectTwice
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 549
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 549
+msgctxt "NodeFactory,Validator.RedirectTwice"
+msgid "Pin {Old} of {Asset} has more than one redirect; the first one is used."
+msgstr "У пина {Old} в {Asset} больше одного перенаправления; используется первое."
+
+#. Key:	Validator.RequiredHidden
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 666
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 666
+msgctxt "NodeFactory,Validator.RequiredHidden"
+msgid "Pin {Pin} of {Asset} is required but hidden by default; CNA008 is only reported while the Behavior shows it."
+msgstr "Пин {Pin} у {Asset} обязательный, но скрыт по умолчанию; CNA008 сообщается, только пока Behavior его показывает."
+
+#. Key:	Validator.RequiredIgnored
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 661
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 661
+msgctxt "NodeFactory,Validator.RequiredIgnored"
+msgid "bRequired of pin {Pin} of {Asset} only applies to a data input; it is ignored."
+msgstr "bRequired пина {Pin} у {Asset} применяется только ко входу данных; флаг игнорируется."
+
+#. Key:	Validator.SelfObject
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 294
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 294
+msgctxt "NodeFactory,Validator.SelfObject"
+msgid "a class with a Self object"
+msgstr "класса с объектом Self"
+
+#. Key:	Validator.Summary
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 864
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 864
+msgctxt "NodeFactory,Validator.Summary"
+msgid "{Asset}: {Errors} error(s), {Warnings} warning(s)."
+msgstr "{Asset}: ошибок: {Errors}, предупреждений: {Warnings}."
+
+#. Key:	Validator.SummaryMany
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 901
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 901
+msgctxt "NodeFactory,Validator.SummaryMany"
+msgid "Validated {Count} asset(s): {Errors} with errors, {Warnings} warning(s) in total."
+msgstr "Проверено ассетов: {Count}; с ошибками: {Errors}, всего предупреждений: {Warnings}."
+
+#. Key:	Validator.TextBox
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 72
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 72
+msgctxt "NodeFactory,Validator.TextBox"
+msgid "TextBox"
+msgstr "TextBox"
+
+#. Key:	Validator.VariableGuid
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 748
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 748
+msgctxt "NodeFactory,Validator.VariableGuid"
+msgid "Local variable {Variable} of {Asset} has no unique id; it gets a new one when the asset is saved."
+msgstr "У локальной переменной {Variable} в {Asset} нет уникального идентификатора; новый будет присвоен при сохранении ассета."
+
+#. Key:	Validator.VariableTwice
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 729
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 729
+msgctxt "NodeFactory,Validator.VariableTwice"
+msgid "The name of local variable {Variable} is used twice in {Asset}; rename one of them."
+msgstr "Имя локальной переменной {Variable} используется в {Asset} дважды; переименуйте одну из них."
+
+#. Key:	Validator.VariableType
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 736
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 736
+msgctxt "NodeFactory,Validator.VariableType"
+msgid "Local variable {Variable} of {Asset} has type {Type}; any pin type except Exec and Wildcard is allowed."
+msgstr "Локальная переменная {Variable} в {Asset} имеет тип {Type}; допустим любой тип пина, кроме Exec и Wildcard."
+
+#. Key:	Validator.VariableWithoutName
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 724
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 724
+msgctxt "NodeFactory,Validator.VariableWithoutName"
+msgid "A local variable of {Asset} has no name; Get Local and Set Local cannot select it."
+msgstr "У локальной переменной в {Asset} нет имени; Get Local и Set Local не могут её выбрать."
+
+#. Key:	Validator.WidgetNoOptions
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 809
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 809
+msgctxt "NodeFactory,Validator.WidgetNoOptions"
+msgid "ComboBox of pin {Pin} of {Asset} has no options."
+msgstr "У ComboBox пина {Pin} в {Asset} нет вариантов."
+
+#. Key:	Validator.WidgetPinMissing
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 798
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 798
+msgctxt "NodeFactory,Validator.WidgetPinMissing"
+msgid "{Widget} on the body of {Asset} refers to input pin {Pin}, which does not exist."
+msgstr "{Widget} на теле {Asset} ссылается на входной пин {Pin}, которого не существует."
+
+#. Key:	Validator.WidgetTwice
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 814
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 814
+msgctxt "NodeFactory,Validator.WidgetTwice"
+msgid "Pin {Pin} of {Asset} has more than one body widget; the first one is used."
+msgstr "У пина {Pin} в {Asset} больше одного виджета на теле ноды; используется первый."
+
+#. Key:	Validator.WidgetType
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 804
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/CNAValidator.cpp - line 804
+msgctxt "NodeFactory,Validator.WidgetType"
+msgid "{Widget} on the body of {Asset} cannot edit pin {Pin} of type {Type}; the pin keeps its normal value field."
+msgstr "{Widget} на теле {Asset} не может редактировать пин {Pin} типа {Type}; у пина остаётся обычное поле значения."
+
+#. Key:	WildcardContainerDisallowed
+#. SourceLocation:	Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1102
+#: Plugins/NodeFactory/Source/NodeFactoryEditor/Private/K2Node_CustomNode.cpp - line 1102
+msgctxt "NodeFactory,WildcardContainerDisallowed"
+msgid "The container of the wire does not match the container of the Wildcard pin."
+msgstr "Контейнер провода не совпадает с контейнером пина Wildcard."

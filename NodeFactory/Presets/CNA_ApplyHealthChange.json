@@ -1,0 +1,465 @@
+{
+  "schemaVersion": 2,
+  "engineVersion": "4.20.3",
+  "pluginVersion": "2.0.0",
+  "id": "010C5142-949F-56BC-90DE-CC720E93E3C1",
+  "name": "CNA_ApplyHealthChange",
+  "displayName": {
+    "text": "Apply Health Change",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_ApplyHealthChange.DisplayName"
+  },
+  "subtitle": {
+    "text": "Local variable",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_ApplyHealthChange.Subtitle"
+  },
+  "tooltip": {
+    "text": "Adds Delta to Health, clamps the result to 0..Max Health and returns it as New Health. Is Dead is true when New Health is 0.",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_ApplyHealthChange.Tooltip"
+  },
+  "category": {
+    "text": "NodeFactory|Examples",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_ApplyHealthChange.Category"
+  },
+  "keywords": {
+    "text": "health damage heal clamp hit points local variable",
+    "namespace": "NodeFactoryPresets",
+    "key": "CNA_ApplyHealthChange.Keywords"
+  },
+  "defaultComment": {
+    "text": "",
+    "namespace": "",
+    "key": ""
+  },
+  "appearance": {
+    "useHeaderColor": true,
+    "headerColor": "#5E35B1",
+    "headerTextColor": "#FFF59D",
+    "pinLabelColor": "#F3E5F5",
+    "icon": "Kismet.AllClasses.VariableIcon",
+    "iconTint": "#FFD54F",
+    "iconTexture": "",
+    "iconTextureTint": "#FFFFFF",
+    "cornerIcon": "None",
+    "badges": [
+      {
+        "text": {
+          "text": "LOCAL",
+          "namespace": "NodeFactoryPresets",
+          "key": "CNA_ApplyHealthChange.Badge.0"
+        },
+        "color": "#FFB300",
+        "textColor": "#1A1A1A",
+        "corner": "TopRight"
+      }
+    ],
+    "minWidth": 190,
+    "bodyWidgets": [],
+    "colorWires": true,
+    "compact": false,
+    "compactTitle": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    }
+  },
+  "flags": {
+    "pure": false,
+    "developmentOnly": false,
+    "deprecated": false,
+    "deprecationMessage": {
+      "text": "",
+      "namespace": "",
+      "key": ""
+    },
+    "allowedGraphs": [
+      "Function",
+      "EventGraph",
+      "Macro",
+      "ConstructionScript"
+    ],
+    "contextClass": "",
+    "hiddenInMenu": false,
+    "allowInstanceLabel": true
+  },
+  "pinOverrides": [
+    {
+      "pinName": "Health",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "Current health.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.Health.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "Delta",
+      "displayName": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "tooltip": {
+        "text": "Negative for damage, positive for healing.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.Delta.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "MaxHealth",
+      "displayName": {
+        "text": "Max Health",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.MaxHealth.DisplayName"
+      },
+      "tooltip": {
+        "text": "Upper limit of New Health.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.MaxHealth.Tooltip"
+      },
+      "advanced": true,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": false,
+      "pinColor": "#FFFFFF",
+      "overrideLabelColor": false,
+      "labelColor": "#FFFFFF"
+    },
+    {
+      "pinName": "NewHealth",
+      "displayName": {
+        "text": "New Health",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.NewHealth.DisplayName"
+      },
+      "tooltip": {
+        "text": "Health + Delta, clamped to 0..Max Health.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.NewHealth.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": true,
+      "pinColor": "#7E57C2",
+      "overrideLabelColor": true,
+      "labelColor": "#D1C4E9"
+    },
+    {
+      "pinName": "IsDead",
+      "displayName": {
+        "text": "Is Dead",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.IsDead.DisplayName"
+      },
+      "tooltip": {
+        "text": "True when New Health is 0.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Pin.IsDead.Tooltip"
+      },
+      "advanced": false,
+      "hiddenByDefault": false,
+      "required": false,
+      "defaultToSelf": false,
+      "passThroughOf": "",
+      "dynamicGroup": false,
+      "dynamicMin": 1,
+      "dynamicMax": 16,
+      "dynamicNameFormat": {
+        "text": "",
+        "namespace": "",
+        "key": ""
+      },
+      "connectionRule": "None",
+      "classFilter": "",
+      "overridePinColor": true,
+      "pinColor": "#E53935",
+      "overrideLabelColor": true,
+      "labelColor": "#FF8A80"
+    }
+  ],
+  "pinRedirects": [],
+  "localVariables": [
+    {
+      "guid": "58F93309-9F51-588D-B245-81CAEE639F29",
+      "name": "NewHealth",
+      "type": {
+        "category": "float",
+        "subCategory": "",
+        "object": "",
+        "container": "None",
+        "isReference": false,
+        "isConst": false,
+        "isWeak": false
+      },
+      "defaultValue": "0.0",
+      "tooltip": {
+        "text": "New health of this run; reset to 0.0 on every entry.",
+        "namespace": "NodeFactoryPresets",
+        "key": "CNA_ApplyHealthChange.Variable.NewHealth.Tooltip"
+      }
+    }
+  ],
+  "graph": {
+    "signature": [
+      {
+        "name": "execute",
+        "direction": "Input",
+        "type": {
+          "category": "exec",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "Health",
+        "direction": "Input",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "Delta",
+        "direction": "Input",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "MaxHealth",
+        "direction": "Input",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "then",
+        "direction": "Output",
+        "type": {
+          "category": "exec",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "NewHealth",
+        "direction": "Output",
+        "type": {
+          "category": "float",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      },
+      {
+        "name": "IsDead",
+        "direction": "Output",
+        "type": {
+          "category": "bool",
+          "subCategory": "",
+          "object": "",
+          "container": "None",
+          "isReference": false,
+          "isConst": false,
+          "isWeak": false
+        }
+      }
+    ],
+    "t3d": [
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_0\"",
+      "   bCanHaveOutputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=-720",
+      "   NodePosY=0",
+      "   NodeGuid=FD4D953DA3A15EAC96D1AE51D77DD004",
+      "   CustomProperties Pin (PinId=DB3D7B78C2935A4E9FCBEFE8756ABEFD,PinName=\"execute\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_SetLocal_0 BC32DF6C695E59709AC7D819ADC1E4A9,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=4E349EFE177B54C5B7FB2C1ACDC9BBAC,PinName=\"Health\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"100.0\",AutogeneratedDefaultValue=\"100.0\",LinkedTo=(K2Node_CallFunction_0 A3510CB4FFE353C3B6E7697D35265120,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=224E22255E7C585E99EC089CD2377C43,PinName=\"Delta\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"-10.0\",AutogeneratedDefaultValue=\"-10.0\",LinkedTo=(K2Node_CallFunction_0 BCDFF4C846775BCE88AD9FE2CAC6F021,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=7B03358620585255921F41523229D771,PinName=\"MaxHealth\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"100.0\",AutogeneratedDefaultValue=\"100.0\",LinkedTo=(K2Node_CallFunction_1 051EC0A20F2C57DFB8F3697022AA8D04,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"execute\",PinType=(PinCategory=\"exec\"),DesiredPinDirection=EGPD_Output)",
+      "   CustomProperties UserDefinedPin (PinName=\"Health\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"100.0\")",
+      "   CustomProperties UserDefinedPin (PinName=\"Delta\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"-10.0\")",
+      "   CustomProperties UserDefinedPin (PinName=\"MaxHealth\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Output,PinDefaultValue=\"100.0\")",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_Tunnel Name=\"K2Node_Tunnel_1\"",
+      "   bCanHaveInputs=True",
+      "   bIsEditable=True",
+      "   NodePosX=560",
+      "   NodePosY=0",
+      "   NodeGuid=965660F13C20528E9A2A73F09D6731EB",
+      "   CustomProperties Pin (PinId=19FDCE5DB24955D7AAD648F3B20976CE,PinName=\"then\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_SetLocal_0 57CF23185221589690F6F477CA6F7D13,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=82F2F6EE88A85362B94B84E55360988B,PinName=\"NewHealth\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_GetLocal_0 7F5E82A46C1D521786781ADFB980A802,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=B81906A4457C505C8A2BCD68A1649848,PinName=\"IsDead\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_2 62FF7489E98A5165AA6C64D1814845F4,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties UserDefinedPin (PinName=\"then\",PinType=(PinCategory=\"exec\"),DesiredPinDirection=EGPD_Input)",
+      "   CustomProperties UserDefinedPin (PinName=\"NewHealth\",PinType=(PinCategory=\"float\"),DesiredPinDirection=EGPD_Input)",
+      "   CustomProperties UserDefinedPin (PinName=\"IsDead\",PinType=(PinCategory=\"bool\"),DesiredPinDirection=EGPD_Input)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_0\"",
+      "   bIsPureFunc=True",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetMathLibrary\"',MemberName=\"Add_FloatFloat\")",
+      "   NodePosX=-432",
+      "   NodePosY=96",
+      "   NodeGuid=AD823EBEF8CE53D1AAD2767DBFAAD941",
+      "   CustomProperties Pin (PinId=A3510CB4FFE353C3B6E7697D35265120,PinName=\"A\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_Tunnel_0 4E349EFE177B54C5B7FB2C1ACDC9BBAC,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=BCDFF4C846775BCE88AD9FE2CAC6F021,PinName=\"B\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"1.0\",AutogeneratedDefaultValue=\"1.0\",LinkedTo=(K2Node_Tunnel_0 224E22255E7C585E99EC089CD2377C43,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=C257D82E7C6A5327AFA93E6778D787F3,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_CallFunction_1 D401B60E499C50D29372F6027CEB1314,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_1\"",
+      "   bIsPureFunc=True",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetMathLibrary\"',MemberName=\"FClamp\")",
+      "   NodePosX=-176",
+      "   NodePosY=112",
+      "   NodeGuid=C1FCEF46A26A5FAFBACCC9F7B4EF76B6",
+      "   CustomProperties Pin (PinId=D401B60E499C50D29372F6027CEB1314,PinName=\"Value\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_CallFunction_0 C257D82E7C6A5327AFA93E6778D787F3,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=E389A7AF5D095E05957D872428D68819,PinName=\"Min\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=051EC0A20F2C57DFB8F3697022AA8D04,PinName=\"Max\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_Tunnel_0 7B03358620585255921F41523229D771,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=72C9E39F36CC54D0BA188F428B83969F,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_SetLocal_0 5125E4360AFA5AFCA7A7E48285AC8550,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/NodeFactoryEditor.K2Node_SetLocal Name=\"K2Node_SetLocal_0\"",
+      "   VariableGuid=58F933099F51588DB24581CAEE639F29",
+      "   VariableName=\"NewHealth\"",
+      "   CachedVariableType=(PinCategory=\"float\")",
+      "   NodePosX=96",
+      "   NodePosY=0",
+      "   NodeGuid=134D8095D47C5FDC87478CF64738A321",
+      "   CustomProperties Pin (PinId=BC32DF6C695E59709AC7D819ADC1E4A9,PinName=\"execute\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_0 DB3D7B78C2935A4E9FCBEFE8756ABEFD,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=57CF23185221589690F6F477CA6F7D13,PinName=\"then\",Direction=\"EGPD_Output\",PinType.PinCategory=\"exec\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 19FDCE5DB24955D7AAD648F3B20976CE,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=5125E4360AFA5AFCA7A7E48285AC8550,PinName=\"Value\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_CallFunction_1 72C9E39F36CC54D0BA188F428B83969F,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=A6A6BDE25CF75D049E3399E36C4392A5,PinName=\"Output_Get\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/NodeFactoryEditor.K2Node_GetLocal Name=\"K2Node_GetLocal_0\"",
+      "   VariableGuid=58F933099F51588DB24581CAEE639F29",
+      "   VariableName=\"NewHealth\"",
+      "   CachedVariableType=(PinCategory=\"float\")",
+      "   NodePosX=96",
+      "   NodePosY=224",
+      "   bCommentBubbleVisible=True",
+      "   NodeComment=\"Reads the value stored by Set NewHealth in this run. Every instance of the node has its own NewHealth.\"",
+      "   NodeGuid=4A1B8229D3E45AEFB31016F6CF687C23",
+      "   CustomProperties Pin (PinId=7F5E82A46C1D521786781ADFB980A802,PinName=\"Value\",Direction=\"EGPD_Output\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 82F2F6EE88A85362B94B84E55360988B,K2Node_CallFunction_2 2EB28C39F5525F0EB11FAFCE6974560A,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object",
+      "Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name=\"K2Node_CallFunction_2\"",
+      "   bIsPureFunc=True",
+      "   FunctionReference=(MemberParent=Class'\"/Script/Engine.KismetMathLibrary\"',MemberName=\"LessEqual_FloatFloat\")",
+      "   NodePosX=336",
+      "   NodePosY=288",
+      "   NodeGuid=B0A73BCE81C056468F069853642CE7E4",
+      "   CustomProperties Pin (PinId=2EB28C39F5525F0EB11FAFCE6974560A,PinName=\"A\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",LinkedTo=(K2Node_GetLocal_0 7F5E82A46C1D521786781ADFB980A802,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=824E85C87C5A59F1BF62E211CF90DA16,PinName=\"B\",PinType.PinCategory=\"float\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,DefaultValue=\"0.0\",AutogeneratedDefaultValue=\"0.0\",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "   CustomProperties Pin (PinId=62FF7489E98A5165AA6C64D1814845F4,PinName=\"ReturnValue\",Direction=\"EGPD_Output\",PinType.PinCategory=\"bool\",PinType.PinSubCategory=\"\",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,LinkedTo=(K2Node_Tunnel_1 B81906A4457C505C8A2BCD68A1649848,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)",
+      "End Object"
+    ]
+  },
+  "behavior": {
+    "t3d": []
+  },
+  "textures": [],
+  "meta": {
+    "author": "NodeFactory",
+    "description": "Set Local and Get Local on the local variable NewHealth: the value is computed once on the exec path, so New Health and Is Dead keep it even when Health is set from New Health after Then. Custom look: header and text colors, icon tint, badge, minimal width, pin and label colors.",
+    "tags": [
+      "example",
+      "local variables",
+      "appearance"
+    ],
+    "sourceUrl": ""
+  }
+}
