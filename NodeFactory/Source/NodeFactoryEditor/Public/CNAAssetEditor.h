@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BlueprintEditor.h"
+#include "SCNAPinManager.h"
 
 class UCustomNodeAsset;
 class IDetailsView;
@@ -18,7 +19,13 @@ class SCNALivePreview;
 class NODEFACTORYEDITOR_API FCNAAssetEditor : public FBlueprintEditor
 {
 public:
+	virtual ~FCNAAssetEditor();
+
 	void InitCNAEditor(const EToolkitMode::Type Mode, const TSharedPtr<IToolkitHost>& InitToolkitHost, UCustomNodeAsset* Asset);
+
+	// FEditorUndoClient. V-check: FBlueprintEditor overrides PostUndo / PostRedo publicly in 4.20.3.
+	virtual void PostUndo(bool bSuccess) override;
+	virtual void PostRedo(bool bSuccess) override;
 
 	UCustomNodeAsset* GetCustomNodeAsset() const;
 
@@ -56,4 +63,14 @@ private:
 	TSharedPtr<SCNAPinManager> PinManager;
 	TSharedPtr<SCNALocalVariables> LocalVariables;
 	TSharedPtr<SCNALivePreview> LivePreview;
+
+	/** Renames of signature pins made outside the Pin Manager are followed by the references (see FCNAPinManagerOps). */
+	void HandleAssetBlueprintChanged(UBlueprint* Blueprint);
+	void HandleLanguageChanged();
+
+	FCNASignatureSnapshot SignatureSnapshot;
+	TWeakObjectPtr<UCustomNodeAsset> WatchedAsset;
+	FDelegateHandle BlueprintChangedHandle;
+	FDelegateHandle LanguageChangedHandle;
+	bool bInUndoRedo = false;
 };

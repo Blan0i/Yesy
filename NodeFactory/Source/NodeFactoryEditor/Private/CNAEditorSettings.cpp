@@ -3,13 +3,15 @@
 #include "CNAEditorSettings.h"
 #include "Interfaces/IPluginManager.h"
 #include "Misc/Paths.h"
+#include "CNALocalization.h"
 
 const FName UCNAEditorSettings::ContainerName(TEXT("Editor"));
 const FName UCNAEditorSettings::CategoryName(TEXT("Plugins"));
 const FName UCNAEditorSettings::SectionName(TEXT("NodeFactory"));
 
 UCNAEditorSettings::UCNAEditorSettings()
-	: MaxExpansionDepth(16)
+	: Language(ECNAPluginLanguage::RussianAndEnglish)
+	, MaxExpansionDepth(16)
 	, bConfirmBulkUpdate(true)
 	, MaxImportFileSizeKB(4096)
 	, bVerboseLog(false)
@@ -53,6 +55,15 @@ void UCNAEditorSettings::SetLivePreviewEnabled(bool bEnabled)
 	}
 }
 
+void UCNAEditorSettings::ApplyLanguage() const
+{
+	// ECNAPluginLanguage and ECNALanguageMode list the same values in the same order.
+	const uint8 Value = static_cast<uint8>(Language);
+	FCNALocalization::SetMode(Value <= static_cast<uint8>(ECNALanguageMode::RussianAndEnglish)
+		? static_cast<ECNALanguageMode>(Value)
+		: ECNALanguageMode::RussianAndEnglish);
+}
+
 #if WITH_EDITOR
 void UCNAEditorSettings::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
@@ -60,5 +71,6 @@ void UCNAEditorSettings::PostEditChangeProperty(FPropertyChangedEvent& PropertyC
 	MaxExpansionDepth = FMath::Clamp(MaxExpansionDepth, 1, 128);
 	MaxImportFileSizeKB = FMath::Clamp(MaxImportFileSizeKB, 1, 65536);
 	SaveConfig();
+	ApplyLanguage();
 }
 #endif

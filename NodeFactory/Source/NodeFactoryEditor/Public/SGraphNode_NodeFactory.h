@@ -11,15 +11,32 @@
 #include "CNATypes.h"
 
 class SVerticalBox;
+class UCustomNodeAsset;
 class UEdGraphPin;
 class UK2Node;
 class UK2Node_CustomNode;
 class UTexture2D;
+struct FSlateBrush;
+
+/** Layout of the node widget chosen by NodeStyle, AnimStyle and NiagaraStyle of the asset. */
+enum class ECNANodeLayout : uint8
+{
+	/** SGraphNodeK2Base: Blueprint, the regular anim nodes and the Niagara nodes. */
+	Standard,
+	/** Standard layout with the "Final Animation Pose" figure between the pin columns. */
+	AnimResult,
+	/** Rounded state body with the title in the middle: State, Conduit, Entry. */
+	AnimState,
+	/** Round transition icon with the pins left and right of it. */
+	AnimTransition
+};
 
 /**
  * Widget of a custom node. The engine layout of SGraphNodeK2Base stays; the widget adds what UK2Node cannot
  * express (spec 3.2): the color of the title text, the icon texture, badges, the minimum width, body widgets,
  * the "+" button of dynamic pins (V4) and the Advanced arrow that raises OnAdvancedViewToggled (spec 6.2).
+ * The Animation and Niagara styles of the asset change the look only; every pin stays a Blueprint pin.
+ * The style parts are implemented in SGraphNode_CNAAnimStyles.cpp and SGraphNode_CNANiagara.cpp.
  */
 class NODEFACTORYEDITOR_API SGraphNode_NodeFactory : public SGraphNodeK2Base
 {
@@ -29,8 +46,12 @@ public:
 
 	void Construct(const FArguments& InArgs, UK2Node_CustomNode* InNode);
 
+	/** Layout used for nodes of the asset; Standard without an asset. */
+	static ECNANodeLayout GetLayoutForAsset(const UCustomNodeAsset* Asset);
+
 	// SGraphNode
 	virtual void UpdateGraphNode() override;
+	virtual void AddPin(const TSharedRef<SGraphPin>& PinToAdd) override;
 
 	// SNodePanel::SNode
 	virtual TArray<FOverlayWidgetInfo> GetOverlayWidgets(bool bSelected, const FVector2D& WidgetSize) const override;
@@ -38,13 +59,48 @@ public:
 protected:
 	// SGraphNode
 	virtual TSharedRef<SWidget> CreateTitleWidget(TSharedPtr<SNodeTitle> NodeTitle) override;
+	virtual TSharedRef<SWidget> CreateNodeContentArea() override;
 	virtual void CreateBelowPinControls(TSharedPtr<SVerticalBox> MainBox) override;
 	virtual void CreateInputSideAddButton(TSharedPtr<SVerticalBox> InputBox) override;
+	virtual void CreateOutputSideAddButton(TSharedPtr<SVerticalBox> OutputBox) override;
 	virtual FReply OnAddPin() override;
 	virtual EVisibility IsAddPinButtonVisible() const override;
 
 private:
 	UK2Node_CustomNode* GetCustomNode() const;
+	const UCustomNodeAsset* GetAsset() const;
+
+	// Animation styles (SGraphNode_CNAAnimStyles.cpp)
+
+	/** State, Conduit and Entry: SGraphNodeAnimState / SGraphNodeAnimStateEntry of 4.20.3 with Blueprint pins. */
+	void UpdateAnimStateNode();
+	/** Transition: SGraphNodeAnimTransition of 4.20.3 with the pins left and right of the icon. */
+	void UpdateAnimTransitionNode();
+	/** Pin columns with the result figure between them (SGraphNodeAnimationResult). */
+	TSharedRef<SWidget> CreateAnimResultContentArea();
+	/** Comment bubble, below-pin controls and Advanced arrow shared by the own layouts. */
+	void FinishCustomLayout(TSharedRef<SVerticalBox> InnerBox);
+	/** Title of the state look: icon, inline editable name and the subtitle lines. */
+	TSharedRef<SWidget> CreateAnimStateTitle(TSharedRef<SNodeTitle> NodeTitle, const FSlateBrush* TypeIcon);
+	/** Icon in front of the title of the regular anim kinds (State Machine); nullptr for none. */
+	const FSlateBrush* GetAnimTitleIcon() const;
+	FSlateColor GetAnimBodyColor() const;
+	/** Lightning mark of anim nodes on the fast path (SAnimationGraphNode). */
+	void BuildFastPathIndicator();
+
+	// Niagara styles (SGraphNode_CNANiagara.cpp)
+
+	/** Map Get / Map Set: every pin of the parameter column sits on a row background like in Niagara. */
+	bool UsesNiagaraMapRows(EEdGraphPinDirection Direction) const;
+	/** "Add Pin" rows of Map Get / Map Set; false when the side has none. */
+	bool UsesNiagaraAddPinRow(EEdGraphPinDirection Direction) const;
+	void AddNiagaraMapRowPin(const TSharedRef<SGraphPin>& PinToAdd);
+	void AddNiagaraAddPinRow(TSharedPtr<SVerticalBox> Box, EEdGraphPinDirection Direction);
+	/** Read-only text area of Custom HLSL with NiagaraBodyText. */
+	void AddNiagaraBodyText(TSharedPtr<SVerticalBox> MainBox);
+
+	/** Curve body widget: a graph on the body, not bound to a pin (spec Curve). */
+	TSharedRef<SWidget> CreateCurveBodyWidget(const FCNABodyWidget& Widget);
 
 	/** Loads IconTexture and points the brush at it (spec 3.2). */
 	void RefreshIconBrush();
@@ -78,6 +134,12 @@ private:
 	FSlateBrush CornerTextureBrush;
 	TStrongObjectPtr<UTexture2D> CornerTexture;
 	TSharedPtr<SWidget> CornerTextureWidget;
+
+	/** Fast path mark of the Animation style, nullptr when it is off. */
+	TSharedPtr<SWidget> FastPathWidget;
+
+	/** Layout of the last UpdateGraphNode; CreateNodeContentArea and AddPin follow it. */
+	ECNANodeLayout CurrentLayout = ECNANodeLayout::Standard;
 
 	struct FBadgeWidget
 	{
